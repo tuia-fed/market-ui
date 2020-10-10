@@ -2,12 +2,13 @@ import { defineComponent, CSSProperties, PropType } from 'vue'
 import styles from '../../styles'
 import { noop } from '@/shared/utils'
 
-export type WheelStartClick = () => void
+export type WheelStartClick = (e: MouseEvent) => void
 
 export default defineComponent({
   name: 'WheelStart',
 
   props: {
+    disabled: Boolean,
     size: {
       type: Number,
       default: 75,
@@ -24,8 +25,9 @@ export default defineComponent({
       height: `${props.size}px`,
     }
 
-    function onClick() {
-      emit('click')
+    const onClick = (e: MouseEvent) => {
+      if (props.disabled) return
+      emit('click', e)
     }
 
     return () => (

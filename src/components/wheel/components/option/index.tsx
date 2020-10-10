@@ -3,15 +3,14 @@ import styles from '../../styles'
 import { isUndef, noop } from '@/shared/utils'
 
 export type WheelOption = {
-  name: string
+  title: string
   image?: string
 }
 
-export type WheelOptionClick = (i: number) => void
+export type WheelOptionClick = (e: MouseEvent, i: number) => void
 
 export default defineComponent({
   name: 'WheelOption',
-  // emits: ['click'],
 
   props: {
     option: {
@@ -57,18 +56,18 @@ export default defineComponent({
       transform: `translate(-25%, -25%) skew(-15deg, -15deg) rotate(-45deg)`,
     }
 
-    function onClick() {
-      emit('click', props.index)
+    const onClick = (e: MouseEvent) => {
+      emit('click', e, props.index)
     }
 
-    const image = props.option.image ? <img style={props.imageStyle} class={styles.itemImage} src={props.option.image} alt={props.option.name} /> : ''
+    const image = props.option.image ? <img style={props.imageStyle} class={styles.itemImage} src={props.option.image} alt={props.option.title} /> : ''
 
     return () => (
       <div onClick={onClick} style={OptionStyle} class={styles.option}>
         <div style={OptionRevertStyle} class={styles.optionRevert}>
           <div class={styles.item}>
             <div class={styles.itemTitle} style={props.titleStyle}>
-              {props.option.name}
+              {props.option.title}
             </div>
             {image}
           </div>

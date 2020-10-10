@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent, PropType } from 'vue'
+import { withModifiers, CSSProperties, defineComponent, PropType } from 'vue'
 import Background from './components/background'
 import Circle from './components/circle'
 import Option, { WheelOption, WheelOptionClick } from './components/option'
@@ -49,6 +49,7 @@ export default defineComponent({
       type: Function as PropType<WheelOptionClick>,
       default: noop,
     },
+    disabled: Boolean,
     onStart: {
       type: Function as PropType<WheelStartClick>,
       default: noop,
@@ -58,8 +59,14 @@ export default defineComponent({
   setup(props) {
 
     return () => (
-      <Background size={props.size} style={props.backgroundStyle}>
-        <Circle style={props.circleStyle} angle={props.angle}>
+      <Background
+        size={props.size}
+        style={props.backgroundStyle}
+      >
+        <Circle
+          style={props.circleStyle}
+          angle={props.angle}
+        >
           {props.options.map((item, i) => (
             <Option
               onClick={props.onOptionClick}
@@ -71,7 +78,12 @@ export default defineComponent({
             </Option>
           ))}
         </Circle>
-        <Start onClick={props.onStart} style={props.startStyle} size={props.size / 4} />
+        <Start
+          disabled={props.disabled}
+          onClick={props.onStart}
+          style={props.startStyle}
+          size={props.size / 4}
+        />
       </Background>
     )
   },
