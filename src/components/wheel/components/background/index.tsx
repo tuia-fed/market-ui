@@ -8,19 +8,19 @@ export default defineComponent({
   props: {
     size: {
       type: Number,
-      default: 300,
+      default: 300
     },
     style: {
       type: Object as PropType<CSSProperties>,
-      default: () => ({}),
-    },
+      default: () => ({})
+    }
   },
 
   setup(props, { slots }) {
     const BackgroundStyle: CSSProperties = {
       width: props.size + 'px',
       height: props.size + 'px',
-      ...props.style,
+      ...props.style
     }
 
     return () => (
@@ -28,5 +28,5 @@ export default defineComponent({
         {(slots.default as Function)()}
       </div>
     )
-  },
+  }
 })

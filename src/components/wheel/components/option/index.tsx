@@ -1,13 +1,7 @@
 import { defineComponent, CSSProperties, PropType } from 'vue'
 import styles from '../../styles'
 import { isUndef, noop } from '@/shared/utils'
-
-export type WheelOption = {
-  title: string
-  image?: string
-}
-
-export type WheelOptionClick = (e: MouseEvent, i: number) => void
+import { WheelOption, WheelOptionClick } from '../../types'
 
 export default defineComponent({
   name: 'WheelOption',
@@ -16,28 +10,28 @@ export default defineComponent({
     option: {
       type: Object as PropType<WheelOption>,
       default: () => ({
-        name: '',
-      }),
+        name: ''
+      })
     },
     size: {
       type: Number,
-      default: 150,
+      default: 150
     },
     index: {
       type: Number,
-      default: 0,
+      default: 0
     },
     titleStyle: {
       type: Object as PropType<CSSProperties>,
-      default: () => ({}),
+      default: () => ({})
     },
     imageStyle: {
       type: Object as PropType<CSSProperties>,
-      default: () => ({}),
+      default: () => ({})
     },
     onClick: {
       type: Function as PropType<WheelOptionClick>,
-      default: noop,
+      default: noop
     }
   },
 
@@ -47,20 +41,29 @@ export default defineComponent({
     const OptionStyle: CSSProperties = {
       width: `${props.size}px`,
       height: `${props.size}px`,
-      transform: `rotate(${-15 + props.index * 60}deg) skew(15deg, 15deg)`,
+      transform: `rotate(${-15 + props.index * 60}deg) skew(15deg, 15deg)`
     }
 
     const OptionRevertStyle: CSSProperties = {
       width: `${props.size * 0.5}px`,
       height: `${props.size * 0.5}px`,
-      transform: `translate(-25%, -25%) skew(-15deg, -15deg) rotate(-45deg)`,
+      transform: `translate(-25%, -25%) skew(-15deg, -15deg) rotate(-45deg)`
     }
 
     const onClick = (e: MouseEvent) => {
       emit('click', e, props.index)
     }
 
-    const image = props.option.image ? <img style={props.imageStyle} class={styles.itemImage} src={props.option.image} alt={props.option.title} /> : ''
+    const image = props.option.image ? (
+      <img
+        style={props.imageStyle}
+        class={styles.itemImage}
+        src={props.option.image}
+        alt={props.option.title}
+      />
+    ) : (
+      ''
+    )
 
     return () => (
       <div onClick={onClick} style={OptionStyle} class={styles.option}>
@@ -74,5 +77,5 @@ export default defineComponent({
         </div>
       </div>
     )
-  },
+  }
 })

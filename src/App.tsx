@@ -1,13 +1,13 @@
-import { withModifiers, CSSProperties, defineComponent, reactive, ref } from 'vue'
+import { CSSProperties, defineComponent, ref } from 'vue'
 import MyWheel, { Wheel, useRotate } from '@/components/wheel'
 
 import optionImage from './assets/smile.png'
 import bgImage from './assets/bgImage.png'
 import btnImage from './assets/btnImage.png'
 
-const options = [1, 2, 3, 4, 5, 6].map((item) => ({
+const options = [1, 2, 3, 4, 5, 6].map(item => ({
   title: `谢谢参与${item}`,
-  image: optionImage,
+  image: optionImage
 }))
 
 export default defineComponent({
@@ -19,11 +19,11 @@ export default defineComponent({
     }
 
     const CircleStyle: CSSProperties = {
-      backgroundImage: `url(${bgImage})`,
+      backgroundImage: `url(${bgImage})`
     }
 
     const StartStyle: CSSProperties = {
-      backgroundImage: `url(${btnImage})`,
+      backgroundImage: `url(${btnImage})`
     }
 
     const titleStyle: CSSProperties = {
@@ -42,8 +42,7 @@ export default defineComponent({
 
     rotate.idled()
 
-    const onStart = (e: MouseEvent) => {
-
+    const onStart = () => {
       disabled.value = true
 
       rotate.start()
@@ -60,8 +59,6 @@ export default defineComponent({
       }, 1000)
     }
 
-    
-
     return () => (
       <>
         <MyWheel
@@ -75,26 +72,17 @@ export default defineComponent({
           onOptionClick={onOptionClick}
           onStart={onStart}
         />
-        <Wheel.Background
-          size={size.value}
-          style={backgroundStyle}
-        >
-          <Wheel.Circle
-            style={CircleStyle}
-            angle={angle.value}
-          >
-            {
-              options.map((opt, i) => (
-                <Wheel.Option
-                  titleStyle={titleStyle}
-                  onClick={onOptionClick}
-                  size={size.value / 2}
-                  index={i}
-                  option={opt}
-                >
-                </Wheel.Option>
-              ))
-            }
+        <Wheel.Background size={size.value} style={backgroundStyle}>
+          <Wheel.Circle style={CircleStyle} angle={angle.value}>
+            {options.map((opt, i) => (
+              <Wheel.Option
+                titleStyle={titleStyle}
+                onClick={onOptionClick}
+                size={size.value / 2}
+                index={i}
+                option={opt}
+              />
+            ))}
           </Wheel.Circle>
           <Wheel.Start
             onClick={onStart}
@@ -104,5 +92,5 @@ export default defineComponent({
         </Wheel.Background>
       </>
     )
-  },
+  }
 })
