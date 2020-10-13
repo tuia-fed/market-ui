@@ -1,15 +1,13 @@
-import _ from '@/shared/styles/prefix'
+import { createClassname } from './create'
 import './index.less'
 
-const prefix = _('wheel')
-
 export default {
-  circle: prefix('circle'),
-  background: prefix('background'),
-  option: prefix('option'),
-  optionRevert: prefix('option__revert'),
-  item: prefix('item'),
-  itemTitle: prefix('item__title'),
-  itemImage: prefix('item__image'),
-  start: prefix('start')
+  circle: createClassname('circle'),
+  background: createClassname('background'),
+  option: createClassname('option'),
+  optionRevert: createClassname('option__revert'),
+  item: createClassname('item'),
+  itemTitle: createClassname('item__title'),
+  itemImage: createClassname('item__image'),
+  start: createClassname('start')
 }

@@ -1,13 +1,17 @@
-import { CSSProperties, defineComponent, PropType } from 'vue'
+import { CSSProperties, PropType } from 'vue'
 import Background from './components/background'
 import Circle from './components/circle'
 import Option from './components/option'
 import Start from './components/start'
 import { noop } from '@/shared/utils'
 import { WheelOptions, WheelOptionClick, WheelStartClick } from './types'
+import { createComponent } from './create'
 
-export default defineComponent({
-  name: 'Wheel',
+export default createComponent({
+  Background,
+  Circle,
+  Option,
+  Start,
 
   props: {
     size: {
