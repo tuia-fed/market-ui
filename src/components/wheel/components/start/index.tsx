@@ -7,7 +7,6 @@ export default defineComponent({
   name: 'WheelStart',
 
   props: {
-    disabled: Boolean,
     size: {
       type: Number,
       default: 75
@@ -25,7 +24,6 @@ export default defineComponent({
     }
 
     const onClick = (e: MouseEvent) => {
-      if (props.disabled) return
       emit('click', e)
     }
 

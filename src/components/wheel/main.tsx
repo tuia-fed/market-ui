@@ -50,7 +50,6 @@ export default createComponent({
       type: Function as PropType<WheelOptionClick>,
       default: noop
     },
-    disabled: Boolean,
     onStart: {
       type: Function as PropType<WheelStartClick>,
       default: noop
@@ -73,7 +72,6 @@ export default createComponent({
           ))}
         </Circle>
         <Start
-          disabled={props.disabled}
           onClick={props.onStart}
           style={props.startStyle}
           size={props.size / 4}

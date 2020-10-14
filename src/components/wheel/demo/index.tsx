@@ -26,6 +26,10 @@ export default defineComponent({
       backgroundImage: `url(${btnImage})`
     }
 
+    const StartDisabledStyle: CSSProperties = {
+      backgroundColor: 'grey'
+    }
+
     const titleStyle: CSSProperties = {
       fontSize: '13px'
     }
@@ -43,6 +47,7 @@ export default defineComponent({
     rotate.idled()
 
     const onStart = () => {
+      if(disabled.value) return
       disabled.value = true
 
       rotate.start()
@@ -62,7 +67,6 @@ export default defineComponent({
     return () => (
       <>
         <Wheel
-          disabled={disabled.value}
           size={size.value}
           angle={angle.value}
           backgroundStyle={backgroundStyle}
@@ -84,11 +88,16 @@ export default defineComponent({
               />
             ))}
           </Wheel.Circle>
-          <Wheel.Start
-            onClick={onStart}
-            style={StartStyle}
+          {
+            disabled.value ? <Wheel.Start
+            style={StartDisabledStyle}
             size={size.value / 4}
-          />
+          /> : <Wheel.Start
+          onClick={onStart}
+          style={StartStyle}
+          size={size.value / 4}
+        />
+          }
         </Wheel.Background>
       </>
     )
