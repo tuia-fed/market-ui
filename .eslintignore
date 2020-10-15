@@ -1,3 +1,5 @@
 dist
 lib
+es
+scripts
 node_modules

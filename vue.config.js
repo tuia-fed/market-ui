@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { resolve } = require('path')
+
 module.exports = {
   chainWebpack: config => {
     config.module
@@ -11,8 +14,11 @@ module.exports = {
       })
   },
   configureWebpack: {
-    output: {
-      libraryExport: 'default'
+    resolve: {
+      alias: {
+        '@': resolve('src'),
+        packages: resolve('packages')
+      }
     }
   }
 }

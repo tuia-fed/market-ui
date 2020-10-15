@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --name mk-wheel src/components/wheel/index.ts",
+    "build:lib": "vue-cli-service build --target lib --name mk es/index.js",
+    "build:es": "node scripts/any/lib/index.js build-vue",
     "cm": "git-cz",
     "release": "npx standard-version",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
@@ -17,7 +18,8 @@
     "core-js": "^3.6.5",
     "popmotion": "^8.7.6",
     "tiny-emitter": "^2.1.0",
-    "vue": "^3.0.0-0"
+    "vue": "^3.0.0-0",
+    "vue-router": "^4.0.0-beta.13"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
