@@ -9,6 +9,7 @@
     "build:lib": "vue-cli-service build --target lib --name mk es/index.js",
     "build:es": "node scripts/any/lib/index.js build-vue",
     "cm": "git-cz",
+    "precommit": "npm run prettier && npm run stylelint",
     "release": "npx standard-version",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "prettier": "npx prettier --write {src,packages}/**/*.tsx",

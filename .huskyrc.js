@@ -1,6 +1,6 @@
 module.exports = {
   hooks: {
-    'pre-commit': 'npm run prettier && npm run stylelint',
+    'pre-commit': 'npm run precommit',
     'commit-msg': 'commitlint -E HUSKY_GIT_PARAMS'
   }
 }
