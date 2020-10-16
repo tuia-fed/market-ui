@@ -18,5 +18,8 @@ function createClassname(name: string) {
 export function createNamespace(name: string) {
   name = 'mk-' + name
 
-  return [createComponent(name), createClassname(name)] as const
+  return {
+    createComponent: createComponent(name),
+    createClassname: createClassname(name)
+  }
 }

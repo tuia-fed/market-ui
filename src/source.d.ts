@@ -17,3 +17,8 @@ declare module '*.jpeg' {
   const str: string
   export default str
 }
+
+declare module '*.json' {
+  const obj: Record<string, unknown>
+  export default obj
+}
