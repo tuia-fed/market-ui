@@ -1,4 +1,4 @@
-import { createNamespace } from '../shared/create'
+import { createNamespace } from '../../shared/create'
 
 const [createComponent, createClassname] = createNamespace('wheel')
 

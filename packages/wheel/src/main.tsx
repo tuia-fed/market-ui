@@ -3,8 +3,8 @@ import Background from './components/background'
 import Circle from './components/circle'
 import Option from './components/option'
 import Start from './components/start'
-import { noop } from '../shared/utils'
-import { WheelOptions, WheelOptionClick, WheelStartClick } from './types'
+import { noop } from '../../shared/utils'
+import { WheelOptions, WheelOptionClick, WheelStartClick } from '../types'
 import { createComponent } from './create'
 
 export default createComponent({

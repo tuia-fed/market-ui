@@ -1,6 +1,6 @@
-import MyWheel from './main'
-import Rotate from './rotate'
-import useRotate from './hooks'
+import MyWheel from './src/main'
+import Rotate from './src/rotate'
+import useRotate from './src/hooks'
 
 export * from './types'
 

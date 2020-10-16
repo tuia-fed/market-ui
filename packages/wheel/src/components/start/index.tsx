@@ -1,7 +1,7 @@
 import { defineComponent, CSSProperties, PropType } from 'vue'
 import styles from '../../styles'
-import { noop } from '../../../shared/utils'
-import { WheelStartClick } from '../../types'
+import { noop } from '../../../../shared/utils'
+import { WheelStartClick } from '../../../types'
 
 export default defineComponent({
   name: 'WheelStart',

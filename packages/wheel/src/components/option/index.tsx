@@ -1,7 +1,7 @@
 import { defineComponent, CSSProperties, PropType } from 'vue'
 import styles from '../../styles'
-import { isUndef, noop } from '../../../shared/utils'
-import { WheelOption, WheelOptionClick } from '../../types'
+import { isUndef, noop } from '../../../../shared/utils'
+import { WheelOption, WheelOptionClick } from '../../../types'
 
 export default defineComponent({
   name: 'WheelOption',
