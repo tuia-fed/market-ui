@@ -28,7 +28,6 @@ export default createComponent({
       height: `${props.height}px`
     }
 
-
     onMounted(() => {
       Lottie.loadAnimation({
         container: container.value,
