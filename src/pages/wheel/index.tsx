@@ -47,7 +47,7 @@ export default defineComponent({
     rotate.idled()
 
     const onStart = () => {
-      if(disabled.value) return
+      if (disabled.value) return
       disabled.value = true
 
       rotate.start()
@@ -88,16 +88,15 @@ export default defineComponent({
               />
             ))}
           </Wheel.Circle>
-          {
-            disabled.value ? <Wheel.Start
-            style={StartDisabledStyle}
-            size={size.value / 4}
-          /> : <Wheel.Start
-          onClick={onStart}
-          style={StartStyle}
-          size={size.value / 4}
-        />
-          }
+          {disabled.value ? (
+            <Wheel.Start style={StartDisabledStyle} size={size.value / 4} />
+          ) : (
+            <Wheel.Start
+              onClick={onStart}
+              style={StartStyle}
+              size={size.value / 4}
+            />
+          )}
         </Wheel.Background>
       </>
     )

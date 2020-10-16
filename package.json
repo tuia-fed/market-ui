@@ -11,8 +11,8 @@
     "cm": "git-cz",
     "release": "npx standard-version",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "eslintt": "npx eslint src/ --ext .tsx,.ts,.js",
-    "stylelintt": "npx stylelint **/*.{css,less}"
+    "prettier": "npx prettier --write {src,packages}/**/*.tsx",
+    "stylelint": "npx stylelint {src,packages}/**/*.{css,less}"
   },
   "dependencies": {
     "core-js": "^3.6.5",
