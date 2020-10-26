@@ -16,6 +16,9 @@ export default defineComponent({
         <li>
           <RouterLink to={'/lottie'}>lottie</RouterLink>
         </li>
+        <li>
+          <RouterLink to={'/multiCubes'}>multiCubes</RouterLink>
+        </li>
       </ul>
     )
   }
