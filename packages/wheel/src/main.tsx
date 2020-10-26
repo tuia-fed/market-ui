@@ -6,12 +6,14 @@ import Start from './components/start'
 import { noop } from '../../shared/utils'
 import { WheelOptions, WheelOptionClick, WheelStartClick } from '../types'
 import { createComponent } from './create'
+import useRotate from './hooks'
 
 export default createComponent({
   Background,
   Circle,
   Option,
   Start,
+  useRotate,
 
   props: {
     size: {
