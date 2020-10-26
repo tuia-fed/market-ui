@@ -25,7 +25,7 @@ export default defineComponent({
       state.autoActiveTimer ? window.clearInterval(state.autoActiveTimer) : ''
       state.autoActiveTimer = window.setInterval(() => {
         changeActiveIndex()
-      }, 180)
+      }, 140)
     }
     autoActive()
 
@@ -50,17 +50,12 @@ export default defineComponent({
     function start(finalIndex: number) {
       window.clearInterval(state.autoActiveTimer)
       state.joinTimer ? window.clearTimeout(state.joinTimer) : ''
-      state.count = finalIndex - state.activeIndex + 32
-      state.timeStep = 180
+      state.count = finalIndex - state.activeIndex + 24
+      state.timeStep = 140
       state.reducetimeStepFlag = true
       slowStop()
     }
 
-    // return {
-    //   ...toRefs(state),
-    //   start,
-    //   autoActive
-    // }
     return () => (
       <>
         <div class="nine-squared-wrap">
@@ -71,7 +66,6 @@ export default defineComponent({
               }
               style="background-color: yellow;"
             >
-              {' '}
               1
             </span>
             <span
@@ -80,8 +74,7 @@ export default defineComponent({
               }
               style="background-color: green;"
             >
-              {' '}
-              2{' '}
+              2
             </span>
             <span
               class={
@@ -89,8 +82,7 @@ export default defineComponent({
               }
               style="background-color: yellow;"
             >
-              {' '}
-              3{' '}
+              3
             </span>
           </div>
           <div class="right-squared-wrap">
@@ -100,7 +92,6 @@ export default defineComponent({
               }
               style="background-color: green;"
             >
-              {' '}
               4
             </span>
           </div>
@@ -111,8 +102,7 @@ export default defineComponent({
               }
               style="background-color: yellow;"
             >
-              {' '}
-              5{' '}
+              5
             </span>
             <span
               class={
@@ -120,8 +110,7 @@ export default defineComponent({
               }
               style="background-color: green;"
             >
-              {' '}
-              6{' '}
+              6
             </span>
             <span
               class={
@@ -129,8 +118,7 @@ export default defineComponent({
               }
               style="background-color: yellow;"
             >
-              {' '}
-              7{' '}
+              7
             </span>
           </div>
           <div class="left-squared-wrap">
@@ -140,8 +128,7 @@ export default defineComponent({
               }
               style="background-color: green;"
             >
-              {' '}
-              8{' '}
+              8
             </span>
           </div>
           <div
