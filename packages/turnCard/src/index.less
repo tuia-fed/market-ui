@@ -1,0 +1,51 @@
+@import '../../shared/style/index.less';
+
+.mk {
+  &-turnCard {
+    &_card {
+      .bg();
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &_cardAni {
+      animation: turn 0.2s linear 0s forwards;
+
+      @keyframes turn {
+        from {
+          transform: translate(-50%, -50%) rotateY(0);
+        }
+
+        to {
+          transform: translate(-50%, -50%) rotateY(90deg);
+        }
+      }
+    }
+
+    &_cardBack {
+      .bg();
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotateY(-90deg);
+    }
+
+    &_cardBackAni {
+      animation: turn 0.2s linear 0s forwards;
+
+      @keyframes turn {
+        from {
+          transform: translate(-50%, -50%) rotateY(-90deg);
+        }
+
+        to {
+          transform: translate(-50%, -50%) rotateY(0);
+        }
+      }
+    }
+  }
+}
