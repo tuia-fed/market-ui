@@ -14,6 +14,10 @@ export default [
       {
         name: '大转盘',
         path: '/wheel'
+      },
+      {
+        name: '旋转木马',
+        path: '/carousel'
       }
     ]
   }
