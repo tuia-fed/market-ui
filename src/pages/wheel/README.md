@@ -1,10 +1,12 @@
+## 大转盘
+
+```javascript
 import { CSSProperties, defineComponent, ref } from 'vue'
 import Wheel from 'packages/wheel'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
 import bgImage from '@/assets/bgImage.png'
 import btnImage from '@/assets/btnImage.png'
-import CodeReview from './README.md'
 
 const options = [0, 1, 2, 3, 4, 5].map(item => ({
   title: `谢谢参与${item}`,
@@ -69,8 +71,14 @@ export default defineComponent({
           onOptionClick={onOptionClick}
           onStart={onStart}
         />
-        <CodeReview />
       </>
     )
   }
 })
+
+```
+
+|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
