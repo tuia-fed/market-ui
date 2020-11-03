@@ -37,7 +37,7 @@ export default createComponent({
     // 转盘options
     options: {
       type: Array as PropType<WheelOptions>,
-      default: () => []
+      required: true
     },
     // 点击option
     onOptionClick: {

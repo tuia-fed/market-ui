@@ -1,4 +1,4 @@
-## 大转盘
+## 基本使用
 
 ```javascript
 import { CSSProperties, defineComponent, ref } from 'vue'
@@ -69,11 +69,41 @@ export default defineComponent({
     )
   }
 })
-
-
 ```
 
-|  表头   | 表头  |
-|  ----  | ----  |
-| 单元格  | 单元格 |
-| 单元格  | 单元格 |
+## Hooks
+
+```javascript
+import { Wheel } from 'market-ui'
+
+const [angle, rotate] = Wheel.useRotate(0)
+
+// angle 作为转盘的旋转角度，是一个 Ref
+
+// 闲置旋转
+rotate.idled()
+// 开始加速
+rotate.start()
+// 开始减速
+rotate.to({
+  index: 0, // 下标
+  complete () {
+
+  }, // 停止回调
+})
+```
+
+## Props
+
+|  参数   | 说明  |  类型   | 默认值 |
+|  ----  | ----  |  ----  | ----  |
+| angle  | 旋转角度 | Number  | 0 |
+| size  | 转盘大小 | Number  | 0 自动获取父级宽度作为size） |
+| style  | 转盘样式 | CSSProperties  | {} 可以设置转盘的背景图片颜色等 |
+| options  | 转盘奖项 | Array<WheelOption>  | required |
+
+## Events
+
+|  事件名   | 说明  |  回调参数  | 
+|  ----  | ----  |  ----  |
+| onOptionClick  | 每个奖项点击的回调 | 事件对象 e: Event , 奖项下标 i: Number |
