@@ -2,8 +2,6 @@ import { defineComponent } from 'vue'
 import styles from './index.module.less'
 
 export default defineComponent({
-  name: 'App',
-
   setup() {
     return () => (
       <header class={styles.header}>

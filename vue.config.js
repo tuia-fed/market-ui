@@ -2,16 +2,11 @@ const { resolve } = require('path')
 
 module.exports = {
   chainWebpack: config => {
-    // config.module.rule('md')
-    //   .test(/\.md/)
-    //   .use('')
-    //   .loader('vue-loader')
-    //   .end()
-    //   .use('vue-markdown-loader')
-    //   .loader('vue-markdown-loader/lib/markdown-compiler')
-    //   .options({
-    //     raw: true
-    //   })
+    config.module.rule('md')
+      .test(/\.md/)
+      .use('markdown-loader')
+      .loader('markdown-loader')
+      .end()
   },
   pluginOptions: {
     'style-resources-loader': {
@@ -22,6 +17,9 @@ module.exports = {
     }
   },
   configureWebpack: {
+    resolveLoader: {
+      modules: ['node_modules', './loaders/']
+    },
     resolve: {
       alias: {
         '@': resolve('src'),

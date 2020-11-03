@@ -4,8 +4,6 @@ import routes from '../../router/routes'
 import styles from './index.module.less'
 
 export default defineComponent({
-  name: 'NavBar',
-
   setup() {
     return () => (
       <nav class={styles.nav}>

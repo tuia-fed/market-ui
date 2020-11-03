@@ -1,6 +1,6 @@
 import { App, defineComponent, ComponentOptionsWithObjectProps } from 'vue'
 
-function createComponent(name: string) {
+export function createComponent(name: string) {
   return function(sfc: ComponentOptionsWithObjectProps) {
     sfc.name = name
     sfc.install = (app: App) => {
@@ -11,7 +11,7 @@ function createComponent(name: string) {
   } as typeof defineComponent
 }
 
-function createClassname(name: string) {
+export function createClassname(name: string) {
   return (type: string) => name + '_' + type
 }
 
