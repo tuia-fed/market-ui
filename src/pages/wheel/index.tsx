@@ -4,27 +4,21 @@ import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
 import bgImage from '@/assets/bgImage.png'
 import btnImage from '@/assets/btnImage.png'
-import CodeReview from './README.md'
+import Code from './README.md'
 
-const options = [0, 1, 2, 3, 4, 5].map(item => ({
-  title: `谢谢参与${item}`,
-  image: optionImage
-}))
+const options = Array.from({ length: 6 })
+  .map((_, index) => index)
+  .map(item => ({
+    title: `奖项名称${item}`,
+    image: optionImage
+  }))
 
 export default defineComponent({
   name: 'WheelDemo',
 
   setup() {
-    const backgroundStyle: CSSProperties = {
-      backgroundColor: '#fff'
-    }
-
-    const CircleStyle: CSSProperties = {
+    const circleStyle: CSSProperties = {
       backgroundImage: `url(${bgImage})`
-    }
-
-    const StartStyle: CSSProperties = {
-      backgroundImage: `url(${btnImage})`
     }
 
     const size = ref(300)
@@ -34,7 +28,7 @@ export default defineComponent({
     const [angle, rotate] = Wheel.useRotate(0)
 
     const onOptionClick = (e: MouseEvent, i: number) => {
-      console.debug(e, i)
+      console.log(i)
     }
 
     rotate.idled()
@@ -59,17 +53,35 @@ export default defineComponent({
 
     return () => (
       <>
-        <Wheel
-          size={size.value}
-          angle={angle.value}
-          backgroundStyle={backgroundStyle}
-          circleStyle={CircleStyle}
-          startStyle={StartStyle}
-          options={options}
-          onOptionClick={onOptionClick}
-          onStart={onStart}
-        />
-        <CodeReview />
+        <div
+          style={{
+            position: 'relative',
+            width: size.value + 'px',
+            height: size.value + 'px'
+          }}
+        >
+          <Wheel
+            angle={angle.value}
+            style={circleStyle}
+            options={options}
+            onOptionClick={onOptionClick}
+            // optionRender={(option) => (<div>{option.toString()}</div>)}
+          />
+          <div
+            onClick={onStart}
+            style={{
+              position: 'absolute',
+              width: size.value / 4 + 'px',
+              height: size.value / 4 + 'px',
+              left: (size.value / 8) * 3 + 'px',
+              top: (size.value / 8) * 3 + 'px',
+              backgroundImage: `url(${btnImage})`,
+              backgroundSize: '100% 100%',
+              borderRadius: '50%'
+            }}
+          ></div>
+        </div>
+        <Code />
       </>
     )
   }

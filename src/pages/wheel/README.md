@@ -2,11 +2,10 @@
 
 ```javascript
 import { CSSProperties, defineComponent, ref } from 'vue'
-import Wheel from 'packages/wheel'
+import { Wheel } from 'market-ui'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
 import bgImage from '@/assets/bgImage.png'
-import btnImage from '@/assets/btnImage.png'
 
 const options = [0, 1, 2, 3, 4, 5].map(item => ({
   title: `谢谢参与${item}`,
@@ -17,16 +16,8 @@ export default defineComponent({
   name: 'WheelDemo',
 
   setup() {
-    const backgroundStyle: CSSProperties = {
-      backgroundColor: '#fff'
-    }
-
-    const CircleStyle: CSSProperties = {
+    const circleStyle: CSSProperties = {
       backgroundImage: `url(${bgImage})`
-    }
-
-    const StartStyle: CSSProperties = {
-      backgroundImage: `url(${btnImage})`
     }
 
     const size = ref(300)
@@ -36,7 +27,7 @@ export default defineComponent({
     const [angle, rotate] = Wheel.useRotate(0)
 
     const onOptionClick = (e: MouseEvent, i: number) => {
-      console.debug(e, i)
+      console.log(i)
     }
 
     rotate.idled()
@@ -61,20 +52,24 @@ export default defineComponent({
 
     return () => (
       <>
-        <Wheel
-          size={size.value}
-          angle={angle.value}
-          backgroundStyle={backgroundStyle}
-          circleStyle={CircleStyle}
-          startStyle={StartStyle}
-          options={options}
-          onOptionClick={onOptionClick}
-          onStart={onStart}
-        />
+        <div
+          style={{
+            width: size.value + 'px',
+            height: size.value + 'px'
+          }}
+        >
+          <Wheel
+            angle={angle.value}
+            style={circleStyle}
+            options={options}
+            onOptionClick={onOptionClick}
+          />
+        </div>
       </>
     )
   }
 })
+
 
 ```
 
