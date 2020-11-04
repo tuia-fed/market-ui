@@ -1,0 +1,27 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .item {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .card {
+    margin: 16px;
+    padding: 16px 0;
+    background-color: #fff;
+    border-radius: @mk-doc-border-radius;
+    box-shadow: 0 8px 12px #ebedf0;
+
+    & > div {
+      margin: auto;
+    }
+
+    .name {
+      text-align: center;
+      color: @mk-gray;
+      margin-top: 16px;
+    }
+  }
+}

@@ -18,14 +18,6 @@ body {
 }
 
 // 定制markdown样式
-@mk-doc-black: #323233;
-@mk-doc-text-color: #34495e;
-@mk-doc-code-background-color: #f1f4f8;
-@mk-doc-blue: #1989fa;
-@mk-doc-green: #4fc08d;
-@mk-doc-code-font-family: 'Source Code Pro', 'Monaco', 'Inconsolata', monospace;
-@mk-doc-border-radius: 20px;
-
 .markdown {
   pre {
     margin-bottom: 24px;
@@ -97,6 +89,8 @@ body {
     line-height: 1.5;
     border-collapse: collapse;
     background-color: #fff;
+    border-radius: @mk-doc-border-radius;
+    box-shadow: 0 8px 12px #ebedf0;
 
     th {
       padding: 8px 10px;
