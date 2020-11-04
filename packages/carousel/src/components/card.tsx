@@ -6,6 +6,21 @@ export default defineComponent({
   name: 'Card',
 
   props: {
+    index: {
+      type: Number,
+      required: true
+    },
+
+    rotateY: {
+      type: Number,
+      default: 0
+    },
+
+    radius: {
+      type: Number,
+      default: 0
+    },
+
     style: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
@@ -25,9 +40,16 @@ export default defineComponent({
   },
 
   setup(props) {
+    const defaultStyle: CSSProperties = {
+      position: 'absolute',
+      left: '50%',
+      transform: `translate(-50%, -50%) rotateY(${props.rotateY}deg) translateZ(${props.radius}px)`,
+      ...props.style
+    }
+
     return () => (
       <div
-        style={props.style}
+        style={defaultStyle}
         class={styles.card}
         onTouchstart={props.onTouchstart}
         onTouchmove={props.onTouchmove}

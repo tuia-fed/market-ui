@@ -18,6 +18,11 @@ export default defineComponent({
     cardStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
+    },
+
+    radius: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -61,22 +66,23 @@ export default defineComponent({
       transform: `rotateY(${angle.value}deg)`
     }))
 
-    const cardList: Array<number> = []
-
-    for (let i = 1; i <= props.cardNum; i++) {
-      cardList.push(i)
-    }
-
     return () => (
       <div class={styles.container}>
+        {/* 旋转中心 */}
         <div class={styles.center} style={centerStyle.value}>
-          {cardList.map(() => (
-            <Card
-              onTouchstart={onTouchstart}
-              onTouchmove={onTouchmove}
-              onTouchend={onTouchend}
-            ></Card>
-          ))}
+          {Array(props.cardNum)
+            .fill(undefined)
+            .map((_, index) => (
+              <Card
+                index={index}
+                rotateY={index * (360 / props.cardNum)}
+                radius={props.radius}
+                style={props.cardStyle}
+                onTouchstart={onTouchstart}
+                onTouchmove={onTouchmove}
+                onTouchend={onTouchend}
+              ></Card>
+            ))}
         </div>
       </div>
     )

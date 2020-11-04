@@ -28,6 +28,11 @@ export default createComponent({
     cardStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
+    },
+
+    radius: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -37,6 +42,7 @@ export default createComponent({
         <Container
           cardNum={props.cardNum}
           cardStyle={props.cardStyle}
+          radius={props.radius}
         ></Container>
 
         <Start style={props.startStyle} onClick={props.onStart}></Start>
