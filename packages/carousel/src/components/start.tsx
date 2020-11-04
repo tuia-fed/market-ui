@@ -1,9 +1,10 @@
 import { defineComponent, CSSProperties, PropType } from 'vue'
 import { CarouselStartClick } from '../../types'
 import { noop } from 'packages/shared/utils'
+import styles from './styles.module.less'
 
 export default defineComponent({
-  name: 'WheelStart',
+  name: 'Start',
 
   props: {
     style: {
@@ -22,6 +23,10 @@ export default defineComponent({
       emit('click', e)
     }
 
-    return () => <div onClick={onClick} style={props.style}></div>
+    return () => (
+      <div onClick={onClick} style={props.style} class={styles.start}>
+        Start
+      </div>
+    )
   }
 })

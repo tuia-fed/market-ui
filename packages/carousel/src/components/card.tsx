@@ -1,4 +1,5 @@
 import { CSSProperties, defineComponent, PropType } from 'vue'
+import styles from './styles.module.less'
 
 export default defineComponent({
   name: 'Card',
@@ -11,6 +12,6 @@ export default defineComponent({
   },
 
   setup(props) {
-    return () => <div style={props.style}></div>
+    return () => <div style={props.style} class={styles.card}></div>
   }
 })

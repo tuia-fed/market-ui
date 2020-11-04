@@ -1,10 +1,11 @@
-import { CSSProperties, defineComponent, PropType } from 'vue'
+import { CSSProperties, PropType } from 'vue'
 import { CarouselStartClick } from '../types'
 import Container from './components/container'
 import Start from './components/start'
 import { noop } from 'packages/shared/utils'
+import { createComponent } from './create'
 
-export default defineComponent({
+export default createComponent({
   Container,
   Start,
 
@@ -37,6 +38,7 @@ export default defineComponent({
           cardNum={props.cardNum}
           cardStyle={props.cardStyle}
         ></Container>
+
         <Start style={props.startStyle} onClick={props.onStart}></Start>
       </>
     )

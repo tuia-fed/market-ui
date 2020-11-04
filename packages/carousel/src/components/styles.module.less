@@ -1,0 +1,74 @@
+.container {
+  position: relative;
+  perspective: 3000px;
+}
+
+@radius: 270px;
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+}
+
+.card {
+  position: absolute;
+  // left: 200px;
+  width: 307px;
+  top: 180px;
+  left: 50%;
+  height: 361px;
+  // background-color: yellow;
+  background-image: url('//yun.tuisnake.com/tact/RedPackSurrounded/fda523e8764bd6fdcd44431b8b34e220.png');
+
+  &:nth-child(1) {
+    transform:
+      translate(-50%, -50%) rotateY(0deg) translateZ(@radius)
+      scale(1);
+  }
+
+  &:nth-child(2) {
+    transform:
+      translate(-50%, -50%) rotateY(60deg) translateZ(@radius)
+      scale(1);
+  }
+
+  &:nth-child(3) {
+    transform:
+      translate(-50%, -50%) rotateY(120deg) translateZ(@radius)
+      scale(1);
+  }
+
+  &:nth-child(4) {
+    transform:
+      translate(-50%, -50%) rotateY(180deg) translateZ(@radius)
+      scale(1);
+  }
+
+  &:nth-child(5) {
+    transform:
+      translate(-50%, -50%) rotateY(240deg) translateZ(@radius)
+      scale(1);
+  }
+
+  &:nth-child(6) {
+    transform:
+      translate(-50%, -50%) rotateY(300deg) translateZ(@radius)
+      scale(1);
+  }
+}
+
+.start {
+  position: absolute;
+  top: 500px;
+  width: 100px;
+  height: 50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: rosybrown;
+  line-height: 50px;
+  text-align: center;
+}

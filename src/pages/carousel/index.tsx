@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Carousel from 'packages/carousel'
 
 export default defineComponent({
@@ -6,11 +6,11 @@ export default defineComponent({
 
   setup() {
     const onStart = (e: MouseEvent) => {
-      console.log('onStart')
+      console.log('onStart', e)
     }
 
-    return () => {
-      ;<Carousel></Carousel>
-    }
+    const cardNum = ref(6)
+
+    return () => <Carousel onStart={onStart} cardNum={cardNum.value}></Carousel>
   }
 })
