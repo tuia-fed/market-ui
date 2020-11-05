@@ -19,16 +19,15 @@ body {
 
 // 定制markdown样式
 .markdown {
-  pre {
+  flex: 1;
+  margin-right: 16px;
+
+  pre.hljs {
     margin-bottom: 24px;
     padding: 24px;
     background-color: #fff;
     border-radius: @mk-doc-border-radius;
     box-shadow: 0 8px 12px #ebedf0;
-  }
-
-  .hljs {
-    background-color: #fff;
   }
 
   h1,
@@ -53,7 +52,7 @@ body {
   }
 
   h2 {
-    margin: 45px 0 20px;
+    margin: 20px 0 20px;
     font-size: 25px;
   }
 
@@ -82,7 +81,9 @@ body {
   }
 
   table {
+    display: block;
     width: 100%;
+    padding: 16px;
     margin-top: 12px;
     color: @mk-doc-text-color;
     font-size: 14px;
@@ -105,6 +106,14 @@ body {
     td {
       padding: 8px;
       border-top: 1px solid @mk-doc-code-background-color;
+
+      &:first-child {
+        min-width: 100px;
+      }
+
+      &:not(:first-child) {
+        min-width: 200px;
+      }
 
       &:last-child {
         padding-right: 0;

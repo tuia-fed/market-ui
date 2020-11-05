@@ -5,10 +5,6 @@ export default [
       {
         name: '介绍',
         path: '/'
-      },
-      {
-        name: '组件预览',
-        path: '/preview'
       }
     ]
   },

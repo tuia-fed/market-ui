@@ -1,4 +1,5 @@
-import { defineComponent } from 'vue'
+import { defineComponent, CSSProperties } from 'vue'
+import Preview from '@/components/preview'
 import Demo from './demo'
 import Code from './README.md'
 
@@ -6,8 +7,10 @@ export default defineComponent({
   setup() {
     return () => (
       <>
-        <Demo />
         <Code />
+        <Preview>
+          <Demo />
+        </Preview>
       </>
     )
   }
