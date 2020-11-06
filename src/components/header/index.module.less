@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  height: @header-height;
+  background-color: #111;
+}
+
+.left {
+  width: @nav-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .brand {
+    height: @header-height / 3;
+  }
+}
+
+.right {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+
+  a {
+    padding: 0 16px;
+    height: @header-height / 2;
+    line-height: @header-height / 2;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: @mk-primary;
+    }
+  }
+}
