@@ -1,8 +1,11 @@
 import { computed, CSSProperties, defineComponent, PropType, ref } from 'vue'
 import Card from './card'
 import styles from './styles.module.less'
-import { tween, easing, transform } from 'popmotion'
-import { CardTouchFunction } from 'packages/carousel/types'
+
+function getAngleByIndex(index: number, splitNum: number) {
+  return index * (360 / splitNum)
+}
+
 
 export default defineComponent({
   name: 'Container',
@@ -10,7 +13,12 @@ export default defineComponent({
   Card,
 
   props: {
-    cardNum: {
+    angle: {
+      type: Number,
+      default: 0,
+    },
+
+    splitNum: {
       type: Number,
       default: 6
     },
@@ -27,8 +35,6 @@ export default defineComponent({
   },
 
   setup(props) {
-    const angle = ref(0)
-
     // tween({
     //   from: 0,
     //   to: 360,
@@ -42,45 +48,42 @@ export default defineComponent({
     //   }
     // })
 
-    let startClientX = 0
-    const rotateRate = 1
+    // let startClientX = 0
+    // const rotateRate = 1
 
-    const onTouchstart: CardTouchFunction = e => {
-      console.log('onTouchstart', e)
-      startClientX = e.touches[0].clientX
-    }
-    const onTouchmove: CardTouchFunction = e => {
-      // console.log('onTouchmove', e)
-      e.preventDefault()
-      // TODO: 实际该算得是速度 engine/cocos2d/core/components/CCScrollView.js:1335
-      angle.value += (e.touches[0].clientX - startClientX) * rotateRate
-      startClientX = e.touches[0].clientX
-    }
-    const onTouchend: CardTouchFunction = e => {
-      // 重置回360度以内
-      // angle.value %= 360
-      console.log('onTouchend', e)
-    }
+    // const onTouchstart: CardTouchFunction = e => {
+    //   console.log('onTouchstart', e)
+    //   startClientX = e.touches[0].clientX
+    // }
+    // const onTouchmove: CardTouchFunction = e => {
+    //   // console.log('onTouchmove', e)
+    //   e.preventDefault()
+    //   // TODO: 实际该算得是速度 engine/cocos2d/core/components/CCScrollView.js:1335
+    //   angle.value += (e.touches[0].clientX - startClientX) * rotateRate
+    //   startClientX = e.touches[0].clientX
+    // }
+    // const onTouchend: CardTouchFunction = e => {
+    //   // 重置回360度以内
+    //   // angle.value %= 360
+    //   console.log('onTouchend', e)
+    // }
 
     const centerStyle = computed(() => ({
-      transform: `rotateY(${angle.value}deg)`
+      transform: `rotateY(${props.angle}deg)`
     }))
 
     return () => (
       <div class={styles.container}>
         {/* 旋转中心 */}
         <div class={styles.center} style={centerStyle.value}>
-          {Array(props.cardNum)
+          {Array(props.splitNum)
             .fill(undefined)
             .map((_, index) => (
               <Card
                 index={index}
-                rotateY={index * (360 / props.cardNum)}
+                rotateY={getAngleByIndex(index, props.splitNum)}
                 radius={props.radius}
                 style={props.cardStyle}
-                onTouchstart={onTouchstart}
-                onTouchmove={onTouchmove}
-                onTouchend={onTouchend}
               ></Card>
             ))}
         </div>

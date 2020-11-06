@@ -54,7 +54,9 @@ export default defineComponent({
         onTouchstart={props.onTouchstart}
         onTouchmove={props.onTouchmove}
         onTouchend={props.onTouchend}
-      ></div>
+      >
+        {props.index}
+      </div>
     )
   }
 })

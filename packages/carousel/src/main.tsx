@@ -1,18 +1,18 @@
 import { CSSProperties, PropType } from 'vue'
 import { CarouselStartClick } from '../types'
 import Container from './components/container'
-import Start from './components/start'
 import { noop } from 'packages/shared/utils'
 import { createComponent } from './create'
+import useRotate from './hooks'
 
 export default createComponent({
   Container,
-  Start,
+  useRotate,
 
   props: {
-    onStart: {
-      type: Function as PropType<CarouselStartClick>,
-      default: noop
+    angle: {
+      type: Number,
+      default: 0
     },
 
     startStyle: {
@@ -20,7 +20,7 @@ export default createComponent({
       default: () => ({})
     },
 
-    cardNum: {
+    splitNum: {
       type: Number,
       default: 6
     },
@@ -40,12 +40,11 @@ export default createComponent({
     return () => (
       <>
         <Container
-          cardNum={props.cardNum}
+          angle={props.angle}
+          splitNum={props.splitNum}
           cardStyle={props.cardStyle}
           radius={props.radius}
         ></Container>
-
-        <Start style={props.startStyle} onClick={props.onStart}></Start>
       </>
     )
   }
