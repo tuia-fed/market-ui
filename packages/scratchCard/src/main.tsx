@@ -60,35 +60,22 @@ export default createComponent({
     const imgObj = new Image()
 
     let mouseDown = false
-    let scratchedRate = 0 // 已经刮出的百分比
 
     let imgWhiteNum = 0 // 图片原本存在的空白点位
-    // 初始化渲染canvas
-    const initRender = () => {
-      if (props.cardImg.indexOf('#') !== -1) {
-        // 如果是颜色值
-        cvsContext.fillStyle = props.cardImg
-        cvsContext.fillRect(0, 0, width, height)
-      } else if (props.cardImg !== '') {
-        // 是图片地址
-        createImgObj(props.cardImg)
-      } else {
-        // 没传，用默认的颜色
-        cvsContext.fillStyle = defaultColor
-        cvsContext.fillRect(0, 0, width, height)
-      }
-    }
-    // 如果传入的是一个图片地址，创建图片对象
-    const createImgObj = (src: string) => {
-      imgObj.src = src
-      imgObj.crossOrigin = 'anonymous'
-      imgObj.onerror = e => {
-        imgObj.src =
-          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArEAAAGSAQMAAADOxAtrAAAAA1BMVEWXl5cPTYmVAAAAOUlEQVR42u3BgQAAAADDoPtT32AE1QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIB4owAAGsmJ4nAAAAAElFTkSuQmCC'
-        imgObj.onerror = null
-      }
-      imgObj.onload = () => {
-        drawImage()
+
+    // 计算图片中原本就存在的空白点
+    const calWhite = () => {
+      try {
+        const pixelData = cvsContext.getImageData(0, 0, width, height)
+        let num = 0
+        for (let i = 0; i < pixelData.data.length; i++) {
+          if (pixelData.data[i] === 0) {
+            num++
+          }
+        }
+        imgWhiteNum = num
+      } catch (e) {
+        console.log('计算图片空白区域出错')
       }
     }
     // 在画布上画图片
@@ -103,19 +90,32 @@ export default createComponent({
         calWhite()
       }, 40)
     }
-    // 计算图片中原本就存在的空白点
-    const calWhite = () => {
-      try {
-        const pixelData = cvsContext.getImageData(0, 0, width, height)
-        let num = 0
-        for (let i = 0; i < pixelData.data.length; i++) {
-          if (pixelData.data[i] === 0) {
-            num++
-          }
-        }
-        imgWhiteNum = num
-      } catch (e) {
-        console.log('计算图片空白区域出错')
+    // 如果传入的是一个图片地址，创建图片对象
+    const createImgObj = (src: string) => {
+      imgObj.src = src
+      imgObj.crossOrigin = 'anonymous'
+      imgObj.onerror = () => {
+        imgObj.src =
+          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArEAAAGSAQMAAADOxAtrAAAAA1BMVEWXl5cPTYmVAAAAOUlEQVR42u3BgQAAAADDoPtT32AE1QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIB4owAAGsmJ4nAAAAAElFTkSuQmCC'
+        imgObj.onerror = null
+      }
+      imgObj.onload = () => {
+        drawImage()
+      }
+    }
+    // 初始化渲染canvas
+    const initRender = () => {
+      if (props.cardImg.indexOf('#') !== -1) {
+        // 如果是颜色值
+        cvsContext.fillStyle = props.cardImg
+        cvsContext.fillRect(0, 0, width, height)
+      } else if (props.cardImg !== '') {
+        // 是图片地址
+        createImgObj(props.cardImg)
+      } else {
+        // 没传，用默认的颜色
+        cvsContext.fillStyle = defaultColor
+        cvsContext.fillRect(0, 0, width, height)
       }
     }
     // 刮的canvas操作
@@ -159,6 +159,41 @@ export default createComponent({
       const offY = e.touches[0].clientY
       fillWhite(offX - cvsBoxInfo.left, offY - cvsBoxInfo.top)
     }
+    // 刮刮卡全部刮开
+    const isDone = () => {
+      cvsContext.fillRect(0, 0, width, height)
+    }
+    // 自动刮
+    const autoPlay = () => {
+      const points = props.autoPoints as Array<Array<number>>
+      const arr: Array<any> = [] // 数组类型如何定义？？
+      for (let i = 0; i < points.length - 1; i++) {
+        arr.push(
+          tween({
+            from: {
+              x: points[i][0],
+              y: points[i][1]
+            },
+            to: {
+              x: points[i + 1][0],
+              y: points[i + 1][1]
+            },
+            duration: 0.25
+          })
+        )
+      }
+      return new Promise(resolve => {
+        chain(...arr).start({
+          update: v => {
+            fillWhite(v.x, v.y)
+          },
+          complete: () => {
+            isDone()
+            resolve()
+          }
+        })
+      })
+    }
     const endHandler = (e: TouchEvent | MouseEvent) => {
       // 刮完之后要做的事
       mouseDown = false
@@ -185,7 +220,7 @@ export default createComponent({
         }
 
         // 计算刮开百分比
-        percent = scratchedRate =
+        percent =
           (num - imgWhiteNum) / (pixelData.data.length - imgWhiteNum)
       } catch (e) {
         percent = props.targetRate
@@ -221,41 +256,6 @@ export default createComponent({
         cvsContext.fill()
         cvsContext.closePath()
       }
-    }
-    // 自动刮
-    const autoPlay = () => {
-      const points = props.autoPoints as Array<Array<number>>
-      const arr = new Array() // 数组类型如何定义？？
-      for (let i = 0; i < points.length - 1; i++) {
-        arr.push(
-          tween({
-            from: {
-              x: points[i][0],
-              y: points[i][1]
-            },
-            to: {
-              x: points[i + 1][0],
-              y: points[i + 1][1]
-            },
-            duration: 0.25
-          })
-        )
-      }
-      return new Promise(resolve => {
-        chain(...arr).start({
-          update: v => {
-            fillWhite(v.x, v.y)
-          },
-          complete: () => {
-            isDone()
-            resolve()
-          }
-        })
-      })
-    }
-    // 刮刮卡全部刮开
-    const isDone = () => {
-      cvsContext.fillRect(0, 0, width, height)
     }
     initRender()
     return () => {
