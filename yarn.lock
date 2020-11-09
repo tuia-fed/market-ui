@@ -1131,6 +1131,11 @@
     remark "^12.0.0"
     unist-util-find-all-after "^3.0.1"
 
+"@tuia/moto.js@^1.0.1":
+  version "1.0.1"
+  resolved "http://npm.dui88.com:80/@tuia%2fmoto.js/-/moto.js-1.0.1.tgz#e9984bb821b0652da0d52a999ca45ca92f5492b5"
+  integrity sha1-6ZhLuCGwZS2g1SqZnKRcqS9UkrU=
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"

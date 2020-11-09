@@ -12,7 +12,8 @@ export default defineComponent({
     }
     const cardImg = '' // 可以不提供图片，有默认的卡颜色
     const autoPlay = ref(true) // 是否开启自动刮
-    const scratchedRate = '' // 不提供刮掉面积占比的时候，有一个默认值，刮掉面积达到时进行开奖
+    const targetRate = '' // 不提供刮掉面积占比的时候，有一个默认值，刮掉面积达到时进行开奖
+    let isPlaying = false // 是否正在刮过程中
     const touchStartAct = () => {
       // 开始刮的时候，要做的事情，比如隐藏引导手势
       if (disabled.value) return
@@ -32,9 +33,10 @@ export default defineComponent({
           size={size}
           cardImg={cardImg}
           autoPlay={autoPlay.value}
-          scratchedRate={scratchedRate}
+          targetRate={targetRate}
           touchStartAct={touchStartAct}
           touchEndAct={touchEndAct}
+          isPlaying={isPlaying}
         />
         <div class="guide_hand"></div>
       </>
