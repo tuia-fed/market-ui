@@ -52,13 +52,13 @@ export default defineComponent({
 
     const onStart = (stop: Function) => {
       fetchData().then(() => {
-        // stop({
-        //   index: 1,
-        //   duration: 1000,
-        //   complete: () => {
-        //     console.log('end')
-        //   }
-        // })
+        stop({
+          index: 1,
+          duration: 1000,
+          complete: () => {
+            console.log('end')
+          }
+        })
       })
     }
 
