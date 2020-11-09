@@ -4,6 +4,7 @@ body {
 }
 
 body {
+  position: relative;
   margin: 0 auto;
 }
 
@@ -14,4 +15,117 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+// 定制markdown样式
+.markdown {
+  flex: 1;
+  margin-right: 16px;
+
+  pre.hljs {
+    margin-bottom: 24px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: @mk-doc-border-radius;
+    box-shadow: 0 8px 12px #ebedf0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: @mk-doc-black;
+    font-weight: normal;
+    line-height: 1.5;
+
+    &[id] {
+      cursor: pointer;
+    }
+  }
+
+  h1 {
+    margin: 0 0 30px;
+    font-size: 30px;
+    cursor: default;
+  }
+
+  h2 {
+    margin: 20px 0 20px;
+    font-size: 25px;
+  }
+
+  h3 {
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  h4 {
+    margin: 24px 0 12px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  h5 {
+    margin: 24px 0 12px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  p {
+    color: @mk-doc-text-color;
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    margin-top: 12px;
+    color: @mk-doc-text-color;
+    font-size: 14px;
+    line-height: 1.5;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: @mk-doc-border-radius;
+    box-shadow: 0 8px 12px #ebedf0;
+
+    th {
+      padding: 8px 10px;
+      font-weight: 600;
+      text-align: left;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    td {
+      padding: 8px;
+      border-top: 1px solid @mk-doc-code-background-color;
+
+      &:first-child {
+        min-width: 100px;
+      }
+
+      &:not(:first-child) {
+        min-width: 200px;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    em {
+      color: @mk-doc-green;
+      font-size: 14px;
+      font-family: @mk-doc-code-font-family;
+      font-style: normal;
+      -webkit-font-smoothing: auto;
+    }
+  }
 }

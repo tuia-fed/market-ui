@@ -1,11 +1,11 @@
 .activeClass {
-  border-right-color: @primary !important;
-  color: @primary !important;
+  border-right-color: @mk-primary !important;
+  color: @mk-primary !important;
   background-color: #eee;
 }
 
 .title {
-  color: #455a64;
+  color: @mk-black;
   font-size: 15px;
   font-weight: 600;
   padding: 16px;
@@ -17,7 +17,6 @@
 }
 
 .nav {
-  height: calc(100vh - @header-height);
   width: @nav-width;
   border-right: 1px solid #eee;
 
@@ -34,7 +33,7 @@
         border-right-width: 2px;
         border-right-style: solid;
         border-right-color: transparent;
-        color: #314659;
+        color: @mk-gray;
       }
     }
   }

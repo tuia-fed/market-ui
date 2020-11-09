@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { RouterView } from 'vue-router'
 import Main from './components/main'
 import Header from './components/header'
-import Nav from './components/navbar'
+import Navbar from './components/navbar'
 import Content from './components/content'
 
 export default defineComponent({
@@ -13,7 +13,7 @@ export default defineComponent({
       <>
         <Header />
         <Main>
-          <Nav />
+          <Navbar />
           <Content>
             <RouterView />
           </Content>
