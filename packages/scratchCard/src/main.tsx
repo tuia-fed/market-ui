@@ -85,7 +85,7 @@ export default createComponent({
       imgObj.onerror = e => {
         imgObj.src =
           'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArEAAAGSAQMAAADOxAtrAAAAA1BMVEWXl5cPTYmVAAAAOUlEQVR42u3BgQAAAADDoPtT32AE1QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIB4owAAGsmJ4nAAAAAElFTkSuQmCC'
-          imgObj.onerror = null
+        imgObj.onerror = null
       }
       imgObj.onload = () => {
         drawImage()
@@ -96,22 +96,17 @@ export default createComponent({
       cvsContext.globalCompositeOperation = 'source-over'
       cvsContext.beginPath()
       const timer = window.setTimeout(() => {
-          cvsContext.drawImage(imgObj, 0, 0, width, height)
-          cvsContext.closePath()
-          cvsContext.globalCompositeOperation = 'destination-over'
-          clearTimeout(timer)
-          calWhite()
-        }, 40)
+        cvsContext.drawImage(imgObj, 0, 0, width, height)
+        cvsContext.closePath()
+        cvsContext.globalCompositeOperation = 'destination-over'
+        clearTimeout(timer)
+        calWhite()
+      }, 40)
     }
     // 计算图片中原本就存在的空白点
     const calWhite = () => {
       try {
-        const pixelData = cvsContext.getImageData(
-          0,
-          0,
-          width,
-          height
-        )
+        const pixelData = cvsContext.getImageData(0, 0, width, height)
         let num = 0
         for (let i = 0; i < pixelData.data.length; i++) {
           if (pixelData.data[i] === 0) {
