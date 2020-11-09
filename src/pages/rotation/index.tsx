@@ -11,14 +11,35 @@ export default defineComponent({
         'url("//yun.tuisnake.com/mami-media/img/185adc53-zsnihatxyl.png")'
     }
 
-    const singleStyle = {
-      image:
-        '//yun.tuisnake.com/h5-mami/dist/item1.84574200c69f49c151a53126b534227c.png'
-    }
-
-    const singleList = [0, 1, 2, 3, 4, 5, 6].map(() => {
-      return singleStyle
-    })
+    const singleList = [
+      {
+        image:
+          '//yun.tuisnake.com/h5-mami/dist/item1.84574200c69f49c151a53126b534227c.png'
+      },
+      {
+        image:
+          '//yun.tuisnake.com/h5-mami/dist/item7.dbbecfdbafca57d3d193809269a87bc2.png'
+      },
+      {
+        image:
+          '//yun.tuisnake.com/h5-mami/dist/item6.78b4b54eedbf3b1431a174716b448929.png'
+      },
+      {
+        image:
+          '//yun.tuisnake.com/h5-mami/dist/item2.ccc21bbd9aea52fbbe28942ef371e0a1.png'
+      },
+      {
+        image: '//yun.tuisnake.com/mami-media/img/95ed6c20-y3h2swcaon.png'
+      },
+      {
+        image:
+          '//yun.tuisnake.com/h5-mami/dist/item4.66875fb5074404008a1d408ed0167b60.png'
+      },
+      {
+        image:
+          '//yun.tuisnake.com/h5-mami/dist/item5.011718b84ce43874b7d18dbbe9c4f649.png'
+      }
+    ]
 
     const width = ref(672)
     const height = ref(354)
@@ -27,11 +48,17 @@ export default defineComponent({
     const singleMargin = ref(20)
     const hideBoxWidth = ref(602)
     const hideBoxHeight = ref(300)
-    const duration = ref(3000)
+    const duration = ref(6000)
 
     const onStart = (stop: Function) => {
       fetchData().then(() => {
-        stop(1)
+        // stop({
+        //   index: 1,
+        //   duration: 1000,
+        //   complete: () => {
+        //     console.log('end')
+        //   }
+        // })
       })
     }
 

@@ -5,5 +5,6 @@ export default {
   container: createClassname('container'),
   single: createClassname('single'),
   'hide-box': createClassname('hide-box'),
-  'price-cell': createClassname('price-cell')
+  'price-cell': createClassname('price-cell'),
+  'price-cell-copy': createClassname('price-cell-copy')
 }

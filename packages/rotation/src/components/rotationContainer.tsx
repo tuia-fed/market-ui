@@ -5,6 +5,7 @@ import styles from '../styles'
 import { RotationOptions } from '../../types'
 import useRotation from '../hooks'
 import { noop } from '../../../shared/utils'
+import { ToProps } from 'packages/wheel/src/hooks/rotate'
 
 export default defineComponent({
   RotationSingle,
@@ -64,10 +65,13 @@ export default defineComponent({
   },
 
   setup(props, ctx) {
-    const startAngle =
+    const prizeWidth =
+      (props.singleWidth + props.singleMargin) * props.singleList.length
+    const endAngle =
       (props.singleWidth + props.singleMargin) * props.singleList.length -
       props.hideBoxWidth
-    const [angle, rotation] = useRotation(-startAngle, startAngle)
+    const correctWidth = props.singleWidth + props.singleMargin
+    const [angle, rotation] = useRotation(endAngle, correctWidth)
 
     const BackgroundStyle: CSSProperties = {
       width: props.width + 'px',
@@ -81,7 +85,8 @@ export default defineComponent({
     }
     const priceCellStyle = computed(() => {
       const result: CSSProperties = {}
-      result.transform = `translate(${angle.value}px, 0)`
+      result.transform = `translate(${angle.value - prizeWidth}px, 0)`
+      // result.transform = `translate(${endAngle - prizeWidth}px, 0)`
       return result
     })
     const hideBoxStyle: CSSProperties = {
@@ -91,20 +96,26 @@ export default defineComponent({
 
     rotation.idled(props.duration)
 
-    const stop = (index: number) => {
-      rotation.stop(index)
+    const stop = (data: ToProps) => {
+      rotation.stop(data, false)
     }
 
     const start = () => {
-      rotation.start()
+      rotation.start(false)
       props.onStart(stop)
     }
-
-    console.log(ctx)
 
     return () => (
       <div style={BackgroundStyle} class={styles.container}>
         <div style={hideBoxStyle} class={styles['hide-box']}>
+          <div style={priceCellStyle.value} class={styles['price-cell-copy']}>
+            {props.singleList.map(item => (
+              <RotationSingle
+                option={item}
+                style={SingleStyle}
+              ></RotationSingle>
+            ))}
+          </div>
           <div style={priceCellStyle.value} class={styles['price-cell']}>
             {props.singleList.map(item => (
               <RotationSingle
