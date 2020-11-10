@@ -15,11 +15,7 @@ export default defineComponent({
       type: Number,
       default: 288
     },
-    onClick: {
-      type: Function as PropType<CardClick>,
-      default: noop
-    },
-    style: {
+    backStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
     },
@@ -30,20 +26,20 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
-    const CardStyle: CSSProperties = {
+
+    const CardBackStyle: CSSProperties = {
       width: `${props.width}px`,
       height: `${props.height}px`,
-      ...props.style
+      ...props.backStyle
     }
 
-    const onClick = (e: MouseEvent) => {
-      emit('click', e)
-    }
+    // const onClick = (e: MouseEvent) => {
+    //   emit('click', e)
+    // }
 
     return () => (
-      <div onClick={onClick}
-        style={CardStyle}
-        class={[styles.card, props.turn ? styles.cardAni : '']}/>
+      <div style={CardBackStyle}
+      class={[styles.cardBack, props.turn ? styles.cardBackAni : '']}/>
     )
   }
 })

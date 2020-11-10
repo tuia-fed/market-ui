@@ -19,23 +19,22 @@ export default defineComponent({
     const height = ref(144)
     const turn = ref(false)
 
-    const onStart = () => {
-      if (turn.value) return
-      turn.value = true
+    const onClick = () => {
+      turn.value = false
     }
 
     return () => (
-      <TurnCard
-        width={width.value}
-        height={height.value}
-        backWidth={width.value}
-        backHeight={height.value}
-        turn={turn.value}
-        cardStyle={CardStyle}
-        cardBackStyle={CardBackStyle}
-        onStart={onStart}
-        // onStart={onStart}
-      />
+      <>
+        <button onClick={onClick}>重置</button>
+        <TurnCard
+          width={width.value}
+          height={height.value}
+          turn={turn.value}
+          cardStyle={CardStyle}
+          cardBackStyle={CardBackStyle}
+          // onStart={onStart}
+        />
+      </>
     )
   }
 })

@@ -2,13 +2,23 @@
 
 .mk {
   &-turnCard {
+    &_cardNum3 {
+      width: 400px;
+      height: 200px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      top: 100px;
+      left: 100px;
+    }
+
+    &_cardBox {
+      position: relative;
+    }
+
     &_card {
       .bg();
-
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
     }
 
     &_cardAni {
@@ -16,11 +26,11 @@
 
       @keyframes turn {
         from {
-          transform: translate(-50%, -50%) rotateY(0);
+          transform: rotateY(0);
         }
 
         to {
-          transform: translate(-50%, -50%) rotateY(90deg);
+          transform: rotateY(90deg);
         }
       }
     }
@@ -28,10 +38,9 @@
     &_cardBack {
       .bg();
 
+      top: 0;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotateY(-90deg);
+      transform: rotateY(-90deg);
     }
 
     &_cardBackAni {
@@ -39,11 +48,11 @@
 
       @keyframes turn {
         from {
-          transform: translate(-50%, -50%) rotateY(-90deg);
+          transform: rotateY(-90deg);
         }
 
         to {
-          transform: translate(-50%, -50%) rotateY(0);
+          transform: rotateY(0);
         }
       }
     }
