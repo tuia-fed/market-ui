@@ -40,14 +40,14 @@ export default createComponent({
       width: `${props.width}px`,
       height: `${props.height}px`
     }
-    const list:Array<number|boolean> = []
-    for (let i = 0; i < props.cardNum; i++){
+    const list: Array<number | boolean> = []
+    for (let i = 0; i < props.cardNum; i++) {
       list.push(false)
     }
 
-    const onClick:Function = (i:number) => {
+    const onClick: Function = (i: number) => {
       list[i] = true
-      console.log(list,i)
+      console.log(list, i)
     }
     return () => (
       <div class={styles[`cardNum${list.length}`]}>

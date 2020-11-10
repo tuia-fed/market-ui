@@ -26,7 +26,6 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
-
     const CardBackStyle: CSSProperties = {
       width: `${props.width}px`,
       height: `${props.height}px`,
@@ -38,8 +37,10 @@ export default defineComponent({
     // }
 
     return () => (
-      <div style={CardBackStyle}
-      class={[styles.cardBack, props.turn ? styles.cardBackAni : '']}/>
+      <div
+        style={CardBackStyle}
+        class={[styles.cardBack, props.turn ? styles.cardBackAni : '']}
+      />
     )
   }
 })
