@@ -10,22 +10,22 @@ export interface ToProps {
   complete: () => void
 }
 
-function getAngleByIndex(index: number, splitNum: number) {
-  return -index * (360 / splitNum)
+function getAngleByIndex(index: number, splitNum: number, direction: number) {
+  return index * (360 / splitNum) * direction
 }
 
 export default class {
   onUpdate: OnUpdate
   angle: number
   splitNum: number
-  clockwise: boolean
+  direction: number
   tw: TweenInterface<number> | undefined
 
   constructor(onUpdate: OnUpdate, splitNum: number, clockwise: boolean) {
     this.onUpdate = onUpdate
     this.angle = 0
     this.splitNum = splitNum
-    this.clockwise = clockwise
+    this.direction = clockwise ? -1 : 1
   }
 
   idled() {
@@ -35,7 +35,7 @@ export default class {
 
     this.tw = tween({
       from: this.angle,
-      to: this.angle + 360,
+      to: this.angle + 360 * this.direction,
       duration: 10000,
       ease: easing.linear,
       loop: Infinity
@@ -55,7 +55,7 @@ export default class {
 
     this.tw = tween({
       from: this.angle,
-      to: this.angle + 360,
+      to: this.angle + 360 * this.direction,
       duration: 500,
       ease: easing.linear,
       loop: Infinity
@@ -83,11 +83,12 @@ export default class {
       throw new Error(`目标索引的范围属于 0 <= to < ${this.splitNum}`)
     }
 
-    const targetAngle = getAngleByIndex(to, this.splitNum)
+    const targetAngle = getAngleByIndex(to, this.splitNum, this.direction)
     const toAngle = 360 * 2 + this.angle - (this.angle % 360) + targetAngle
 
     this.angle %= this.angle
 
+    console.debug('targetIndex', to)
     console.debug('targetAngle', targetAngle)
     console.debug('this.angle', this.angle)
     console.debug('toAngle', toAngle)
@@ -95,12 +96,11 @@ export default class {
     this.tw = tween({
       from: this.angle,
       to: 360 * 2 + this.angle - (this.angle % 360) + targetAngle,
-      duration: data.duration || 1000,
+      duration: data.duration || 800,
       ease: easing.cubicBezier(0.33, 1, 0.68, 1) // easeOutCubic
     }).start({
       update: (angle: number) => {
         this.angle = angle
-        console.log('update', this.angle)
         this.onUpdate(angle)
       },
       complete: () => {

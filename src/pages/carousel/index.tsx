@@ -1,59 +1,33 @@
-import { CSSProperties, defineComponent, ref } from 'vue'
-import Carousel from 'packages/carousel'
-import { fetchData } from '@/shared/utils'
+import { CSSProperties, defineComponent } from 'vue'
+import Preview from '@/components/preview'
+import Demo from './demo'
+import Code from './README.md'
 
 export default defineComponent({
-  name: 'Carousel',
-
   setup() {
-    const splitNum = ref(6)
-
-    const radius = ref(270)
-
-    const disabled = ref(false)
-
-    const [angle, rotate] = Carousel.useRotate(0, splitNum.value, true)
-
-    rotate.idled()
-
-    const onStart = () => {
-      if (disabled.value) {
-        return
-      }
-
-      disabled.value = true
-
-      rotate.start()
-      fetchData().then(() => {
-        rotate.to({
-          index: Math.floor(Math.random() * splitNum.value),
-          complete() {
-            setTimeout(() => {
-              disabled.value = false
-              rotate.idled()
-            }, 1000)
-          }
-        })
-      })
+    const bannerStyle: CSSProperties = {
+      display: 'none'
     }
 
-    const cardStyles: CSSProperties = {
-      top: '170px',
-      width: '307px',
-      height: '361px',
-      backgroundImage: `url('//yun.tuisnake.com/tact/RedPackSurrounded/fda523e8764bd6fdcd44431b8b34e220.png')`
+    const backgroundStyle: CSSProperties = {
+      width: '660px'
+    }
+
+    const mainStyle: CSSProperties = {
+      alignItems: 'center',
+      flexDirection: 'column'
     }
 
     return () => (
       <>
-        <Carousel
-          angle={angle.value}
-          splitNum={splitNum.value}
-          cardStyle={cardStyles}
-          radius={radius.value}
-        ></Carousel>
-
-        <button onClick={onStart}>Start</button>
+        <Code />
+        <Preview
+          backgroudStyle={backgroundStyle}
+          bannerStyle={bannerStyle}
+          mainStyle={mainStyle}
+        >
+          <Demo />
+        </Preview>
       </>
     )
   }

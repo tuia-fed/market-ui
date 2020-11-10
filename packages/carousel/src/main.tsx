@@ -1,12 +1,14 @@
-import { CSSProperties, PropType } from 'vue'
-import { CarouselStartClick } from '../types'
-import Container from './components/container'
-import { noop } from 'packages/shared/utils'
+import { computed, CSSProperties, PropType } from 'vue'
 import { createComponent } from './create'
+import Card from './components/card'
+import styles from './components/styles.module.less'
 import useRotate from './hooks'
 
+function getAngleByIndex(index: number, splitNum: number) {
+  return index * (360 / splitNum)
+}
+
 export default createComponent({
-  Container,
   useRotate,
 
   props: {
@@ -15,37 +17,48 @@ export default createComponent({
       default: 0
     },
 
-    startStyle: {
-      type: Object as PropType<CSSProperties>,
-      default: () => ({})
-    },
-
     splitNum: {
       type: Number,
       default: 6
     },
 
-    cardStyle: {
+    radius: {
+      type: Number,
+      default: 0
+    },
+
+    containerStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
     },
 
-    radius: {
-      type: Number,
-      default: 0
+    cardStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: () => ({})
     }
   },
 
   setup(props) {
+    // 旋转中心的样式
+    const centerStyle = computed(() => ({
+      transform: `rotateY(${props.angle}deg)`
+    }))
+
+    const list = Array(props.splitNum).fill(undefined)
+
     return () => (
-      <>
-        <Container
-          angle={props.angle}
-          splitNum={props.splitNum}
-          cardStyle={props.cardStyle}
-          radius={props.radius}
-        ></Container>
-      </>
+      <div class={styles.container} style={props.containerStyle}>
+        <div class={styles.center} style={centerStyle.value}>
+            {list.map((_, index) => (
+              <Card
+                index={index}
+                rotateY={getAngleByIndex(index, props.splitNum)}
+                radius={props.radius}
+                style={props.cardStyle}
+              ></Card>
+            ))}
+        </div>
+      </div>
     )
   }
 })

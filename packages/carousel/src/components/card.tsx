@@ -1,4 +1,3 @@
-import { CardTouchFunction } from 'packages/carousel/types'
 import { CSSProperties, defineComponent, PropType } from 'vue'
 import styles from './styles.module.less'
 
@@ -24,24 +23,13 @@ export default defineComponent({
     style: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
-    },
-
-    onTouchstart: {
-      type: Function as PropType<CardTouchFunction>
-    },
-
-    onTouchmove: {
-      type: Function as PropType<CardTouchFunction>
-    },
-
-    onTouchend: {
-      type: Function as PropType<CardTouchFunction>
     }
   },
 
   setup(props) {
     const defaultStyle: CSSProperties = {
       position: 'absolute',
+      top: '50%',
       left: '50%',
       transform: `translate(-50%, -50%) rotateY(${props.rotateY}deg) translateZ(${props.radius}px)`,
       ...props.style
@@ -51,9 +39,6 @@ export default defineComponent({
       <div
         style={defaultStyle}
         class={styles.card}
-        onTouchstart={props.onTouchstart}
-        onTouchmove={props.onTouchmove}
-        onTouchend={props.onTouchend}
       >
         {props.index}
       </div>
