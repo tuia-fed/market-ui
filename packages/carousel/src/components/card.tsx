@@ -36,10 +36,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div
-        style={defaultStyle}
-        class={styles.card}
-      >
+      <div style={defaultStyle} class={styles.card}>
         {props.index}
       </div>
     )

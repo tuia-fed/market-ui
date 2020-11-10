@@ -49,14 +49,14 @@ export default createComponent({
     return () => (
       <div class={styles.container} style={props.containerStyle}>
         <div class={styles.center} style={centerStyle.value}>
-            {list.map((_, index) => (
-              <Card
-                index={index}
-                rotateY={getAngleByIndex(index, props.splitNum)}
-                radius={props.radius}
-                style={props.cardStyle}
-              ></Card>
-            ))}
+          {list.map((_, index) => (
+            <Card
+              index={index}
+              rotateY={getAngleByIndex(index, props.splitNum)}
+              radius={props.radius}
+              style={props.cardStyle}
+            ></Card>
+          ))}
         </div>
       </div>
     )

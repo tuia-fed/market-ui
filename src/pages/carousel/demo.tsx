@@ -1,6 +1,8 @@
 import { CSSProperties, defineComponent, ref } from 'vue'
 import Carousel from 'packages/carousel'
 import { fetchData } from '@/shared/utils'
+import btnImage from '@/assets/btnImage.png'
+import packetImage from '@/assets/packet.png'
 
 export default defineComponent({
   name: 'Carousel',
@@ -45,7 +47,15 @@ export default defineComponent({
     const cardStyle: CSSProperties = {
       width: '307px',
       height: '361px',
-      backgroundImage: `url('//yun.tuisnake.com/tact/RedPackSurrounded/fda523e8764bd6fdcd44431b8b34e220.png')`
+      backgroundSize: '100%',
+      backgroundImage: `url(${packetImage})`
+    }
+
+    const startStyle: CSSProperties = {
+      width: '100px',
+      height: '100px',
+      backgroundSize: '100%',
+      backgroundImage: `url(${btnImage})`
     }
 
     return () => (
@@ -58,7 +68,7 @@ export default defineComponent({
           cardStyle={cardStyle}
         ></Carousel>
 
-        <button onClick={onStart}>Start</button>
+        <div onClick={onStart} style={startStyle}></div>
       </>
     )
   }

@@ -10,10 +10,6 @@ export interface ToProps {
   complete: () => void
 }
 
-function getAngleByIndex(index: number, splitNum: number, direction: number) {
-  return index * (360 / splitNum) * direction
-}
-
 export default class {
   onUpdate: OnUpdate
   angle: number
@@ -83,20 +79,20 @@ export default class {
       throw new Error(`目标索引的范围属于 0 <= to < ${this.splitNum}`)
     }
 
-    const targetAngle = getAngleByIndex(to, this.splitNum, this.direction)
-    const toAngle = 360 * 2 + this.angle - (this.angle % 360) + targetAngle
+    this.angle = this.angle % 360
 
-    this.angle %= this.angle
+    const targetAngle = this.getAngleByIndex(to)
+    const toAngle = targetAngle + this.direction * 360 * 2
 
+    console.debug('this.angle', this.angle)
     console.debug('targetIndex', to)
     console.debug('targetAngle', targetAngle)
-    console.debug('this.angle', this.angle)
     console.debug('toAngle', toAngle)
 
     this.tw = tween({
       from: this.angle,
-      to: 360 * 2 + this.angle - (this.angle % 360) + targetAngle,
-      duration: data.duration || 800,
+      to: toAngle,
+      duration: data.duration || 3000,
       ease: easing.cubicBezier(0.33, 1, 0.68, 1) // easeOutCubic
     }).start({
       update: (angle: number) => {
@@ -109,20 +105,11 @@ export default class {
     })
   }
 
-  test() {
-    this.tw?.stop()
-
-    this.tw = tween({
-      from: 0,
-      to: 1380 % 360,
-      duration: 500,
-      ease: easing.easeOut
-    }).start({
-      update: (angle: number) => {
-        this.angle = angle
-        console.log('update', this.angle)
-        this.onUpdate(angle)
-      }
-    })
+  /**
+   * 根据索引获取目标角度
+   * @param index 索引位置
+   */
+  getAngleByIndex(index: number) {
+    return index * (360 / this.splitNum) * this.direction
   }
 }
