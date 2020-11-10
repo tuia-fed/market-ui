@@ -1,9 +1,10 @@
 import MyWheel from './src/main'
-import Rotate from './src/rotate'
-import useRotate from './src/hooks'
+import { App } from 'vue'
 
 export * from './types'
 
-export { Rotate, useRotate }
+MyWheel.install = (app: App) => {
+  app.component(MyWheel.name, MyWheel)
+}
 
 export default MyWheel

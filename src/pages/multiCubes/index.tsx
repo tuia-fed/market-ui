@@ -1,147 +1,99 @@
-import { defineComponent } from 'vue'
+import { CSSProperties, defineComponent, ref, Component } from 'vue'
+import MultiCubes, { MultiCubesOption } from 'packages/multiCubes'
+import { fetchData } from '@/shared/utils'
+import optionImage from '@/assets/smile.png'
+import Preview from '@/components/preview'
+import Code from './README.md'
 import './index.less'
-import { reactive } from 'vue'
+const options = Array.from({ length: 50 })
+  .map((_, index) => index)
+  .map(item => ({
+    title: `奖品${item}`,
+    image: optionImage
+  }))
+
 export default defineComponent({
-  name: 'MultiCubes',
+  name: 'MultiCubesDemo',
+
   setup() {
-    const state = reactive({
-      activeIndex: 0,
-      timeStep: 50,
-      autoActiveTimer: 0,
-      joinTimer: 0,
-      count: 0,
-      reducetimeStepFlag: true
-    })
+    const containerStyle: CSSProperties = {}
 
-    function changeActiveIndex() {
-      if (state.activeIndex === 7) {
-        state.activeIndex = 0
-      } else {
-        state.activeIndex++
-      }
+    const size = ref(320)
+    const rowNum = ref(3)
+
+    const disabled = ref(false)
+
+    const [activeIndex, rotate] = MultiCubes.useRotate({ rowNum: rowNum.value })
+    const onOptionClick = (e: MouseEvent, i: number) => {
+      console.log(i)
     }
 
-    function autoActive() {
-      state.autoActiveTimer ? window.clearInterval(state.autoActiveTimer) : ''
-      state.autoActiveTimer = window.setInterval(() => {
-        changeActiveIndex()
-      }, 140)
-    }
-    autoActive()
+    rotate.idled()
 
-    function slowStop() {
-      state.joinTimer = window.setTimeout(() => {
-        if (state.count == 0) {
-          window.clearTimeout(state.joinTimer)
-        } else {
-          state.count--
-          if (state.timeStep > 20 && state.reducetimeStepFlag) {
-            state.timeStep -= 5
-          } else {
-            state.reducetimeStepFlag = false
-            state.timeStep += 20
+    const onStart = () => {
+      if (disabled.value) return
+      disabled.value = true
+
+      rotate.start()
+      fetchData().then(() => {
+        const index = Math.floor(Math.random() * 8)
+        console.log(index)
+        rotate.stop({
+          index,
+          complete() {
+            console.log('获得奖品' + index)
+            setTimeout(() => {
+              disabled.value = false
+              rotate.idled()
+            }, 2000)
           }
-          changeActiveIndex()
-          slowStop()
-        }
-      }, state.timeStep)
+        })
+      })
     }
 
-    function start(finalIndex: number) {
-      window.clearInterval(state.autoActiveTimer)
-      state.joinTimer ? window.clearTimeout(state.joinTimer) : ''
-      state.count = finalIndex - state.activeIndex + 24
-      state.timeStep = 140
-      state.reducetimeStepFlag = true
-      slowStop()
+    function cubesItemRender(option: MultiCubesOption): Component {
+      return (
+        <div class="cube-item-wrap">
+          <div class={`cube-item ${option.active ? 'active' : ''}`}>
+            <p>
+              <img src={option.image} />
+            </p>
+            <p>{option.title}</p>
+          </div>
+        </div>
+      )
     }
 
     return () => (
       <>
-        <div class="nine-squared-wrap">
-          <div class="top-squared-wrap">
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 0 ? ' active' : '')
-              }
-              style="background-color: yellow;"
-            >
-              1
-            </span>
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 1 ? ' active' : '')
-              }
-              style="background-color: green;"
-            >
-              2
-            </span>
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 2 ? ' active' : '')
-              }
-              style="background-color: yellow;"
-            >
-              3
-            </span>
-          </div>
-          <div class="right-squared-wrap">
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 3 ? ' active' : '')
-              }
-              style="background-color: green;"
-            >
-              4
-            </span>
-          </div>
-          <div class="bottom-squared-wrap">
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 4 ? ' active' : '')
-              }
-              style="background-color: yellow;"
-            >
-              5
-            </span>
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 5 ? ' active' : '')
-              }
-              style="background-color: green;"
-            >
-              6
-            </span>
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 6 ? ' active' : '')
-              }
-              style="background-color: yellow;"
-            >
-              7
-            </span>
-          </div>
-          <div class="left-squared-wrap">
-            <span
-              class={
-                'squared-item' + (state.activeIndex * 1 === 7 ? ' active' : '')
-              }
-              style="background-color: green;"
-            >
-              8
-            </span>
-          </div>
+        <Code />
+        <Preview>
           <div
-            class="button"
-            onClick={() => {
-              start(7)
+            class="game-area"
+            style={{
+              width: size.value + 'px',
+              height: size.value + 'px'
             }}
           >
-            抽奖
+            <div class="multi-cubes-wrap">
+              <MultiCubes
+                size={size.value}
+                rowNum={rowNum.value}
+                activeIndex={activeIndex.value}
+                containerStyle={containerStyle}
+                options={options}
+                onMultiCubesItemClick={onOptionClick}
+                cubesItemRender={cubesItemRender}
+              />
+              <div class="start-btn" onClick={onStart}>
+                <p>
+                  <b>抽奖</b>
+                </p>
+                <p>消耗10积分</p>
+              </div>
+            </div>
           </div>
-          <span class="active-circle"></span>
-        </div>
-        <button onClick={autoActive}>重置</button>
+        </Preview>
       </>
     )
   }
