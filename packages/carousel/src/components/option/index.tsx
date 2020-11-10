@@ -1,8 +1,8 @@
-import { CSSProperties, defineComponent, PropType } from 'vue'
-import styles from './styles.module.less'
+import { CSSProperties, defineComponent, FunctionalComponent, PropType } from 'vue'
+import { CarouselOption } from 'packages/carousel/types'
 
 export default defineComponent({
-  name: 'Card',
+  name: 'Option',
 
   props: {
     index: {
@@ -23,10 +23,20 @@ export default defineComponent({
     style: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
+    },
+
+    option: {
+      type: Object as PropType<CarouselOption>,
+      default: () => ({})
+    },
+
+    render: {
+      type: Function as PropType<FunctionalComponent>,
+      required: true
     }
   },
 
-  setup(props) {
+  setup(props, ctx) {
     const defaultStyle: CSSProperties = {
       position: 'absolute',
       top: '50%',
@@ -34,10 +44,11 @@ export default defineComponent({
       transform: `translate(-50%, -50%) rotateY(${props.rotateY}deg) translateZ(${props.radius}px)`,
       ...props.style
     }
+    
 
     return () => (
-      <div style={defaultStyle} class={styles.card}>
-        {props.index}
+      <div style={defaultStyle}>
+        {props.render(props.option, ctx)}
       </div>
     )
   }

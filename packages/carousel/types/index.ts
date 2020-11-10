@@ -1,1 +1,5 @@
-export type CarouselStartClick = (e: MouseEvent) => void
+export type CarouselOption = {
+  image?: string
+}
+
+export type CarouselOptions = Array<CarouselOption>

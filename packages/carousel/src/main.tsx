@@ -1,8 +1,10 @@
-import { computed, CSSProperties, PropType } from 'vue'
+import { computed, CSSProperties, FunctionalComponent, PropType } from 'vue'
 import { createComponent } from './create'
-import Card from './components/card'
+import Option from './components/option/index'
+import OptionRender from './components/option/render'
 import styles from './components/styles.module.less'
 import useRotate from './hooks'
+import { CarouselOption, CarouselOptions } from '../types'
 
 function getAngleByIndex(index: number, splitNum: number) {
   return index * (360 / splitNum)
@@ -32,9 +34,19 @@ export default createComponent({
       default: () => ({})
     },
 
-    cardStyle: {
+    options: {
+      type: Array as PropType<CarouselOptions>,
+      required: true
+    },
+
+    optionStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
+    },
+
+    optionRender: {
+      type: Function as PropType<FunctionalComponent>,
+      default: (option: CarouselOption) => <OptionRender {...option} />
     }
   },
 
@@ -44,18 +56,18 @@ export default createComponent({
       transform: `rotateY(${props.angle}deg)`
     }))
 
-    const list = Array(props.splitNum).fill(undefined)
-
     return () => (
       <div class={styles.container} style={props.containerStyle}>
         <div class={styles.center} style={centerStyle.value}>
-          {list.map((_, index) => (
-            <Card
+          {props.options.map((item, index) => (
+            <Option
               index={index}
               rotateY={getAngleByIndex(index, props.splitNum)}
               radius={props.radius}
-              style={props.cardStyle}
-            ></Card>
+              style={props.optionStyle}
+              option={item}
+              render={props.optionRender}
+            ></Option>
           ))}
         </div>
       </div>

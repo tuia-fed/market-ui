@@ -4,6 +4,13 @@ import { fetchData } from '@/shared/utils'
 import btnImage from '@/assets/btnImage.png'
 import packetImage from '@/assets/packet.png'
 
+const options = Array.from({ length: 6 })
+  .map((_, index) => index)
+  .map(i => ({
+    index: i,
+    image: packetImage
+  }))
+
 export default defineComponent({
   name: 'Carousel',
 
@@ -44,9 +51,10 @@ export default defineComponent({
       height: '500px'
     }
 
-    const cardStyle: CSSProperties = {
+    const optionStyle: CSSProperties = {
       width: '307px',
       height: '361px',
+      textAlign: 'center',
       backgroundSize: '100%',
       backgroundImage: `url(${packetImage})`
     }
@@ -65,7 +73,8 @@ export default defineComponent({
           splitNum={splitNum.value}
           radius={radius.value}
           containerStyle={containerStyle}
-          cardStyle={cardStyle}
+          optionStyle={optionStyle}
+          options={options}
         ></Carousel>
 
         <div onClick={onStart} style={startStyle}></div>
