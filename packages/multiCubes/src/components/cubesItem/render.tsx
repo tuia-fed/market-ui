@@ -10,19 +10,18 @@ export default defineComponent({
   },
 
   setup(props) {
-    
     const image = props.image ? (
       <img class={styles.itemImg} src={props.image} alt={props.title} />
     ) : (
       ''
     )
-    function getBgColor (index:number){
+    function getBgColor(index: number) {
       const remainder = index % 4
-      switch(remainder){
+      switch (remainder) {
         case 0:
-          return '#FC9D9A'  
+          return '#FC9D9A'
         case 1:
-          return '#F9CDAD'  
+          return '#F9CDAD'
         case 2:
           return '#C8C8A9'
         case 3:
@@ -31,9 +30,11 @@ export default defineComponent({
     }
 
     return () => (
-      <div 
-        class={`${styles.cubeItem} ${props.active? `${styles.itemActive}` : ''}`}
-        style={{backgroundColor: getBgColor(props.index as number)}}
+      <div
+        class={`${styles.cubeItem} ${
+          props.active ? `${styles.itemActive}` : ''
+        }`}
+        style={{ backgroundColor: getBgColor(props.index as number) }}
       >
         <div class={styles.itemTitle}>{props.title}</div>
         {image}

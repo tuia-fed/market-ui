@@ -16,14 +16,14 @@ export default defineComponent({
       required: true
     },
     // 高亮index
-    activeIndex:{
+    activeIndex: {
       type: Number,
-      required: true 
+      required: true
     },
     // 宫格项尺寸
-    cubeSize:{
+    cubeSize: {
       type: Number,
-      required: true 
+      required: true
     },
     onClick: {
       type: Function as PropType<MultiCubesItemClick>,
@@ -36,21 +36,24 @@ export default defineComponent({
   },
 
   setup(props, ctx) {
-
     const onClick = (e: MouseEvent) => {
       ctx.emit('click', e, props.index)
     }
 
     return () => (
-      <div onClick={onClick}
+      <div
+        onClick={onClick}
         class={styles.cubeItemWrap}
-        style={{width: props.cubeSize + 'px', height: props.cubeSize + 'px'}}
+        style={{ width: props.cubeSize + 'px', height: props.cubeSize + 'px' }}
       >
-        {props.render({
-          ...props.option,
-          index: props.index,
-          active: props.activeIndex * 1 === props.index
-        }, ctx)}
+        {props.render(
+          {
+            ...props.option,
+            index: props.index,
+            active: props.activeIndex * 1 === props.index
+          },
+          ctx
+        )}
       </div>
     )
   }

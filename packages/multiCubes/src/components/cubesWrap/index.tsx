@@ -24,10 +24,38 @@ export default defineComponent({
     }))
     return () => (
       <div class={styles.outerWrap} style={containerStyle.value}>
-        <div class={styles.topWrap} style={{ height: props.cubeSize + 'px'}}>{(ctx.slots.top as Function)()}</div>
-        <div class={styles.rightWrap} style={{ width: props.cubeSize + 'px',height: (props.rowNum -2) * props.cubeSize  + 'px', top:props.cubeSize + 'px'}}>{(ctx.slots.right as Function)()}</div>
-        <div class={styles.bottomWrap} style={{ height: props.cubeSize + 'px', top: (props.rowNum -1) * props.cubeSize + 'px' }}>{(ctx.slots.bottom as Function)()}</div>
-        <div class={styles.leftWrap} style={{ width: props.cubeSize + 'px',height: (props.rowNum -2) * props.cubeSize  + 'px', top:props.cubeSize + 'px'}}>{(ctx.slots.left as Function)()}</div>
+        <div class={styles.topWrap} style={{ height: props.cubeSize + 'px' }}>
+          {(ctx.slots.top as Function)()}
+        </div>
+        <div
+          class={styles.rightWrap}
+          style={{
+            width: props.cubeSize + 'px',
+            height: (props.rowNum - 2) * props.cubeSize + 'px',
+            top: props.cubeSize + 'px'
+          }}
+        >
+          {(ctx.slots.right as Function)()}
+        </div>
+        <div
+          class={styles.bottomWrap}
+          style={{
+            height: props.cubeSize + 'px',
+            top: (props.rowNum - 1) * props.cubeSize + 'px'
+          }}
+        >
+          {(ctx.slots.bottom as Function)()}
+        </div>
+        <div
+          class={styles.leftWrap}
+          style={{
+            width: props.cubeSize + 'px',
+            height: (props.rowNum - 2) * props.cubeSize + 'px',
+            top: props.cubeSize + 'px'
+          }}
+        >
+          {(ctx.slots.left as Function)()}
+        </div>
       </div>
     )
   }

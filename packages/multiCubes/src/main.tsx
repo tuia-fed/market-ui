@@ -20,8 +20,10 @@ import useRotate, { UseRotateOption } from './hooks'
 export default createComponent({
   MultiCubesWrap,
   CubesItem,
-  useRotate(option: UseRotateOption = { rowNum: 3 }){
-    if (option.rowNum < 3) { option.rowNum = 3 }
+  useRotate(option: UseRotateOption = { rowNum: 3 }) {
+    if (option.rowNum < 3) {
+      option.rowNum = 3
+    }
     return useRotate(option)
   },
 
@@ -49,17 +51,19 @@ export default createComponent({
     // 自定义option组件
     cubesItemRender: {
       type: Function as PropType<FunctionalComponent<MultiCubesOption>>,
-      default: (option: MultiCubesOption) => <CubesItemRenderFunction {...option} />
+      default: (option: MultiCubesOption) => (
+        <CubesItemRenderFunction {...option} />
+      )
     },
     // 每排的宫格数
-    rowNum :{
+    rowNum: {
       type: Number,
       default: 5
     },
     // 当前高亮index
-    activeIndex:{
+    activeIndex: {
       type: Number,
-      required:true
+      required: true
     }
   },
 
@@ -80,55 +84,55 @@ export default createComponent({
     }
     // 每行宫格个数
     const rowNum = computed(() => {
-      if(!props.rowNum || props.rowNum < 3){
+      if (!props.rowNum || props.rowNum < 3) {
         return 3
       }
       return props.rowNum
     })
     // 每宫格尺寸
     const cubeSize = computed(() => {
-      return  autoSize.value / rowNum.value
+      return autoSize.value / rowNum.value
     })
 
     // 总宫格数
-    const cubesNum =  computed(()=>{
-      return Math.pow(rowNum.value,2) - Math.pow(rowNum.value-2,2) 
-    }) 
+    const cubesNum = computed(() => {
+      return Math.pow(rowNum.value, 2) - Math.pow(rowNum.value - 2, 2)
+    })
 
     // 宫格参数
-    const optionsArr = computed(()=>{
-      return props.options.map((item,i)=>({ ...item, optionIndex:i}))
+    const optionsArr = computed(() => {
+      return props.options.map((item, i) => ({ ...item, optionIndex: i }))
     })
 
     // 宫格参数划分为四组：上，右，下，左
-    const optionsDevideArr:any = computed(() => {
-       return [
+    const optionsDevideArr: any = computed(() => {
+      return [
         optionsArr.value.slice(0, rowNum.value),
-        optionsArr.value.slice(rowNum.value, rowNum.value*2 - 2),
-        optionsArr.value.slice(rowNum.value*2 - 2, rowNum.value*3 - 2),
-        optionsArr.value.slice(rowNum.value*3 - 2, rowNum.value*4 - 4)
-       ]
+        optionsArr.value.slice(rowNum.value, rowNum.value * 2 - 2),
+        optionsArr.value.slice(rowNum.value * 2 - 2, rowNum.value * 3 - 2),
+        optionsArr.value.slice(rowNum.value * 3 - 2, rowNum.value * 4 - 4)
+      ]
     })
-    
+
     // 每个方位的宫格的渲染函数
-    function cubeItemsRender(data:MultiCubesOptions){
-      return data.map((item:MultiCubesOption) => ( 
-      <CubesItem 
-        onClick={props.onMultiCubesItemClick}
-        index={item.optionIndex as number}
-        option={item}
-        render={props.cubesItemRender as any}
-        activeIndex={props.activeIndex}
-        cubeSize={cubeSize.value}
-      /> 
-      )
-    )}
+    function cubeItemsRender(data: MultiCubesOptions) {
+      return data.map((item: MultiCubesOption) => (
+        <CubesItem
+          onClick={props.onMultiCubesItemClick}
+          index={item.optionIndex as number}
+          option={item}
+          render={props.cubesItemRender as any}
+          activeIndex={props.activeIndex}
+          cubeSize={cubeSize.value}
+        />
+      ))
+    }
 
     return () => (
-      <MultiCubesWrap 
-        containerStyle={containerStyle.value} 
-        rowNum={rowNum.value} 
-        cubeSize={cubeSize.value} 
+      <MultiCubesWrap
+        containerStyle={containerStyle.value}
+        rowNum={rowNum.value}
+        cubeSize={cubeSize.value}
         ref={myRef}
         v-slots={{
           top: () => cubeItemsRender(optionsDevideArr.value[0]),
@@ -136,8 +140,7 @@ export default createComponent({
           bottom: () => cubeItemsRender(optionsDevideArr.value[2]),
           left: () => cubeItemsRender(optionsDevideArr.value[3])
         }}
-      >
-      </MultiCubesWrap>
+      ></MultiCubesWrap>
     )
   }
 })
