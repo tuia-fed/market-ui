@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent, ref, Component } from 'vue'
+import { defineComponent, ref, Component } from 'vue'
 import MultiCubes, { MultiCubesOption } from 'packages/multiCubes'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
@@ -16,7 +16,6 @@ export default defineComponent({
   name: 'MultiCubesDemo',
 
   setup() {
-    const containerStyle: CSSProperties = {}
 
     const size = ref(320)
     const rowNum = ref(3)
@@ -80,7 +79,6 @@ export default defineComponent({
                 size={size.value}
                 rowNum={rowNum.value}
                 activeIndex={activeIndex.value}
-                containerStyle={containerStyle}
                 options={options}
                 onMultiCubesItemClick={onOptionClick}
                 cubesItemRender={cubesItemRender}

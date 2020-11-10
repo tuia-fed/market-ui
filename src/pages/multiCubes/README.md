@@ -1,7 +1,7 @@
 ## 基本使用
 
 ```javascript
-import { CSSProperties, defineComponent, ref, Component } from 'vue'
+import { defineComponent, ref, Component } from 'vue'
 import MultiCubes, { MultiCubesOption } from 'packages/multiCubes'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
@@ -16,7 +16,6 @@ export default defineComponent({
   name: 'MultiCubesDemo',
 
   setup() {
-    const containerStyle: CSSProperties = {}
 
     const size = ref(320)
     const rowNum = ref(3)
@@ -75,7 +74,6 @@ export default defineComponent({
               size={size.value}
               rowNum={rowNum.value}
               activeIndex={activeIndex.value}
-              containerStyle={containerStyle}
               options={options}
               onMultiCubesItemClick={onOptionClick}
               cubesItemRender={cubesItemRender}
@@ -223,7 +221,6 @@ rotate.stop({
 |  ----  | ----  |  ----  | ----  |
 | activeIndex  | 当前高亮项 | Number  | 起始值为0 , 变动范围为0至(宫格数 - 1)|
 | size  | 宫格容器大小 | Number  | 0 自动获取父级宽度作为size） |
-| containerStyle  | 宫格容器样式 | CSSProperties  | {} 可设置容器背景图等 |
 | options  | 宫格奖项 | Array<MultiCubesOption>  | required |
 | rowNum  | 宫格每边奖项个数 | Array<MultiCubesOption>  | 默认为3，如传入的值小于3则也会取默认值3 |
 | cubesItemRender  | 宫格项渲染函数 | (option:MultiCubesOption) => Component  | 不传则走默认渲染函数 |
