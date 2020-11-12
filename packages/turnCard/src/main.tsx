@@ -1,12 +1,13 @@
-import { CSSProperties, PropType } from 'vue'
+import { FunctionalComponent, CSSProperties, PropType } from 'vue'
 import Card from './components/card'
-import CardBack from './components/cardBack'
 import { createComponent } from './create'
+import { noop } from '../../shared/utils'
+import CardRenderFunction from './components/card/render'
+import { CardClick, CardOption, CardOptions } from '../types'
 import styles from './styles'
 
 export default createComponent({
   Card,
-  CardBack,
 
   props: {
     width: {
@@ -17,56 +18,43 @@ export default createComponent({
       type: Number,
       default: 288
     },
-    cardStyle: {
-      type: Object as PropType<CSSProperties>,
-      default: () => ({})
+    options: {
+      type: Array as PropType<CardOptions>,
+      required: true
     },
-    cardBackStyle: {
-      type: Object as PropType<CSSProperties>,
-      default: () => ({})
-    },
-    turn: {
-      type: Boolean,
-      default: false
-    },
-    cardNum: {
+    activeIndex: {
       type: Number,
-      default: 3
+      required: true
+    },
+    cardClick: {
+      type: Function as PropType<CardClick>,
+      default: noop
+    },
+    optionRender: {
+      type: Function as PropType<FunctionalComponent>,
+      default: (option: CardOption) => <CardRenderFunction {...option} />
     }
   },
   // class={styles[`cardNum${props.cardNum}`]}
   setup(props) {
-    const style: CSSProperties = {
-      width: `${props.width}px`,
-      height: `${props.height}px`
-    }
-    const list: Array<number | boolean> = []
-    for (let i = 0; i < props.cardNum; i++) {
-      list.push(false)
+    const bgStyle: CSSProperties = {
+      height: `${(props.height+20)*(Math.ceil(props.options.length/3))}px`
     }
 
-    const onClick: Function = (i: number) => {
-      list[i] = true
-      console.log(list, i)
-    }
     return () => (
-      <div class={styles[`cardNum${list.length}`]}>
-        {list.map((item, i) => (
-          <div class={styles.cardBox} style={style}>
-            <Card
-              turn={props.turn}
-              onClick={onClick(i)}
-              style={props.cardStyle}
-              width={props.width}
-              height={props.height}
-            />
-            <CardBack
-              turn={props.turn}
-              backStyle={props.cardBackStyle}
-              width={props.width}
-              height={props.height}
-            />
-          </div>
+      <div class={styles.cardNum}
+        style={bgStyle}
+      >
+        {props.options.map((item, i) => (
+          <Card
+            onClick={props.cardClick}
+            width={props.width}
+            height={props.height}
+            index={i}
+            option={item}
+            active={props.activeIndex * 1 === i}
+            render={props.optionRender}
+          />
         ))}
       </div>
     )

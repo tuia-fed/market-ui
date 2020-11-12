@@ -6,6 +6,9 @@ export default {
   cardAni: createClassname('cardAni'),
   cardBack: createClassname('cardBack'),
   cardBackAni: createClassname('cardBackAni'),
-  cardNum3: createClassname('cardNum3'),
-  cardBox: createClassname('cardBox')
+  cardBox: createClassname('cardBox'),
+  cardNum: createClassname('cardNum'),
+  item: createClassname('item'),
+  itemImage: createClassname('item__image'),
+  itemActive: createClassname('item__active')
 }
