@@ -13,10 +13,6 @@ export default defineComponent({
       ''
     )
 
-    return () => (
-      <div class={styles.item}>
-        {image}
-      </div>
-    )
+    return () => <div class={styles.item}>{image}</div>
   }
 })

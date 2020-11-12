@@ -38,13 +38,11 @@ export default createComponent({
   // class={styles[`cardNum${props.cardNum}`]}
   setup(props) {
     const bgStyle: CSSProperties = {
-      height: `${(props.height+20)*(Math.ceil(props.options.length/3))}px`
+      height: `${(props.height + 20) * Math.ceil(props.options.length / 3)}px`
     }
 
     return () => (
-      <div class={styles.cardNum}
-        style={bgStyle}
-      >
+      <div class={styles.cardNum} style={bgStyle}>
         {props.options.map((item, i) => (
           <Card
             onClick={props.cardClick}

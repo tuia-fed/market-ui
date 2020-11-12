@@ -1,4 +1,10 @@
-import { defineComponent, CSSProperties, FunctionalComponent, PropType, ref } from 'vue'
+import {
+  defineComponent,
+  CSSProperties,
+  FunctionalComponent,
+  PropType,
+  ref
+} from 'vue'
 import styles from '../../styles'
 import { noop } from '../../../../shared/utils'
 import { CardClick, CardOption } from '../../../types'
@@ -54,7 +60,7 @@ export default defineComponent({
     console.log(turn)
     const onClick = (e: MouseEvent) => {
       ctx.emit('click', e, props.index)
-      if(!turn.value){
+      if (!turn.value) {
         turn.value = true
         console.log(turn)
       }
@@ -65,7 +71,11 @@ export default defineComponent({
         <div
           onClick={onClick}
           style={CardStyle}
-          class={[styles.card, turn.value ? styles.cardAni : '',props.active ? styles.itemActive : '']}
+          class={[
+            styles.card,
+            turn.value ? styles.cardAni : '',
+            props.active ? styles.itemActive : ''
+          ]}
         />
         <div
           onClick={onClick}
