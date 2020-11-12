@@ -57,21 +57,12 @@ export default defineComponent({
     duration: {
       type: Number,
       default: 3000
-    },
-    onStart: {
-      type: Function,
-      default: noop
     }
   },
 
   setup(props, ctx) {
     const prizeWidth =
       (props.singleWidth + props.singleMargin) * props.singleList.length
-    const endAngle =
-      (props.singleWidth + props.singleMargin) * props.singleList.length -
-      props.hideBoxWidth
-    const correctWidth = props.singleWidth + props.singleMargin
-    const [angle, rotation] = useRotation(endAngle, correctWidth)
 
     const BackgroundStyle: CSSProperties = {
       width: props.width + 'px',
@@ -85,24 +76,13 @@ export default defineComponent({
     }
     const priceCellStyle = computed(() => {
       const result: CSSProperties = {}
-      result.transform = `translate(${angle.value - prizeWidth}px, 0)`
+      result.transform = `translate(${props.angle - prizeWidth}px, 0)`
       // result.transform = `translate(${endAngle - prizeWidth}px, 0)`
       return result
     })
     const hideBoxStyle: CSSProperties = {
       width: props.hideBoxWidth + 'px',
       height: props.hideBoxHeight + 'px'
-    }
-
-    rotation.idled(props.duration)
-
-    const stop = (data: ToProps) => {
-      rotation.stop(data, false)
-    }
-
-    const start = () => {
-      rotation.start(false)
-      props.onStart(stop)
     }
 
     return () => (
@@ -125,7 +105,6 @@ export default defineComponent({
             ))}
           </div>
         </div>
-        <div onClick={start}>{(ctx.slots.default as Function)()}</div>
       </div>
     )
   }

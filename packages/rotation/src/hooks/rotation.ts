@@ -27,6 +27,7 @@ export default class {
    * 闲置状态滚动
    */
   idled(duration: number) {
+    console.log(this.angle, this.endAngle)
     this.tw?.stop()
     this.tw = tween({
       from: this.angle,
@@ -38,6 +39,7 @@ export default class {
       update: (angle: number) => {
         this.angle = angle
         this.onUpdate(angle)
+        // console.log(angle)
       }
     })
   }

@@ -50,39 +50,56 @@ export default defineComponent({
     const hideBoxHeight = ref(300)
     const duration = ref(6000)
 
-    const onStart = (stop: Function) => {
+    const rotationData = {
+      singleWidth: singleWidth.value,
+      singleMargin: singleMargin.value,
+      hideBoxWidth: hideBoxWidth.value,
+      singleList
+    }
+
+    const [angle, rotation] = RotationContainer.useRotation(rotationData)
+
+    rotation.idled(duration.value)
+
+    const onStart = () => {
+      rotation.start(false)
       fetchData().then(() => {
-        stop({
-          index: 1,
-          duration: 1000,
-          complete: () => {
-            console.log('end')
-          }
-        })
+        rotation.stop(
+          {
+            index: 1,
+            duration: 1000,
+            complete: () => {
+              console.log('end')
+            }
+          },
+          false
+        )
       })
     }
 
     return () => (
-      <RotationContainer
-        width={width.value}
-        height={height.value}
-        singleWidth={singleWidth.value}
-        singleHeight={singleHeight.value}
-        singleMargin={singleMargin.value}
-        singleList={singleList}
-        hideBoxWidth={hideBoxWidth.value}
-        hideBoxHeight={hideBoxHeight.value}
-        style={backgroundStyle}
-        duration={duration.value}
-        onStart={onStart}
-      >
+      <div>
+        <RotationContainer
+          width={width.value}
+          height={height.value}
+          singleWidth={singleWidth.value}
+          singleHeight={singleHeight.value}
+          singleMargin={singleMargin.value}
+          singleList={singleList}
+          hideBoxWidth={hideBoxWidth.value}
+          hideBoxHeight={hideBoxHeight.value}
+          style={backgroundStyle}
+          duration={duration.value}
+          angle={angle.value}
+        ></RotationContainer>
         <div
+          onClick={onStart}
           style={{
             position: 'absolute',
             width: '100px',
             height: '100px',
-            left: '275px',
-            top: '400px',
+            left: '505px',
+            top: '500px',
             backgroundColor: 'red',
             backgroundSize: '100% 100%',
             borderRadius: '50%',
@@ -94,7 +111,7 @@ export default defineComponent({
         >
           start
         </div>
-      </RotationContainer>
+      </div>
     )
   }
 })
