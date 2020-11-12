@@ -1,4 +1,9 @@
-import { CSSProperties, defineComponent, FunctionalComponent, PropType } from 'vue'
+import {
+  CSSProperties,
+  defineComponent,
+  FunctionalComponent,
+  PropType
+} from 'vue'
 import { CarouselOption } from 'packages/carousel/types'
 
 export default defineComponent({
@@ -44,12 +49,9 @@ export default defineComponent({
       transform: `translate(-50%, -50%) rotateY(${props.rotateY}deg) translateZ(${props.radius}px)`,
       ...props.style
     }
-    
 
     return () => (
-      <div style={defaultStyle}>
-        {props.render(props.option, ctx)}
-      </div>
+      <div style={defaultStyle}>{props.render(props.option, ctx)}</div>
     )
   }
 })

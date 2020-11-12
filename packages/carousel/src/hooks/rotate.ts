@@ -24,6 +24,9 @@ export default class {
     this.direction = clockwise ? -1 : 1
   }
 
+  /**
+   * 闲置旋转
+   */
   idled() {
     this.tw?.stop()
 
@@ -63,6 +66,10 @@ export default class {
     })
   }
 
+  /**
+   * 减速停在某一个位置
+   * @param data 配置
+   */
   to(data: ToProps) {
     this.tw?.stop()
 
