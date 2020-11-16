@@ -55,18 +55,20 @@ export default createComponent({
       }
     }
 
-    const optionsRender = props.options.map((item, i) => (
-      <Option
-        onClick={props.onOptionClick}
-        index={i}
-        size={props.size ? props.size / 2 : autoSize.value / 2}
-        option={item}
-      />
-    ))
+    const optionsRender = () => {
+      return props.options.map((item, i) => (
+        <Option
+          onClick={props.onOptionClick}
+          index={i}
+          size={props.size ? props.size / 2 : autoSize.value / 2}
+          option={item}
+        />
+      ))
+    }
 
     return () => (
       <Circle style={circleStyle.value} angle={props.angle} ref={myRef}>
-        {optionsRender}
+        {optionsRender()}
       </Circle>
     )
   }
