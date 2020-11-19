@@ -1,3 +1,9 @@
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .game-area {
   animation: changeBg 0.5s ease infinite;
   overflow: hidden;
@@ -21,23 +27,11 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -55%);
+    cursor: pointer;
+    .flex-center();
 
-    p {
-      font-size: 14px;
-      color: #fff;
-      cursor: pointer;
-      text-align: center;
-      overflow: hidden;
-      margin: 0;
-
-      b {
-        font-size: 40px;
-        margin-top: 24px;
-        margin-bottom: 15px;
-        line-height: 30px;
-        display: block;
-      }
-    }
+    color: #fff;
+    font-size: 40px;
   }
 
   .cube-item-wrap {
@@ -51,10 +45,9 @@
       height: 92%;
       background: url(../../assets/multiCubesItembg2.png) no-repeat center;
       background-size: 100% 100%;
-      display: flex;
+      .flex-center();
+
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
 
       p {
         color: #708abf;
