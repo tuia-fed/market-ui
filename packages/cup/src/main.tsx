@@ -1,10 +1,12 @@
-import { CSSProperties, PropType, ref } from 'vue'
+import { CSSProperties, PropType, ref, computed } from 'vue'
 import Background from './components/background'
 import { createComponent } from './create'
 import styles from './styles'
-// import useRotate from './hooks'
+import useTurn from './hooks'
 
 export default createComponent({
+  useTurn,
+
   props: {
     backgroundStyle: {
       type: Object as PropType<CSSProperties>,
@@ -18,101 +20,77 @@ export default createComponent({
       type: Object as PropType<CSSProperties>,
       default: () => ({})
     },
+    list: {
+      type: Array,
+      default: []
+    },
     interval: {
       type: Number,
-      default: 1
+      default: 0.5
     },
-    times: {
+    direction: {
+      type: String,
+      default: ''
+    },
+    cupNumber: {
       type: Number,
-      default: 1
+      default: -1
     },
-    afterEnd: {
+    cupClick: {
       type: Function,
-      default: () => {return {}}
+      default: () => {
+        return {}
+      }
     }
   },
   setup(props) {
-    const interval = props.interval || 0.5
-    const times = props.times || 20
     const cupStyle: CSSProperties = {
       ...props.cupStyle
     }
-    const centerToRight: CSSProperties = {
-      animation: `center_to_right ${interval}s 1 linear`
-    }
-    const rightToCenter: CSSProperties = {
-      animation: `right_to_center ${interval}s 1 linear`
-    }
-    const centerToLeft: CSSProperties = {
-      animation: `center_to_left ${interval}s 1 linear`
-    }
-    const leftToCenter: CSSProperties = {
-      animation: `left_to_center ${interval}s 1 linear`
-    }
+
+    const centerToRight = computed(() => ({
+      animation: `center_to_right ${props.interval}s 1 linear`
+    }))
+    const rightToCenter = computed(() => ({
+      animation: `right_to_center ${props.interval}s 1 linear`
+    }))
+    const centerToLeft = computed(() => ({
+      animation: `center_to_left ${props.interval}s 1 linear`
+    }))
+    const leftToCenter = computed(() => ({
+      animation: `left_to_center ${props.interval}s 1 linear`
+    }))
     let style
 
-    const list = ref([0, 1, 2])
+    const list = computed(() => {
+      return props.list
+    })
 
-    const direction = ref('')
+    const direction = computed(() => {
+      return props.direction
+    })
 
-    const cupNumber = ref(-1)
-
-    const delay = async (t: number) => {
-      return new Promise(resolve => {
-        setTimeout(resolve, t)
-      })
-    }
-    const move = async () => {
-      if (Math.round(Math.random())) {
-        direction.value = 'right'
-        list.value[1] = [list.value[2], (list.value[2] = list.value[1])][0]
-      } else {
-        direction.value = 'left'
-        list.value[1] = [list.value[0], (list.value[0] = list.value[1])][0]
-      }
-      await delay(interval * 1000).then(() => {
-        direction.value = ''
-      })
-    }
-
-    const onClick = async () => {
-      if (cupNumber.value !== -1) return
-      cupNumber.value = list.value.indexOf(1)
-      await delay(2000)
-      for (let i = 0; i < times; i++) {
-        await move()
-
-        await delay(100)
-      }
-      cupNumber.value = -1
-    }
-    const cupClick = (index: number, i: number) => {
-      if (cupNumber.value !== -1) return
-      cupNumber.value = index
-      delay(2000).then(() => {
-        cupNumber.value = -1
-      })
-      props.afterEnd(i === 1)
-    }
+    const cupNumber = computed(() => {
+      return props.cupNumber
+    })
 
     return () => (
       <Background style={props.backgroundStyle}>
-        <button onClick={onClick}>开始</button>
         {list.value.map((i, index) => {
           const item = `item${index + 1}`
           if (direction.value === 'right') {
             style =
               index === 1
-                ? { ...centerToRight }
+                ? centerToRight.value
                 : index === 2
-                ? { ...rightToCenter }
+                ? rightToCenter.value
                 : {}
           } else if (direction.value === 'left') {
             style =
               index === 1
-                ? { ...centerToLeft }
+                ? centerToLeft.value
                 : index === 0
-                ? { ...leftToCenter }
+                ? leftToCenter.value
                 : {}
           } else {
             style = {}
@@ -126,8 +104,8 @@ export default createComponent({
                   styles.cup,
                   index === cupNumber.value ? styles.cupMove : ''
                 ]}
-                onClick={(e: MouseEvent) => {
-                  cupClick(index, i)
+                onClick={function(){
+                  props.cupClick(index, i === 1)
                 }}
               ></div>
               {i === 1 && (

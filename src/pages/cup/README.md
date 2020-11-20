@@ -10,6 +10,8 @@ export default defineComponent({
   name: 'cupDemo',
 
   setup() {
+    const [list, direction, cupNumber, interval, t] = Cup.useTurn()
+
     const backgroundStyle: CSSProperties = {
       width: '500px',
       height: '300px',
@@ -28,27 +30,72 @@ export default defineComponent({
       backgroundImage: `url(${coinImage})`
     }
 
-    const interval = 0.5
-    const times = 20
+    const times = 10
 
-    function afterEnd(isRight:boolean) {
-      console.log(isRight)
+    function start() {
+      t.start(0.1, times)
+    }
+
+    function cupClick(index: number, isIndex: boolean) {
+      t.cupUp(index)
+      if (isIndex) {
+        setTimeout(() => {
+          alert('猜对了')
+        }, 1000)
+      }
+    }
+
+    const btnStyle: CSSProperties = {
+      width: '100px',
+      height: '60px',
+      margin: 'auto',
+      position: 'absolute',
+      left: '50%',
+      marginTop: '40px',
+      transform: 'translateX(-50%)'
     }
 
     return () => (
       <>
-        <Cup
-          interval={interval}
-          times={times}
-          backgroundStyle={backgroundStyle}
-          cupStyle={cupStyle}
-          coinStyle={coinStyle}
-          afterEnd={afterEnd}
-        />
+        <div>
+          <Cup
+            backgroundStyle={backgroundStyle}
+            cupStyle={cupStyle}
+            coinStyle={coinStyle}
+            list={list.value}
+            direction={direction.value}
+            interval={interval.value}
+            cupNumber={cupNumber.value}
+            cupClick={cupClick}
+          />
+          <button style={btnStyle} onClick={start}>开始</button>
+        </div>
       </>
     )
   }
 })
+```
+
+## Hooks
+
+```javascript
+import { Cup } from 'market-ui'
+
+const [list, direction, cupNumber, interval, turn] = Wheel.useRotate()
+
+/**
+ * 开始游戏
+ *
+ * @param Number interval 换杯子的间隔
+ * @param Number times 换杯子的次数
+ */
+turn.start(interval, times)
+
+/**
+ * 杯子升起
+ * @param Number index 传入杯子索引
+ */
+turn.cupUp(index)
 ```
 
 ## Props
@@ -60,10 +107,9 @@ export default defineComponent({
 | backgroundStyle  | 杯子背景区域样式 | CSSProperties  | {} 可以杯子间隔和背景 |
 | cupStyle  | 杯子样式 | CSSProperties  | {} 可以设置杯子的背景图片颜色大小等 |
 | coinStyle  | 硬币样式 | CSSProperties  | {} 可以设置硬币的背景图片颜色大小等 |
-| options  | 转盘奖项 | Array<WheelOption>  | required |
 
 ## Events
 
 |  事件名   | 说明  |  回调参数  | 
 |  ----  | ----  |  ----  |
-| afterEnd  | 猜测结果的回调 | boolean |
+| cupClick  | 杯子点击事件 | boolean |

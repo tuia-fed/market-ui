@@ -7,10 +7,12 @@ export default defineComponent({
   name: 'cupDemo',
 
   setup() {
+    const [list, direction, cupNumber, interval, turn] = Cup.useTurn()
+
     const backgroundStyle: CSSProperties = {
       width: '500px',
       height: '300px',
-      backgroundColor: '#1E90FF'
+      backgroundColor: '#FFF'
     }
 
     const cupStyle: CSSProperties = {
@@ -25,23 +27,44 @@ export default defineComponent({
       backgroundImage: `url(${coinImage})`
     }
 
-    const interval = 0.5
-    const times = 20
+    function start() {
+      turn.start(0.1, 10)
+    }
 
-    function afterEnd(isRight:boolean) {
-      console.log(isRight)
+    function cupClick(index: number, isIndex: boolean) {
+      turn.cupUp(index)
+      if (isIndex) {
+        setTimeout(() => {
+          alert('猜对了')
+        }, 1000)
+      }
+    }
+
+    const btnStyle: CSSProperties = {
+      width: '100px',
+      height: '60px',
+      margin: 'auto',
+      position: 'absolute',
+      left: '50%',
+      marginTop: '40px',
+      transform: 'translateX(-50%)'
     }
 
     return () => (
       <>
-        <Cup
-          interval={interval}
-          times={times}
-          backgroundStyle={backgroundStyle}
-          cupStyle={cupStyle}
-          coinStyle={coinStyle}
-          afterEnd={afterEnd}
-        />
+        <div>
+          <Cup
+            backgroundStyle={backgroundStyle}
+            cupStyle={cupStyle}
+            coinStyle={coinStyle}
+            list={list.value}
+            direction={direction.value}
+            interval={interval.value}
+            cupNumber={cupNumber.value}
+            cupClick={cupClick}
+          />
+          <button style={btnStyle} onClick={start}>开始</button>
+        </div>
       </>
     )
   }
