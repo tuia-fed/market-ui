@@ -1,4 +1,4 @@
-import { tween, chain, Action } from 'popmotion'
+import { tween, chain, Action, easing } from 'popmotion'
 import { TweenInterface } from 'popmotion/lib/animations/tween/types'
 import { ValueMap } from 'popmotion/lib/reactions/value'
 
@@ -6,14 +6,12 @@ export class PaintBrush {
   cvsContext: CanvasRenderingContext2D
   cWidth: number
   cHeight: number
-  totalPixelInfo: ImageData
   cvsBoxInfo: DOMRect
 
   constructor(dom: HTMLCanvasElement, cWidth: number, cHeight: number) {
     this.cvsContext = dom.getContext('2d') as CanvasRenderingContext2D
     this.cWidth = cWidth
     this.cHeight = cHeight
-    this.totalPixelInfo = this.cvsContext.getImageData(0, 0, cWidth, cHeight)
     this.cvsBoxInfo = dom.getBoundingClientRect()
   }
 
@@ -22,7 +20,7 @@ export class PaintBrush {
     this.cvsContext.beginPath()
     this.cvsContext.fillStyle = '#f00'
     // offsetX、 offsetY，圆心的坐标
-    this.cvsContext.arc(offsetX, offsetY, 40, 0, Math.PI * 2)
+    this.cvsContext.arc(offsetX, offsetY, 20, 0, Math.PI * 2)
     this.cvsContext.fill()
     this.cvsContext.closePath()
   }
@@ -71,7 +69,7 @@ export class PaintBrush {
   }
   // 自动刮
   autoPlay = (points: Array<Array<number>>) => {
-    const arr: Array<Action<TweenInterface<number>>> = [] // 数组类型如何定义？？
+    const arr: Array<Action<TweenInterface<number>>> = []
     for (let i = 0; i < points.length - 1; i++) {
       arr.push(
         tween({
@@ -83,7 +81,7 @@ export class PaintBrush {
             x: points[i + 1][0],
             y: points[i + 1][1]
           },
-          duration: 0.25
+          duration: 250
         })
       )
     }

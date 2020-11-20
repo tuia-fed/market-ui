@@ -220,8 +220,7 @@ export default createComponent({
         }
 
         // 计算刮开百分比
-        percent =
-          (num - imgWhiteNum) / (pixelData.data.length - imgWhiteNum)
+        percent = (num - imgWhiteNum) / (pixelData.data.length - imgWhiteNum)
       } catch (e) {
         percent = props.targetRate
       }

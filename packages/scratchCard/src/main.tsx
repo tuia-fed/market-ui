@@ -24,12 +24,11 @@ export default createComponent({
     autoPoints: {
       type: Array as PropType<Array<Array<number>>>,
       default: [
-        [500, 40],
-        [60, 90],
-        [530, 120],
-        [40, 210],
-        [530, 200],
-        [30, 290]
+        [300, 40],
+        [90, 90],
+        [330, 120],
+        [70, 210],
+        [330, 260]
       ]
     },
     targetRate: {
@@ -56,7 +55,7 @@ export default createComponent({
 
   setup(props, { emit }) {
     const defaultColor = '#979797'
-    const targetRate = props.targetRate > 0 ? props.targetRate: 0.3
+    const targetRate = props.targetRate > 0 ? props.targetRate : 0.3
     const width = props.width
     const height = props.height
     let paintObj: PaintBrush
@@ -83,7 +82,7 @@ export default createComponent({
       }
     }
 
-    const startHandler= (e: TouchEvent) => {
+    const startHandler = (e: TouchEvent) => {
       // 开始刮
       if (props.touchStartAct) {
         props.touchStartAct()
@@ -104,7 +103,8 @@ export default createComponent({
       let percent
       try {
         // 计算刮开区域像素点
-        const pData = paintObj.totalPixelInfo.data
+        const totalPixelInfo = paintObj.cvsContext.getImageData(0, 0, paintObj.cWidth, paintObj.cHeight)
+        const pData = totalPixelInfo.data
         for (let i = 0; i < pData.length; i++) {
           if (pData[i] === 0) {
             num++
@@ -112,9 +112,7 @@ export default createComponent({
         }
         // 计算刮开百分比
         percent = (num - imgWhiteNum) / (pData.length - imgWhiteNum)
-        console.log(percent, 'pppppercent')
       } catch (e) {
-        console.log(e, 'eeee')
         percent = targetRate
       }
       // 百分比 <= 0.3 ,刮刮卡展开再出券
@@ -152,7 +150,7 @@ export default createComponent({
     return () => (
       <canvas
         id="canvasId"
-        style={{display: props.isShowCanvas}}
+        style={{ display: props.isShowCanvas, background: 'transparent', position: 'absolute' }}
         width={width}
         height={height}
         onTouchstart={startHandler}
