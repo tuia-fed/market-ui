@@ -12,7 +12,7 @@ const options = Array.from({ length: 50 })
 
 /**
  * 各宫格自定义的渲染函数
- * @param option 
+ * @param option
  */
 function cubesItemRender(option: MultiCubesOption): Component {
   return (
@@ -31,7 +31,6 @@ export default defineComponent({
   name: 'MultiCubesDemo',
 
   setup() {
-
     const size = ref(320)
     const rowNum = ref(3)
 
@@ -82,7 +81,9 @@ export default defineComponent({
             onItemClick={onOptionClick}
             itemRender={cubesItemRender}
           />
-          <div class="start-btn" onClick={onStart}>抽奖</div>
+          <div class="start-btn" onClick={onStart}>
+            抽奖
+          </div>
         </div>
       </div>
     )

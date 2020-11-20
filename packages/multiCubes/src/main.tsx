@@ -19,10 +19,10 @@ import useRotate from './hooks'
 
 /**
  * 宫格参数划分为四组：上，右，下，左
- * @param optionsArr 
- * @param rowNum 
+ * @param optionsArr
+ * @param rowNum
  */
-function getOptionsDevideArr(optionsArr : MultiCubesOptions,rowNum : number){
+function getOptionsDevideArr(optionsArr: MultiCubesOptions, rowNum: number) {
   return [
     optionsArr.slice(0, rowNum),
     optionsArr.slice(rowNum, rowNum * 2 - 2),
@@ -76,9 +76,8 @@ export default createComponent({
   },
 
   setup(props) {
-    
-    if(props.rowNum < 2){
-      return ()=>(<div>ERROR: rowNum must greater than 1</div>)
+    if (props.rowNum < 2) {
+      return () => <div>ERROR: rowNum must greater than 1</div>
     }
 
     const autoSize = ref(props.size)
@@ -110,7 +109,7 @@ export default createComponent({
 
     // 宫格参数划分为四组：上，右，下，左
     const optionsDevideArr: any = computed(() => {
-      return getOptionsDevideArr(optionsArr.value,rowNum.value)
+      return getOptionsDevideArr(optionsArr.value, rowNum.value)
     })
 
     // 每个方位的宫格的渲染函数
