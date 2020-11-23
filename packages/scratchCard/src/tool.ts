@@ -4,14 +4,14 @@ import { ValueMap } from 'popmotion/lib/reactions/value'
 
 export class PaintBrush {
   cvsContext: CanvasRenderingContext2D
-  cWidth: number
-  cHeight: number
-  cvsBoxInfo: DOMRect
+  width: number // 画布的宽度
+  height: number // 画布的高度
+  cvsBoxInfo: DOMRect // canvas元素相对于视窗的属性
 
-  constructor(dom: HTMLCanvasElement, cWidth: number, cHeight: number) {
+  constructor(dom: HTMLCanvasElement, width: number, height: number) {
     this.cvsContext = dom.getContext('2d') as CanvasRenderingContext2D
-    this.cWidth = cWidth
-    this.cHeight = cHeight
+    this.width = width
+    this.height = height
     this.cvsBoxInfo = dom.getBoundingClientRect()
   }
 
@@ -24,13 +24,16 @@ export class PaintBrush {
     this.cvsContext.fill()
     this.cvsContext.closePath()
   }
+  getPixelDate(width: number, height: number) {
+    return this.cvsContext.getImageData(0, 0, width, height).data
+  }
   // 计算空白区域的像素点数
   calWhite(width: number, height: number) {
     try {
-      const pixelData = this.cvsContext.getImageData(0, 0, width, height)
+      const pixelData = this.getPixelDate(width, height)
       let num = 0
-      for (let i = 0; i < pixelData.data.length; i++) {
-        if (pixelData.data[i] === 0) {
+      for (let i = 0; i < pixelData.length; i++) {
+        if (pixelData[i] === 0) {
           num++
         }
       }
@@ -46,7 +49,7 @@ export class PaintBrush {
         this.cvsContext.globalCompositeOperation = 'source-over'
         this.cvsContext.beginPath()
         const timer = window.setTimeout(() => {
-          this.cvsContext.drawImage(imgObj, 0, 0, this.cWidth, this.cHeight)
+          this.cvsContext.drawImage(imgObj, 0, 0, this.width, this.height)
           this.cvsContext.closePath()
           this.cvsContext.globalCompositeOperation = 'destination-over'
           clearTimeout(timer)
@@ -60,7 +63,7 @@ export class PaintBrush {
   // 画颜色
   drawColor = (color: string) => {
     this.cvsContext.fillStyle = color
-    this.cvsContext.fillRect(0, 0, this.cWidth, this.cHeight)
+    this.cvsContext.fillRect(0, 0, this.width, this.height)
   }
   touchActive = (e: TouchEvent) => {
     const offX = e.touches[0].clientX - this.cvsBoxInfo.left
@@ -91,7 +94,7 @@ export class PaintBrush {
           this.fillWhite(Number(v.x), Number(v.y))
         },
         complete: () => {
-          this.cvsContext.fillRect(0, 0, this.cWidth, this.cHeight)
+          this.cvsContext.fillRect(0, 0, this.width, this.height)
           resolve()
         }
       })

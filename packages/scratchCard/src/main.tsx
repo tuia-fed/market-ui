@@ -15,7 +15,7 @@ export default createComponent({
     },
     paintCoat: {
       type: String, // 可以传图片地址，也可以穿颜色值
-      default: ''
+      default: '#979797'
     },
     autoPlay: {
       type: Boolean,
@@ -54,7 +54,6 @@ export default createComponent({
   },
 
   setup(props, { emit }) {
-    const defaultColor = '#979797'
     const targetRate = props.targetRate > 0 ? props.targetRate : 0.3
     const width = props.width
     const height = props.height
@@ -76,9 +75,6 @@ export default createComponent({
             imgWhiteNum = paintObj.calWhite(width, height) || 0
           })
         }
-      } else {
-        // 没传，用默认的颜色
-        paintObj.drawColor(defaultColor)
       }
     }
 
@@ -99,17 +95,11 @@ export default createComponent({
       // 刮完之后要做的事
       mouseDown = false
       e.preventDefault()
-      let num = 0
       let percent
       try {
+        const pData = paintObj.getPixelDate(paintObj.width, paintObj.height)
         // 计算刮开区域像素点
-        const totalPixelInfo = paintObj.cvsContext.getImageData(0, 0, paintObj.cWidth, paintObj.cHeight)
-        const pData = totalPixelInfo.data
-        for (let i = 0; i < pData.length; i++) {
-          if (pData[i] === 0) {
-            num++
-          }
-        }
+        const num = paintObj.calWhite(paintObj.width, paintObj.height) || 0
         // 计算刮开百分比
         percent = (num - imgWhiteNum) / (pData.length - imgWhiteNum)
       } catch (e) {
@@ -129,7 +119,6 @@ export default createComponent({
     }
 
     const mouseStartHandler = (e: MouseEvent) => {
-      console.log('ssssstart')
       // 鼠标开始事件
       mouseDown = true
       paintObj.fillWhite(e.offsetX, e.offsetY)
@@ -150,7 +139,11 @@ export default createComponent({
     return () => (
       <canvas
         id="canvasId"
-        style={{ display: props.isShowCanvas, background: 'transparent', position: 'absolute' }}
+        style={{
+          display: props.isShowCanvas,
+          background: 'transparent',
+          position: 'absolute'
+        }}
         width={width}
         height={height}
         onTouchstart={startHandler}
