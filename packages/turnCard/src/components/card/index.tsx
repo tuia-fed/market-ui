@@ -15,7 +15,8 @@ export default defineComponent({
       type: Object as PropType<CardOption>,
       default: () => ({
         cardImg: '',
-        backImg: ''
+        backImg: '',
+        turn: false
       })
     },
     width: {
@@ -28,10 +29,6 @@ export default defineComponent({
     },
     index: {
       type: Number,
-      required: true
-    },
-    active: {
-      type: Boolean,
       required: true
     },
     onClick: {
@@ -56,14 +53,9 @@ export default defineComponent({
       height: `${props.height}px`,
       backgroundImage: `url(${props.option.backImg})`
     }
-    let turn = ref(false)
-    console.log(turn)
+
     const onClick = (e: MouseEvent) => {
       ctx.emit('click', e, props.index)
-      if (!turn.value) {
-        turn.value = true
-        console.log(turn)
-      }
     }
 
     return () => (
@@ -73,16 +65,15 @@ export default defineComponent({
           style={CardStyle}
           class={[
             styles.card,
-            turn.value ? styles.cardAni : '',
-            props.active ? styles.itemActive : ''
+            props.option.turn ? styles.cardAni : ''
           ]}
         />
         <div
           onClick={onClick}
           style={CardBackStyle}
-          class={[styles.cardBack, turn.value ? styles.cardBackAni : '']}
+          class={[styles.cardBack, props.option.turn ? styles.cardBackAni : '']}
         >
-          {props.render(props.option.itemImg as string, ctx)}
+          {props.render(props.option, ctx)}
         </div>
       </div>
     )

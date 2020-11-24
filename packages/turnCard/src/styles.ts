@@ -9,6 +9,6 @@ export default {
   cardBox: createClassname('cardBox'),
   cardNum: createClassname('cardNum'),
   item: createClassname('item'),
-  itemImage: createClassname('item__image'),
-  itemActive: createClassname('item__active')
+  itemImage: createClassname('itemImage'),
+  itemActive: createClassname('itemActive')
 }

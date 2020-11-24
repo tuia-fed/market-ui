@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import styles from '../../styles'
 
 export default defineComponent({
@@ -7,12 +7,10 @@ export default defineComponent({
   },
 
   setup(props) {
-    const image = props.itemImg ? (
-      <img class={styles.itemImage} src={props.itemImg} />
-    ) : (
-      ''
-    )
+    const itemStyle = computed(() => ({
+      backgroundImage: `url(${props.itemImg?props.itemImg:''})`
+    }))
 
-    return () => <div class={styles.item}>{image}</div>
+    return () => <div class={styles.item} style={itemStyle.value}></div>
   }
 })

@@ -33,16 +33,16 @@ export default createComponent({
     optionRender: {
       type: Function as PropType<FunctionalComponent>,
       default: (option: CardOption) => <CardRenderFunction {...option} />
+    },
+    cardAni: {
+      type: Object as PropType<CSSProperties>,
+      default: () => ({})
     }
   },
-  // class={styles[`cardNum${props.cardNum}`]}
   setup(props) {
-    const bgStyle: CSSProperties = {
-      height: `${(props.height + 20) * Math.ceil(props.options.length / 3)}px`
-    }
-
+    window.console.log(props.cardAni)
     return () => (
-      <div class={styles.cardNum} style={bgStyle}>
+      <div class={styles.cardNum}>
         {props.options.map((item, i) => (
           <Card
             onClick={props.cardClick}
@@ -50,7 +50,7 @@ export default createComponent({
             height={props.height}
             index={i}
             option={item}
-            active={props.activeIndex * 1 === i}
+            style={props.activeIndex * 1 === i?props.cardAni:''}
             render={props.optionRender}
           />
         ))}

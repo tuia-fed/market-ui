@@ -3,8 +3,11 @@
 .mk {
   &-turnCard {
     &_cardNum {
-      width: 100%;
-      position: relative;
+      width: 94%;
+      height: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -13,6 +16,7 @@
 
     &_cardBox {
       position: relative;
+      margin-bottom: 10px;
     }
 
     &_card {
@@ -53,6 +57,17 @@
           transform: rotateY(0);
         }
       }
+    }
+
+    &_item {
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      width: 80%;
+      height: 60%;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
     }
   }
 }
