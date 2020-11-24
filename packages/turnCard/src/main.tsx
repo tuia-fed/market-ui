@@ -50,7 +50,7 @@ export default createComponent({
             height={props.height}
             index={i}
             option={item}
-            style={props.activeIndex * 1 === i?props.cardAni:''}
+            style={props.activeIndex * 1 === i ? props.cardAni : ''}
             render={props.optionRender}
           />
         ))}

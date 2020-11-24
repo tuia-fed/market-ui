@@ -63,10 +63,7 @@ export default defineComponent({
         <div
           onClick={onClick}
           style={CardStyle}
-          class={[
-            styles.card,
-            props.option.turn ? styles.cardAni : ''
-          ]}
+          class={[styles.card, props.option.turn ? styles.cardAni : '']}
         />
         <div
           onClick={onClick}

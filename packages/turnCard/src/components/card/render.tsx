@@ -8,7 +8,7 @@ export default defineComponent({
 
   setup(props) {
     const itemStyle = computed(() => ({
-      backgroundImage: `url(${props.itemImg?props.itemImg:''})`
+      backgroundImage: `url(${props.itemImg ? props.itemImg : ''})`
     }))
 
     return () => <div class={styles.item} style={itemStyle.value}></div>

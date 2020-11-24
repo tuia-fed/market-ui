@@ -7,28 +7,30 @@ import logo from '@/assets/logo.png'
 import './index.less'
 
 const length = 12
-const options = ref(Array.from({ length })
-  .map((_, index) => index)
-  .map(item => ({
-    cardImg: cardImage,
-    backImg: cardBackImage,
-    itemImg: itemImage,
-    turn: false
-  })))
+const options = ref(
+  Array.from({ length })
+    .map((_, index) => index)
+    .map(item => ({
+      cardImg: cardImage,
+      backImg: cardBackImage,
+      itemImg: itemImage,
+      turn: false
+    }))
+)
 export default defineComponent({
   name: 'TurnCardDemo',
 
   setup() {
-    const width = ref(100*0.8)
-    const height = ref(144*0.8)
+    const width = ref(100 * 0.8)
+    const height = ref(144 * 0.8)
     const activeIndex = ref(0)
-    setInterval(()=>{
+    setInterval(() => {
       if (activeIndex.value === length) {
         activeIndex.value = 0
         return
       }
-      activeIndex.value ++
-    },1000)
+      activeIndex.value++
+    }, 1000)
     const style: CSSProperties = {
       animation: 'cardAni 1s linear infinite'
     }
