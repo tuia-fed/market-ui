@@ -12,15 +12,19 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 // 定制markdown样式
 .markdown {
   flex: 1;
-  margin-right: 16px;
 
   pre.hljs {
     margin-bottom: 24px;
@@ -126,6 +130,26 @@ body {
       font-family: @mk-doc-code-font-family;
       font-style: normal;
       -webkit-font-smoothing: auto;
+    }
+  }
+}
+
+@media screen and (max-width: @mk-screen-max-width) {
+  .markdown {
+    code {
+      white-space: pre-wrap;
+    }
+
+    table {
+      td {
+        &:first-child {
+          min-width: auto;
+        }
+
+        &:not(:first-child) {
+          min-width: auto;
+        }
+      }
     }
   }
 }
