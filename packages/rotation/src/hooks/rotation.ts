@@ -2,6 +2,7 @@ import { tween, easing } from 'popmotion'
 import { TweenInterface } from 'popmotion/lib/animations/tween/types'
 
 type OnUpdate = (angle: number) => void
+type stopPosition = (index: number) => number
 
 export interface ToProps {
   index?: number
@@ -11,23 +12,31 @@ export interface ToProps {
 
 export default class {
   onUpdate: OnUpdate
+  stopPosition: stopPosition
   angle: number
   endAngle: number
+  startAngle: number
   correctWidth: number
   tw: TweenInterface<number> | undefined
 
-  constructor(onUpdate: OnUpdate, angle: number, correctWidth: number) {
+  constructor(
+    onUpdate: OnUpdate,
+    angle: number,
+    correctWidth: number,
+    stopPosition: stopPosition
+  ) {
     this.onUpdate = onUpdate
     this.angle = -angle
-    this.endAngle = angle - correctWidth
+    this.startAngle = angle
+    this.endAngle = -angle + correctWidth
     this.correctWidth = correctWidth
+    this.stopPosition = stopPosition
   }
 
   /**
    * 闲置状态滚动
    */
   idled(duration: number) {
-    console.log(this.angle, this.endAngle)
     this.tw?.stop()
     this.tw = tween({
       from: this.angle,
@@ -39,7 +48,6 @@ export default class {
       update: (angle: number) => {
         this.angle = angle
         this.onUpdate(angle)
-        // console.log(angle)
       }
     })
   }
@@ -47,12 +55,11 @@ export default class {
   /**
    * 闲置状态滚动
    */
-  start(noReset: boolean) {
-    console.log('111', this.angle)
+  start() {
     this.tw?.stop()
     this.tw = tween({
       from: this.angle,
-      to: this.endAngle,
+      to: this.angle + this.correctWidth,
       duration: 500,
       ease: easing.linear,
       loop: 100000
@@ -60,41 +67,52 @@ export default class {
       update: (angle: number) => {
         this.angle = angle
         this.onUpdate(angle)
-        if (!noReset && angle === this.endAngle) {
-          // 开始滚动第一段结束后重置为快速滚动，用户不同时机的点击会导致快速滚动参数不同
-          this.angle = -angle
-          this.onUpdate(-angle)
-          this.start(true)
+      }
+    })
+  }
+
+  /**
+   * 停止
+   * @param data
+   * @param noReset
+   */
+  stop(data: ToProps, noReset: boolean) {
+    this.tw?.stop()
+    let to = 0
+    if (data.index !== undefined) {
+      to = this.stopPosition(data.index)
+    }
+    if (!noReset) {
+      this.angle -= this.correctWidth
+      to = this.endAngle
+    }
+    this.tw = tween({
+      from: this.angle,
+      to: to,
+      duration: data.duration || 500,
+      ease: easing.linear
+    }).start({
+      update: (angle: number) => {
+        this.angle = angle
+        this.onUpdate(angle)
+      },
+      complete: () => {
+        if (!noReset) {
+          this.angle -= this.correctWidth
+          this.onUpdate(this.angle)
+          this.stop(data, true)
+        } else {
+          data.complete()
         }
       }
     })
   }
 
-  stop(data: ToProps, noReset: boolean) {
-    console.log('111', this.angle)
-    this.tw?.stop()
-    let to = 0
-    if (data.index !== undefined) {
-      to = this.correctWidth * data.index
-    }
-    this.tw = tween({
-      from: this.angle,
-      to: noReset ? to : this.endAngle,
-      duration: data.duration || 500,
-      ease: easing.reversed(easing.linear)
-    }).start({
-      update: (angle: number) => {
-        this.angle = angle
-        this.onUpdate(angle)
-        if (!noReset && angle === this.endAngle) {
-          this.angle = -angle
-          this.onUpdate(-angle)
-          this.stop(data, true)
-        }
-      },
-      complete: () => {
-        data.complete()
-      }
-    })
+  /**
+   * 重置
+   */
+  reset(duration: number) {
+    this.angle = -this.startAngle
+    this.idled(duration)
   }
 }

@@ -46,7 +46,7 @@ export default defineComponent({
       type: Array as PropType<RotationOptions>,
       default: () => []
     },
-    style: {
+    backgroundStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => () => ({})
     },
@@ -67,7 +67,7 @@ export default defineComponent({
     const BackgroundStyle: CSSProperties = {
       width: props.width + 'px',
       height: props.height + 'px',
-      ...props.style
+      ...props.backgroundStyle
     }
     const SingleStyle: CSSProperties = {
       width: props.singleWidth + 'px',
@@ -76,8 +76,8 @@ export default defineComponent({
     }
     const priceCellStyle = computed(() => {
       const result: CSSProperties = {}
-      result.transform = `translate(${props.angle - prizeWidth}px, 0)`
-      // result.transform = `translate(${endAngle - prizeWidth}px, 0)`
+      // result.transform = `translate(${props.angle - prizeWidth}px, 0)`
+      result.transform = `translate(${props.angle}px, 0)`
       return result
     })
     const hideBoxStyle: CSSProperties = {

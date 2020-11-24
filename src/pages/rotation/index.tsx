@@ -62,7 +62,7 @@ export default defineComponent({
     rotation.idled(duration.value)
 
     const onStart = () => {
-      rotation.start(false)
+      rotation.start()
       fetchData().then(() => {
         rotation.stop(
           {
@@ -70,6 +70,9 @@ export default defineComponent({
             duration: 1000,
             complete: () => {
               console.log('end')
+              setTimeout(() => {
+                rotation.reset(duration.value)
+              }, 2000)
             }
           },
           false
@@ -88,7 +91,7 @@ export default defineComponent({
           singleList={singleList}
           hideBoxWidth={hideBoxWidth.value}
           hideBoxHeight={hideBoxHeight.value}
-          style={backgroundStyle}
+          backgroundStyle={backgroundStyle}
           duration={duration.value}
           angle={angle.value}
         ></RotationContainer>
