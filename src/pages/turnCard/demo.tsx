@@ -10,7 +10,7 @@ const length = 12
 const options = ref(
   Array.from({ length })
     .map((_, index) => index)
-    .map(item => ({
+    .map(() => ({
       cardImg: cardImage,
       backImg: cardBackImage,
       itemImg: itemImage,

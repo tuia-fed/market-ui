@@ -24,7 +24,7 @@ export default createComponent({
     },
     activeIndex: {
       type: Number,
-      required: true
+      default: -1
     },
     cardClick: {
       type: Function as PropType<CardClick>,

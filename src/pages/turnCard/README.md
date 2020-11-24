@@ -2,94 +2,65 @@
 
 ```javascript
 import { CSSProperties, defineComponent, ref } from 'vue'
-import { Wheel } from 'market-ui'
-import { fetchData } from '@/shared/utils'
-import optionImage from '@/assets/smile.png'
-import bgImage from '@/assets/bgImage.png'
+import TurnCard from 'packages/turnCard'
+import cardImage from '@/assets/cardImage.png'
+import cardBackImage from '@/assets/cardBackImage.png'
+import itemImage from '@/assets/smile.png'
+import logo from '@/assets/logo.png'
+import './index.less'
 
-const options = [0, 1, 2, 3, 4, 5].map(item => ({
-  title: `谢谢参与${item}`,
-  image: optionImage
-}))
-
+const length = 12
+const options = ref(
+  Array.from({ length })
+    .map((_, index) => index)
+    .map(item => ({
+      cardImg: cardImage,
+      backImg: cardBackImage,
+      itemImg: itemImage,
+      turn: false
+    }))
+)
 export default defineComponent({
-  name: 'WheelDemo',
+  name: 'TurnCardDemo',
 
   setup() {
-    const circleStyle: CSSProperties = {
-      backgroundImage: `url(${bgImage})`
+    const width = ref(100 * 0.8)
+    const height = ref(144 * 0.8)
+    const activeIndex = ref(0)
+    setInterval(() => {
+      if (activeIndex.value === length) {
+        activeIndex.value = 0
+        return
+      }
+      activeIndex.value++
+    }, 1000)
+    const style: CSSProperties = {
+      animation: 'cardAni 1s linear infinite'
     }
-
-    const size = ref(300)
-
-    const disabled = ref(false)
-
-    const [angle, rotate] = Wheel.useRotate(0)
-
-    const onOptionClick = (e: MouseEvent, i: number) => {
-      console.log(i)
+    const onCardClick = (e: MouseEvent, i: number) => {
+      options.value[i].turn = true
+      options.value[i].itemImg = logo
     }
-
-    rotate.idled()
-
-    const onStart = () => {
-      if (disabled.value) return
-      disabled.value = true
-
-      rotate.start()
-      fetchData().then(() => {
-        rotate.to({
-          index: Math.floor(Math.random() * 5),
-          complete() {
-            setTimeout(() => {
-              disabled.value = false
-              rotate.idled()
-            }, 1000)
-          }
-        })
-      })
+    const reset = () => {
+      for (let i = 0; i < length; i++) {
+        options.value[i].turn = false
+      }
     }
 
     return () => (
-      <>
-        <div
-          style={{
-            width: size.value + 'px',
-            height: size.value + 'px'
-          }}
-        >
-          <Wheel
-            angle={angle.value}
-            style={circleStyle}
-            options={options}
-            onOptionClick={onOptionClick}
-          />
-        </div>
-      </>
+      <div>
+        <button onClick={reset}>重置</button>
+        <TurnCard
+          width={width.value}
+          height={height.value}
+          options={options.value}
+          cardClick={onCardClick}
+          activeIndex={activeIndex.value}
+          cardAni={style}
+        />
+      </div>
     )
   }
-})
-```
-
-## Hooks
-
-```javascript
-import { Wheel } from 'market-ui'
-
-const [angle, rotate] = Wheel.useRotate(0)
-
-// angle 作为转盘的旋转角度，是一个 Ref
-
-// 闲置旋转
-rotate.idled()
-// 开始加速
-rotate.start()
-// 开始减速
-rotate.to({
-  index: 0, // 下标
-  complete () {
-
-  }, // 停止回调
 })
 ```
 
@@ -97,13 +68,14 @@ rotate.to({
 
 |  参数   | 说明  |  类型   | 默认值 |
 |  ----  | ----  |  ----  | ----  |
-| angle  | 旋转角度 | Number  | 0 |
-| size  | 转盘大小 | Number  | 0 自动获取父级宽度作为size） |
-| style  | 转盘样式 | CSSProperties  | {} 可以设置转盘的背景图片颜色等 |
-| options  | 转盘奖项 | Array<WheelOption>  | required |
+| width  | 卡牌宽度 | Number  | 0 |
+| height  | 卡牌高度 | Number  | 0 |
+| options  | 卡牌项 | Array<CardOption>  | {} 可以设置卡牌正反面图片、反面item图、翻转 |
+| activeIndex  | 卡牌动效下标 | Number  | -1 可以通过改变activeIndex决定哪张牌做动效 |
+| cardAni  | 动效 | PropType<CSSProperties>  | {} 卡牌要做的动效 |
 
 ## Events
 
 |  事件名   | 说明  |  回调参数  | 
 |  ----  | ----  |  ----  |
-| onOptionClick  | 每个奖项点击的回调 | 事件对象 e: Event , 奖项下标 i: Number |
+| cardClick  | 每张牌点击的回调 | 事件对象 e: Event , 奖项下标 i: Number |

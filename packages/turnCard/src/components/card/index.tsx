@@ -2,8 +2,7 @@ import {
   defineComponent,
   CSSProperties,
   FunctionalComponent,
-  PropType,
-  ref
+  PropType
 } from 'vue'
 import styles from '../../styles'
 import { noop } from '../../../../shared/utils'
