@@ -34,7 +34,7 @@ export default class {
       to: this.angle + 360,
       duration: 10000,
       ease: easing.linear,
-      loop: 100000
+      loop: Infinity
     }).start({
       update: (angle: number) => {
         this.angle = angle
@@ -50,9 +50,10 @@ export default class {
     this.tw?.stop()
     this.tw = tween({
       from: this.angle,
-      to: this.angle + 360 * 100,
-      duration: 500 * 100,
-      ease: easing.linear
+      to: this.angle + 360,
+      duration: 500,
+      ease: easing.linear,
+      loop: Infinity
     }).start({
       update: (angle: number) => {
         this.angle = angle
@@ -80,8 +81,8 @@ export default class {
     this.tw = tween({
       from: this.angle,
       to: this.angle + 360 * 2 - (this.angle % 360) + to,
-      duration: data.duration || 500,
-      ease: easing.reversed(easing.linear)
+      duration: data.duration || 1000,
+      ease: easing.cubicBezier(0.33, 1, 0.68, 1)
     }).start({
       update: (angle: number) => {
         this.angle = angle
