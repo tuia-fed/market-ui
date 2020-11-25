@@ -1,5 +1,5 @@
 import { createNamespace } from '../../shared/create'
 
-const { createComponent } = createNamespace('carousel')
+const { createComponent, createClassname } = createNamespace('carousel')
 
-export { createComponent }
+export { createComponent, createClassname as createClassName }

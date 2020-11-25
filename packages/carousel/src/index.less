@@ -1,0 +1,18 @@
+@radius: 270px;
+
+.mk {
+  &-carousel {
+    &_container {
+      // position: relative;
+      perspective: 3000px;
+    }
+
+    &_center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+    }
+  }
+}

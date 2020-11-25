@@ -2,7 +2,7 @@ import { computed, CSSProperties, FunctionalComponent, PropType } from 'vue'
 import { createComponent } from './create'
 import Option from './components/option/index'
 import OptionRender from './components/option/render'
-import styles from './components/styles.module.less'
+import stylesClass from './styles'
 import useRotate from './hooks'
 import { CarouselOption, CarouselOptions } from '../types'
 
@@ -57,8 +57,8 @@ export default createComponent({
     }))
 
     return () => (
-      <div class={styles.container} style={props.containerStyle}>
-        <div class={styles.center} style={centerStyle.value}>
+      <div class={stylesClass.container} style={props.containerStyle}>
+        <div class={stylesClass.center} style={centerStyle.value}>
           {props.options.map((item, index) => (
             <Option
               index={index}
