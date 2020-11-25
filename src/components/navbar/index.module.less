@@ -8,7 +8,7 @@
   color: @mk-black;
   font-size: 15px;
   font-weight: 600;
-  padding: 16px;
+  padding: 16px 16px 16px 32px;
   margin-bottom: 0;
 }
 
@@ -19,6 +19,11 @@
 .nav {
   width: @nav-width;
   border-right: 1px solid #eee;
+  transition: all 0.3s linear;
+
+  &.show {
+    width: @nav-width;
+  }
 
   ul {
     list-style: none;
@@ -29,12 +34,68 @@
       a {
         text-decoration: none;
         display: block;
-        padding: 8px 16px;
+        padding: 8px 32px;
         border-right-width: 2px;
         border-right-style: solid;
         border-right-color: transparent;
         color: @mk-gray;
       }
     }
+  }
+}
+
+.btn {
+  z-index: 9999;
+  position: fixed;
+  top: @header-height + 10px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 0 4px 4px #eee;
+  display: none;
+
+  span {
+    position: absolute;
+    display: block;
+    transform: translate(-50%, 50%);
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    background-color: @mk-header-bg-color;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background-color: @mk-header-bg-color;
+      bottom: 5px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background-color: @mk-header-bg-color;
+      top: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: @mk-screen-max-width) {
+  .nav {
+    width: 0;
+  }
+
+  .btn {
+    display: block;
   }
 }

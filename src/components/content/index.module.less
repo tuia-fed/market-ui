@@ -3,4 +3,12 @@
   padding: 16px;
   background-color: #f7f8fa;
   display: flex;
+  transition: all 0.3s linear;
+}
+
+@media screen and (max-width: @mk-screen-max-width) {
+  .content {
+    flex-direction: column-reverse;
+    max-width: 100%;
+  }
 }

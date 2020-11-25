@@ -1,15 +1,8 @@
-import {
-  CSSProperties,
-  PropType,
-  FunctionalComponent,
-  ref,
-  computed
-} from 'vue'
+import { CSSProperties, PropType, ref, computed } from 'vue'
 import Circle from './components/circle'
 import Option from './components/option'
-import OptionRenderFunction from './components/option/render'
 import { noop } from '../../shared/utils'
-import { WheelOptions, WheelOptionClick, WheelOption } from '../types'
+import { WheelOptions, WheelOptionClick } from '../types'
 import { createComponent } from './create'
 import useRotate from './hooks'
 
@@ -43,11 +36,6 @@ export default createComponent({
     onOptionClick: {
       type: Function as PropType<WheelOptionClick>,
       default: noop
-    },
-    // 自定义option组件
-    optionRender: {
-      type: Function as PropType<FunctionalComponent>,
-      default: (option: WheelOption) => <OptionRenderFunction {...option} />
     }
   },
 
@@ -67,17 +55,20 @@ export default createComponent({
       }
     }
 
+    const optionsRender = () => {
+      return props.options.map((item, i) => (
+        <Option
+          onClick={props.onOptionClick}
+          index={i}
+          size={props.size ? props.size / 2 : autoSize.value / 2}
+          option={item}
+        />
+      ))
+    }
+
     return () => (
       <Circle style={circleStyle.value} angle={props.angle} ref={myRef}>
-        {props.options.map((item, i) => (
-          <Option
-            onClick={props.onOptionClick}
-            index={i}
-            size={props.size ? props.size / 2 : autoSize.value / 2}
-            option={item}
-            render={props.optionRender}
-          />
-        ))}
+        {optionsRender()}
       </Circle>
     )
   }
