@@ -66,6 +66,11 @@ export default defineComponent({
       backgroundImage: `url(${btnImage})`
     }
 
+    // 点击每一项时
+    const onOptionClick = (e: MouseEvent, i: number) => {
+      console.log('onOptionClick', i)
+    }
+
     return () => (
       <>
         <Carousel
@@ -75,6 +80,7 @@ export default defineComponent({
           containerStyle={containerStyle}
           optionStyle={optionStyle}
           options={options}
+          optionOnClick={onOptionClick}
         ></Carousel>
 
         <div onClick={onStart} style={startStyle}></div>

@@ -4,7 +4,7 @@ import {
   FunctionalComponent,
   PropType
 } from 'vue'
-import { CarouselOption } from 'packages/carousel/types'
+import { CarouselOption, CarouselOptionOnClick } from 'packages/carousel/types'
 
 export default defineComponent({
   name: 'Option',
@@ -38,6 +38,13 @@ export default defineComponent({
     render: {
       type: Function as PropType<FunctionalComponent>,
       required: true
+    },
+
+    /**
+     * 点击事件
+     */
+    onClick: {
+      type: Function as PropType<CarouselOptionOnClick>
     }
   },
 
@@ -50,8 +57,14 @@ export default defineComponent({
       ...props.style
     }
 
+    const onClick = (e: MouseEvent) => {
+      ctx.emit('click', e, props.index)
+    }
+
     return () => (
-      <div style={defaultStyle}>{props.render(props.option, ctx)}</div>
+      <div onClick={onClick} style={defaultStyle}>
+        {props.render(props.option, ctx)}
+      </div>
     )
   }
 })

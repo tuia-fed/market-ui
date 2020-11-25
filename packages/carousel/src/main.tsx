@@ -4,7 +4,11 @@ import Option from './components/option/index'
 import OptionRender from './components/option/render'
 import stylesClass from './styles'
 import useRotate from './hooks'
-import { CarouselOption, CarouselOptions } from '../types'
+import {
+  CarouselOption,
+  CarouselOptions,
+  CarouselOptionOnClick
+} from '../types'
 
 function getAngleByIndex(index: number, splitNum: number) {
   return index * (360 / splitNum)
@@ -47,6 +51,14 @@ export default createComponent({
     optionRender: {
       type: Function as PropType<FunctionalComponent>,
       default: (option: CarouselOption) => <OptionRender {...option} />
+    },
+
+    /**
+     * 点击每一项的事件
+     */
+    optionOnClick: {
+      type: Function as PropType<CarouselOptionOnClick>,
+      default: () => ({})
     }
   },
 
@@ -67,6 +79,7 @@ export default createComponent({
               style={props.optionStyle}
               option={item}
               render={props.optionRender}
+              onClick={props.optionOnClick}
             ></Option>
           ))}
         </div>
