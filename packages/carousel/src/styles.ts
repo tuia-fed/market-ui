@@ -3,5 +3,6 @@ import './index.less'
 
 export default {
   container: createClassName('container'),
-  center: createClassName('center')
+  center: createClassName('center'),
+  option: createClassName('option')
 }

@@ -1,12 +1,23 @@
 import { tween, easing } from 'popmotion'
 import { TweenInterface } from 'popmotion/lib/animations/tween/types'
 
+/**
+ * 更新回调函数
+ */
 type OnUpdate = (angle: number) => void
 
 export interface ToProps {
+  /**
+   * 目标位置索引
+   */
   index?: number
-  to?: number
+  /**
+   * 持续时间
+   */
   duration?: number
+  /**
+   * 完成回调函数
+   */
   complete: () => void
 }
 
@@ -17,6 +28,12 @@ export default class {
   direction: number
   tw: TweenInterface<number> | undefined
 
+  /**
+   * 构造函数
+   * @param onUpdate 更新函数
+   * @param splitNum 切分数量
+   * @param clockwise 顺时针
+   */
   constructor(onUpdate: OnUpdate, splitNum: number, clockwise: boolean) {
     this.onUpdate = onUpdate
     this.angle = 0
@@ -30,6 +47,7 @@ export default class {
   idled() {
     this.tw?.stop()
 
+    // 恢复初始角度，避免过大
     this.angle %= 360
 
     this.tw = tween({
@@ -75,6 +93,7 @@ export default class {
 
     let to = 0
 
+    // 校验索引合法性
     if (
       data.index !== undefined &&
       data.index >= 0 &&
@@ -86,9 +105,11 @@ export default class {
       throw new Error(`目标索引的范围属于 0 <= to < ${this.splitNum}`)
     }
 
+    // 重置角度回一圈内
     this.angle = this.angle % 360
 
     const targetAngle = this.getAngleByIndex(to)
+    // 多转两圈更自然
     const toAngle = targetAngle + this.direction * 360 * 2
 
     console.debug('this.angle', this.angle)
