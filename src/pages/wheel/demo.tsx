@@ -61,9 +61,9 @@ export default defineComponent({
           <Wheel
             angle={angle.value}
             style={circleStyle}
+            class={'aaaa'}
             options={options}
             onOptionClick={onOptionClick}
-            // optionRender={(option) => (<div>{option.toString()}</div>)}
           />
           <div
             onClick={onStart}
