@@ -2023,8 +2023,6 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-<<<<<<< HEAD
-=======
 ali-oss@^6.11.2:
   version "6.11.2"
   resolved "http://npm.dui88.com:80/ali-oss/-/ali-oss-6.11.2.tgz#fed279a9d373f0d1ad278edf614f710f99f73e19"
@@ -2057,7 +2055,6 @@ ali-oss@^6.11.2:
     utility "^1.8.0"
     xml2js "^0.4.16"
 
->>>>>>> b5ffefc6a895260f6e1414f83fce9d093fe2ede1
 alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
@@ -9622,8 +9619,6 @@ schema-utils@^2.0.0, schema-utils@^2.5.0, schema-utils@^2.6.1, schema-utils@^2.6
     ajv "^6.12.4"
     ajv-keywords "^3.5.2"
 
-<<<<<<< HEAD
-=======
 sdk-base@^2.0.1:
   version "2.0.1"
   resolved "http://npm.dui88.com:80/sdk-base/-/sdk-base-2.0.1.tgz#ba40289e8bdf272ed11dd9ea97eaf98e036d24c6"
@@ -9631,7 +9626,6 @@ sdk-base@^2.0.1:
   dependencies:
     get-ready "~1.0.0"
 
->>>>>>> b5ffefc6a895260f6e1414f83fce9d093fe2ede1
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
