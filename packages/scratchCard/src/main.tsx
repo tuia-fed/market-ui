@@ -52,7 +52,7 @@ export default createComponent({
     }
   },
 
-  setup(props, { emit }) {
+  setup(props) {
     const targetRate = props.targetRate > 0 ? props.targetRate : 0.3
     const width = props.width
     const height = props.height

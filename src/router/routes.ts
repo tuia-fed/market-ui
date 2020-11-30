@@ -28,6 +28,22 @@ export default [
         path: '/multiCubes'
       },
       {
+        name: '猜杯子',
+        path: '/cup'
+      },
+      {
+        name: '旋转木马',
+        path: '/carousel'
+      },
+      {
+        name: '翻牌子',
+        path: '/turnCard'
+      },
+      {
+        name: '刮刮卡',
+        path: '/scratchCard'
+      },
+      {
         name: '摇奖机',
         path: '/rotation'
       }
