@@ -84,7 +84,7 @@ export default defineComponent({
           containerStyle={containerStyle}
           optionStyle={optionStyle}
           options={options}
-          optionOnClick={onOptionClick}
+          onOptionClick={onOptionClick}
         ></Carousel>
 
         <div onClick={onStart} style={startStyle}></div>

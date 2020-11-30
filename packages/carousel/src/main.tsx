@@ -56,7 +56,7 @@ export default createComponent({
     /**
      * 点击每一项的事件
      */
-    optionOnClick: {
+    onOptionClick: {
       type: Function as PropType<CarouselOptionOnClick>,
       default: () => ({})
     }
@@ -79,7 +79,7 @@ export default createComponent({
               style={props.optionStyle}
               option={item}
               render={props.optionRender}
-              onClick={props.optionOnClick}
+              onClick={props.onOptionClick}
             ></Option>
           ))}
         </div>
