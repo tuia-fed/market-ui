@@ -8,7 +8,9 @@ export default defineComponent({
     return () => (
       <>
         <Code />
-        <Demo />
+        <Preview>
+          <Demo />
+        </Preview>
       </>
     )
   }
