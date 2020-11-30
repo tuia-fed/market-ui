@@ -5,6 +5,14 @@ export default [
       {
         name: '介绍',
         path: '/'
+      },
+      {
+        name: '安装',
+        path: '/install'
+      },
+      {
+        name: '开始',
+        path: '/start'
       }
     ]
   },
@@ -14,6 +22,10 @@ export default [
       {
         name: '大转盘',
         path: '/wheel'
+      },
+      {
+        name: '九宫格',
+        path: '/multiCubes'
       },
       {
         name: '摇奖机',

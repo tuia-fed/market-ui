@@ -20,7 +20,7 @@ module.exports = function (source) {
   source = md.render(source)
   source = escape(source)
   return `import { defineComponent, h } from 'vue'
-
+  
   const content = unescape(\`${source}\`);
   
   export default defineComponent({

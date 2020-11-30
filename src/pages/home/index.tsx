@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue'
+import Markdown from './README.md'
+
+import './index.less'
 
 export default defineComponent({
-  name: 'Home',
-
   setup() {
-    return () => <h1>hello market-ui</h1>
+    return () => <Markdown />
   }
 })

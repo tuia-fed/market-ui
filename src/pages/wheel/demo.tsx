@@ -11,7 +11,6 @@ const options = Array.from({ length: 6 })
     title: `奖项名称${item}`,
     image: optionImage
   }))
-
 export default defineComponent({
   name: 'WheelDemo',
 
@@ -62,7 +61,6 @@ export default defineComponent({
           <Wheel
             angle={angle.value}
             style={circleStyle}
-            class={'aaaa'}
             options={options}
             onOptionClick={onOptionClick}
           />
