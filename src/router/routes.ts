@@ -14,10 +14,6 @@ export default [
       {
         name: '大转盘',
         path: '/wheel'
-      },
-      {
-        name: '刮刮卡',
-        path: '/scratchCard'
       }
     ]
   }

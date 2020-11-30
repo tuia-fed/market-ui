@@ -3,15 +3,14 @@ import { createComponent } from './create'
 import { createImgObj, PaintBrush } from './tool'
 
 export default createComponent({
-  name: 'ScratchCard',
   props: {
     width: {
       type: Number,
-      default: 552
+      default: 360
     },
     height: {
       type: Number,
-      default: 338
+      default: 200
     },
     paintCoat: {
       type: String, // 可以传图片地址，也可以穿颜色值
