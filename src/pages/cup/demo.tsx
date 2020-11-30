@@ -63,7 +63,9 @@ export default defineComponent({
             cupNumber={cupNumber.value}
             onCupClick={onCupClick}
           />
-          <button style={btnStyle} onClick={start}>开始</button>
+          <button style={btnStyle} onClick={start}>
+            开始
+          </button>
         </div>
       </>
     )

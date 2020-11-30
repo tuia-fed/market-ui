@@ -104,7 +104,7 @@ export default createComponent({
                   styles.cup,
                   index === cupNumber.value ? styles.cupMove : ''
                 ]}
-                onClick={function(){
+                onClick={function() {
                   props.onCupClick(index, i === 1)
                 }}
               ></div>
