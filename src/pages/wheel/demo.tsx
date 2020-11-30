@@ -11,7 +11,6 @@ const options = Array.from({ length: 6 })
     title: `奖项名称${item}`,
     image: optionImage
   }))
-
 export default defineComponent({
   name: 'WheelDemo',
 

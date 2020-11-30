@@ -1,0 +1,45 @@
+@import '../../shared/style/index.less';
+
+.mk {
+  &-turnCard {
+    &_container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    &_card {
+      &_wraper {
+        position: relative;
+        margin-bottom: 10px;
+      }
+
+      &_front {
+        .bg();
+
+        transition: all 0.2s;
+
+        &_active {
+          transform: rotateY(90deg);
+        }
+      }
+
+      &_back {
+        .bg();
+
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: absolute;
+        transform: rotateY(-90deg);
+        transition: all 0.2s;
+
+        &_active {
+          transform: rotateY(0);
+        }
+      }
+    }
+  }
+}
