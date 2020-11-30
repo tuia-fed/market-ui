@@ -1,4 +1,4 @@
-import { CSSProperties, PropType, ref, computed } from 'vue'
+import { CSSProperties, PropType, computed } from 'vue'
 import Background from './components/background'
 import { createComponent } from './create'
 import styles from './styles'
@@ -36,7 +36,7 @@ export default createComponent({
       type: Number,
       default: -1
     },
-    cupClick: {
+    onCupClick: {
       type: Function,
       default: () => {
         return {}
@@ -105,7 +105,7 @@ export default createComponent({
                   index === cupNumber.value ? styles.cupMove : ''
                 ]}
                 onClick={function(){
-                  props.cupClick(index, i === 1)
+                  props.onCupClick(index, i === 1)
                 }}
               ></div>
               {i === 1 && (

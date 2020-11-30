@@ -10,9 +10,9 @@ export default defineComponent({
     const [list, direction, cupNumber, interval, turn] = Cup.useTurn()
 
     const backgroundStyle: CSSProperties = {
-      width: '500px',
+      width: '100%',
       height: '300px',
-      backgroundColor: '#FFF'
+      backgroundColor: 'green'
     }
 
     const cupStyle: CSSProperties = {
@@ -31,7 +31,7 @@ export default defineComponent({
       turn.start(0.1, 10)
     }
 
-    function cupClick(index: number, isIndex: boolean) {
+    function onCupClick(index: number, isIndex: boolean) {
       turn.cupUp(index)
       if (isIndex) {
         setTimeout(() => {
@@ -61,7 +61,7 @@ export default defineComponent({
             direction={direction.value}
             interval={interval.value}
             cupNumber={cupNumber.value}
-            cupClick={cupClick}
+            onCupClick={onCupClick}
           />
           <button style={btnStyle} onClick={start}>开始</button>
         </div>
