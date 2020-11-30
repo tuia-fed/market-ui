@@ -22,6 +22,10 @@ export default [
       {
         name: '大转盘',
         path: '/wheel'
+      },
+      {
+        name: '九宫格',
+        path: '/multiCubes'
       }
     ]
   }
