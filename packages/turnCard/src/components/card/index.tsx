@@ -1,12 +1,7 @@
-import {
-  defineComponent,
-  CSSProperties,
-  FunctionalComponent,
-  PropType
-} from 'vue'
+import { defineComponent, PropType, computed } from 'vue'
 import styles from '../../styles'
 import { noop } from '../../../../shared/utils'
-import { CardClick, CardOption } from '../../../types'
+import { OnCardClick, CardOption } from '../../../types'
 
 export default defineComponent({
   props: {
@@ -31,46 +26,49 @@ export default defineComponent({
       required: true
     },
     onClick: {
-      type: Function as PropType<CardClick>,
+      type: Function as PropType<OnCardClick>,
       default: noop
     },
-    render: {
-      type: Function as PropType<FunctionalComponent>,
-      required: true
+    activeName: {
+      type: String
     }
   },
 
   setup(props, ctx) {
-    const CardStyle: CSSProperties = {
+    const CardStyle = computed(() => ({
       width: `${props.width}px`,
       height: `${props.height}px`,
       backgroundImage: `url(${props.option.cardImg})`
-    }
+    }))
 
-    const CardBackStyle: CSSProperties = {
+    const CardBackStyle = computed(() => ({
       width: `${props.width}px`,
       height: `${props.height}px`,
       backgroundImage: `url(${props.option.backImg})`
-    }
+    }))
 
     const onClick = (e: MouseEvent) => {
       ctx.emit('click', e, props.index)
     }
 
     return () => (
-      <div class={styles.cardBox}>
+      <div class={[styles.cardWraper, props.activeName]}>
         <div
           onClick={onClick}
-          style={CardStyle}
-          class={[styles.card, props.option.turn ? styles.cardAni : '']}
-        />
+          style={CardStyle.value}
+          class={[
+            styles.cardFront,
+            props.option.turn ? styles.frontTurnBack : ''
+          ]}
+        ></div>
         <div
           onClick={onClick}
-          style={CardBackStyle}
-          class={[styles.cardBack, props.option.turn ? styles.cardBackAni : '']}
-        >
-          {props.render(props.option, ctx)}
-        </div>
+          style={CardBackStyle.value}
+          class={[
+            styles.cardBack,
+            props.option.turn ? styles.backTurnFront : ''
+          ]}
+        ></div>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import { defineComponent, CSSProperties } from 'vue'
+import { defineComponent } from 'vue'
 import Preview from '@/components/preview'
 import Demo from './demo'
 import Code from './README.md'

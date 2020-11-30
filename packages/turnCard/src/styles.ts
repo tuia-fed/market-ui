@@ -2,13 +2,10 @@ import { createClassname } from './create'
 import './index.less'
 
 export default {
-  card: createClassname('card'),
-  cardAni: createClassname('cardAni'),
-  cardBack: createClassname('cardBack'),
-  cardBackAni: createClassname('cardBackAni'),
-  cardBox: createClassname('cardBox'),
-  cardNum: createClassname('cardNum'),
-  item: createClassname('item'),
-  itemImage: createClassname('itemImage'),
-  itemActive: createClassname('itemActive')
+  container: createClassname('container'),
+  cardWraper: createClassname('card_wraper'),
+  cardFront: createClassname('card_front'),
+  cardBack: createClassname('card_back'),
+  frontTurnBack: createClassname('card_front_active'),
+  backTurnFront: createClassname('card_back_active')
 }

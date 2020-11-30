@@ -2,72 +2,44 @@
 
 .mk {
   &-turnCard {
-    &_cardNum {
-      width: 94%;
-      height: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      position: absolute;
+    &_container {
+      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       flex-wrap: wrap;
     }
 
-    &_cardBox {
-      position: relative;
-      margin-bottom: 10px;
-    }
-
     &_card {
-      .bg();
-    }
+      &_wraper {
+        position: relative;
+        margin-bottom: 10px;
+      }
 
-    &_cardAni {
-      animation: turn 0.2s linear 0s forwards;
+      &_front {
+        .bg();
 
-      @keyframes turn {
-        from {
-          transform: rotateY(0);
-        }
+        transition: all 0.2s;
 
-        to {
+        &_active {
           transform: rotateY(90deg);
         }
       }
-    }
 
-    &_cardBack {
-      .bg();
+      &_back {
+        .bg();
 
-      top: 0;
-      position: absolute;
-      transform: rotateY(-90deg);
-    }
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: absolute;
+        transform: rotateY(-90deg);
+        transition: all 0.2s;
 
-    &_cardBackAni {
-      animation: turn 0.2s linear 0s forwards;
-
-      @keyframes turn {
-        from {
-          transform: rotateY(-90deg);
-        }
-
-        to {
+        &_active {
           transform: rotateY(0);
         }
       }
-    }
-
-    &_item {
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      position: absolute;
-      width: 80%;
-      height: 60%;
-      background-repeat: no-repeat;
-      background-size: 100% auto;
     }
   }
 }

@@ -22,10 +22,6 @@ export default [
       {
         name: '大转盘',
         path: '/wheel'
-      },
-      {
-        name: '翻牌子',
-        path: '/turnCard'
       }
     ]
   }
