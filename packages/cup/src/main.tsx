@@ -36,7 +36,7 @@ export default createComponent({
       type: Number,
       default: -1
     },
-    onCupClick: {
+    cupClick: {
       type: Function,
       default: () => {
         return {}
@@ -105,7 +105,7 @@ export default createComponent({
                   index === cupNumber.value ? styles.cupMove : ''
                 ]}
                 onClick={function() {
-                  props.onCupClick(index, i === 1)
+                  props.cupClick(index, i === 1)
                 }}
               ></div>
               {i === 1 && (

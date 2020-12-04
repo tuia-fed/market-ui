@@ -14,6 +14,10 @@ export default [
       {
         name: '大转盘',
         path: '/wheel'
+      },
+      {
+        name: '猜杯子',
+        path: '/cup'
       }
     ]
   }
