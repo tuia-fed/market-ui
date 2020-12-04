@@ -35,7 +35,7 @@ export default defineComponent({
 
   setup() {
     const size = ref(300)
-    const rowNum = ref(4)
+    const rowNum = ref(3)
 
     const disabled = ref(false)
 
