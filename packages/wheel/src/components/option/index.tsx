@@ -1,4 +1,4 @@
-import { defineComponent, PropType, FunctionalComponent, computed } from 'vue'
+import { defineComponent, PropType, computed } from 'vue'
 import styles from '../../styles'
 import { WheelOption, WheelOptionClick } from '../../../types'
 
@@ -21,10 +21,6 @@ export default defineComponent({
     onClick: {
       type: Function as PropType<WheelOptionClick>,
       required: true
-    },
-    render: {
-      type: Function as PropType<FunctionalComponent>,
-      required: true
     }
   },
 
@@ -45,10 +41,23 @@ export default defineComponent({
       ctx.emit('click', e, props.index)
     }
 
+    const image = props.option.image ? (
+      <img
+        class={styles.itemImage}
+        src={props.option.image}
+        alt={props.option.title}
+      />
+    ) : (
+      ''
+    )
+
     return () => (
       <div onClick={onClick} style={OptionStyle.value} class={styles.option}>
         <div style={OptionRevertStyle.value} class={styles.optionRevert}>
-          {props.render(props.option, ctx)}
+          <div class={styles.item}>
+            <div class={styles.itemTitle}>{props.option.title}</div>
+            {image}
+          </div>
         </div>
       </div>
     )

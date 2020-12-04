@@ -7,7 +7,7 @@ export default function useRotate(angle: number) {
   const onUpdate = (value: number) => {
     state.value = value
   }
-  const r = new Rotate(onUpdate)
+  const rotate = new Rotate(onUpdate)
 
-  return [state, r] as const
+  return [state, rotate] as const
 }
