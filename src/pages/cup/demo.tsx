@@ -2,6 +2,7 @@ import { CSSProperties, defineComponent } from 'vue'
 import Cup from 'packages/cup'
 import cupImage from '@/assets/cup.png'
 import coinImage from '@/assets/coin.png'
+import startBtn from '@/assets/start_btn.png'
 
 export default defineComponent({
   name: 'cupDemo',
@@ -12,7 +13,9 @@ export default defineComponent({
     const backgroundStyle: CSSProperties = {
       width: '100%',
       height: '300px',
-      backgroundColor: 'green'
+      backgroundImage:
+        'url(//yun.duiba.com.cn/duiba-live/welfareRainV2/rain_bg.png)',
+      backgroundSize: '100% auto'
     }
 
     const cupStyle: CSSProperties = {
@@ -32,27 +35,35 @@ export default defineComponent({
     }
 
     function onCupClick(index: number, isIndex: boolean) {
-      turn.cupUp(index)
-      if (isIndex) {
-        setTimeout(() => {
+      turn.cupUp(index).then(() => {
+        if (isIndex) {
           alert('猜对了')
-        }, 1000)
-      }
+          turn.reset()
+        } else {
+          alert('猜错了')
+          turn.reset()
+        }
+      })
     }
 
     const btnStyle: CSSProperties = {
-      width: '100px',
-      height: '60px',
+      width: '204px',
+      height: '55px',
       margin: 'auto',
       position: 'absolute',
       left: '50%',
-      marginTop: '40px',
-      transform: 'translateX(-50%)'
+      transform: 'translate(-50%, -80px)',
+      backgroundImage: `url(${startBtn})`,
+      backgroundSize: '100% 100%'
+    }
+
+    const mainStyle: CSSProperties = {
+      width: '100vw'
     }
 
     return () => (
       <>
-        <div>
+        <div style={mainStyle}>
           <Cup
             backgroundStyle={backgroundStyle}
             cupStyle={cupStyle}
@@ -63,9 +74,7 @@ export default defineComponent({
             cupNumber={cupNumber.value}
             onCupClick={onCupClick}
           />
-          <button style={btnStyle} onClick={start}>
-            开始
-          </button>
+          <div style={btnStyle} onClick={start}></div>
         </div>
       </>
     )

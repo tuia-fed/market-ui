@@ -5,17 +5,19 @@ import { CSSProperties, defineComponent } from 'vue'
 import Cup from 'packages/cup'
 import cupImage from '@/assets/cup.png'
 import coinImage from '@/assets/coin.png'
+import startBtn from '@/assets/start_btn.png'
 
 export default defineComponent({
   name: 'cupDemo',
 
   setup() {
-    const [list, direction, cupNumber, interval, t] = Cup.useTurn()
+    const [list, direction, cupNumber, interval, turn] = Cup.useTurn()
 
     const backgroundStyle: CSSProperties = {
-      width: '500px',
+      width: '100%',
       height: '300px',
-      backgroundColor: '#1E90FF'
+      backgroundImage: 'url(//yun.duiba.com.cn/duiba-live/welfareRainV2/rain_bg.png)',
+      backgroundSize: '100% auto'
     }
 
     const cupStyle: CSSProperties = {
@@ -30,34 +32,40 @@ export default defineComponent({
       backgroundImage: `url(${coinImage})`
     }
 
-    const times = 10
-
     function start() {
-      t.start(0.1, times)
+      turn.start(0.1, 10)
     }
 
-    function cupClick(index: number, isIndex: boolean) {
-      t.cupUp(index)
-      if (isIndex) {
-        setTimeout(() => {
+    function onCupClick(index: number, isIndex: boolean) {
+      turn.cupUp(index).then(() => {
+        if (isIndex) {
           alert('猜对了')
-        }, 1000)
-      }
+          turn.reset()
+        } else {
+          alert('猜错了')
+          turn.reset()
+        }
+      })
     }
 
     const btnStyle: CSSProperties = {
-      width: '100px',
-      height: '60px',
+      width: '204px',
+      height: '55px',
       margin: 'auto',
       position: 'absolute',
       left: '50%',
-      marginTop: '40px',
-      transform: 'translateX(-50%)'
+      transform: 'translate(-50%, -80px)',
+      backgroundImage: `url(${startBtn})`,
+      backgroundSize: '100% 100%'
+    }
+
+    const mainStyle: CSSProperties = {
+      width: '100vw'
     }
 
     return () => (
       <>
-        <div>
+        <div style={mainStyle}>
           <Cup
             backgroundStyle={backgroundStyle}
             cupStyle={cupStyle}
@@ -66,9 +74,9 @@ export default defineComponent({
             direction={direction.value}
             interval={interval.value}
             cupNumber={cupNumber.value}
-            cupClick={cupClick}
+            cupClick={onCupClick}
           />
-          <button style={btnStyle} onClick={start}>开始</button>
+          <div style={btnStyle} onClick={start}></div>
         </div>
       </>
     )
@@ -96,6 +104,13 @@ turn.start(interval, times)
  * @param Number index 传入杯子索引
  */
 turn.cupUp(index)
+
+
+/**
+ * 游戏重置
+ */
+turn.reset()
+
 ```
 
 ## Props
@@ -112,4 +127,4 @@ turn.cupUp(index)
 
 |  事件名   | 说明  |  回调参数  | 
 |  ----  | ----  |  ----  |
-| cupClick  | 杯子点击事件 | boolean |
+| cupClick  | 杯子点击事件回调 | function (index: number, isIndex: boolean) {} 返回当前点击的杯子的索引值，和硬币是否在当前杯子的boolean|
