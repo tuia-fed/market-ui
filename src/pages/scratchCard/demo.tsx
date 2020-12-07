@@ -20,10 +20,12 @@ export default defineComponent({
       [330, 260]
     ]
 
-    const bgImg =
-      '//yun.tuisnake.com/babi/img/46de46c2-ngat6glknm.jpg'
+    const bgImg = '//yun.tuisnake.com/babi/img/46de46c2-ngat6glknm.jpg'
 
-    const touchStartAct = ( e: TouchEvent | MouseEvent, resolveAct: Function) => {
+    const touchStartAct = (
+      e: TouchEvent | MouseEvent,
+      resolveAct: Function
+    ) => {
       // 开始刮的时候，要做的事情，比如隐藏引导手势
       console.log('点击了')
       return new Promise((resolve, reject) => {

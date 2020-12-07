@@ -45,14 +45,13 @@ export default createComponent({
     }
   },
 
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const width = props.width
     const height = props.height
     let paintBrush: PaintBrush
     let mouseDown = false
     const visible = ref('block')
-    const id = ref('scratch-' +  ++uid)
-
+    const id = ref('scratch-' + ++uid)
 
     const startHandler = (e: TouchEvent) => {
       // 开始刮
