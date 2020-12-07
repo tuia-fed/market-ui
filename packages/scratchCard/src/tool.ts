@@ -1,4 +1,4 @@
-import { tween, chain, Action, easing } from 'popmotion'
+import { tween, chain, Action } from 'popmotion'
 import { TweenInterface } from 'popmotion/lib/animations/tween/types'
 import { ValueMap } from 'popmotion/lib/reactions/value'
 

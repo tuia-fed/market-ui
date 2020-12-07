@@ -11,7 +11,6 @@ const options = Array.from({ length: 6 })
     title: `奖项名称${item}`,
     image: optionImage
   }))
-
 export default defineComponent({
   name: 'WheelDemo',
 
@@ -64,7 +63,6 @@ export default defineComponent({
             style={circleStyle}
             options={options}
             onOptionClick={onOptionClick}
-            // optionRender={(option) => (<div>{option.toString()}</div>)}
           />
           <div
             onClick={onStart}

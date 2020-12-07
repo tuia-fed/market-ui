@@ -5,8 +5,8 @@ export default defineComponent({
   name: 'ScratchCardDemo',
 
   setup() {
-    const width = 400
-    const height = 300
+    const width = 689 / 2
+    const height = 402 / 2
     const paintCoat = '//yun.dui88.com/tact/scratchCard/cardBg.png' // 可以不提供图片，有默认的卡颜色
     const autoPlay = ref(true) // 是否开启自动刮
     const targetRate = 0 // 不提供刮掉面积占比的时候，有一个默认值，刮掉面积达到时进行开奖
@@ -41,8 +41,9 @@ export default defineComponent({
         <div
           class="card_bg_img"
           style={{
-            background: `url(${bgImg})no-repeat`,
-            backgroundSize: '100% 100%',
+            background: `url(${bgImg}) no-repeat `,
+            backgroundSize: 'auto 100%',
+            backgroundPosition: 'center center',
             width: width + 'px',
             height: height + 'px'
           }}

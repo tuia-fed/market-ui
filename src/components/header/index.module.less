@@ -1,17 +1,29 @@
 .header {
   display: flex;
   height: @header-height;
-  background-color: #111;
+  background-color: @mk-header-bg-color;
 }
 
 .left {
   width: @nav-width;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 32px;
 
   .brand {
-    height: @header-height / 3;
+    height: @header-height * 0.6;
+  }
+
+  .text {
+    margin-left: 8px;
+    height: @header-height * 0.3;
+  }
+}
+
+@media screen and (max-width: @mk-screen-max-width) {
+  .left {
+    padding-left: 16px;
   }
 }
 
