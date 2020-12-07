@@ -56,24 +56,22 @@
       position: relative;
     }
 
-    &_item_active {
-      &::before {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 100%;
-        border: 4px solid #fe4365;
-        box-sizing: border-box;
-        left: 0;
-        top: 0;
-      }
-    }
-
     &_cube_item {
       .flex-center-col();
 
-      width: 100%;
-      height: 100%;
+      border: 1px solid #d9d9d9;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+      margin: 5%;
+      width: 90%;
+      height: 90%;
+      border-radius: 5%;
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    &_item_active {
+      background-color: #fe4365 !important;
+      color: #fff;
+      border-color: #fe4365;
     }
 
     &_item_title {

@@ -15,7 +15,7 @@ const options = Array.from({ length: 50 })
 
 /**
  * 各宫格自定义的渲染函数
- * @param option 
+ * @param option
  */
 function cubesItemRender(option: MultiCubesOption): Component {
   return (
@@ -34,8 +34,7 @@ export default defineComponent({
   name: 'MultiCubesDemo',
 
   setup() {
-
-    const size = ref(320)
+    const size = ref(300)
     const rowNum = ref(3)
 
     const disabled = ref(false)
@@ -69,14 +68,13 @@ export default defineComponent({
     }
 
     return () => (
-      <div
-        class="game-area"
-        style={{
-          width: size.value + 'px',
-          height: size.value + 'px'
-        }}
-      >
-        <div class="multi-cubes-wrap">
+      <div class="game-area">
+        <div    
+          style={{
+            width: size.value + 'px',
+            height: size.value + 'px'
+          }}
+        >
           <MultiCubes
             size={size.value}
             rowNum={rowNum.value}
@@ -85,104 +83,15 @@ export default defineComponent({
             onItemClick={onOptionClick}
             itemRender={cubesItemRender}
           />
-          <div class="start-btn" onClick={onStart}>抽奖</div>
+          <div class="start-btn" onClick={onStart}>
+            抽奖
+          </div>
         </div>
       </div>
     )
   }
 })
 ```
-```less
-//./index.less
-.flex-center() {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.game-area {
-  animation: changeBg 0.5s ease infinite;
-  overflow: hidden;
-  margin: 0 auto;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  padding: 20px 20px;
-  position: relative;
-
-  .multi-cubes-wrap {
-    width: 100%;
-    height: 100%;
-  }
-
-  .start-btn {
-    background: url(../../assets/multiCubesItembg1.png) no-repeat center;
-    background-size: 100% 100%;
-    position: absolute;
-    width: 106px;
-    height: 106px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -55%);
-    cursor: pointer;
-    .flex-center();
-
-    color: #fff;
-    font-size: 40px;
-  }
-
-  .cube-item-wrap {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-
-    .cube-item {
-      width: 92%;
-      height: 92%;
-      background: url(../../assets/multiCubesItembg2.png) no-repeat center;
-      background-size: 100% 100%;
-      .flex-center();
-
-      flex-direction: column;
-
-      p {
-        color: #708abf;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 14px;
-        margin: 0;
-
-        img {
-          margin-bottom: 6px;
-          width: 40px;
-          height: 40px;
-        }
-      }
-
-      &.active {
-        background: url(../../assets/multiCubesItembg1.png) no-repeat center;
-        background-size: 100% 100%;
-
-        p {
-          color: #fff;
-        }
-      }
-    }
-  }
-}
-
-@keyframes changeBg {
-  0% {
-    background-image: url(../../assets/multiCubesBg1.png);
-  }
-
-  100% {
-    background-image: url(../../assets/multiCubesBg2.png);
-  }
-}
-```
-
 ## Hooks
 
 ```javascript
