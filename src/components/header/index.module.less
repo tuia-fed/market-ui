@@ -34,14 +34,22 @@
   justify-content: flex-end;
 
   a {
-    padding: 0 16px;
+    padding: 0 32px;
     height: @header-height / 2;
     line-height: @header-height / 2;
     color: #fff;
     text-decoration: none;
+    display: flex;
+    align-items: center;
 
     &:hover {
       color: @mk-primary;
     }
+  }
+
+  .logo {
+    width: 26px;
+    height: 26px;
+    margin-right: 8px;
   }
 }

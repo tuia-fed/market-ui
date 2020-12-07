@@ -17,6 +17,10 @@ export default defineComponent({
             href="http://gitlab.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui"
             target="_blank"
           >
+            <img
+              class={styles.logo}
+              src="https://yun.tuisnake.com/mk-ui/logo/github.523d0066.svg"
+            />
             Github
           </a>
         </div>
