@@ -74,7 +74,7 @@ export default defineComponent({
             direction={direction.value}
             interval={interval.value}
             cupNumber={cupNumber.value}
-            cupClick={onCupClick}
+            onCupClick={onCupClick}
           />
           <div style={btnStyle} onClick={start}></div>
         </div>
@@ -127,4 +127,4 @@ turn.reset()
 
 |  事件名   | 说明  |  回调参数  | 
 |  ----  | ----  |  ----  |
-| cupClick  | 杯子点击事件回调 | function (index: number, isIndex: boolean) {} 返回当前点击的杯子的索引值，和硬币是否在当前杯子的boolean|
+| onCupClick  | 杯子点击事件回调 | function (index: number, isIndex: boolean) {} 返回当前点击的杯子的索引值，和硬币是否在当前杯子的boolean|
