@@ -4,8 +4,6 @@ import RotationSingle from './single'
 import styles from '../styles'
 import { RotationOptions } from '../../types'
 import useRotation from '../hooks'
-import { noop } from '../../../shared/utils'
-import { ToProps } from 'packages/wheel/src/hooks/rotate'
 
 export default defineComponent({
   RotationSingle,
@@ -14,41 +12,17 @@ export default defineComponent({
   name: 'rotationContainer',
 
   props: {
-    width: {
-      type: Number,
-      default: 672
+    prizeItemStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: {}
     },
-    height: {
-      type: Number,
-      default: 354
+    hideBoxStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: {}
     },
-    singleWidth: {
-      type: Number,
-      default: 180
-    },
-    singleHeight: {
-      type: Number,
-      default: 180
-    },
-    singleMargin: {
-      type: Number,
-      default: 20
-    },
-    hideBoxWidth: {
-      type: Number,
-      default: 602
-    },
-    hideBoxHeight: {
-      type: Number,
-      default: 300
-    },
-    singleList: {
+    prizeList: {
       type: Array as PropType<RotationOptions>,
       default: () => []
-    },
-    backgroundStyle: {
-      type: Object as PropType<CSSProperties>,
-      default: () => () => ({})
     },
     angle: {
       type: Number,
@@ -60,50 +34,33 @@ export default defineComponent({
     }
   },
 
-  setup(props, ctx) {
-    const prizeWidth =
-      (props.singleWidth + props.singleMargin) * props.singleList.length
-
-    const BackgroundStyle: CSSProperties = {
-      width: props.width + 'px',
-      height: props.height + 'px',
-      ...props.backgroundStyle
-    }
-    const SingleStyle: CSSProperties = {
-      width: props.singleWidth + 'px',
-      height: props.singleHeight + 'px',
-      marginRight: props.singleMargin + 'px'
-    }
+  setup(props) {
     const priceCellStyle = computed(() => {
       const result: CSSProperties = {}
-      // result.transform = `translate(${props.angle - prizeWidth}px, 0)`
       result.transform = `translate(${props.angle}px, 0)`
       return result
     })
-    const hideBoxStyle: CSSProperties = {
-      width: props.hideBoxWidth + 'px',
-      height: props.hideBoxHeight + 'px'
+
+    const renderItem = () => {
+      return props.prizeList.map(item => (
+        <RotationSingle
+          option={item}
+          style={props.prizeItemStyle}
+        ></RotationSingle>
+      ))
     }
 
     return () => (
-      <div style={BackgroundStyle} class={styles.container}>
-        <div style={hideBoxStyle} class={styles['hide-box']}>
-          <div style={priceCellStyle.value} class={styles['price-cell-copy']}>
-            {props.singleList.map(item => (
-              <RotationSingle
-                option={item}
-                style={SingleStyle}
-              ></RotationSingle>
-            ))}
-          </div>
-          <div style={priceCellStyle.value} class={styles['price-cell']}>
-            {props.singleList.map(item => (
-              <RotationSingle
-                option={item}
-                style={SingleStyle}
-              ></RotationSingle>
-            ))}
-          </div>
+      <div style={props.hideBoxStyle} class={styles['hide-box']}>
+        <div style={priceCellStyle.value} class={styles['price-cell-copy']}>
+          {
+            renderItem()
+          }
+        </div>
+        <div style={priceCellStyle.value} class={styles['price-cell']}>
+          {
+            renderItem()
+          }
         </div>
       </div>
     )

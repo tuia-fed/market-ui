@@ -2,18 +2,14 @@
 
 ```javascript
 import { CSSProperties, defineComponent, ref } from 'vue'
-import { RotationContainer } from 'packages/rotation'
+import RotationContainer from 'packages/rotation'
 import { fetchData } from '@/shared/utils'
+import './index.less'
 
 export default defineComponent({
   name: 'RotationDemo',
 
   setup() {
-    const backgroundStyle: CSSProperties = {
-      backgroundImage:
-        'url("//yun.tuisnake.com/mami-media/img/185adc53-zsnihatxyl.png")'
-    }
-
     const singleList = [
       {
         image:
@@ -44,14 +40,23 @@ export default defineComponent({
       }
     ]
 
-    const width = ref(672)
-    const height = ref(354)
-    const singleWidth = ref(180)
-    const singleHeight = ref(180)
-    const singleMargin = ref(20)
-    const hideBoxWidth = ref(602)
-    const hideBoxHeight = ref(300)
+    const singleWidth = ref(180 * 0.5)
+    const singleHeight = ref(180 * 0.5)
+    const singleMargin = ref(20 * 0.5)
+    const hideBoxWidth = ref(602 * 0.5)
+    const hideBoxHeight = ref(300 * 0.5)
     const duration = ref(6000)
+
+    const hideBoxStyle: CSSProperties = {
+      width: hideBoxWidth.value + 'px',
+      height: hideBoxHeight .value+ 'px'
+    }
+
+    const prizeItemStyle:CSSProperties = {
+      width: singleWidth.value + 'px',
+      height: singleHeight.value+ 'px',
+      marginRight: singleMargin.value + 'px'
+    }
 
     const rotationData = {
       singleWidth: singleWidth.value,
@@ -65,7 +70,7 @@ export default defineComponent({
     rotation.idled(duration.value)
 
     const onStart = () => {
-      rotation.start(false)
+      rotation.start()
       fetchData().then(() => {
         rotation.stop(
           {
@@ -73,6 +78,9 @@ export default defineComponent({
             duration: 1000,
             complete: () => {
               console.log('end')
+              setTimeout(() => {
+                rotation.reset(duration.value)
+              }, 2000)
             }
           },
           false
@@ -81,37 +89,15 @@ export default defineComponent({
     }
 
     return () => (
-      <div>
+      <div class="demo-container">
         <RotationContainer
-          width={width.value}
-          height={height.value}
-          singleWidth={singleWidth.value}
-          singleHeight={singleHeight.value}
-          singleMargin={singleMargin.value}
+          prizeItemStyle={prizeItemStyle}
           singleList={singleList}
-          hideBoxWidth={hideBoxWidth.value}
-          hideBoxHeight={hideBoxHeight.value}
-          style={backgroundStyle}
+          hideBoxStyle={hideBoxStyle}
           duration={duration.value}
           angle={angle.value}
         ></RotationContainer>
-        <div
-          onClick={onStart}
-          style={{
-            position: 'absolute',
-            width: '100px',
-            height: '100px',
-            left: '505px',
-            top: '500px',
-            backgroundColor: 'red',
-            backgroundSize: '100% 100%',
-            borderRadius: '50%',
-            color: '#fff',
-            fontSize: '24px',
-            textAlign: 'center',
-            lineHeight: '100px'
-          }}
-        >
+        <div onClick={onStart} class="demo-btn">
           start
         </div>
       </div>
@@ -160,13 +146,8 @@ rotation.reset()
 |  参数   | 说明  |  类型   | 默认值 |
 |  ----  | ----  |  ----  | ----  |
 | angle  | 移动位置 | Number  | 0 |
-| width  | 摇奖机背景宽度 | Number  | 0 |
-| height  | 摇奖机背景高度 | Number  | 0 |
-| singleWidth  | 奖品宽度 | Number  | 0 |
-| singleHeight  | 奖品高度 | Number  | 0 ） |
-| singleMargin  | 奖品间距 | Number  | 0 ） |
-| hideBoxWidth  | 隐藏区域宽度 | Number  | 0 |
-| hideBoxHeight  | 隐藏区域高度 | Number  | 0 |
+| prizeItemStyle  | 奖品样式 | CSSProperties  | {} |
+| hideBoxStyle  | 隐藏区域样式 | CSSProperties  | {} |
 | duration  | 初始化动画轮询速率 | Number  | 3000 |
 | singleList  | 奖品列表 | Array<RotationOptions>  | required |
 

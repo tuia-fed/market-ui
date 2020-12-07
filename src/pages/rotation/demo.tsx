@@ -1,5 +1,5 @@
 import { CSSProperties, defineComponent, ref } from 'vue'
-import { RotationContainer } from 'packages/rotation'
+import RotationContainer from 'packages/rotation'
 import { fetchData } from '@/shared/utils'
 import './index.less'
 
@@ -7,12 +7,7 @@ export default defineComponent({
   name: 'RotationDemo',
 
   setup() {
-    const backgroundStyle: CSSProperties = {
-      backgroundImage:
-        'url("//yun.tuisnake.com/mami-media/img/185adc53-zsnihatxyl.png")'
-    }
-
-    const singleList = [
+    const prizeList = [
       {
         image:
           '//yun.tuisnake.com/h5-mami/dist/item1.84574200c69f49c151a53126b534227c.png'
@@ -42,20 +37,29 @@ export default defineComponent({
       }
     ]
 
-    const width = ref(672)
-    const height = ref(354)
-    const singleWidth = ref(180)
-    const singleHeight = ref(180)
-    const singleMargin = ref(20)
-    const hideBoxWidth = ref(602)
-    const hideBoxHeight = ref(300)
+    const prizeWidth = ref(180 * 0.5)
+    const prizeHeight = ref(180 * 0.5)
+    const prizeMargin = ref(20 * 0.5)
+    const hideBoxWidth = ref(602 * 0.5)
+    const hideBoxHeight = ref(300 * 0.5)
     const duration = ref(6000)
 
+    const hideBoxStyle: CSSProperties = {
+      width: hideBoxWidth.value + 'px',
+      height: hideBoxHeight .value+ 'px'
+    }
+
+    const prizeItemStyle:CSSProperties = {
+      width: prizeWidth.value + 'px',
+      height: prizeHeight.value+ 'px',
+      marginRight: prizeMargin.value + 'px'
+    }
+
     const rotationData = {
-      singleWidth: singleWidth.value,
-      singleMargin: singleMargin.value,
+      prizeWidth: prizeWidth.value,
+      prizeMargin: prizeMargin.value,
       hideBoxWidth: hideBoxWidth.value,
-      singleList
+      prizeList
     }
 
     const [angle, rotation] = RotationContainer.useRotation(rotationData)
@@ -68,7 +72,7 @@ export default defineComponent({
         rotation.stop(
           {
             index: 1,
-            duration: 1000,
+            duration: 1500,
             complete: () => {
               console.log('end')
               setTimeout(() => {
@@ -84,15 +88,9 @@ export default defineComponent({
     return () => (
       <div class="demo-container">
         <RotationContainer
-          width={width.value}
-          height={height.value}
-          singleWidth={singleWidth.value}
-          singleHeight={singleHeight.value}
-          singleMargin={singleMargin.value}
-          singleList={singleList}
-          hideBoxWidth={hideBoxWidth.value}
-          hideBoxHeight={hideBoxHeight.value}
-          backgroundStyle={backgroundStyle}
+          prizeItemStyle={prizeItemStyle}
+          prizeList={prizeList}
+          hideBoxStyle={hideBoxStyle}
           duration={duration.value}
           angle={angle.value}
         ></RotationContainer>

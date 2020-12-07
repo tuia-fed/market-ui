@@ -89,8 +89,8 @@ export default class {
     this.tw = tween({
       from: this.angle,
       to: to,
-      duration: data.duration || 500,
-      ease: easing.linear
+      duration: noReset ? data.duration || 1000 : 500,
+      ease: noReset ? easing.backOut : easing.linear
     }).start({
       update: (angle: number) => {
         this.angle = angle

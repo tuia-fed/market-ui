@@ -7,4 +7,4 @@ RotationContainer.install = (app: App) => {
   app.component(RotationContainer.name, RotationContainer)
 }
 
-export { RotationContainer }
+export default RotationContainer
