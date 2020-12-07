@@ -1,14 +1,14 @@
-import { RotationOption } from 'packages/rotation/types'
+import { lotteryMachineOption } from 'packages/lotteryMachine/types'
 import { CSSProperties, defineComponent, PropType } from 'vue'
 
 import styles from '../styles'
 
 export default defineComponent({
-  name: 'rotationSingle',
+  name: 'lotteryMachinePrizeItem',
 
   props: {
     option: {
-      type: Object as PropType<RotationOption>,
+      type: Object as PropType<lotteryMachineOption>,
       default: () => ({})
     },
     style: {
@@ -18,11 +18,11 @@ export default defineComponent({
   },
 
   setup(props) {
-    const singleStyle: CSSProperties = {
+    const prizeItemStyle: CSSProperties = {
       backgroundImage: `url(${props.option.image})`,
       ...props.style
     }
 
-    return () => <div style={singleStyle} class={styles.single}></div>
+    return () => <div style={prizeItemStyle} class={styles.prizeItem}></div>
   }
 })

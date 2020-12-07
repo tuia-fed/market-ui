@@ -2,15 +2,15 @@
 
 ```javascript
 import { CSSProperties, defineComponent, ref } from 'vue'
-import RotationContainer from 'packages/rotation'
+import lotteryMachine from 'packages/lotteryMachine'
 import { fetchData } from '@/shared/utils'
 import './index.less'
 
 export default defineComponent({
-  name: 'RotationDemo',
+  name: 'lotteryMachine',
 
   setup() {
-    const singleList = [
+    const prizeList = [
       {
         image:
           '//yun.tuisnake.com/h5-mami/dist/item1.84574200c69f49c151a53126b534227c.png'
@@ -40,46 +40,46 @@ export default defineComponent({
       }
     ]
 
-    const singleWidth = ref(180 * 0.5)
-    const singleHeight = ref(180 * 0.5)
-    const singleMargin = ref(20 * 0.5)
+    const prizeWidth = ref(180 * 0.5)
+    const prizeHeight = ref(180 * 0.5)
+    const prizeMargin = ref(20 * 0.5)
     const hideBoxWidth = ref(602 * 0.5)
     const hideBoxHeight = ref(300 * 0.5)
     const duration = ref(6000)
 
     const hideBoxStyle: CSSProperties = {
       width: hideBoxWidth.value + 'px',
-      height: hideBoxHeight .value+ 'px'
+      height: hideBoxHeight.value + 'px'
     }
 
-    const prizeItemStyle:CSSProperties = {
-      width: singleWidth.value + 'px',
-      height: singleHeight.value+ 'px',
-      marginRight: singleMargin.value + 'px'
+    const prizeItemStyle: CSSProperties = {
+      width: prizeWidth.value + 'px',
+      height: prizeHeight.value + 'px',
+      marginRight: prizeMargin.value + 'px'
     }
 
-    const rotationData = {
-      singleWidth: singleWidth.value,
-      singleMargin: singleMargin.value,
+    const lotteryMachineData = {
+      prizeWidth: prizeWidth.value,
+      prizeMargin: prizeMargin.value,
       hideBoxWidth: hideBoxWidth.value,
-      singleList
+      prizeList
     }
 
-    const [angle, rotation] = RotationContainer.useRotation(rotationData)
+    const [angle, lottery] = lotteryMachine.useLottery(lotteryMachineData)
 
-    rotation.idled(duration.value)
+    lottery.idled(duration.value)
 
     const onStart = () => {
-      rotation.start()
+      lottery.start()
       fetchData().then(() => {
-        rotation.stop(
+        lottery.stop(
           {
             index: 1,
-            duration: 1000,
+            duration: 1500,
             complete: () => {
               console.log('end')
               setTimeout(() => {
-                rotation.reset(duration.value)
+                lottery.reset(duration.value)
               }, 2000)
             }
           },
@@ -90,13 +90,13 @@ export default defineComponent({
 
     return () => (
       <div class="demo-container">
-        <RotationContainer
+        <lotteryMachine
           prizeItemStyle={prizeItemStyle}
-          singleList={singleList}
+          prizeList={prizeList}
           hideBoxStyle={hideBoxStyle}
           duration={duration.value}
           angle={angle.value}
-        ></RotationContainer>
+        ></lotteryMachine>
         <div onClick={onStart} class="demo-btn">
           start
         </div>
@@ -109,36 +109,36 @@ export default defineComponent({
 ## Hooks
 
 ```javascript
-import { RotationContainer } from 'market-ui'
+import { lotteryMachine } from 'market-ui'
 
-const rotationData = {
+const lotteryMachineData = {
   // 单个奖项宽度
-  singleWidth: singleWidth.value,
+  prizeWidth: prizeWidth.value,
   // 单个奖项高度
-  singleMargin: singleMargin.value,
+  prizeMargin: prizeMargin.value,
   // 隐藏区域宽度
   hideBoxWidth: hideBoxWidth.value,
   // 奖项列表
-  singleList
+  prizeList
 }
 
-const [angle, rotation] = RotationContainer.useRotate(rotationData)
+const [angle, lottery] = lotteryMachine.useLottery(lotteryMachineData)
 
 // angle 作为摇奖机的奖品的移动位置，是一个 Ref
 
 // 闲置旋转
-rotation.idled(duration)
+lottery.idled(duration)
 // 开始加速
-rotation.start()
+lottery.start()
 // 开始减速
-rotation.stop({
+lottery.stop({
   index: 0, // 停止位置
   complete () {
 
   }, // 停止回调
 })
 // 重置
-rotation.reset()
+lottery.reset()
 ```
 
 ## Props
@@ -149,9 +149,13 @@ rotation.reset()
 | prizeItemStyle  | 奖品样式 | CSSProperties  | {} |
 | hideBoxStyle  | 隐藏区域样式 | CSSProperties  | {} |
 | duration  | 初始化动画轮询速率 | Number  | 3000 |
-| singleList  | 奖品列表 | Array<RotationOptions>  | required |
+| prizeList  | 奖品列表 | Array<lotteryMachineOptions>  | required |
 
 ## Events
 
 |  事件名   | 说明  |  回调参数  | 
 |  ----  | ----  |  ----  |
+
+## Tips
+
+1、隐藏区域宽度要大于奖品总宽度

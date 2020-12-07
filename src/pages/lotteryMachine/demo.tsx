@@ -1,10 +1,10 @@
 import { CSSProperties, defineComponent, ref } from 'vue'
-import RotationContainer from 'packages/rotation'
+import lotteryMachine from 'packages/lotteryMachine'
 import { fetchData } from '@/shared/utils'
 import './index.less'
 
 export default defineComponent({
-  name: 'RotationDemo',
+  name: 'lotteryMachine',
 
   setup() {
     const prizeList = [
@@ -55,28 +55,28 @@ export default defineComponent({
       marginRight: prizeMargin.value + 'px'
     }
 
-    const rotationData = {
+    const lotteryMachineData = {
       prizeWidth: prizeWidth.value,
       prizeMargin: prizeMargin.value,
       hideBoxWidth: hideBoxWidth.value,
       prizeList
     }
 
-    const [angle, rotation] = RotationContainer.useRotation(rotationData)
+    const [angle, lottery] = lotteryMachine.useLottery(lotteryMachineData)
 
-    rotation.idled(duration.value)
+    lottery.idled(duration.value)
 
     const onStart = () => {
-      rotation.start()
+      lottery.start()
       fetchData().then(() => {
-        rotation.stop(
+        lottery.stop(
           {
             index: 1,
             duration: 1500,
             complete: () => {
               console.log('end')
               setTimeout(() => {
-                rotation.reset(duration.value)
+                lottery.reset(duration.value)
               }, 2000)
             }
           },
@@ -87,16 +87,14 @@ export default defineComponent({
 
     return () => (
       <div class="demo-container">
-        <RotationContainer
+        <lotteryMachine
           prizeItemStyle={prizeItemStyle}
           prizeList={prizeList}
           hideBoxStyle={hideBoxStyle}
           duration={duration.value}
           angle={angle.value}
-        ></RotationContainer>
-        <div onClick={onStart} class="demo-btn">
-          start
-        </div>
+        ></lotteryMachine>
+        <div onClick={onStart} class="demo-btn"></div>
       </div>
     )
   }

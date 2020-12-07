@@ -45,7 +45,7 @@ export default [
       },
       {
         name: '摇奖机',
-        path: '/rotation'
+        path: '/lotteryMachine'
       }
     ]
   }

@@ -7,7 +7,7 @@ interface PlainObject {
 
 const styles: PlainObject = {
   container: createClassname('container'),
-  single: createClassname('single'),
+  prizeItem: createClassname('prizeItem'),
   'hide-box': createClassname('hide-box'),
   'price-cell': createClassname('price-cell'),
   'price-cell-copy': createClassname('price-cell-copy')

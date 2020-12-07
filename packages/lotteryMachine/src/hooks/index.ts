@@ -1,15 +1,20 @@
 import { ref } from 'vue'
-import Rotation from './rotation'
+import Lottery from './lottery'
 
-export interface RotationData {
+export interface LotteryMachineDataType {
   prizeWidth: number
   prizeMargin: number
   prizeList: Array<any>
   hideBoxWidth: number
 }
 
-export default function useRotation(rotationData: RotationData) {
-  const { prizeWidth, prizeMargin, prizeList, hideBoxWidth } = rotationData
+export default function useLottery(lotteryMachineData: LotteryMachineDataType) {
+  const {
+    prizeWidth,
+    prizeMargin,
+    prizeList,
+    hideBoxWidth
+  } = lotteryMachineData
   const startAngle =
     (prizeWidth + prizeMargin) * prizeList.length - hideBoxWidth
   const correctWidth = (prizeWidth + prizeMargin) * prizeList.length
@@ -26,7 +31,7 @@ export default function useRotation(rotationData: RotationData) {
       (prizeWidth * (index - 0.5) + prizeMargin * index)
     return position
   }
-  const r = new Rotation(onUpdate, startAngle, correctWidth, stopPosition)
+  const r = new Lottery(onUpdate, startAngle, correctWidth, stopPosition)
 
   return [state, r] as const
 }
