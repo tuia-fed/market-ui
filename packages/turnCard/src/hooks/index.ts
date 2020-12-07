@@ -8,21 +8,26 @@ class Animation {
   maxIndex: number
   timer?: number | null
   lastIndex?: number
+  duration!: number
 
   constructor(currentIndex: Ref<number>, options: Ref<CardOptions>) {
     this.activeIndex = currentIndex
     this.options = options
     this.maxIndex = options.value.length - 1
     this.isRunning = false
+    this.duration = 1000
   }
 
   start(duration: number) {
+    if (duration) {
+      this.duration = duration
+    }
     if (this.isRunning) return
     this.isRunning = true
 
     this.timer = setInterval(() => {
       if (this.activeIndex.value === this.maxIndex) {
-        this.activeIndex.value = 0
+        this.activeIndex.value = -1
         return
       }
 
@@ -51,7 +56,7 @@ class Animation {
           this.activeIndex.value = againNextIndex
         }
       }
-    }, duration || 1000)
+    }, this.duration)
   }
 
   stop() {
@@ -71,6 +76,7 @@ class Animation {
     for (let i = 0; i < this.options.value.length; i++) {
       this.options.value[i].turn = false
     }
+    this.start(this.duration)
   }
 
   turnBack(i: number) {
