@@ -44,14 +44,12 @@ export default defineComponent({
     const renderItem = (prizeOriginName: string) => {
       return (
         <div style={priceCellStyle.value} class={styles[prizeOriginName]}>
-          {props.prizeList.map(item =>
-            (
-              <lotteryMachinePrizeItem
-                option={item}
-                style={props.prizeItemStyle}
-              ></lotteryMachinePrizeItem>
-            )
-          )}
+          {props.prizeList.map(item => (
+            <lotteryMachinePrizeItem
+              option={item}
+              style={props.prizeItemStyle}
+            ></lotteryMachinePrizeItem>
+          ))}
         </div>
       )
     }
@@ -60,11 +58,9 @@ export default defineComponent({
 
     return () => (
       <div style={props.hideBoxStyle} class={styles['hide-box']}>
-        {
-          prizeArr.map(prizeOriginName => {
-            return renderItem(prizeOriginName)
-          })
-        }
+        {prizeArr.map(prizeOriginName => {
+          return renderItem(prizeOriginName)
+        })}
       </div>
     )
   }
