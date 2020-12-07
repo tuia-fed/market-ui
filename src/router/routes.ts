@@ -42,6 +42,10 @@ export default [
       {
         name: '刮刮卡',
         path: '/scratchCard'
+      },
+      {
+        name: '摇奖机',
+        path: '/rotation'
       }
     ]
   }
