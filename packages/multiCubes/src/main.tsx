@@ -66,7 +66,7 @@ export default createComponent({
     // 每排的宫格数
     rowNum: {
       type: Number,
-      default: 5
+      default: 3
     },
     // 当前高亮index
     activeIndex: {

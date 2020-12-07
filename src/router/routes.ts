@@ -7,10 +7,6 @@ export default [
         path: '/'
       },
       {
-        name: '安装',
-        path: '/install'
-      },
-      {
         name: '开始',
         path: '/start'
       }

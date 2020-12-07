@@ -6,62 +6,77 @@ import TurnCard from 'packages/turnCard'
 import cardImage from '@/assets/cardImage.png'
 import cardBackImage from '@/assets/cardBackImage.png'
 import itemImage from '@/assets/smile.png'
-import logo from '@/assets/logo.png'
 import './index.less'
 
-const length = 12
-const options = ref(
-  Array.from({ length })
-    .map((_, index) => index)
-    .map(item => ({
-      cardImg: cardImage,
-      backImg: cardBackImage,
-      itemImg: itemImage,
-      turn: false
-    }))
-)
+const length = 6
+const data = Array.from({ length })
+  .map((_, index) => index)
+  .map(() => ({
+    cardImg: cardImage,
+    backImg: cardBackImage,
+    itemImg: itemImage,
+    turn: false
+  }))
+
 export default defineComponent({
   name: 'TurnCardDemo',
 
   setup() {
     const width = ref(100 * 0.8)
     const height = ref(144 * 0.8)
-    const activeIndex = ref(0)
-    setInterval(() => {
-      if (activeIndex.value === length) {
-        activeIndex.value = 0
-        return
-      }
-      activeIndex.value++
-    }, 1000)
-    const style: CSSProperties = {
-      animation: 'cardAni 1s linear infinite'
-    }
+    const [activeIndex, options, game] = TurnCard.useAnimation(0, data)
+
+    game.start()
+
     const onCardClick = (e: MouseEvent, i: number) => {
-      options.value[i].turn = true
-      options.value[i].itemImg = logo
+      game.turnBack(i)
     }
+
     const reset = () => {
-      for (let i = 0; i < length; i++) {
-        options.value[i].turn = false
-      }
+      game.reset()
+    }
+
+    const container: CSSProperties = {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '90%',
+      position: 'absolute',
+      left: '50%',
+      transform: 'translate(-50%)'
     }
 
     return () => (
-      <div>
-        <button onClick={reset}>重置</button>
+      <div style={container}>
         <TurnCard
           width={width.value}
           height={height.value}
           options={options.value}
-          cardClick={onCardClick}
+          onCardClick={onCardClick}
           activeIndex={activeIndex.value}
-          cardAni={style}
+          activeClassName={'turncard_demo_active'}
         />
+        <button onClick={reset}>重置</button>
       </div>
     )
   }
 })
+```
+
+## Hooks
+
+```javascript
+import { TurnCard } from 'market-ui'
+
+const [activeIndex, options, game] = TurnCard.useAnimation(0, data)
+
+// activeIndex 作为卡牌动画的下标，是一个 Ref
+
+// 卡牌开始动画
+game.start()
+// 翻转下标i的卡牌
+game.turnBack(i)
+// 卡牌重置
+game.reset()
 ```
 
 ## Props
@@ -78,4 +93,4 @@ export default defineComponent({
 
 |  事件名   | 说明  |  回调参数  | 
 |  ----  | ----  |  ----  |
-| cardClick  | 每张牌点击的回调 | 事件对象 e: Event , 奖项下标 i: Number |
+| onCardClick  | 每张牌点击的回调 | 事件对象 e: Event , 奖项下标 i: Number |

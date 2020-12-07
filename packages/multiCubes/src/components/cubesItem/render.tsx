@@ -16,16 +16,12 @@ export default defineComponent({
       ''
     )
     function getBgColor(index: number) {
-      const remainder = index % 4
+      const remainder = index % 2
       switch (remainder) {
         case 0:
-          return '#FC9D9A'
+          return '#FFF'
         case 1:
           return '#F9CDAD'
-        case 2:
-          return '#C8C8A9'
-        case 3:
-          return '#83AF9B'
       }
     }
 
