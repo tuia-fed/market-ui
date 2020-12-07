@@ -53,14 +53,10 @@ export default defineComponent({
     return () => (
       <div style={props.hideBoxStyle} class={styles['hide-box']}>
         <div style={priceCellStyle.value} class={styles['price-cell-copy']}>
-          {
-            renderItem()
-          }
+          {renderItem()}
         </div>
         <div style={priceCellStyle.value} class={styles['price-cell']}>
-          {
-            renderItem()
-          }
+          {renderItem()}
         </div>
       </div>
     )

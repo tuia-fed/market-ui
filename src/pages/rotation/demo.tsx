@@ -46,12 +46,12 @@ export default defineComponent({
 
     const hideBoxStyle: CSSProperties = {
       width: hideBoxWidth.value + 'px',
-      height: hideBoxHeight .value+ 'px'
+      height: hideBoxHeight.value + 'px'
     }
 
-    const prizeItemStyle:CSSProperties = {
+    const prizeItemStyle: CSSProperties = {
       width: prizeWidth.value + 'px',
-      height: prizeHeight.value+ 'px',
+      height: prizeHeight.value + 'px',
       marginRight: prizeMargin.value + 'px'
     }
 
