@@ -1,7 +1,6 @@
 import { computed, CSSProperties, FunctionalComponent, PropType } from 'vue'
 import { createComponent } from './create'
 import Option from './components/option/index'
-import OptionRender from './components/option/render'
 import stylesClass from './styles'
 import useRotate from './hooks'
 import {
@@ -48,9 +47,12 @@ export default createComponent({
       default: () => ({})
     },
 
+    /**
+     * 每一项的自定义渲染组件
+     */
     optionRender: {
       type: Function as PropType<FunctionalComponent>,
-      default: (option: CarouselOption) => <OptionRender {...option} />
+      default: (option: CarouselOption) => <img src={option.image} />
     },
 
     /**

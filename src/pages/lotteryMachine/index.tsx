@@ -8,7 +8,7 @@ export default defineComponent({
     return () => (
       <>
         <Code />
-        <Preview mainStyle={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Preview>
           <Demo />
         </Preview>
       </>

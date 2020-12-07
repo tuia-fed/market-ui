@@ -7,10 +7,6 @@ export default [
         path: '/'
       },
       {
-        name: '安装',
-        path: '/install'
-      },
-      {
         name: '开始',
         path: '/start'
       }
@@ -42,6 +38,10 @@ export default [
       {
         name: '刮刮卡',
         path: '/scratchCard'
+      },
+      {
+        name: '摇奖机',
+        path: '/lotteryMachine'
       }
     ]
   }

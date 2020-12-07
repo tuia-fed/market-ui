@@ -89,12 +89,19 @@ export default class {
   }
 
   cupUp(index: number) {
-    if (this.cupNumber !== -1 || this.step === 0) return
-    this.cupNumber = index
-    this.update()
-    delay(2000).then(() => {
-      this.cupNumber = -1
+    return new Promise(resolve => {
+      if (this.cupNumber !== -1 || this.step === 0) return
+      this.cupNumber = index
       this.update()
+      delay(2000).then(() => {
+        this.cupNumber = -1
+        this.update()
+        resolve()
+      })
     })
+  }
+
+  reset() {
+    this.step = 0
   }
 }

@@ -31,7 +31,7 @@ export default defineComponent({
   name: 'MultiCubesDemo',
 
   setup() {
-    const size = ref(320)
+    const size = ref(300)
     const rowNum = ref(3)
 
     const disabled = ref(false)
@@ -65,14 +65,13 @@ export default defineComponent({
     }
 
     return () => (
-      <div
-        class="game-area"
-        style={{
-          width: size.value + 'px',
-          height: size.value + 'px'
-        }}
-      >
-        <div class="multi-cubes-wrap">
+      <div class="game-area">
+        <div
+          style={{
+            width: size.value + 'px',
+            height: size.value + 'px'
+          }}
+        >
           <MultiCubes
             size={size.value}
             rowNum={rowNum.value}
