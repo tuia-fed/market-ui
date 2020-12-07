@@ -1,7 +1,8 @@
-import { onMounted, PropType } from 'vue'
+import { onMounted, PropType, ref } from 'vue'
 import { createComponent } from './create'
-import { createImgObj, PaintBrush } from './tool'
+import { PaintBrush } from './tool'
 
+let uid = 0
 export default createComponent({
   props: {
     width: {
@@ -34,114 +35,81 @@ export default createComponent({
       type: Number,
       default: 0.3
     },
-    touchStartAct: {
+    onTouchStart: {
       type: Function,
       default: null
     },
-    touchEndAct: {
+    onTouchEnd: {
       type: Function,
       default: null
-    },
-    isPlaying: {
-      type: Boolean,
-      default: false
-    },
-    isShowCanvas: {
-      type: String,
-      default: 'block'
     }
   },
 
-  setup(props) {
-    const targetRate = props.targetRate > 0 ? props.targetRate : 0.3
+  setup(props, { emit }) {
     const width = props.width
     const height = props.height
-    let paintObj: PaintBrush
+    let paintBrush: PaintBrush
     let mouseDown = false
-    let imgWhiteNum = 0 // 图片原本存在的空白点位
-
-    // 初始化渲染canvas
-    const initRender = () => {
-      if (props.paintCoat.indexOf('#') !== -1 && props.paintCoat.length < 8) {
-        // 如果是颜色值
-        paintObj.drawColor(props.paintCoat)
-      } else if (props.paintCoat !== '') {
-        // 是图片地址
-        const imgObj = createImgObj(props.paintCoat)
-        imgObj.onload = () => {
-          paintObj.drawImage(imgObj).then(() => {
-            // 画完之后计算空白点位，可能存在图片小于canvas尺寸的情况
-            imgWhiteNum = paintObj.calWhite(width, height) || 0
-          })
-        }
-      }
-    }
+    const visible = ref('block')
+    const id = ref('scratch-' + ++uid)
 
     const startHandler = (e: TouchEvent) => {
       // 开始刮
-      if (props.touchStartAct) {
-        props.touchStartAct()
+      if (props.onTouchStart) {
+        // 如果定义了开始刮之前的事件，且必须在事件完成之后才开始刮，则如下，否则在demo里直接写事件即可
+        emit('touchStart', e, () => {
+          paintBrush.touchActive(e)
+        })
+      } else {
+        paintBrush.touchActive(e)
       }
-      paintObj.touchActive(e)
     }
     const moveHandler = (e: TouchEvent) => {
       // 刮过程中要做的事情
       e.preventDefault()
-      paintObj.touchActive(e)
+      paintBrush.touchActive(e)
     }
 
     const endHandler = (e: TouchEvent | MouseEvent) => {
       // 刮完之后要做的事
       mouseDown = false
       e.preventDefault()
-      let percent
-      try {
-        const pData = paintObj.getPixelDate(paintObj.width, paintObj.height)
-        // 计算刮开区域像素点
-        const num = paintObj.calWhite(paintObj.width, paintObj.height) || 0
-        // 计算刮开百分比
-        percent = (num - imgWhiteNum) / (pData.length - imgWhiteNum)
-      } catch (e) {
-        percent = targetRate
-      }
-      // 百分比 <= 0.3 ,刮刮卡展开再出券
-      // 百分比 > 0.3, 刮刮卡直接出券
-      if (percent < targetRate && props.autoPlay) {
-        setTimeout(() => {
-          paintObj.autoPlay(props.autoPoints).then(() => {
-            props.touchEndAct && props.touchEndAct()
-          })
-        }, 1000)
-      } else {
-        props.touchEndAct && props.touchEndAct()
-      }
+      paintBrush.playEnd(
+        props.targetRate,
+        props.autoPlay,
+        props.autoPoints,
+        () => {
+          // 隐藏canvas，要能点击券
+          visible.value = 'none'
+          props.onTouchEnd && emit('touchEnd', e)
+        }
+      )
     }
 
     const mouseStartHandler = (e: MouseEvent) => {
       // 鼠标开始事件
       mouseDown = true
-      paintObj.fillWhite(e.offsetX, e.offsetY)
+      paintBrush.fillWhite(e.offsetX, e.offsetY)
     }
     const mouseMoveHandler = (e: MouseEvent) => {
       // 鼠标移动事件
       if (mouseDown) {
         e.preventDefault()
-        paintObj.fillWhite(e.offsetX, e.offsetY)
+        paintBrush.fillWhite(e.offsetX, e.offsetY)
       }
     }
     onMounted(() => {
-      const dom = document.getElementById('canvasId') as HTMLCanvasElement
-      dom.style.background = 'transparent'
-      paintObj = new PaintBrush(dom, width, height)
-      initRender()
+      const dom = document.getElementById(id.value) as HTMLCanvasElement
+      paintBrush = new PaintBrush(dom, width, height)
+      paintBrush.init(props.paintCoat)
     })
     return () => (
       <canvas
-        id="canvasId"
+        id={id.value}
         style={{
-          display: props.isShowCanvas,
           background: 'transparent',
-          position: 'absolute'
+          position: 'absolute',
+          display: visible.value
         }}
         width={width}
         height={height}
