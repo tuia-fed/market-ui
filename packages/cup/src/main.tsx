@@ -36,7 +36,7 @@ export default createComponent({
       type: Number,
       default: -1
     },
-    cupClick: {
+    onCupClick: {
       type: Function,
       default: () => {
         return {}

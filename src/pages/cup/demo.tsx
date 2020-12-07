@@ -13,7 +13,8 @@ export default defineComponent({
     const backgroundStyle: CSSProperties = {
       width: '100%',
       height: '300px',
-      backgroundImage: 'url(//yun.duiba.com.cn/duiba-live/welfareRainV2/rain_bg.png)',
+      backgroundImage:
+        'url(//yun.duiba.com.cn/duiba-live/welfareRainV2/rain_bg.png)',
       backgroundSize: '100% auto'
     }
 
@@ -71,7 +72,7 @@ export default defineComponent({
             direction={direction.value}
             interval={interval.value}
             cupNumber={cupNumber.value}
-            cupClick={onCupClick}
+            onCupClick={onCupClick}
           />
           <div style={btnStyle} onClick={start}></div>
         </div>
