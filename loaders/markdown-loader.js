@@ -1,12 +1,12 @@
 const MarkdownIt = require('markdown-it')
 const hljs = require('highlight.js')
 const javascript = require('highlight.js/lib/languages/javascript')
-hljs.registerLanguage('jvascript', javascript)
+hljs.registerLanguage('javascript', javascript)
 const md = new MarkdownIt({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return `<pre class="hljs"><code class="language-${lang}">${hljs.highlight(lang, str, true).value}</code></pre>`
+        return `<pre class="hljs"><code class="language-${lang} hljs">${hljs.highlight(lang, str, true).value}</code></pre>`
       } catch (error) {
         console.log(error)
       }

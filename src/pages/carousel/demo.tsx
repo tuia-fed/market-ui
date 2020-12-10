@@ -3,8 +3,7 @@ import {
   defineComponent,
   ref,
   FunctionalComponent,
-  getCurrentInstance,
-  ComponentInternalInstance
+  getCurrentInstance
 } from 'vue'
 import Carousel, { CarouselOption } from 'packages/carousel'
 import { fetchData } from '@/shared/utils'
@@ -22,7 +21,7 @@ const options = Array.from({ length: 6 })
 export default defineComponent({
   name: 'Carousel',
 
-  setup(props, context) {
+  setup() {
     // 切分数量
     const splitNum = ref(6)
     // 半径
