@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent, ref } from 'vue'
+import { CSSProperties, defineComponent, getCurrentInstance, ref } from 'vue'
 import Wheel from 'packages/wheel'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
@@ -25,8 +25,12 @@ export default defineComponent({
 
     const [angle, rotate] = Wheel.useRotate(0)
 
+    const internalInstance = getCurrentInstance()
+
     const onOptionClick = (e: MouseEvent, i: number) => {
-      console.log(i)
+      internalInstance?.appContext.config.globalProperties.$toast(
+        'Click on' + i
+      )
     }
 
     rotate.idled()
@@ -40,6 +44,10 @@ export default defineComponent({
         rotate.to({
           index: Math.floor(Math.random() * 5),
           complete() {
+            internalInstance?.appContext.config.globalProperties.$toast(
+              'Lucky you'
+            )
+
             setTimeout(() => {
               disabled.value = false
               rotate.idled()

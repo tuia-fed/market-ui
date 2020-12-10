@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent, ref } from 'vue'
+import { CSSProperties, defineComponent, getCurrentInstance, ref } from 'vue'
 import lotteryMachine from 'packages/lotteryMachine'
 import { fetchData } from '@/shared/utils'
 import './index.less'
@@ -64,6 +64,8 @@ export default defineComponent({
 
     const [angle, lottery] = lotteryMachine.useLottery(lotteryMachineData)
 
+    const internalInstance = getCurrentInstance()
+
     lottery.idled(duration.value)
 
     const onStart = () => {
@@ -74,7 +76,8 @@ export default defineComponent({
             index: 1,
             duration: 1500,
             complete: () => {
-              console.log('end')
+              internalInstance?.appContext.config.globalProperties.$toast('end')
+
               setTimeout(() => {
                 lottery.reset(duration.value)
               }, 2000)

@@ -1,4 +1,11 @@
-import { CSSProperties, defineComponent, ref, FunctionalComponent } from 'vue'
+import {
+  CSSProperties,
+  defineComponent,
+  ref,
+  FunctionalComponent,
+  getCurrentInstance,
+  ComponentInternalInstance
+} from 'vue'
 import Carousel, { CarouselOption } from 'packages/carousel'
 import { fetchData } from '@/shared/utils'
 import btnImage from '@/assets/btnImage.png'
@@ -15,7 +22,7 @@ const options = Array.from({ length: 6 })
 export default defineComponent({
   name: 'Carousel',
 
-  setup() {
+  setup(props, context) {
     // 切分数量
     const splitNum = ref(6)
     // 半径
@@ -27,6 +34,8 @@ export default defineComponent({
 
     // 闲置旋转
     rotate.idled()
+
+    const internalInstance = getCurrentInstance()
 
     const onStart = () => {
       // 防重锁
@@ -41,6 +50,10 @@ export default defineComponent({
         rotate.to({
           index: Math.floor(Math.random() * splitNum.value), // 停在随机位置
           complete() {
+            internalInstance?.appContext.config.globalProperties.$toast(
+              'Lucky you'
+            )
+
             // 1s 后恢复闲置旋转
             setTimeout(() => {
               disabled.value = false
@@ -67,7 +80,9 @@ export default defineComponent({
 
     // 点击每一项时
     const onOptionClick = (e: MouseEvent, i: number) => {
-      console.log('onOptionClick', i)
+      internalInstance?.appContext.config.globalProperties.$toast(
+        'click on' + i
+      )
     }
 
     // 自定义渲染组件
