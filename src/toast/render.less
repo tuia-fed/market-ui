@@ -1,0 +1,31 @@
+.mk-toast {
+  &_container {
+    display: flex;
+    position: fixed;
+    right: 0;
+    top: 60px;
+    flex-direction: column-reverse;
+  }
+
+  &_instance {
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding: 6px 24px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-right: 10px;
+    animation: toast-slide-right 0.3s;
+  }
+}
+
+@keyframes toast-slide-right {
+  from {
+    transform: translate(100%, 0);
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+}
