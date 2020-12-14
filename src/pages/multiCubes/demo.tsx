@@ -1,4 +1,4 @@
-import { defineComponent, ref, Component } from 'vue'
+import { defineComponent, ref, Component, getCurrentInstance } from 'vue'
 import MultiCubes, { MultiCubesOption } from 'packages/multiCubes'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
@@ -33,12 +33,18 @@ export default defineComponent({
   setup() {
     const size = ref(300)
     const rowNum = ref(3)
-
     const disabled = ref(false)
 
     const [activeIndex, rotate] = MultiCubes.useRotate({ rowNum: rowNum.value })
+
+    const internalInstance = getCurrentInstance()
+
     const onOptionClick = (e: MouseEvent, i: number) => {
       console.log(i)
+
+      internalInstance?.appContext.config.globalProperties.$toast(
+        'Click on' + i
+      )
     }
 
     rotate.idled()
@@ -54,7 +60,9 @@ export default defineComponent({
         rotate.stop({
           index,
           complete() {
-            console.log('获得奖品' + index)
+            internalInstance?.appContext.config.globalProperties.$toast(
+              '获得奖品' + index
+            )
             setTimeout(() => {
               disabled.value = false
               rotate.idled()

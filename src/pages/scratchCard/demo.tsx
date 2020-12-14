@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue'
+import { defineComponent, getCurrentInstance, ref } from 'vue'
 import ScratchCard from 'packages/scratchCard'
 
 export default defineComponent({
@@ -22,15 +22,20 @@ export default defineComponent({
 
     const bgImg = '//yun.tuisnake.com/babi/img/46de46c2-ngat6glknm.jpg'
 
+    const internalInstance = getCurrentInstance()
+
     const touchStartAct = (
       e: TouchEvent | MouseEvent,
       resolveAct: Function
     ) => {
       // 开始刮的时候，要做的事情，比如隐藏引导手势
-      console.log('点击了')
+      internalInstance?.appContext.config.globalProperties.$toast('结束刮卡')
+
       return new Promise((resolve, reject) => {
         if (disabled.value) reject()
-        console.log('开始刮了')
+
+        internalInstance?.appContext.config.globalProperties.$toast('开始刮了')
+
         disabled.value = true
         resolveAct && resolveAct()
         resolve()
@@ -40,7 +45,8 @@ export default defineComponent({
     const touchEndAct = (e: TouchEvent | MouseEvent) => {
       // 刮结束了开奖之后的动作
       disabled.value = false
-      console.log('结束刮卡')
+
+      internalInstance?.appContext.config.globalProperties.$toast('结束刮卡')
     }
 
     return () => (

@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent, ref } from 'vue'
+import { CSSProperties, defineComponent, ref, getCurrentInstance } from 'vue'
 import TurnCard from 'packages/turnCard'
 import cardImage from '@/assets/cardImage.png'
 import cardBackImage from '@/assets/cardBackImage.png'
@@ -23,9 +23,15 @@ export default defineComponent({
     const height = ref(144 * 0.8)
     const [activeIndex, options, game] = TurnCard.useAnimation(0, data)
 
+    const internalInstance = getCurrentInstance()
+
     game.start()
 
     const onCardClick = (e: MouseEvent, i: number) => {
+      internalInstance?.appContext.config.globalProperties.$toast(
+        'Click on' + i
+      )
+
       game.turnBack(i)
     }
 

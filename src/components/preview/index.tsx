@@ -3,7 +3,7 @@ import styles from './index.module.less'
 
 export default defineComponent({
   props: {
-    backgroudStyle: {
+    backgroundStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
     },
@@ -18,8 +18,8 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
-    const backgroudStyle: CSSProperties = {
-      ...props.backgroudStyle
+    const backgroundStyle: CSSProperties = {
+      ...props.backgroundStyle
     }
     const mainStyle: CSSProperties = {
       ...props.mainStyle
@@ -29,7 +29,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div class={styles.preview} style={backgroudStyle}>
+      <div class={styles.preview} style={backgroundStyle}>
         <div class={styles.banner} style={bannerStyle}></div>
         <div class={styles.main} style={mainStyle}>
           {(slots.default as Function)()}

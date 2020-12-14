@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import router from './router'
+import Toast from './toast'
 import App from './App'
 import './main.less'
 import hljs from 'highlight.js'
@@ -14,5 +15,6 @@ hljs.initHighlightingOnLoad()
 const app = createApp(App)
 
 app.use(router)
+app.use(Toast)
 
 app.mount('#app')

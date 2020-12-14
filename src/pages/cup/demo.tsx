@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent } from 'vue'
+import { CSSProperties, defineComponent, getCurrentInstance } from 'vue'
 import Cup from 'packages/cup'
 import cupImage from '@/assets/cup.png'
 import coinImage from '@/assets/coin.png'
@@ -30,6 +30,8 @@ export default defineComponent({
       backgroundImage: `url(${coinImage})`
     }
 
+    const internalInstance = getCurrentInstance()
+
     function start() {
       turn.start(0.1, 10)
     }
@@ -37,10 +39,10 @@ export default defineComponent({
     function onCupClick(index: number, isIndex: boolean) {
       turn.cupUp(index).then(() => {
         if (isIndex) {
-          alert('猜对了')
+          internalInstance?.appContext.config.globalProperties.$toast('猜对了')
           turn.reset()
         } else {
-          alert('猜错了')
+          internalInstance?.appContext.config.globalProperties.$toast('猜错了')
           turn.reset()
         }
       })
