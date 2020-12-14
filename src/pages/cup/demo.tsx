@@ -2,7 +2,7 @@ import { CSSProperties, defineComponent, getCurrentInstance } from 'vue'
 import Cup from 'packages/cup'
 import cupImage from '@/assets/cup.png'
 import coinImage from '@/assets/coin.png'
-import startBtn from '@/assets/start_btn.png'
+import startBtn from '@/assets/btnImage.png'
 
 export default defineComponent({
   name: 'cupDemo',
@@ -12,10 +12,7 @@ export default defineComponent({
 
     const backgroundStyle: CSSProperties = {
       width: '100%',
-      height: '300px',
-      backgroundImage:
-        'url(//yun.duiba.com.cn/duiba-live/welfareRainV2/rain_bg.png)',
-      backgroundSize: '100% auto'
+      height: '300px'
     }
 
     const cupStyle: CSSProperties = {
@@ -49,8 +46,8 @@ export default defineComponent({
     }
 
     const btnStyle: CSSProperties = {
-      width: '204px',
-      height: '55px',
+      width: '89px',
+      height: '89px',
       margin: 'auto',
       position: 'absolute',
       left: '50%',
