@@ -24,6 +24,45 @@ module.exports = function (source) {
   const content = unescape(\`${source}\`);
   
   export default defineComponent({
+    mounted() {
+      const cardDOM = document.querySelector('.markdown > pre:nth-child(2).hljs:nth-of-type(1)')
+      
+      if (!cardDOM) return
+      
+      const height = cardDOM.getBoundingClientRect().height || 0
+      const foldText = '显示完整代码>>'
+      const unfoldText = '隐藏完整代码<<'
+      let isFold
+  
+      if (height > 425) {
+        cardDOM.classList.add('fold')
+        isFold = true
+      }
+  
+      const footer = document.createElement('div')
+      
+      footer.innerText = foldText
+      footer.classList.add('footer')
+  
+      footer.addEventListener('click', () => {
+        if (isFold) {
+          isFold = false
+          footer.innerText = unfoldText
+  
+          cardDOM.classList.remove('fold')
+          cardDOM.classList.add('unfold')
+        } else {
+          isFold = true
+          footer.innerText = foldText
+  
+          cardDOM.classList.remove('unfold')
+          cardDOM.classList.add('fold')
+        }
+      })
+  
+      cardDOM.appendChild(footer)
+    },
+
     render () {
       return h('section', { innerHTML: content, class: 'markdown' })
     }
