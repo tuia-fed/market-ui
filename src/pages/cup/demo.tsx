@@ -57,7 +57,7 @@ export default defineComponent({
     }
 
     const mainStyle: CSSProperties = {
-      width: '100vw'
+      width: '100%'
     }
 
     return () => (
