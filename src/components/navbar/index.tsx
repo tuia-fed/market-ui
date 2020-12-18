@@ -19,7 +19,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div>
+      <div class={styles.bar}>
         <div class={styles.btn} onClick={onClick}>
           <span></span>
         </div>

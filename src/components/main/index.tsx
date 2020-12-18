@@ -4,7 +4,9 @@ import styles from './index.module.less'
 export default defineComponent({
   setup(_, { slots }) {
     return () => (
-      <main class={styles.main}>{(slots.default as Function)()}</main>
+      <main class={styles.main}>
+        <div class={styles.content}>{(slots.default as Function)()}</div>
+      </main>
     )
   }
 })

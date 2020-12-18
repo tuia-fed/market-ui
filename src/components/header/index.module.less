@@ -1,7 +1,16 @@
 .header {
-  display: flex;
+  // padding: 0 120px;
   height: @header-height;
   background-color: @mk-header-bg-color;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: @main-content-max-width;
 }
 
 .left {

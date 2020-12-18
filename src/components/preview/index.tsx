@@ -7,10 +7,7 @@ export default defineComponent({
       type: Object as PropType<CSSProperties>,
       default: () => ({})
     },
-    bannerStyle: {
-      type: Object as PropType<CSSProperties>,
-      default: () => ({})
-    },
+
     mainStyle: {
       type: Object as PropType<CSSProperties>,
       default: () => ({})
@@ -24,13 +21,11 @@ export default defineComponent({
     const mainStyle: CSSProperties = {
       ...props.mainStyle
     }
-    const bannerStyle: CSSProperties = {
-      ...props.bannerStyle
-    }
 
     return () => (
       <div class={styles.preview} style={backgroundStyle}>
-        <div class={styles.banner} style={bannerStyle}></div>
+        <div class={styles.title}>效果预览</div>
+
         <div class={styles.main} style={mainStyle}>
           {(slots.default as Function)()}
         </div>
