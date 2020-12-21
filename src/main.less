@@ -9,13 +9,14 @@ body {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'PingFang SC', Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  background-color: #f7f8fa;
 }
 
 * {
@@ -25,6 +26,9 @@ body {
 // 定制markdown样式
 .markdown {
   flex: 1;
+  font-size: 14px;
+  margin-right: 24px;
+  margin-bottom: 24px;
 
   pre > code {
     padding: 24px;
@@ -38,6 +42,52 @@ body {
     background-color: #fff;
     border-radius: @mk-doc-border-radius;
     box-shadow: 2px 2px 8px 0 rgba(0, 21, 41, 0.08);
+
+    .footer {
+      width: calc(100% - 48px);
+      height: 50px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
+      line-height: 50px;
+      border-top: 1px dashed #e1e1e1;
+      background-color: #fafafa;
+      padding-left: 10px;
+      cursor: pointer;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    &.fold {
+      height: 425px;
+      overflow-y: hidden;
+      position: relative;
+      padding-bottom: 24px;
+
+      > code {
+        height: 377px;
+        overflow-y: hidden;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 24px;
+      }
+    }
+
+    &.unfold {
+      > code {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .footer {
+        width: 100%;
+      }
+    }
+  }
+
+  > pre:nth-child(2).hljs:nth-of-type(1) {
+    max-width: 744px;
   }
 
   h1,
@@ -47,7 +97,7 @@ body {
   h5,
   h6 {
     color: @mk-doc-black;
-    font-weight: normal;
+    font-weight: 500;
     line-height: 1.5;
 
     &[id] {
@@ -142,6 +192,10 @@ body {
 
 @media screen and (max-width: @mk-screen-max-width) {
   .markdown {
+    > pre:nth-child(2).hljs:nth-of-type(1) {
+      max-width: unset;
+    }
+
     code {
       white-space: pre-wrap;
     }

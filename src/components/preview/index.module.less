@@ -1,37 +1,40 @@
 .preview {
   width: 375px;
-  height: 667px;
-  background-color: #fff;
-  border-radius: @mk-doc-border-radius;
-  position: sticky;
+  position: absolute;
+  right: 0;
   top: 10px;
-  overflow: hidden;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
   margin-left: 24px;
-  margin-top: 78px;
-  box-shadow: 2px 2px 8px 0 rgba(0, 21, 41, 0.08);
+  margin-right: 24px;
 }
 
 @media screen and (max-width: @mk-screen-max-width) {
   .preview {
-    max-width: 100%;
-    top: 0;
+    width: 100%;
     position: relative;
-    margin-left: 0;
-    margin-top: 0;
+    margin: 0;
+    padding-right: 24px;
   }
 }
 
-.banner {
-  width: 100%;
-  height: 180px;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
+.title {
+  margin: 20px 0 20px;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .main {
   display: flex;
   justify-content: center;
-  padding-top: 24px;
+  align-items: center;
+  height: 425px;
+  background-color: #fff;
+  box-shadow: 2px 2px 8px 0 rgba(0, 21, 41, 0.08);
+  border-radius: @mk-doc-border-radius;
+}
+
+@media screen and (max-width: @mk-mobile-screen-max-width) {
+  .preview {
+    margin-top: 24px;
+  }
 }
