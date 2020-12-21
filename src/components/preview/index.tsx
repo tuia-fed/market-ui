@@ -24,7 +24,7 @@ export default defineComponent({
 
     return () => (
       <div class={styles.preview} style={backgroundStyle}>
-        <div class={styles.title}>效果预览</div>
+        <div class={styles.title}>Preview</div>
 
         <div class={styles.main} style={mainStyle}>
           {(slots.default as Function)()}

@@ -58,7 +58,17 @@ export default defineComponent({
           activeIndex={activeIndex.value}
           activeClassName={'turncard_demo_active'}
         />
-        <button onClick={reset}>重置</button>
+        <button
+          onClick={reset}
+          style={{
+            margin: '16px auto',
+            border: 'none',
+            padding: '8px 16px',
+            borderRadius: '8px'
+          }}
+        >
+          reset
+        </button>
       </div>
     )
   }

@@ -12,7 +12,7 @@ export default defineComponent({
 
     const backgroundStyle: CSSProperties = {
       width: '100%',
-      height: '300px'
+      height: '200px'
     }
 
     const cupStyle: CSSProperties = {
@@ -48,10 +48,7 @@ export default defineComponent({
     const btnStyle: CSSProperties = {
       width: '89px',
       height: '89px',
-      margin: 'auto',
-      position: 'absolute',
-      left: '50%',
-      transform: 'translate(-50%, -80px)',
+      margin: '0 auto',
       backgroundImage: `url(${startBtn})`,
       backgroundSize: '100% 100%'
     }

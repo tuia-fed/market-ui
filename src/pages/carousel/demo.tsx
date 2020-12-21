@@ -46,11 +46,12 @@ export default defineComponent({
 
       rotate.start()
       fetchData().then(() => {
+        const index = Math.floor(Math.random() * splitNum.value)
         rotate.to({
-          index: Math.floor(Math.random() * splitNum.value), // 停在随机位置
+          index, // 停在随机位置
           complete() {
             internalInstance?.appContext.config.globalProperties.$toast(
-              'Lucky you'
+              'Lucky you with ' + index
             )
 
             // 1s 后恢复闲置旋转

@@ -1,4 +1,4 @@
-import { PropType, ref, computed, onMounted } from 'vue'
+import { PropType, ref } from 'vue'
 import Card from './components/card'
 import { createComponent } from './create'
 import { noop } from '../../shared/utils'

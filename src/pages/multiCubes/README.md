@@ -1,4 +1,4 @@
-## 基本使用
+## Usage
 
 ```javascript
 import { defineComponent, ref, Component } from 'vue'

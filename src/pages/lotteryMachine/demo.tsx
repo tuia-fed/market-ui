@@ -1,6 +1,7 @@
 import { CSSProperties, defineComponent, getCurrentInstance, ref } from 'vue'
 import lotteryMachine from 'packages/lotteryMachine'
 import { fetchData } from '@/shared/utils'
+import btnImage from '@/assets/btnImage.png'
 import './index.less'
 
 export default defineComponent({
@@ -97,7 +98,13 @@ export default defineComponent({
           duration={duration.value}
           angle={angle.value}
         ></lotteryMachine>
-        <div onClick={onStart} class="demo-btn"></div>
+        <div
+          onClick={onStart}
+          class="demo-btn"
+          style={{
+            backgroundImage: `url(${btnImage})`
+          }}
+        ></div>
       </div>
     )
   }

@@ -41,11 +41,12 @@ export default defineComponent({
 
       rotate.start()
       fetchData().then(() => {
+        const index = Math.floor(Math.random() * 5)
         rotate.to({
-          index: Math.floor(Math.random() * 5),
+          index,
           complete() {
             internalInstance?.appContext.config.globalProperties.$toast(
-              'Lucky you'
+              'Lucky you with ' + index
             )
 
             setTimeout(() => {
