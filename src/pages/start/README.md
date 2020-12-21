@@ -1,8 +1,8 @@
-# 快速上手
+## 快速上手
 
 本节将介绍如何在项目中使用 Marketing-UI
 
-## 引入 Marketing-UI
+### 引入 Marketing-UI
 
 你可以引入整个 Marketing-UI，或是根据需要仅引入部分组件。我们先介绍如何引入完整的 Marketing-UI
 
