@@ -1,4 +1,4 @@
-# Usage
+## Usage
 
 ```javascript
 import { CSSProperties, defineComponent, ref, FunctionalComponent } from 'vue'
@@ -104,7 +104,7 @@ export default defineComponent({
 })
 ```
 
-# Hooks
+## Hooks
 
 ```javascript
 import { Wheel } from 'market-ui'
