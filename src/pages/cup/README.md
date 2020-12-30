@@ -89,7 +89,7 @@ export default defineComponent({
 ```javascript
 import { Cup } from 'market-ui'
 
-const [list, direction, cupNumber, interval, turn] = Wheel.useRotate()
+const [list, direction, cupNumber, interval, turn] = Cup.useRotate()
 
 /**
  * 开始游戏

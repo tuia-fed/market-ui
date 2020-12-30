@@ -69,7 +69,7 @@ export class PaintBrush {
   }
   // 往canvas上画图片 TODO考虑图片与画布大小不一致的情况
   drawImage(imgObj: CanvasImageSource) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       try {
         this.cvsContext.globalCompositeOperation = 'source-over'
         this.cvsContext.beginPath()
@@ -95,7 +95,7 @@ export class PaintBrush {
     const offY = e.touches[0].clientY - this.cvsBoxInfo.top
     this.fillWhite(offX, offY)
   }
-  playEnd (
+  playEnd(
     targetRate: number,
     autoPlay: boolean,
     autoPoints: Array<Array<number>>,
@@ -127,7 +127,7 @@ export class PaintBrush {
     }
   }
   // 自动刮
-  autoPlay (points: Array<Array<number>>) {
+  autoPlay(points: Array<Array<number>>) {
     const arr: Array<Action<TweenInterface<number>>> = []
     for (let i = 0; i < points.length - 1; i++) {
       arr.push(
@@ -144,7 +144,7 @@ export class PaintBrush {
         })
       )
     }
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       chain(...arr).start({
         update: (v: ValueMap) => {
           this.fillWhite(Number(v.x), Number(v.y))
@@ -157,5 +157,3 @@ export class PaintBrush {
     })
   }
 }
-
-

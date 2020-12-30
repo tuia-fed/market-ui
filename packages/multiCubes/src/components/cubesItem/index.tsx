@@ -1,6 +1,6 @@
 import { defineComponent, PropType, FunctionalComponent } from 'vue'
 import styles from '../../styles'
-import { MultiCubesOption, MultiCubesItemClick } from '../../../types'
+import { MultiCubesOption, MultiCubesItemClick } from 'types'
 
 export default defineComponent({
   props: {

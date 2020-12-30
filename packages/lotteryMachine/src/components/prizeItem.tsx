@@ -1,4 +1,4 @@
-import { lotteryMachineOption } from 'packages/lotteryMachine/types'
+import { lotteryMachineOption } from 'types'
 import { CSSProperties, defineComponent, PropType } from 'vue'
 
 import styles from '../styles'

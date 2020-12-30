@@ -1,5 +1,5 @@
 import { CSSProperties, defineComponent, getCurrentInstance, ref } from 'vue'
-import Wheel from 'packages/wheel'
+import Wheel from 'packages/Wheel'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
 import bgImage from '@/assets/bgImage.png'

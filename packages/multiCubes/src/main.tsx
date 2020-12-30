@@ -13,7 +13,7 @@ import {
   MultiCubesOptions,
   MultiCubesItemClick,
   MultiCubesOption
-} from '../types'
+} from 'types'
 import { createComponent } from './create'
 import useRotate from './hooks'
 

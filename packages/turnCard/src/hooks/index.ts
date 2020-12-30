@@ -1,5 +1,5 @@
 import { ref, Ref } from 'vue'
-import { CardOptions } from 'packages/turnCard/types'
+import { CardOptions } from 'types'
 
 class Animation {
   activeIndex: Ref<number>

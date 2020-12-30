@@ -1,0 +1,20 @@
+{
+  "map": {
+    "Carousel": [],
+    "Cup": [],
+    "LotteryMachine": [],
+    "MultiCubes": [],
+    "ScratchCard": [],
+    "TurnCard": [],
+    "Wheel": []
+  },
+  "sequence": [
+    "Carousel",
+    "Cup",
+    "LotteryMachine",
+    "MultiCubes",
+    "ScratchCard",
+    "TurnCard",
+    "Wheel"
+  ]
+}

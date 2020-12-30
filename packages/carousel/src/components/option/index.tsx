@@ -4,7 +4,7 @@ import {
   FunctionalComponent,
   PropType
 } from 'vue'
-import { CarouselOption, CarouselOptionOnClick } from 'packages/carousel/types'
+import { CarouselOption, CarouselOptionOnClick } from 'types'
 import stylesClass from '../../styles'
 
 export default defineComponent({

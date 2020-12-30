@@ -89,7 +89,7 @@ export default class {
   }
 
   cupUp(index: number) {
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       if (this.cupNumber !== -1 || this.step === 0) return
       this.cupNumber = index
       this.update()

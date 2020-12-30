@@ -7,7 +7,7 @@ import {
   CarouselOption,
   CarouselOptions,
   CarouselOptionOnClick
-} from '../types'
+} from 'types'
 
 function getAngleByIndex(index: number, splitNum: number) {
   return index * (360 / splitNum)

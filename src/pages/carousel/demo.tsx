@@ -5,7 +5,8 @@ import {
   FunctionalComponent,
   getCurrentInstance
 } from 'vue'
-import Carousel, { CarouselOption } from 'packages/carousel'
+import Carousel from 'packages/Carousel'
+import { CarouselOption } from 'types'
 import { fetchData } from '@/shared/utils'
 import btnImage from '@/assets/btnImage.png'
 import packetImage from '@/assets/packet.png'

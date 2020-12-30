@@ -5,3 +5,4 @@ scripts
 node_modules
 vue.config.js
 loaders
+vant-cli

@@ -2,7 +2,7 @@ import { CSSProperties, defineComponent, PropType, computed } from 'vue'
 import lotteryMachinePrizeItem from './prizeItem'
 
 import styles from '../styles'
-import { lotteryMachineOptions } from '../../types'
+import { lotteryMachineOptions } from 'types'
 import useLottery from '../hooks'
 
 export default defineComponent({
