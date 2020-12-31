@@ -2,7 +2,8 @@ import { App, defineComponent, ComponentOptionsWithObjectProps } from 'vue'
 
 export function createComponent(name: string) {
   return function(sfc: ComponentOptionsWithObjectProps) {
-    sfc.name = name
+    const upCaseName = name.charAt(0).toUpperCase() + name.slice(1)
+    sfc.name = upCaseName
     sfc.install = (app: App) => {
       app.component(name, sfc)
     }
@@ -16,10 +17,10 @@ export function createClassname(name: string) {
 }
 
 export function createNamespace(name: string) {
-  name = 'mk-' + name
+  // name = 'mk-' + name
 
   return {
     createComponent: createComponent(name),
-    createClassname: createClassname(name)
+    createClassname: createClassname('mk-' + name)
   }
 }
