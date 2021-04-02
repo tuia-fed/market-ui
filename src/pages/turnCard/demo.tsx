@@ -1,5 +1,5 @@
 import { CSSProperties, defineComponent, ref, getCurrentInstance } from 'vue'
-import TurnCard from 'packages/turnCard'
+import TurnCard from 'packages/TurnCard'
 import cardImage from '@/assets/cardImage.png'
 import cardBackImage from '@/assets/cardBackImage.png'
 import itemImage from '@/assets/smile.png'

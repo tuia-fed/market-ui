@@ -1,5 +1,5 @@
 import { CSSProperties, defineComponent, getCurrentInstance } from 'vue'
-import Cup from 'packages/cup'
+import Cup from 'packages/Cup'
 import cupImage from '@/assets/cup.png'
 import coinImage from '@/assets/coin.png'
 import startBtn from '@/assets/btnImage.png'

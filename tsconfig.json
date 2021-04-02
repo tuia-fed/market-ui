@@ -12,8 +12,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "lib",
-    "outDir": "lib",
+    "declarationDir": "types",
+    "outDir": "dist",
     "types": [
       "webpack-env"
     ],
@@ -40,7 +40,8 @@
     "packages/**/*.tsx",
     "packages/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "types/**/*"
   ],
   "exclude": [
     "node_modules"

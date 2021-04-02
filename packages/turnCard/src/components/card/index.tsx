@@ -1,7 +1,7 @@
 import { defineComponent, PropType, computed } from 'vue'
 import styles from '../../styles'
 import { noop } from '../../../../shared/utils'
-import { OnCardClick, CardOption } from '../../../types'
+import { OnCardClick, CardOption } from 'types'
 
 export default defineComponent({
   props: {

@@ -2,7 +2,7 @@ import { PropType, ref } from 'vue'
 import Card from './components/card'
 import { createComponent } from './create'
 import { noop } from '../../shared/utils'
-import { OnCardClick, CardOptions } from '../types'
+import { OnCardClick, CardOptions } from 'types'
 import styles from './styles'
 import useAnimation from './hooks'
 

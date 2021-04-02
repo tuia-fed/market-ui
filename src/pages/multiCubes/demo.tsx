@@ -1,5 +1,6 @@
 import { defineComponent, ref, Component, getCurrentInstance } from 'vue'
-import MultiCubes, { MultiCubesOption } from 'packages/multiCubes'
+import MultiCubes from 'packages/MultiCubes'
+import {MultiCubesOption} from 'types'
 import { fetchData } from '@/shared/utils'
 import optionImage from '@/assets/smile.png'
 import './index.less'

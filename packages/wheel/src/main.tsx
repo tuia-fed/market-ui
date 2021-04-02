@@ -2,7 +2,7 @@ import { CSSProperties, PropType, ref, computed } from 'vue'
 import Circle from './components/circle'
 import Option from './components/option'
 import { noop } from '../../shared/utils'
-import { WheelOptions, WheelOptionClick } from '../types'
+import { WheelOptions, WheelOptionClick } from 'types'
 import { createComponent } from './create'
 import useRotate from './hooks'
 

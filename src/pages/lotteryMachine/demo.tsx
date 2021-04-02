@@ -1,5 +1,5 @@
 import { CSSProperties, defineComponent, getCurrentInstance, ref } from 'vue'
-import lotteryMachine from 'packages/lotteryMachine'
+import lotteryMachine from 'packages/LotteryMachine'
 import { fetchData } from '@/shared/utils'
 import btnImage from '@/assets/btnImage.png'
 import './index.less'

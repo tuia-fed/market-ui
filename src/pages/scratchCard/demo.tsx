@@ -1,5 +1,5 @@
 import { defineComponent, getCurrentInstance, ref } from 'vue'
-import ScratchCard from 'packages/scratchCard'
+import ScratchCard from 'packages/ScratchCard'
 
 export default defineComponent({
   name: 'ScratchCardDemo',
@@ -31,7 +31,7 @@ export default defineComponent({
       // 开始刮的时候，要做的事情，比如隐藏引导手势
       internalInstance?.appContext.config.globalProperties.$toast('结束刮卡')
 
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         if (disabled.value) reject()
 
         internalInstance?.appContext.config.globalProperties.$toast('开始刮了')
