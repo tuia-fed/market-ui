@@ -21,6 +21,7 @@
     "core-js": "^3.6.5",
     "lottie-web": "^5.7.3",
     "popmotion": "^8.7.6",
+    "swiper": "^6.3.5",
     "tiny-emitter": "^2.1.0",
     "vue": "^3.0.0-0",
     "vue-router": "^4.0.0-beta.13"
