@@ -1,0 +1,55 @@
+// 领取按钮缩放
+@keyframes card-btn-breathe {
+  0%,
+  30%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+
+  15%,
+  45% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes card-btn-in {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.cardBag {
+  position: relative;
+  margin: 0 auto;
+}
+
+.cardBag .swiper-slide {
+  width: 606px;
+  height: 806px;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-btn {
+  margin-top: 60%;
+  width: 261px;
+  height: 271px;
+  // pointer-events: none;
+  transform: scale(0);
+  animation: card-btn-in 0.2s forwards, card-btn-breathe 1s linear 0.2s infinite;
+}
