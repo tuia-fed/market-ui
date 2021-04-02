@@ -1,0 +1,5 @@
+pages:
+  stage: deploy
+  script:
+    - rm -rf public/*
+    - mv docs/dist/* public

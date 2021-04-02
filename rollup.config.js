@@ -50,10 +50,19 @@ module.exports = {
             if (!fs.existsSync(`lib/${name}`)) {
               fs.mkdirSync(`lib/${name}`);
             }
-            if (fs.existsSync(`lib/${name}/index.css`)) {
-              result = fs.readFileSync(`lib/${name}/index.css`) + b[key];
+            if (!fs.existsSync(`lib/${name}/style`)) {
+              fs.mkdirSync(`lib/${name}/style`);
             }
-            fs.writeFileSync(`lib/${name}/index.css`, result);
+            if (!fs.existsSync(`lib/${name}/style/css.js`)) {
+              fs.writeFileSync(
+                `lib/${name}/style/css.js`,
+                `import "./index.css";`
+              );
+            }
+            if (fs.existsSync(`lib/${name}/style/index.css`)) {
+              result = fs.readFileSync(`lib/${name}/style/index.css`) + b[key];
+            }
+            fs.writeFileSync(`lib/${name}/style/index.css`, result);
           });
       },
     }),
