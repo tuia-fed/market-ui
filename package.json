@@ -16,15 +16,17 @@
   "license": "MIT",
   "scripts": {
     "serve": "npm run docs:dev",
-    "build": "npm run build:lib && npm run build:components && npm run docs:build",
+    "build": "npm run build:lib && npm run build:components && npm run build:style && npm run docs:build",
     "build:lib": "vue-cli-service build --target lib --name mkui --dest lib src/index.js",
     "build:components": "rollup -c",
+    "build:style": "gulp build && node build/gen-css-file",
     "lint": "vue-cli-service lint",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "popmotion": "9.1.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -42,6 +44,10 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
     "glob": "^7.1.6",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-less": "^4.0.1",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1",

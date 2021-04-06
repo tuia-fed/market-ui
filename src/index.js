@@ -1,9 +1,9 @@
-import button from "./button";
-import link from "./link";
+import wheel from "./wheel";
+import toast from "./toast";
 
 const components = {
-  button,
-  link,
+  wheel,
+  toast,
 };
 
 function install(Vue) {
@@ -16,4 +16,4 @@ if (typeof window !== undefined && window.Vue) {
   install(window.Vue);
 }
 
-export default { install, button, link };
+export default { install, wheel, toast };

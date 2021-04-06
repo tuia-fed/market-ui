@@ -33,8 +33,8 @@ module.exports = {
         title: '组件',
         collapsable: true,
         children: [
-          'pages/components/button/',
-          'pages/components/link/'
+          'pages/components/wheel/',
+          'pages/components/toast/'
         ]
       },
     ]

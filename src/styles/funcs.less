@@ -1,0 +1,89 @@
+/* 宽高 */
+
+.wh() {
+  width: 100%;
+  height: 100%;
+}
+
+.wh(@w, @h) {
+  width: unit(@w, px);
+  height: unit(@h, px);
+}
+
+/* 定位 */
+
+// 左上
+.atl() {
+  .atl(0, 0);
+}
+
+.atl(@top, @left) {
+  position: absolute;
+  top: unit(@top, px);
+  left: unit(@left, px);
+}
+
+// 右上
+.atr() {
+  .atr(0, 0);
+}
+
+.atr(@top, @right) {
+  position: absolute;
+  top: unit(@top, px);
+  right: unit(@right, px);
+}
+
+// 左下
+.abl() {
+  .abl(0, 0);
+}
+
+.abl(@bottom, @left) {
+  position: absolute;
+  bottom: unit(@bottom, px);
+  left: unit(@left, px);
+}
+
+// 右下
+.abr() {
+  .abr(0, 0);
+}
+
+.abr(@bottom, @right) {
+  position: absolute;
+  right: unit(@right, px);
+  bottom: unit(@bottom, px);
+}
+
+// 上中
+.atm(@top) {
+  position: absolute;
+  top: unit(@top, px);
+  left: 50%;
+  transform: translate(-50%);
+}
+
+// 下中
+.abm(@bottom) {
+  position: absolute;
+  bottom: unit(@bottom, px);
+  left: 50%;
+  transform: translate(-50%);
+}
+
+// 背景图片
+.bg() {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bg(@url) {
+  .bg();
+
+  background-image: url('@{host}@{url}');
+}
+
+.bg-size(@w, @h) {
+  background-size: @w @h;
+}
