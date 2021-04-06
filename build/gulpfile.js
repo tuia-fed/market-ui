@@ -4,15 +4,15 @@ const autoprefixer = require("gulp-autoprefixer");
 const cssmin = require("gulp-cssmin");
 
 function compile() {
-  return src("./src/**/*.less")
+  return src("../src/**/*.less")
     .pipe(less())
     .pipe(autoprefixer())
     .pipe(cssmin())
-    .pipe(dest("./lib"));
+    .pipe(dest("../lib"));
 }
 
 function copyLess() {
-  return src("./src/**/*.less").pipe(dest("./lib"));
+  return src("../src/**/*.less").pipe(dest("../lib"));
 }
 
 exports.build = series(compile, copyLess);
