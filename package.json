@@ -5,19 +5,26 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "npm run docs:dev",
+    "build": "mkui build",
+    "build:watch": "mkui build --watch",
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vuepress dev docs",
+    "doc:build": "vuepress build docs"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "popmotion": "9.1.0",
     "vue": "^2.6.11"
   },
+  "peerDependencies": {
+    "vue": ">= 2.5.22"
+  },
   "devDependencies": {
     "@tuia/mkui-cli": "^0.0.5",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
+    "@vue/babel-preset-jsx": "^1.2.4",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
@@ -30,6 +37,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1",
+    "ts-loader": "^8.1.0",
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.8.2"
