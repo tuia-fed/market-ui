@@ -1,18 +1,23 @@
 <template>
   <div class="tuia-doc-sidebar" :style="{'top': `${sidebarTop}px`}">
-    <div class="tuia-doc-sidebar__group" v-for="item in $site.themeConfig.sidebar" :key="item.title">
-      <div class="tuia-doc-sidebar__title">{{ item.title }}</div>
-      <div class="tuia-doc-sidebar__item" v-for="child in item.children" :key="child">
-        <a :href="pagePathFilter(child)[0]">{{ pagePathFilter(child)[1] }}</a>
+    <div class="tuia-doc-sidebar__group" v-for="item in siteSidebar" :key="item.title">
+      <div class="tuia-doc-sidebar__title">{{ enToZhJson(item.title) }}</div>
+      <div class="tuia-doc-sidebar__item" v-for="child in item.children" :key="child.title">
+        <!-- to的路径需要加上`/`，否则路由会拼接，无法导航到正确路由 -->
+        <router-link :to="`/${child.children[0]}`" v-if="child.title">{{ enToZhJson(child.title) }}</router-link>
       </div>
     </div>
   </div>
 </template>
 <script>
+/* sidebar中英文混合对照json */
+import titleZhEnJson from '../../../sidebar.json'
+
 export default {
   name: 'Sider',
   data: () => ({
-    totalPages: []
+    siteSidebar: [],
+    titleZhEnJson
   }),
   props: {
     /* 滚动条高度 */
@@ -28,18 +33,18 @@ export default {
     }
   },
   methods: {
-    pagePathFilter(page) {
-      let filterPage = ''
-      if (this.totalPages.length) {
-        filterPage = this.totalPages.find(item => item.relativePath === page)
-        const { path, title } = filterPage
-        return [path, title]
-      }
-      return []
+    enToZhJson(val) {
+      const { titleZhEnJson } = this
+      const zhList = titleZhEnJson.zh
+      const enList = titleZhEnJson.en
+      const zhIndex = enList.findIndex(item => item === val)
+      return zhList[zhIndex]
     }
   },
   mounted() {
-    this.totalPages = this.$site.pages
+    // 对sidebar排序
+    this.siteSidebar = this.$site.themeConfig.sidebar
+    this.siteSidebar = this.siteSidebar.reverse()
   }
 }
 </script>

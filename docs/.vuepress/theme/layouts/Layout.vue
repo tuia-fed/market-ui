@@ -9,12 +9,9 @@
     <Container :isContainerCover="simulatorDisabled">
       <Content />
     </Container>
+    <!-- <Content slot-key="demo" /> -->
     <!-- 模拟器 -->
-    <Simulator :isTopFixed="isFixed" v-if="!simulatorDisabled">
-      <Content slot-key="demo" />
-    </Simulator>
-    <!-- 页脚 -->
-    <!-- <Footer /> -->
+    <Simulator :isTopFixed="isFixed" v-if="!simulatorDisabled" :src="simulatorPath"></Simulator>
   </div>
 </template>
 <script>
@@ -22,25 +19,36 @@ import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import Container from '../components/Container'
 import Simulator from '../components/Simulator'
-// import Footer from '../components/Footer'
 import { throttle } from '../utils'
 // 不展示手机模拟器效果匹配的路由列表(开发指南路由)
-const disabledSimmulatorRoutes = ['README.md', 'pages/guide/install.md', 'pages/guide/get-started.md']
+const disabledSimmulatorRoutes = ['README.md', 'guide/install/README.md', 'guide/get-started/README.md']
 
 export default {
   name: 'Layout',
-  data: () => ({
-    isFixed: false,
-    scrollListener: null,
-    currentScrollTop: 0,
-    simulatorDisabled: false
-  }),
+  data() {
+    // const path = location.pathname.replace(/\/index(\.html)?/, '/')
+
+    return {
+      isFixed: false,
+      scrollListener: null,
+      currentScrollTop: 0,
+      simulatorDisabled: false,
+      simulatorPath: `${location.protocol}//${location.hostname}:2222/demo.html${location.hash}`
+    }
+  },
   components: {
     Navbar,
     Sidebar,
     Container,
     Simulator
-    // Footer
+  },
+  watch: {
+    '$page.relativePath': {
+      handler: function(newVal) {
+        this.simulatorDisabled = disabledSimmulatorRoutes.includes(newVal)
+      },
+      immediate: true
+    }
   },
   mounted() {
     const that = this
@@ -52,14 +60,11 @@ export default {
       } else {
         that.isFixed = false
       }
-    }, 50)
+    }, 20)
     window.addEventListener('scroll', this.scrollListener)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.scrollListener)
-  },
-  created() {
-    this.simulatorDisabled = disabledSimmulatorRoutes.includes(this.$page.relativePath)
   }
 }
 </script>

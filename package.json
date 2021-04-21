@@ -5,12 +5,15 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
-    "serve": "npm run docs:dev",
+    "serve": "concurrently \"npm run docs:dev\" \"npm run demo:dev\"",
+    "demo:dev": "vue-cli-service serve",
     "build": "mkui build",
     "build:watch": "mkui build --watch",
+    "demo:build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "docs:dev": "vuepress dev docs",
-    "doc:build": "vuepress build docs"
+    "doc:build": "vuepress build docs",
+    "copy": "node ./plugins/node-vuepress-components/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -31,15 +34,19 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "chokidar": "^3.5.1",
+    "concurrently": "^6.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "fs-extra": "^9.1.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1",
     "ts-loader": "^8.1.0",
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11",
-    "vuepress": "^1.8.2"
+    "vuepress": "^1.8.2",
+    "vuepress-bar": "^0.3.6"
   }
 }

@@ -1,10 +1,14 @@
 const pkg = require('../../package.json')
 const path = require('path')
+const getThemeConfig = require('vuepress-bar')
 
 const resolve = dir => path.join(__dirname, dir)
 
+// 从docs根目录下动态获取.md文档生成侧边栏导航路由
+const { sidebar } = getThemeConfig()
+
 module.exports = {
-  base:'/' + pkg.name +'/',
+  base: '/',
   title: pkg.name.toUpperCase(),
   description: pkg.description,
   dest: 'docs/dist',
@@ -18,26 +22,8 @@ module.exports = {
     '@vuepress/back-to-top'
   ],
   themeConfig: {
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Gitlab', link: 'http://gitlab.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui' },
-    ],
     sidebar: [
-      {
-        title: '开发指南',
-        collapsable: true,
-        children: [
-          'pages/guide/install.md',
-          'pages/guide/get-started.md'
-        ]
-      },
-      {
-        title: '组件',
-        collapsable: true,
-        children: [
-          'pages/components/wheel/README.md'
-        ]
-      }
+      ...sidebar
     ]
   },
   configureWebpack: {
