@@ -6,12 +6,12 @@
     <Sidebar :scrollTop="currentScrollTop" />
     <!-- 代码区 -->
     <!-- Content组件是vuepress内部用于渲染Markdown文件的内容 -->
-    <Container :isContainerCover="simulatorDisabled">
+    <Container>
       <Content />
     </Container>
     <!-- <Content slot-key="demo" /> -->
     <!-- 模拟器 -->
-    <Simulator :isTopFixed="isFixed" v-if="!simulatorDisabled" :src="simulatorPath"></Simulator>
+    <Simulator :isTopFixed="isFixed" :src="simulatorPath" ref="simulator"></Simulator>
   </div>
 </template>
 <script>
@@ -33,7 +33,7 @@ export default {
       scrollListener: null,
       currentScrollTop: 0,
       simulatorDisabled: false,
-      simulatorPath: `${location.protocol}//${location.hostname}:2222/demo.html${location.hash}`
+      simulatorHash: ''
     }
   },
   components: {
@@ -42,13 +42,34 @@ export default {
     Container,
     Simulator
   },
-  watch: {
-    '$page.relativePath': {
-      handler: function(newVal) {
-        this.simulatorDisabled = disabledSimmulatorRoutes.includes(newVal)
-      },
-      immediate: true
+  computed: {
+    simulatorPath() {
+      const { protocol, hostname } = window.location
+      const basicPath = `${protocol}//${hostname}:2222/demo.html`
+      let iframePath = ''
+      if (this.simulatorHash) {
+        iframePath = `${basicPath}/#${this.simulatorHash}`
+      } else {
+        iframePath = basicPath
+      }
+      return iframePath
     }
+  },
+  watch: {
+    '$route'(to, from) {
+      const currentPath = to.path // 当前页面路由
+      if (/^\/components/.test(currentPath)) { // 匹配到组件路由
+        this.simulatorHash = currentPath.split('/components')[1]
+      } else {
+        this.simulatorHash = ''
+      }
+    },
+    // '$page.relativePath': {
+    //   handler: function(newVal) {
+    //     console.log(newVal)
+    //   },
+    //   immediate: true
+    // }
   },
   mounted() {
     const that = this

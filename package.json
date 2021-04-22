@@ -5,14 +5,14 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
-    "serve": "concurrently \"npm run docs:dev\" \"npm run demo:dev\"",
-    "demo:dev": "vue-cli-service serve",
+    "serve": "concurrently --kill-others-on-fail \"npm:dev-*\"",
+    "dev-demo": "vue-cli-service serve",
     "build": "mkui build",
     "build:watch": "mkui build --watch",
-    "demo:build": "vue-cli-service build",
+    "build-demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "docs:dev": "vuepress dev docs",
-    "doc:build": "vuepress build docs",
+    "dev-doc": "vuepress dev docs",
+    "build-doc": "vuepress build docs",
     "copy": "node ./plugins/node-vuepress-components/index.js"
   },
   "dependencies": {

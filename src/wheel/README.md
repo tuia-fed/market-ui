@@ -1,11 +1,5 @@
 # Wheel 大转盘
 
-::: slot demo
-<ClientOnly>
-  <demo-wheel/>
-</ClientOnly>
-:::
-
 ## 介绍
 * 一个圆形的转盘，按照一定的速率转动停下之后，指针指向的位置就是抽中的奖品
 

@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+import { iframeReady } from '../utils'
+
 export default {
   name: 'Simulator',
   props: {
