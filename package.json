@@ -11,7 +11,7 @@
     "build:watch": "mkui build --watch",
     "build-demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev-doc": "vuepress dev docs",
+    "dev-doc": "vuepress dev docs --host='127.0.0.1' --open",
     "build-doc": "vuepress build docs",
     "copy": "node ./plugins/node-vuepress-components/index.js"
   },

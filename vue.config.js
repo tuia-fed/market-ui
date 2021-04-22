@@ -23,7 +23,7 @@ module.exports = {
     // 端口号
     port: process.env.SERVER_PORT,
     // 不启用浏览器自动打开服务
-    open: true
+    open: false
   },
   // webpack定制
   configureWebpack: {
