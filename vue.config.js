@@ -8,7 +8,7 @@ module.exports = {
   pages: {
     // spa应用入口配置
     index: {
-      entry: path.join(demoDirName, 'main.js'),
+      entry: path.join(demoDirName, 'main.ts'),
       template: './public/index.html',
       // 构建之后的html名称
       filename: 'demo.html',

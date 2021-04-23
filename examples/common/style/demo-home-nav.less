@@ -1,37 +1,5 @@
-<template>
-  <div class="demo-home-nav">
-    <div class="demo-home-nav__group">
-      <router-link
-        class="demo-home-nav__block"
-        v-for="navItem in group"
-        :key="navItem.path"
-        :to="`${navItem.path}`"
-      >
-        {{ navItem.name }}
-        <arrow-right class="demo-home-nav__icon" />
-      </router-link>
-    </div>
-  </div>
-</template>
-
-<script>
-import ArrowRight from './ArrowRight';
-
-export default {
-  components: {
-    ArrowRight,
-  },
-
-  props: {
-    group: Array,
-  }
-}
-</script>
-
-<style lang="less">
-
 .demo-home-nav {
-
+  position: relative;
   &__block {
     position: relative;
     display: flex;
@@ -45,6 +13,7 @@ export default {
     border-radius: 99px;
     transition: background 0.3s;
     text-decoration: none;
+    height: 40px;
 
     &:hover {
       background: darken(#f7f8fa, 3%);
@@ -64,4 +33,3 @@ export default {
     margin-top: -8px;
   }
 }
-</style>
