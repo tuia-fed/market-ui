@@ -1,5 +1,11 @@
 import Vue from "vue";
 
+type styleObject = {
+  transform: string,
+  width: string,
+  height: string
+}
+
 export default Vue.extend({
   name: "mk-wheel",
 
@@ -15,7 +21,7 @@ export default Vue.extend({
   },
 
   computed: {
-    wheelStyle(): object  {
+    wheelStyle(): styleObject  {
       return {
         transform: `rotate3d(0, 0, 1, ${this.angle}deg)`,
         width: this.size + "px",

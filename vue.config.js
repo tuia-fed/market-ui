@@ -4,7 +4,7 @@ const path = require('path')
 const demoDirName = `examples/`
 
 module.exports = {
-  publicPath: '/',
+  publicPath: '/tuia/',
   pages: {
     // spa应用入口配置
     index: {

@@ -11,6 +11,20 @@ export default Vue.extend({
     group: Array,
   },
 
+  data() {
+    return {
+      currentPath: ''
+    }
+  },
+
+  methods: {
+    handlePushRoute (path: string) {
+      this.currentPath = path
+      // 向主窗口发送路由消息
+      window.parent.postMessage({ path }, '*')
+    }
+  },
+
   render() {
     return (
       <div class="demo-home-nav">
@@ -18,10 +32,12 @@ export default Vue.extend({
           {
             this.group.map((navItem: { path: string; name: string }) => {
               return (
-                <router-link class="demo-home-nav__block" key={navItem.path} to={navItem.path}>
-                  { navItem.name }
-                  <arrow-right class="demo-home-nav__icon" />
-                </router-link>
+                <div onClick={() => this.handlePushRoute(navItem.path)}>
+                  <router-link class="demo-home-nav__block" key={navItem.path} to={navItem.path}>
+                    { navItem.name }
+                    <arrow-right class="demo-home-nav__icon" />
+                  </router-link>
+                </div>
               )
             })
           }

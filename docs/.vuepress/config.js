@@ -5,22 +5,27 @@ const getThemeConfig = require('vuepress-bar')
 const resolve = dir => path.join(__dirname, dir)
 
 // 从docs根目录下动态获取.md文档生成侧边栏导航路由
-const { sidebar } = getThemeConfig()
+const { sidebar } = getThemeConfig({
+  stripNumbers: true
+})
 
 module.exports = {
-  base: '/',
+  base: '/tuia/',
   title: pkg.name.toUpperCase(),
   description: pkg.description,
   dest: 'docs/dist',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
+  // 本地开发默认主机名
+  host: '127.0.0.1',
   markdown: {
     lineNumbers: false
   },
   plugins: [
     '@vuepress/back-to-top'
   ],
+  theme: '@tuia/vuepress-theme',
   themeConfig: {
     sidebar: [
       ...sidebar

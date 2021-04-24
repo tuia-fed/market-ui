@@ -16,11 +16,7 @@ export default Vue.extend({
   },
   methods: {
     onBack() {
-      if (history.length > 1) {
-        history.back()
-      } else {
-        this.$router.replace('/')
-      }
+      this.$router.replace('/')
     }
   },
   render() {

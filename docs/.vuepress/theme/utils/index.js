@@ -33,11 +33,11 @@ export function throttle (fn, delay) {
 export function iframeReady (iframe, callback) {
   const doc = iframe.contentDocument || iframe.contentWindow.document
   const interval = () => {
-    if (iframe.contentWindow.replacePath) {
+    if (iframe.contentWindow) {
       callback()
     } else {
       setTimeout(() => {
-        interval();
+        interval()
       }, 50)
     }
   }
@@ -48,3 +48,18 @@ export function iframeReady (iframe, callback) {
     iframe.onload = interval
   }
 }
+
+/* 配置iframe的开发生产基础路径 */
+export function iframeConfigPath (iframePort = '8080') {
+  const { protocol, hostname, port } = window.location
+  const localPathExp = /^127\.0\.0\.1$/
+  let basicPath = ''
+  if (localPathExp.test(hostname) || port === '8080') { // 本地开发
+    basicPath = `${protocol}//${hostname}:${iframePort}`
+  }
+  return basicPath
+}
+
+/* 基础demo服务配置 */
+export const DOC_PUBLICPATH = '/tuia'
+export const DOC_DEVPORT = '2222'

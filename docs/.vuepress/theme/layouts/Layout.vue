@@ -19,18 +19,15 @@ import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import Container from '../components/Container'
 import Simulator from '../components/Simulator'
-import { throttle } from '../utils'
-// 不展示手机模拟器效果匹配的路由列表(开发指南路由)
-const disabledSimmulatorRoutes = ['README.md', 'guide/install/README.md', 'guide/get-started/README.md']
+import { throttle, iframeConfigPath, DOC_PUBLICPATH, DOC_DEVPORT } from '../utils'
 
 export default {
   name: 'Layout',
   data() {
-    // const path = location.pathname.replace(/\/index(\.html)?/, '/')
-
     return {
       isFixed: false,
       scrollListener: null,
+      iframeListener: null,
       currentScrollTop: 0,
       simulatorDisabled: false,
       simulatorHash: ''
@@ -44,8 +41,7 @@ export default {
   },
   computed: {
     simulatorPath() {
-      const { protocol, hostname } = window.location
-      const basicPath = `${protocol}//${hostname}:2222/demo.html`
+      const basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}/demo.html`
       let iframePath = ''
       if (this.simulatorHash) {
         iframePath = `${basicPath}/#${this.simulatorHash}`
@@ -63,16 +59,11 @@ export default {
       } else {
         this.simulatorHash = ''
       }
-    },
-    // '$page.relativePath': {
-    //   handler: function(newVal) {
-    //     console.log(newVal)
-    //   },
-    //   immediate: true
-    // }
+    }
   },
   mounted() {
     const that = this
+    /* 监听页面滚动 */
     this.scrollListener = throttle(function(e) {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       that.currentScrollTop = scrollTop
@@ -83,9 +74,20 @@ export default {
       }
     }, 20)
     window.addEventListener('scroll', this.scrollListener)
+    /* 监听iframe子页面发送的消息 */
+    this.iframeListener = (e) => {
+      const skipPath = e.data.path
+      if (skipPath) {
+        this.$router.push(`/components${skipPath}`).catch(err => {
+          console.info(err.message)
+        })
+      }
+    }
+    window.addEventListener('message', this.iframeListener, false)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.scrollListener)
+    window.removeEventListener('message', this.iframeListener)
   }
 }
 </script>

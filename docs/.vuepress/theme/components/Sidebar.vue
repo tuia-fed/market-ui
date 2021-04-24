@@ -42,9 +42,16 @@ export default {
     }
   },
   mounted() {
-    // 对sidebar排序
+    // 对sidebar排序,引导路由始终置顶
     this.siteSidebar = this.$site.themeConfig.sidebar
-    this.siteSidebar = this.siteSidebar.reverse()
+    const sortSitebar = (arr) => {
+      const guideIndex = arr.findIndex(item => item.title === 'Guide')
+      const guideItem = arr[guideIndex]
+      arr.splice(guideIndex, 1)
+      arr.unshift(guideItem)
+      return arr
+    }
+    this.siteSidebar = sortSitebar(this.siteSidebar)
   }
 }
 </script>
