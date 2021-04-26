@@ -38,7 +38,7 @@ export default {
       const zhList = titleZhEnJson.zh
       const enList = titleZhEnJson.en
       const zhIndex = enList.findIndex(item => item === val)
-      return zhList[zhIndex]
+      return zhIndex !== -1 ? zhList[zhIndex] : val
     }
   },
   mounted() {
@@ -52,6 +52,7 @@ export default {
       return arr
     }
     this.siteSidebar = sortSitebar(this.siteSidebar)
+    console.log(this.$site)
   }
 }
 </script>

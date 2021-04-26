@@ -1,3 +1,8 @@
+---
+title: Wheel 大转盘
+group: Basic Components
+---
+
 # Wheel 大转盘
 
 ## 介绍
