@@ -1,23 +1,19 @@
 <template>
-  <div class="tuia-doc-sidebar" :style="{'top': `${sidebarTop}px`}">
-    <div class="tuia-doc-sidebar__group" v-for="item in siteSidebar" :key="item.title">
-      <div class="tuia-doc-sidebar__title">{{ enToZhJson(item.title) }}</div>
+  <div class="tuia-doc-sidebar" :style="{'top': `${sidebarTop}px`}" v-if="sitebarRoutes">
+    <div class="tuia-doc-sidebar__group" v-for="item in sitebarRoutes" :key="item.group">
+      <div class="tuia-doc-sidebar__title">{{ item.group | groupTitle }}</div>
       <div class="tuia-doc-sidebar__item" v-for="child in item.children" :key="child.title">
         <!-- to的路径需要加上`/`，否则路由会拼接，无法导航到正确路由 -->
-        <router-link :to="`/${child.children[0]}`" v-if="child.title">{{ enToZhJson(child.title) }}</router-link>
+        <router-link :to="`${child.path}`" v-if="child.title">{{ child.title }}</router-link>
       </div>
     </div>
   </div>
 </template>
 <script>
-/* sidebar中英文混合对照json */
-import titleZhEnJson from '../../../sidebar.json'
-
 export default {
   name: 'Sider',
   data: () => ({
-    siteSidebar: [],
-    titleZhEnJson
+    sitebarRoutes: []
   }),
   props: {
     /* 滚动条高度 */
@@ -32,27 +28,55 @@ export default {
       return remainTop > 0 ? remainTop : 0
     }
   },
+  filters: {
+    groupTitle(val) {
+      const titleExp = new RegExp(/\|/, 'g')
+      if (titleExp.test(val)) {
+        return val.split('|')[1].trim()
+      }
+      return val
+    }
+  },
   methods: {
-    enToZhJson(val) {
-      const { titleZhEnJson } = this
-      const zhList = titleZhEnJson.zh
-      const enList = titleZhEnJson.en
-      const zhIndex = enList.findIndex(item => item === val)
-      return zhIndex !== -1 ? zhList[zhIndex] : val
+    groupSidebarRouter(pages) {
+      const frontmatterGroupList = []
+      // 分组
+      pages.forEach(item => {
+        const { frontmatter } = item // 页面自定义配置
+        if (!frontmatterGroupList.includes(frontmatter.group)) {
+          frontmatterGroupList.push(frontmatter.group)
+        }
+      })
+      // 排序
+      const sidebarGroups = frontmatterGroupList.map(item => {
+        const groupChild = pages.filter(page => page.frontmatter.group === item)
+        // 分组子路由根据level进行内部排序
+        groupChild.sort((a, b) => a.frontmatter.level - b.frontmatter.level)
+        const groupObj = {
+          group: item,
+          children: [...groupChild]
+        }
+        return groupObj
+      })
+      // 再次排序
+      sidebarGroups.sort((a, b) => {
+        const groupLevel = (item) => {
+          const { group } = item
+          const level = Number(group.split('|')[0].trim())
+          return level
+        }
+        return groupLevel(a) - groupLevel(b)
+      })
+      return sidebarGroups
     }
   },
   mounted() {
-    // 对sidebar排序,引导路由始终置顶
-    this.siteSidebar = this.$site.themeConfig.sidebar
-    const sortSitebar = (arr) => {
-      const guideIndex = arr.findIndex(item => item.title === 'Guide')
-      const guideItem = arr[guideIndex]
-      arr.splice(guideIndex, 1)
-      arr.unshift(guideItem)
-      return arr
-    }
-    this.siteSidebar = sortSitebar(this.siteSidebar)
-    console.log(this.$site)
+    // 筛选非首页-侧边栏路由
+    const sitePages = this.$site.pages.filter(item => item.path !== '/')
+    // 分组
+    this.sitebarRoutes = this.groupSidebarRouter(sitePages)
+    // 分组对象挂载到window对象——用于demo服务
+    window.sitebarRoutes = this.sitebarRoutes
   }
 }
 </script>

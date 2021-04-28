@@ -1,6 +1,6 @@
 ---
-title: Wheel 大转盘
-group: Basic Components
+group: 2 | 业务组件
+level: 1
 ---
 
 # Wheel 大转盘

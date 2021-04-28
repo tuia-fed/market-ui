@@ -1,13 +1,7 @@
 const pkg = require('../../package.json')
 const path = require('path')
-const getThemeConfig = require('vuepress-bar')
 
 const resolve = dir => path.join(__dirname, dir)
-
-// 从docs根目录下动态获取.md文档生成侧边栏导航路由
-const { sidebar } = getThemeConfig({
-  stripNumbers: true
-})
 
 module.exports = {
   base: '/tuia/',
@@ -27,9 +21,7 @@ module.exports = {
   ],
   theme: '@tuia/vuepress-theme',
   themeConfig: {
-    sidebar: [
-      ...sidebar
-    ]
+    searchMaxSuggestions: 10 // 搜索框显示的搜索结果配置
   },
   configureWebpack: {
     resolve: {

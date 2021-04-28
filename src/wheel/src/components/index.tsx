@@ -1,7 +1,7 @@
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
-  name: 'mk-wheel-option',
+  name: "mk-wheel-option",
 
   props: {
     title: String,
@@ -22,7 +22,11 @@ export default Vue.extend({
 
   render() {
     return (
-      <div onClick={this.onClick} style={this.optionStyle} class="mk-wheel_option">
+      <div
+        onClick={this.onClick}
+        style={this.optionStyle}
+        class="mk-wheel_option"
+      >
         <div class="mk-wheel_option__revert">
           <div class="mk-wheel_option__title">{this.title}</div>
           <img
@@ -33,13 +37,12 @@ export default Vue.extend({
           />
         </div>
       </div>
-
-    )
+    );
   },
 
   methods: {
     onClick(e: Event) {
       this.$emit("click", e, this.index);
     },
-  }
-})
+  },
+});

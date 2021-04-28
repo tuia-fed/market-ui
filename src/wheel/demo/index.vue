@@ -5,41 +5,41 @@
   </div>
 </template>
 <script>
-import MkWheel, { useRotate } from '../index'
+import MkWheel, { useRotate } from "../index";
 
 export default {
   components: {
-    MkWheel
+    MkWheel,
   },
 
   data() {
     return {
-      angle: 0
-    }
+      angle: 0,
+    };
   },
 
   mounted() {
-    this.hooks = useRotate(angle => {
-      this.angle = angle
-    })
-    this.hooks.idled()
+    this.hooks = useRotate((angle) => {
+      this.angle = angle;
+    });
+    this.hooks.idled();
   },
 
   methods: {
     onStart() {
-      this.hooks.start()
+      this.hooks.start();
 
       setTimeout(() => {
-          this.hooks.to({
+        this.hooks.to({
           index: 3,
           complete() {
-            console.log('中奖啦')
-          }
-        })
-      }, 3000)
-    }
-  }
-}
+            console.log("中奖啦");
+          },
+        });
+      }, 3000);
+    },
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
@@ -48,7 +48,7 @@ export default {
 
 .wheel {
   margin: 0 auto;
-  background-image: url('//yun.dui88.com/h5-mani/marketui0a61051e-112a-4496-9961-2076099a1389.png');
+  background-image: url("//yun.dui88.com/h5-mani/marketui0a61051e-112a-4496-9961-2076099a1389.png");
   background-size: 100%;
 }
 
@@ -59,7 +59,7 @@ export default {
   transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
-  background-image: url('//yun.dui88.com/h5-mani/marketui16b96b04-0664-4df0-ac02-4d29cf0b5ab2.png');
+  background-image: url("//yun.dui88.com/h5-mani/marketui16b96b04-0664-4df0-ac02-4d29cf0b5ab2.png");
   background-size: 100%;
 }
 </style>

@@ -2107,11 +2107,6 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
-argparse@^2.0.1:
-  version "2.0.1"
-  resolved "http://npm.dui88.com:80/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
-  integrity sha1-JG9Q88p4oyQPbJl+ipvR6sSeSzg=
-
 arr-diff@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/arr-diff/download/arr-diff-4.0.0.tgz#d6461074febfec71e7e15235761a329a5dc7c520"
@@ -2770,7 +2765,7 @@ callsites@^2.0.0:
   resolved "https://registry.npm.taobao.org/callsites/download/callsites-2.0.0.tgz#06eb84f00eea413da86affefacbffb36093b3c50"
   integrity sha1-BuuE8A7qQT2oav/vrL/7Ngk7PFA=
 
-callsites@^3.0.0, callsites@^3.1.0:
+callsites@^3.0.0:
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/callsites/download/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha1-s2MKvYlDQy9Us/BRkjjjPNffL3M=
@@ -4083,11 +4078,6 @@ entities@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/entities/download/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha1-CY3JDruD2N/6CJ1VJWs1HTTE2lU=
-
-entities@~2.1.0:
-  version "2.1.0"
-  resolved "http://npm.dui88.com:80/entities/-/entities-2.1.0.tgz#992d3129cf7df6870b96c57858c249a120f8b8b5"
-  integrity sha1-mS0xKc999ocLlsV4WMJJoSD4uLU=
 
 envify@^4.0.0:
   version "4.1.0"
@@ -5579,11 +5569,6 @@ infer-owner@^1.0.3, infer-owner@^1.0.4:
   resolved "https://registry.npm.taobao.org/infer-owner/download/infer-owner-1.0.4.tgz#c4cefcaa8e51051c2a40ba2ce8a3d27295af9467"
   integrity sha1-xM78qo5RBRwqQLos6KPScpWvlGc=
 
-inflection@^1.12.0:
-  version "1.12.0"
-  resolved "http://npm.dui88.com:80/inflection/-/inflection-1.12.0.tgz#a200935656d6f5f6bc4dc7502e1aecb703228416"
-  integrity sha1-ogCTVlbW9fa8TcdQLhrstwMihBY=
-
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.npm.taobao.org/inflight/download/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -6108,7 +6093,7 @@ js-tokens@^4.0.0:
   resolved "https://registry.npm.taobao.org/js-tokens/download/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha1-GSA/tZmR35jjoocFDUZHzerzJJk=
 
-js-yaml@^3.11.0, js-yaml@^3.13.1, js-yaml@^3.8.1:
+js-yaml@^3.11.0, js-yaml@^3.13.1:
   version "3.14.1"
   resolved "https://registry.npm.taobao.org/js-yaml/download/js-yaml-3.14.1.tgz?cache=0&sync_timestamp=1618435151523&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjs-yaml%2Fdownload%2Fjs-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
   integrity sha1-2ugS/bOCX6MGYJqHFzg8UMNqBTc=
@@ -6344,13 +6329,6 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
-linkify-it@^3.0.1:
-  version "3.0.2"
-  resolved "http://npm.dui88.com:80/linkify-it/-/linkify-it-3.0.2.tgz#f55eeb8bc1d3ae754049e124ab3bb56d97797fb8"
-  integrity sha1-9V7ri8HTrnVASeEkqzu1bZd5f7g=
-  dependencies:
-    uc.micro "^1.0.1"
-
 load-script@^1.0.0:
   version "1.0.0"
   resolved "http://npm.dui88.com:80/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
@@ -6432,11 +6410,6 @@ lodash.defaultsdeep@^4.6.1:
   resolved "https://registry.npm.taobao.org/lodash.defaultsdeep/download/lodash.defaultsdeep-4.6.1.tgz#512e9bd721d272d94e3d3a63653fa17516741ca6"
   integrity sha1-US6b1yHSctlOPTpjZT+hdRZ0HKY=
 
-lodash.escaperegexp@^4.1.2:
-  version "4.1.2"
-  resolved "http://npm.dui88.com:80/lodash.escaperegexp/-/lodash.escaperegexp-4.1.2.tgz#64762c48618082518ac3df4ccf5d5886dae20347"
-  integrity sha1-ZHYsSGGAglGKw99Mz11YhtriA0c=
-
 lodash.kebabcase@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/lodash.kebabcase/download/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
@@ -6451,11 +6424,6 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npm.taobao.org/lodash.memoize/download/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
-
-lodash.sortby@^4.7.0:
-  version "4.7.0"
-  resolved "http://npm.dui88.com:80/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
-  integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
 lodash.template@^4.5.0:
   version "4.5.0"
@@ -6600,28 +6568,10 @@ markdown-it-emoji@^1.4.0:
   resolved "http://npm.dui88.com:80/markdown-it-emoji/-/markdown-it-emoji-1.4.0.tgz#9bee0e9a990a963ba96df6980c4fddb05dfb4dcc"
   integrity sha1-m+4OmpkKljupbfaYDE/dsF37Tcw=
 
-markdown-it-meta@0.0.1:
-  version "0.0.1"
-  resolved "http://npm.dui88.com:80/markdown-it-meta/-/markdown-it-meta-0.0.1.tgz#d75b68f115659caf568e4ad43cb460a471248c39"
-  integrity sha1-11to8RVlnK9WjkrUPLRgpHEkjDk=
-  dependencies:
-    js-yaml "^3.8.1"
-
 markdown-it-table-of-contents@^0.4.0:
   version "0.4.4"
   resolved "http://npm.dui88.com:80/markdown-it-table-of-contents/-/markdown-it-table-of-contents-0.4.4.tgz#3dc7ce8b8fc17e5981c77cc398d1782319f37fbc"
   integrity sha1-PcfOi4/BflmBx3zDmNF4Ixnzf7w=
-
-markdown-it@^12.0.4:
-  version "12.0.6"
-  resolved "http://npm.dui88.com:80/markdown-it/-/markdown-it-12.0.6.tgz#adcc8e5fe020af292ccbdf161fe84f1961516138"
-  integrity sha1-rcyOX+Agryksy98WH+hPGWFRYTg=
-  dependencies:
-    argparse "^2.0.1"
-    entities "~2.1.0"
-    linkify-it "^3.0.1"
-    mdurl "^1.0.1"
-    uc.micro "^1.0.5"
 
 markdown-it@^8.4.1:
   version "8.4.2"
@@ -7490,13 +7440,6 @@ parent-module@^1.0.0:
   integrity sha1-aR0nCeeMefrjoVZiJFLQB2LKqqI=
   dependencies:
     callsites "^3.0.0"
-
-parent-module@^2.0.0:
-  version "2.0.0"
-  resolved "http://npm.dui88.com:80/parent-module/-/parent-module-2.0.0.tgz#fa71f88ff1a50c27e15d8ff74e0e3a9523bf8708"
-  integrity sha1-+nH4j/GlDCfhXY/3Tg46lSO/hwg=
-  dependencies:
-    callsites "^3.1.0"
 
 parse-asn1@^5.0.0, parse-asn1@^5.1.5:
   version "5.1.6"
@@ -9708,13 +9651,6 @@ tough-cookie@~2.5.0:
     psl "^1.1.28"
     punycode "^2.1.1"
 
-transliteration@^2.1.8:
-  version "2.2.0"
-  resolved "http://npm.dui88.com:80/transliteration/-/transliteration-2.2.0.tgz#e6333cc74b25ef4465bc27086ed8465c9a19211d"
-  integrity sha1-5jM8x0sl70RlvCcIbthGXJoZIR0=
-  dependencies:
-    yargs "^16.1.0"
-
 tree-kill@^1.2.2:
   version "1.2.2"
   resolved "http://npm.dui88.com:80/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
@@ -10232,20 +10168,6 @@ vue@^2.6.10, vue@^2.6.11:
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha1-9evU+mvShpQD4pqJau1JBEVskSM=
 
-vuepress-bar@^0.3.6:
-  version "0.3.6"
-  resolved "http://npm.dui88.com:80/vuepress-bar/-/vuepress-bar-0.3.6.tgz#8b9207f6fa0e8ae7e88bdfba43c6dd6e61619b73"
-  integrity sha1-i5IH9voOiufoi9+6Q8bdbmFhm3M=
-  dependencies:
-    glob "^7.1.6"
-    inflection "^1.12.0"
-    lodash.escaperegexp "^4.1.2"
-    lodash.sortby "^4.7.0"
-    markdown-it "^12.0.4"
-    markdown-it-meta "0.0.1"
-    parent-module "^2.0.0"
-    transliteration "^2.1.8"
-
 vuepress-html-webpack-plugin@^3.2.0:
   version "3.2.0"
   resolved "http://npm.dui88.com:80/vuepress-html-webpack-plugin/-/vuepress-html-webpack-plugin-3.2.0.tgz#219be272ad510faa8750d2d4e70fd028bfd1c16e"
@@ -10669,7 +10591,7 @@ yargs@^13.3.2:
     y18n "^4.0.0"
     yargs-parser "^13.1.2"
 
-yargs@^16.0.0, yargs@^16.1.0, yargs@^16.2.0:
+yargs@^16.0.0, yargs@^16.2.0:
   version "16.2.0"
   resolved "https://registry.npm.taobao.org/yargs/download/yargs-16.2.0.tgz?cache=0&sync_timestamp=1618195370004&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs%2Fdownload%2Fyargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
   integrity sha1-HIK/D2tqZur85+8w43b0mhJHf2Y=

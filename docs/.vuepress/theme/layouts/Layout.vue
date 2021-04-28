@@ -78,7 +78,7 @@ export default {
     this.iframeListener = (e) => {
       const skipPath = e.data.path
       if (skipPath) {
-        this.$router.push(`/components${skipPath}`).catch(err => {
+        this.$router.push(`${skipPath}`).catch(err => {
           console.info(err.message)
         })
       }
