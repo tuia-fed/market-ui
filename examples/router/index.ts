@@ -32,8 +32,7 @@ const homeRoutes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../components/DemoHome'),
-    redirect: '/wheel'
+    component: () => import('../components/DemoHome')
   }
 ]
 

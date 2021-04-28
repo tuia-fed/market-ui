@@ -19,43 +19,7 @@ Vue.use(wheel)
 # 代码演示
 
 ## 基础用法
-* 
-```js
-import { useRotate } from '@tuia/market-ui/wheel'
-
-export default {
-  data() {
-    return {
-      angle: 0
-    }
-  },
-
-  mounted() {
-    this.hooks = useRotate(angle => {
-      this.angle = angle
-    })
-    this.hooks.idled()
-  },
-
-  methods: {
-    async onStart() {
-      this.hooks.start()
-      await this.delay(3000)
-      this.hooks.to({
-        index: 3,
-        complete() {
-          Toast.show('中奖啦')
-        }
-      })
-    },
-    delay(time) {
-      return new Promise(resolve => {
-        setTimeout(resolve, time)
-      })
-    }
-  }
-}
-```
+<<< @/../market-ui/src/wheel/demo/extend.js
 
 # API
 

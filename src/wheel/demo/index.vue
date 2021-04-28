@@ -5,40 +5,10 @@
   </div>
 </template>
 <script>
-import MkWheel, { useRotate } from "../index";
+import Extend from "./extend";
 
 export default {
-  components: {
-    MkWheel,
-  },
-
-  data() {
-    return {
-      angle: 0,
-    };
-  },
-
-  mounted() {
-    this.hooks = useRotate((angle) => {
-      this.angle = angle;
-    });
-    this.hooks.idled();
-  },
-
-  methods: {
-    onStart() {
-      this.hooks.start();
-
-      setTimeout(() => {
-        this.hooks.to({
-          index: 3,
-          complete() {
-            console.log("中奖啦");
-          },
-        });
-      }, 3000);
-    },
-  },
+  extends: Extend,
 };
 </script>
 <style lang="less" scoped>
