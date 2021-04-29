@@ -25,6 +25,13 @@ export default Vue.extend({
         return val.split('|')[1].trim()
       }
       return val
+    },
+    filterPath(path: string) {
+      let componentPath: string = path
+      if (/^\/components/.test(path)) {
+        componentPath = path.split('/components')[1]
+      }
+      return componentPath
     }
   },
 
@@ -40,7 +47,7 @@ export default Vue.extend({
               this.group.children.map((navItem: { path: string; title: string }) => {
                 return (
                   <div onClick={() => this.handlePushRoute(navItem.path)}>
-                    <router-link class="demo-home-nav__block" key={navItem.path} to={navItem.path}>
+                    <router-link class="demo-home-nav__block" key={navItem.path} to={this.filterPath(navItem.path)}>
                       { navItem.title }
                       <arrow-right class="demo-home-nav__icon" />
                     </router-link>

@@ -16,10 +16,16 @@ import { Wheel } from '@tuia/market-ui'
 Vue.use(wheel)
 ```
 
-# 代码演示
+# 基础用法
 
-## 基础用法
-<<< @/../market-ui/src/wheel/demo/extend.js
+## 代码演示
+<details>
+
+<summary>点击展开完整代码</summary>
+
+<<< @/../market-ui/src/wheel/demo/extend.js#snippet
+
+</details>
 
 # API
 

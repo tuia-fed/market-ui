@@ -77,7 +77,10 @@ export default {
     /* 监听iframe子页面发送的消息 */
     this.iframeListener = (e) => {
       const skipPath = e.data.path
-      if (skipPath) {
+      // 当前所在页面路由
+      const currentPagePath = this.$page.path
+      // 避免路由重复跳转
+      if (skipPath && skipPath !== currentPagePath) {
         this.$router.push(`${skipPath}`).catch(err => {
           console.info(err.message)
         })

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import MkWheel, { useRotate } from "../index";
-
+// #region snippet
 export default Vue.extend({
   components: {
     MkWheel,
@@ -34,3 +34,4 @@ export default Vue.extend({
     },
   },
 });
+// #endregion snippet
