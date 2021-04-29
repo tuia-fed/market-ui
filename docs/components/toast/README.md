@@ -1,5 +1,5 @@
 ---
-group: 3 | 基础组件
+group: 基础组件
 level: 1
 ---
 
@@ -27,7 +27,13 @@ Vue.use(Toast)
 
 <br />
 
+<details>
+
+<summary>点击展开完整代码</summary>
+
 <<< @/../market-ui/src/toast/demo/index.vue#js
+
+</details>
 
 # API
 

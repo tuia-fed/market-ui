@@ -1,5 +1,5 @@
 ---
-group: 2 | 业务组件
+group: 业务组件
 level: 1
 ---
 
@@ -23,7 +23,13 @@ Vue.use(wheel)
 
 <br />
 
+<details>
+
+<summary>点击展开完整代码</summary>
+
 <<< @/../market-ui/src/wheel/demo/index.vue#js
+
+</details>
 
 # API
 

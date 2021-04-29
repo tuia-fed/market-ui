@@ -40,7 +40,7 @@ export default Vue.extend({
       <div class="demo-home-nav">
         <div>
           <div class="demo-home-nav__title">
-            { this.groupTitle(this.group.group) }
+            { this.group.group }
           </div>
           <div class="demo-home-nav__group">
             {

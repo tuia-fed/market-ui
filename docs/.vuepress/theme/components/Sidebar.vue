@@ -1,7 +1,7 @@
 <template>
   <div class="tuia-doc-sidebar" :style="{'top': `${sidebarTop}px`}" v-if="sitebarRoutes">
     <div class="tuia-doc-sidebar__group" v-for="item in sitebarRoutes" :key="item.group">
-      <div class="tuia-doc-sidebar__title">{{ item.group | groupTitle }}</div>
+      <div class="tuia-doc-sidebar__title">{{ item.group }}</div>
       <div class="tuia-doc-sidebar__item" v-for="child in item.children" :key="child.title">
         <!-- to的路径需要加上`/`，否则路由会拼接，无法导航到正确路由 -->
         <router-link :to="`${child.path}`" v-if="child.title">{{ child.title }}</router-link>
@@ -10,8 +10,10 @@
   </div>
 </template>
 <script>
+import { sidebarGroupLevels } from '../utils'
+
 export default {
-  name: 'Sider',
+  name: 'Sidebar',
   data: () => ({
     sitebarRoutes: []
   }),
@@ -58,16 +60,22 @@ export default {
         }
         return groupObj
       })
-      // 再次排序
-      sidebarGroups.sort((a, b) => {
-        const groupLevel = (item) => {
-          const { group } = item
-          const level = Number(group.split('|')[0].trim())
-          return level
+      // 根据默认分组配置项进行排序
+      const levelSidebarGroups = sidebarGroups.map(item => {
+        const { group } = item
+        const newItem = {
+          ...item,
+          level: 1
         }
-        return groupLevel(a) - groupLevel(b)
+        const sidegroup = sidebarGroupLevels.find(siderbar => siderbar.group === group)
+        // 非默认分组直接放到下面层级
+        newItem.level = sidegroup ? sidegroup['level'] : 4
+        return newItem
       })
-      return sidebarGroups
+      levelSidebarGroups.sort((a, b) => {
+        return a.level - b.level
+      })
+      return levelSidebarGroups
     }
   },
   mounted() {
@@ -75,7 +83,7 @@ export default {
     const sitePages = this.$site.pages.filter(item => item.path !== '/')
     // 分组
     this.sitebarRoutes = this.groupSidebarRouter(sitePages)
-    // 分组对象挂载到window对象——用于demo服务
+    // 分组对象挂载到window对象——用于demo组件列表服务
     window.sitebarRoutes = this.sitebarRoutes
   }
 }
