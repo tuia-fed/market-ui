@@ -8,6 +8,10 @@
     <!-- Content组件是vuepress内部用于渲染Markdown文件的内容 -->
     <Container>
       <Content />
+      <!-- 页脚 -->
+      <div slot="footer">
+        <Footer />
+      </div>
     </Container>
     <!-- <Content slot-key="demo" /> -->
     <!-- 模拟器 -->
@@ -19,6 +23,7 @@ import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import Container from '../components/Container'
 import Simulator from '../components/Simulator'
+import Footer from '../components/Footer'
 import { throttle, iframeConfigPath, DOC_PUBLICPATH, DOC_DEVPORT } from '../utils'
 
 export default {
@@ -37,7 +42,8 @@ export default {
     Navbar,
     Sidebar,
     Container,
-    Simulator
+    Simulator,
+    Footer
   },
   computed: {
     simulatorPath() {

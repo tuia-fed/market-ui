@@ -10,9 +10,7 @@ export default Vue.extend({
     msg: "",
     color: "#fff",
     bg: "rgba(0, 0, 0, 0.6)",
-    type: "",
     toJSON: "",
-    isOrigin: false,
     duration: 2500,
     styleContent: {},
   }),
@@ -53,8 +51,7 @@ export default Vue.extend({
               "typeStyle",
               this.position === "top" ? "topStyle" : "",
               this.position === "middle" ? "middleStyle" : "",
-              this.position === "bottom" ? "bottomStyle" : "",
-              this.position === "top" && this.isOrigin ? "headerTop" : "",
+              this.position === "bottom" ? "bottomStyle" : ""
             ]}
             style={this.styleC}
           >

@@ -10,7 +10,7 @@ module.exports = {
   pages: {
     // spa应用入口配置
     index: {
-      entry: path.join(demoDirName, "main.ts"),
+      entry: path.join(demoDirName, "main.js"),
       template: "./public/index.html",
       // 构建之后的html名称
       filename: "demo.html",
@@ -52,7 +52,7 @@ module.exports = {
     // 别名-用于引用打包之后的组件源码
     resolve: {
       alias: {
-        "@tuia/market-ui": resolve("lib"),
+        "@tuia/market-ui": resolve("es"),
       },
     },
   },

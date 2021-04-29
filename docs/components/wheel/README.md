@@ -13,19 +13,17 @@ level: 1
 import Vue from 'vue'
 import { Wheel } from '@tuia/market-ui'
 
-Vue.use(wheel)
+Vue.use(Wheel)
 ```
 
-# 基础用法
+# 代码演示
 
-## 代码演示
-<details>
+## 基础用法
+<<< @/../market-ui/src/wheel/demo/index.vue#html
 
-<summary>点击展开完整代码</summary>
+<br />
 
-<<< @/../market-ui/src/wheel/demo/extend.js#snippet
-
-</details>
+<<< @/../market-ui/src/wheel/demo/index.vue#js
 
 # API
 

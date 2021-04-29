@@ -1,15 +1,49 @@
 <template>
+<!-- #region html -->
   <div class="container">
     <mk-wheel class="wheel" :angle="angle" />
     <div class="btn" @click="onStart"></div>
   </div>
+<!-- #endregion html -->
 </template>
 <script>
-import Extend from "./extend";
+// #region js
+import { wheel } from "@tuia/market-ui";
 
 export default {
-  extends: Extend,
+  components: {
+    MkWheel: wheel,
+  },
+
+  data() {
+    return {
+      angle: 0,
+    };
+  },
+
+  mounted() {
+    this.hooks = wheel.useRotate((angle) => {
+      this.angle = angle;
+    });
+    this.hooks.idled();
+  },
+
+  methods: {
+    onStart() {
+      this.hooks.start();
+
+      setTimeout(() => {
+        this.hooks.to({
+          index: 3,
+          complete() {
+            console.log("中奖啦");
+          },
+        });
+      }, 3000);
+    },
+  },
 };
+// #endregion js
 </script>
 <style lang="less" scoped>
 .container {
