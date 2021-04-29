@@ -64,7 +64,7 @@ export function iframeConfigPath (iframePort = '8080') {
 export const DOC_PUBLICPATH = '/tuia'
 export const DOC_DEVPORT = '2222'
 
-/* 侧边栏分组顺序 */
+/* 侧边栏默认分组顺序 */
 export const sidebarGroupLevels = [
   {
     group: '引导',

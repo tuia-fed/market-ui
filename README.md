@@ -10,14 +10,13 @@
 * 由于侧边栏是自定义主题，所以对应的`sidebar`不需要走默认配置，本项目利用`vuepress`对`Front Matter`的支持来进行自定义配置，配置项示例如下：
 ```js
 ---
-group: 3 | 基础组件
+group: 基础组件
 level: 1
 ---
 /**
- * group——左侧数字是当前分组所在总sidebar路由的level位置,右侧是当前分组的名称
+ * group——当前分组的名称
  * level——当前路由在所在分组内的level位置
  * **/
-/* 注：group配置项必须要用`|`分割，否则无法正确解析 */
 ```
 
 ### README.md文档如何引入demo源码
