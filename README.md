@@ -20,6 +20,30 @@ level: 1
 /* 注：group配置项必须要用`|`分割，否则无法正确解析 */
 ```
 
+### README.md文档如何引入demo源码
+* 利用了`vuepress`支持直接导入源文件的代码段，分为两步：
+```js
+// 1. 划分区块
+
+// #region js
+export default {
+  data() {
+
+  },
+  methods: {
+
+  },
+  mounted() {
+
+  }
+}
+// #endregion js
+/* #region——#endregion内部包裹的是可以引入的代码区块, js是区块的标识, 用于分段展示 */
+
+// 2. README.md 引入区块代码
+<<< @/../market-ui/src/wheel/demo/index.vue#js
+// '<<< @/../'指向的是机器根地址, @——process.cwd(), 后面跟被引入文件的绝对路径
+```
 ## 开发规范
 * 组件核心代码、demo和README统一放在`src/*`目录下，方便开发和维护
 
