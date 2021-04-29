@@ -13,7 +13,7 @@ level: 1
 import Vue from 'vue'
 import { Wheel } from '@tuia/market-ui'
 
-Vue.use(Wheel)
+Vue.use(wheel)
 ```
 
 # 代码演示

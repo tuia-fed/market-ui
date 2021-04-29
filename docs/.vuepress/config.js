@@ -13,7 +13,8 @@ module.exports = {
   ],
   // 本地开发默认主机名
   host: '127.0.0.1',
-  // markdown配置,支持自定义传入snippets参数,用于分块html/js/css展示,from https://github.com/vuejs/vuepress/issues/2663
+  // markdown配置,支持自定义传入snippets参数,用于分块html/js/css展示
+  // from https://github.com/vuejs/vuepress/issues/2663
   markdown: {
     lineNumbers: false,
     extendMarkdown: md => {
