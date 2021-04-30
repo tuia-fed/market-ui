@@ -51,7 +51,7 @@ export default Vue.extend({
               "typeStyle",
               this.position === "top" ? "topStyle" : "",
               this.position === "middle" ? "middleStyle" : "",
-              this.position === "bottom" ? "bottomStyle" : ""
+              this.position === "bottom" ? "bottomStyle" : "",
             ]}
             style={this.styleC}
           >
