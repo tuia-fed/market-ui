@@ -18,7 +18,7 @@
     "dev-copy": "node plugins/fs-copy",
     "precommit": "npm run prettier && npm run stylelint",
     "postinstall": "npx husky install",
-    "commitlint": "npx commitlint -E $HUSKY_GIT_PARAMS",
+    "commitlint": "npx commitlint -e $HUSKY_GIT_PARAMS",
     "prettier": "npx prettier --write \"src/**/*.tsx\"",
     "stylelint": "npx stylelint src/**/*.{css,less}",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
