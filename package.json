@@ -11,6 +11,7 @@
     "build:watch": "mkui build --watch",
     "build-demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "commit": "git-cz",
     "dev-doc": "vuepress dev docs --open",
     "build-doc": "vuepress build docs",
     "dev-builld": "npm run build:watch",
@@ -36,7 +37,9 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "chokidar": "^3.5.1",
+    "commitizen": "^4.2.3",
     "concurrently": "^6.0.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
@@ -48,5 +51,10 @@
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.8.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
