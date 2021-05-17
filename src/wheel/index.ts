@@ -5,6 +5,4 @@ import Wheel from "./src/index";
   Vue.component(Wheel.name, Wheel);
 };
 
-export * from "./src/hooks";
-
 export default Wheel;

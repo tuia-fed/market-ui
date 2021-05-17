@@ -35,10 +35,6 @@ export default {
 // #endregion js
 </script>
 <style lang="less" scoped>
-.toast {
-  text-align: center;
-  overflow: hidden;
-}
 .toast-button {
   display: inline-block;
   line-height: 1;
@@ -61,6 +57,7 @@ export default {
   font-size: 14px;
   border-radius: 4px;
 }
+
 .primary {
   color: #fff;
   background-color: #409eff;

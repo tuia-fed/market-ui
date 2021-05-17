@@ -1224,10 +1224,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tuia/mkui-cli@^0.0.5":
-  version "0.0.5"
-  resolved "http://npm.dui88.com:80/@tuia%2fmkui-cli/-/mkui-cli-0.0.5.tgz#a1df333e1b5ee5aa9c8a4eab3195b1f903c690dc"
-  integrity sha512-jASQg3OkgDZrQN7oxqdLT6MylMOIc57MBlVJLY+kGqtVIGiu4on8IautKRNbO2Vz/5EaG5qlNkKdGwi4KYYTzw==
+"@tuia/mkui-cli@^0.0.6":
+  version "0.0.6"
+  resolved "http://npm.dui88.com:80/@tuia%2fmkui-cli/-/mkui-cli-0.0.6.tgz#d141f6e087cdd58dc56e740f23f5feb7891e274f"
+  integrity sha512-HeiipG8rUb1zbqZjbt0enPznCW3cCSCx7uiXI3/IA4Zl5/PCVIX6BUi6LCRQIlkxGmpUplvbzoM0EAoJue0N0g==
   dependencies:
     "@babel/core" "^7.13.15"
     "@babel/preset-env" "^7.13.15"

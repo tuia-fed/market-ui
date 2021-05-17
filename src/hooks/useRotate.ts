@@ -13,7 +13,7 @@ function getAngleRangeByIndex(index: number) {
   return [0 - 60 * index, 60 - 60 * index];
 }
 
-export default class Rotate {
+export class Rotate {
   private onUpdate: OnUpdate;
   private angle: number;
   private tw:
@@ -93,4 +93,8 @@ export default class Rotate {
       },
     });
   }
+}
+
+export default function useRotate(onUpdate: OnUpdate) {
+  return new Rotate(onUpdate);
 }

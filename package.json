@@ -35,7 +35,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
-    "@tuia/mkui-cli": "^0.0.5",
+    "@tuia/mkui-cli": "^0.0.6",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/babel-preset-jsx": "^1.2.4",

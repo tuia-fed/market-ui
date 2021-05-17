@@ -8,7 +8,7 @@
 </template>
 <script>
 // #region js
-import { wheel } from "@tuia/market-ui";
+import { wheel, useRotate } from "@tuia/market-ui";
 
 export default {
   components: {
@@ -22,7 +22,7 @@ export default {
   },
 
   mounted() {
-    this.hooks = wheel.useRotate((angle) => {
+    this.hooks = useRotate((angle) => {
       this.angle = angle;
     });
     this.hooks.idled();
