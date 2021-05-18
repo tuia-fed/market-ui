@@ -6,5 +6,8 @@ export default ({
   siteData, // 站点元数据
   isServer
 }) => {
-  // console.log(siteData, isServer)
+  /* 动态添加404重定向路由匹配规则 */
+  router.addRoutes([
+    { path: '/demo-*', redirect: '/' }
+  ])
 }

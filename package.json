@@ -5,12 +5,24 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
-    "serve": "npm run docs:dev",
+    "serve": "concurrently --kill-others-on-fail \"npm:dev-*\"",
+    "dev-demo": "vue-cli-service serve",
     "build": "mkui build",
     "build:watch": "mkui build --watch",
+    "build-demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "docs:dev": "vuepress dev docs",
-    "doc:build": "vuepress build docs"
+    "commit": "git-cz",
+    "dev-doc": "vuepress dev docs --open",
+    "build-doc": "vuepress build docs",
+    "dev-builld": "npm run build:watch",
+    "dev-copy": "node plugins/fs-copy",
+    "precommit": "npm run prettier && npm run stylelint",
+    "postinstall": "npx husky install",
+    "commitlint": "npx commitlint -e $HUSKY_GIT_PARAMS",
+    "prettier": "npx prettier --write \"src/**/*.tsx\"",
+    "stylelint": "npx stylelint src/**/*.{css,less}",
+    "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "release": "npx standard-version --no-verify -t release-"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -21,7 +33,9 @@
     "vue": ">= 2.5.22"
   },
   "devDependencies": {
-    "@tuia/mkui-cli": "^0.0.5",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@tuia/mkui-cli": "^0.0.6",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/babel-preset-jsx": "^1.2.4",
@@ -31,15 +45,30 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "chokidar": "^3.5.1",
+    "commitizen": "^4.2.3",
+    "concurrently": "^6.0.2",
+    "conventional-changelog-cli": "^2.1.1",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "fs-extra": "^9.1.0",
+    "husky": "^6.0.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1",
+    "standard-version": "^9.2.0",
+    "stylelint": "^13.13.0",
+    "stylelint-config-standard": "^22.0.0",
     "ts-loader": "^8.1.0",
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.8.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

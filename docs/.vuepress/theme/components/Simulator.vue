@@ -1,15 +1,31 @@
 <template>
   <div class="tuia-doc-simulator" :class="{'tuia-doc-simulator-fixed': isTopFixed}">
-    <div class="tuia-doc-demo">
-      <slot></slot>
-    </div>
+    <iframe ref="iframe" :src="src" :style="simulatorStyle" frameborder="0" />
   </div>
 </template>
 <script>
+
 export default {
   name: 'Simulator',
   props: {
-    isTopFixed: Boolean
+    isTopFixed: Boolean,
+    src: String
+  },
+  data: () => ({
+    windowHeight: window.innerHeight
+  }),
+  computed: {
+    simulatorStyle() {
+      const height = Math.min(640, this.windowHeight - 90)
+      return {
+        height: `${height}px`
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      this.windowHeight = window.innerHeight
+    })
   }
 }
 </script>
@@ -32,7 +48,8 @@ export default {
   position: fixed;
   top: 30px;
 }
-.tuia-doc-demo {
-  margin-top: 32px;
+iframe {
+  display: block;
+  width: 100%;
 }
 </style>

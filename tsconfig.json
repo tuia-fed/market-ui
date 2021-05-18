@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2018",
+    "allowJs": true,
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
@@ -11,6 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "types",
     "types": [
       "webpack-env"
     ],
@@ -31,7 +34,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "types/**/*"
   ],
   "exclude": [
     "node_modules"

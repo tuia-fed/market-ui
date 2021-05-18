@@ -1,18 +1,21 @@
 <template>
-  <div class="tuia-doc-sidebar" :style="{'top': `${sidebarTop}px`}">
-    <div class="tuia-doc-sidebar__group" v-for="item in $site.themeConfig.sidebar" :key="item.title">
-      <div class="tuia-doc-sidebar__title">{{ item.title }}</div>
-      <div class="tuia-doc-sidebar__item" v-for="child in item.children" :key="child">
-        <a :href="pagePathFilter(child)[0]">{{ pagePathFilter(child)[1] }}</a>
+  <div class="tuia-doc-sidebar" :style="{'top': `${sidebarTop}px`}" v-if="sitebarRoutes">
+    <div class="tuia-doc-sidebar__group" v-for="item in sitebarRoutes" :key="item.group">
+      <div class="tuia-doc-sidebar__title">{{ item.group }}</div>
+      <div class="tuia-doc-sidebar__item" v-for="child in item.children" :key="child.title">
+        <!-- to的路径需要加上`/`，否则路由会拼接，无法导航到正确路由 -->
+        <router-link :to="`${child.path}`" v-if="child.title">{{ child.title }}</router-link>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { sidebarGroupLevels } from '../utils'
+
 export default {
-  name: 'Sider',
+  name: 'Sidebar',
   data: () => ({
-    totalPages: []
+    sitebarRoutes: []
   }),
   props: {
     /* 滚动条高度 */
@@ -27,19 +30,61 @@ export default {
       return remainTop > 0 ? remainTop : 0
     }
   },
-  methods: {
-    pagePathFilter(page) {
-      let filterPage = ''
-      if (this.totalPages.length) {
-        filterPage = this.totalPages.find(item => item.relativePath === page)
-        const { path, title } = filterPage
-        return [path, title]
+  filters: {
+    groupTitle(val) {
+      const titleExp = new RegExp(/\|/, 'g')
+      if (titleExp.test(val)) {
+        return val.split('|')[1].trim()
       }
-      return []
+      return val
+    }
+  },
+  methods: {
+    groupSidebarRouter(pages) {
+      const frontmatterGroupList = []
+      // 分组
+      pages.forEach(item => {
+        const { frontmatter } = item // 页面自定义配置
+        if (!frontmatterGroupList.includes(frontmatter.group)) {
+          frontmatterGroupList.push(frontmatter.group)
+        }
+      })
+      // 排序
+      const sidebarGroups = frontmatterGroupList.map(item => {
+        const groupChild = pages.filter(page => page.frontmatter.group === item)
+        // 分组子路由根据level进行内部排序
+        groupChild.sort((a, b) => a.frontmatter.level - b.frontmatter.level)
+        const groupObj = {
+          group: item,
+          children: [...groupChild]
+        }
+        return groupObj
+      })
+      // 根据默认分组配置项进行排序
+      const levelSidebarGroups = sidebarGroups.map(item => {
+        const { group } = item
+        const newItem = {
+          ...item,
+          level: 1
+        }
+        const sidegroup = sidebarGroupLevels.find(siderbar => siderbar.group === group)
+        // 非默认分组直接放到下面层级
+        newItem.level = sidegroup ? sidegroup['level'] : 4
+        return newItem
+      })
+      levelSidebarGroups.sort((a, b) => {
+        return a.level - b.level
+      })
+      return levelSidebarGroups
     }
   },
   mounted() {
-    this.totalPages = this.$site.pages
+    // 筛选非首页-侧边栏路由
+    const sitePages = this.$site.pages.filter(item => item.path !== '/')
+    // 分组
+    this.sitebarRoutes = this.groupSidebarRouter(sitePages)
+    // 分组对象挂载到window对象——用于demo组件列表服务
+    window.sitebarRoutes = this.sitebarRoutes
   }
 }
 </script>
