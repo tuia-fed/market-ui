@@ -3,12 +3,11 @@ const chokidar = require('chokidar')
 const chalk = require('chalk')
 const { resolvePath } = require('./utils')
 
-/* 监听文件变化自动拷贝 */
 function start() {
   console.info('\nWatching file changes...');
 
   const SRCDIR = resolvePath('../../src')
-  chokidar.watch(SRCDIR).on('change', async path => {
+  const copyFn = async () => {
     try {
       await copy.getMdFile(SRCDIR)
       console.log(chalk.green(
@@ -17,7 +16,11 @@ function start() {
     } catch (error) {
       console.log(error)
     }
-  })
+  }
+  // 先拷贝一次
+  copyFn()
+  /* 监听文件变化自动拷贝 */
+  chokidar.watch(SRCDIR).on('change', copyFn)
 }
 
 start()

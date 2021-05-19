@@ -19,11 +19,11 @@ Vue.use(Toast)
 # 代码演示
 
 ## 基础用法
-<<< @/../market-ui/src/toast/demo/index.vue#html1
+<<< @/src/toast/demo/index.vue#html1
 
 <br />
 
-<<< @/../market-ui/src/toast/demo/index.vue#html2
+<<< @/src/toast/demo/index.vue#html2
 
 <br />
 
@@ -31,7 +31,7 @@ Vue.use(Toast)
 
 <summary>点击展开完整代码</summary>
 
-<<< @/../market-ui/src/toast/demo/index.vue#js
+<<< @/src/toast/demo/index.vue#js
 
 </details>
 

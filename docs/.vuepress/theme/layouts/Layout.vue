@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     simulatorPath() {
-      const basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}/demo.html`
+      const basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}`
       let iframePath = ''
       if (this.simulatorHash) {
         iframePath = `${basicPath}/#${this.simulatorHash}`
