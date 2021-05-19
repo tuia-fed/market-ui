@@ -6,7 +6,7 @@ const demoDirName = `examples/`;
 const resolve = (dir) => path.join(__dirname, dir);
 
 module.exports = {
-  publicPath: "/demo/",
+  publicPath: "/demo",
   pages: {
     // spa应用入口配置
     index: {
