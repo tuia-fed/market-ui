@@ -15,7 +15,7 @@ declare global {
 
 // 判断当前demo服务是否内嵌在iframe中
 const isInIframe: boolean = window !== window.top
-let sitebarRoutes: Array<any>
+let sitebarRoutes: Array<any> = []
 if (isInIframe) {
   // 获取父窗口对象下挂载的组件分类对象
   const parentWindow = window.parent
