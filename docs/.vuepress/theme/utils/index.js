@@ -61,7 +61,7 @@ export function iframeConfigPath (iframePort = '8080') {
 }
 
 /* 基础demo服务配置 */
-export const DOC_PUBLICPATH = '/tuia'
+export const DOC_PUBLICPATH = '/demo'
 export const DOC_DEVPORT = '2222'
 
 /* 侧边栏默认分组顺序 */

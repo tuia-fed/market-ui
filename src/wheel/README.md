@@ -19,7 +19,7 @@ Vue.use(wheel)
 # 代码演示
 
 ## 基础用法
-<<< @/../market-ui/src/wheel/demo/index.vue#html
+<<< @/src/wheel/demo/index.vue#html
 
 <br />
 
@@ -27,7 +27,7 @@ Vue.use(wheel)
 
 <summary>点击展开完整代码</summary>
 
-<<< @/../market-ui/src/wheel/demo/index.vue#js
+<<< @/src/wheel/demo/index.vue#js
 
 </details>
 

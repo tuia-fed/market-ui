@@ -6,14 +6,12 @@ const demoDirName = `examples/`;
 const resolve = (dir) => path.join(__dirname, dir);
 
 module.exports = {
-  publicPath: "/tuia/",
+  publicPath: "/demo/",
   pages: {
     // spa应用入口配置
     index: {
       entry: path.join(demoDirName, "main.js"),
       template: "./public/index.html",
-      // 构建之后的html名称
-      filename: "demo.html",
       // 页面标题
       title: "Demo Page",
       chunks: ["index", "chunk-vendors"],
