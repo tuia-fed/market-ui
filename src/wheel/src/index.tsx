@@ -1,5 +1,5 @@
 import Vue, { VNode } from "vue";
-import { size } from './props'
+import { size } from "./props";
 
 type StyleObject = {
   transform: string;

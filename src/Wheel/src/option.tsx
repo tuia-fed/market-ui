@@ -14,36 +14,38 @@ export default Vue.extend({
     },
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     image: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
 
   computed: {
     optionStyle(): StyleObject {
       return {
-        transform: `rotate(${15 + this.index * 60}deg) skew(15deg, 15deg)`
+        transform: `rotate(${15 + this.index * 60}deg) skew(15deg, 15deg)`,
       };
-    }
+    },
   },
 
   render(): VNode {
     return (
-      <div onClick={this.onClick} style={this.optionStyle} class="mk-wheel-option">
+      <div
+        onClick={this.onClick}
+        style={this.optionStyle}
+        class="mk-wheel-option"
+      >
         <div class="mk-wheel-option__revert">
-          {
-            this.title && <div class="mk-wheel-option__title">{this.title}</div>
-          }
-          {
-            this.image && <img
+          {this.title && <div class="mk-wheel-option__title">{this.title}</div>}
+          {this.image && (
+            <img
               class="mk-wheel-option__image"
               src={this.image}
               alt={this.title}
             />
-          }
+          )}
           {this.$slots.default}
         </div>
       </div>
@@ -52,7 +54,7 @@ export default Vue.extend({
 
   methods: {
     onClick() {
-      this.$emit('click', this.index)
-    }
-  }
+      this.$emit("click", this.index);
+    },
+  },
 });
