@@ -11,9 +11,9 @@ level: 1
 ## 引入
 ```js
 import Vue from 'vue'
-import { Wheel } from '@tuia/market-ui'
+import { Wheel, useRotate } from '@tuia/market-ui'
 
-Vue.use(wheel)
+Vue.use(Wheel)
 ```
 
 # 代码演示
