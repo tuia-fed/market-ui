@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <!-- #region html -->
     <div class="container">
       <div class="wheel">
@@ -20,6 +20,9 @@
       </div>
     </div>
     <!-- #endregion html -->
+    <ul class="messages">
+      <li v-for="(item, index) in messages" :key="index">{{ item.msg }}</li>
+    </ul>
   </div>
 </template>
 <script>
@@ -35,6 +38,7 @@ export default {
   data() {
     return {
       angle: 0,
+      messages: [],
     };
   },
 
@@ -80,7 +84,7 @@ export default {
     },
 
     onOptionClick(index) {
-      console.log(index);
+      this.pushMessage("你点击啦，下标为：" + index);
     },
 
     start(hooks) {
@@ -89,11 +93,12 @@ export default {
       hooks.start();
 
       delay(() => {
+        const index = this.randomInit(this.options.length - 1);
         hooks.to({
-          index: this.randomInit(this.options.length - 1),
+          index,
           duration: 3000,
-          complete() {
-            console.log("中奖啦");
+          complete: () => {
+            this.pushMessage("你中奖啦，下标为：" + index);
             delay(() => {
               hooks.idled();
             }, 1000);
@@ -109,11 +114,21 @@ export default {
     randomInit(max, min = 0) {
       return Math.floor(Math.random() * (max - min)) + min;
     },
+
+    pushMessage(msg) {
+      this.messages.push({
+        msg,
+      });
+    },
   },
 };
 // #endregion js
 </script>
 <style lang="less" scoped>
+.page {
+  padding-top: 20px;
+}
+
 .container {
   position: relative;
 }
@@ -164,6 +179,15 @@ export default {
     50% {
       transform: scale(0.85);
     }
+  }
+}
+
+.messages {
+  margin: 0;
+  padding: 20px;
+
+  li {
+    margin-bottom: 15px;
   }
 }
 </style>

@@ -31,7 +31,7 @@ export class Rotate {
    * 闲置状态空转
    */
   idled() {
-    this.tw?.stop();
+    this.stop();
     this.tw = animate({
       from: this.angle,
       to: this.angle + 360,
@@ -49,7 +49,7 @@ export class Rotate {
    * 开始抽奖
    */
   start() {
-    this.tw?.stop();
+    this.stop();
     this.tw = animate({
       from: this.angle,
       to: this.angle + 360,
@@ -68,7 +68,7 @@ export class Rotate {
    * @param data - 抽奖结果
    */
   to(data: ToProps) {
-    this.tw?.stop();
+    this.stop();
     let to = 0;
 
     if (data.to !== undefined) {
@@ -92,6 +92,13 @@ export class Rotate {
         data.complete();
       },
     });
+  }
+
+  /**
+   * 停止转动
+   */
+  stop() {
+    this.tw?.stop();
   }
 }
 
