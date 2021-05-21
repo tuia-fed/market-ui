@@ -26,6 +26,10 @@ export default {
     window.addEventListener('resize', () => {
       this.windowHeight = window.innerHeight
     })
+
+    this.$refs.iframe.onload = () => {
+      this.$refs.iframe.contentWindow.postMessage(window.sitebarRoutes, '*')
+    }
   }
 }
 </script>

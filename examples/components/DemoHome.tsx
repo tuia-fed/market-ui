@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import DemoHomeNav from './DemoHomeNav'
 import '../common/style/demo-home.less'
-import RouterConfig from '../router'
 
 type itemType = {
   path: string
@@ -28,8 +27,11 @@ export default Vue.extend({
     publicPath: process.env.BASE_URL
   }),
 
-  mounted() {
-    this.group = RouterConfig
+  created() {
+    window.addEventListener('message', e => {
+      if (!e.data || e.data.type === 'webpackOk' || !e.data.filter) return
+      this.group = e.data.filter(item => !(/引导$/).test(item.group))
+    })
   },
 
   render() {

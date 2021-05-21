@@ -1,5 +1,5 @@
 ---
-group: 业务组件
+group: 互动组件
 level: 1
 ---
 

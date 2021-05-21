@@ -11,21 +11,6 @@ declare global {
   }
 }
 
-/* 主要由于vuepress服务先启动，再加载demo服务的iframe容器，因此demo实例挂载的时候，vuepress父窗口window的自定义对象是可以挂载成功的 */
-
-// 判断当前demo服务是否内嵌在iframe中
-const isInIframe: boolean = window !== window.top
-let sitebarRoutes: Array<any> = []
-if (isInIframe) {
-  // 获取父窗口对象下挂载的组件分类对象
-  const parentWindow = window.parent
-  if (parentWindow.hasOwnProperty('sitebarRoutes')) {
-    sitebarRoutes = parentWindow.sitebarRoutes
-    sitebarRoutes = sitebarRoutes.filter(item => !(/引导$/).test(item.group))
-  }
-}
-
-
 const ROUTE_NAME_REG = /\.\/(\w+)\/demo\/index.vue/
 
 const homeRoutes = [
@@ -66,5 +51,3 @@ export const router = new VueRouter({
   routes: combineRoutes,
   scrollBehavior: (to, from, savedPosition) => savedPosition || { x: 0, y: 0 },
 })
-
-export default sitebarRoutes

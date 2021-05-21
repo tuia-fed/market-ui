@@ -52,7 +52,7 @@ export default {
       if (this.simulatorHash) {
         iframePath = `${basicPath}/#${this.simulatorHash}`
       } else {
-        iframePath = basicPath
+        iframePath = basicPath + '/#/'
       }
       return iframePath
     }
