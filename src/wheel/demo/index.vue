@@ -28,8 +28,8 @@ import { Wheel, useRotate } from "@tuia/market-ui";
 
 export default {
   components: {
-    MkWheel: Wheel,
-    MkWheelOption: Wheel.Option,
+    [Wheel.name]: Wheel,
+    [Wheel.Option.name]: Wheel.Option,
   },
 
   data() {

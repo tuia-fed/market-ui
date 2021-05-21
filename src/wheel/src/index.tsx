@@ -1,4 +1,4 @@
-import Vue, { VNode } from "vue";
+import Vue from "vue";
 import { size } from "./props";
 
 type StyleObject = {
@@ -31,7 +31,7 @@ export default Vue.extend({
     },
   },
 
-  render(): VNode {
+  render() {
     return (
       <div style={this.wheelStyle} class="mk-wheel">
         {this.$slots.default}
