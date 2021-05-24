@@ -9,6 +9,7 @@ function start() {
   const SRCDIR = resolvePath('../../src')
   const copyFn = async () => {
     try {
+      await copy.cleanDocs()
       await copy.getMdFile(SRCDIR)
       console.log(chalk.green(
         `文档拷贝成功!`
