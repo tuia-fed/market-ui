@@ -40,8 +40,8 @@ export default {
 /* #region——#endregion内部包裹的是可以引入的代码区块, js是区块的标识, 用于分段展示 */
 
 // 2. README.md 引入区块代码
-<<< @/../market-ui/src/wheel/demo/index.vue#js
-// '<<< @/../'指向的是机器根地址, @——process.cwd(), 后面跟被引入文件的绝对路径
+<<< @/src/wheel/demo/index.vue#js
+// '<<< @'指向的是机器根地址, @——process.cwd(), 后面跟被引入文件的绝对路径
 ```
 ## 开发规范
 * 组件核心代码、demo和README统一放在`src/*`目录下，方便开发和维护
@@ -51,3 +51,8 @@ export default {
 
 ## 关于hooks
 * 在React的生态内，`hooks`被用于抽象通用逻辑的最好方式，因此可以借鉴其思想，将组件的通用逻辑抽象出来，同组件完全独立，只输出一个响应式的对象变量和一些操作该变量的方法。在本项目中，所有抽离出的逻辑全部放在`./src/hooks`目录下，`mkui-cli`会单独打包并对外独立暴露出来，方便组件调用。
+
+## 安装husky.sh
+```bash
+npx husky install
+```
