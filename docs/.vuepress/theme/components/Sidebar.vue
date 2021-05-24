@@ -82,9 +82,10 @@ export default {
     // 筛选非首页-侧边栏路由
     const sitePages = this.$site.pages.filter(item => item.path !== '/')
     // 分组
-    this.sitebarRoutes = this.groupSidebarRouter(sitePages)
+    const sitebarRoutes = this.groupSidebarRouter(sitePages)
     // 分组对象挂载到window对象——用于demo组件列表服务
-    window.sitebarRoutes = this.sitebarRoutes
+    window.sitebarRoutes = [].concat(sitebarRoutes)
+    this.sitebarRoutes = sitebarRoutes
   }
 }
 </script>

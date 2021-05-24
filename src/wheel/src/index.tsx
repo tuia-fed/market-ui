@@ -1,6 +1,7 @@
-import Vue, { VNode } from "vue";
+import Vue from "vue";
+import { size } from "./props";
 
-type styleObject = {
+type StyleObject = {
   transform: string;
   width: string;
   height: string;
@@ -16,12 +17,12 @@ export default Vue.extend({
     },
     size: {
       type: Number,
-      default: 300,
+      default: size,
     },
   },
 
   computed: {
-    wheelStyle(): styleObject {
+    wheelStyle(): StyleObject {
       return {
         transform: `rotate3d(0, 0, 1, ${this.angle}deg)`,
         width: this.size + "px",
@@ -30,10 +31,10 @@ export default Vue.extend({
     },
   },
 
-  render(): VNode {
+  render() {
     return (
       <div style={this.wheelStyle} class="mk-wheel">
-        <slot />
+        {this.$slots.default}
       </div>
     );
   },
