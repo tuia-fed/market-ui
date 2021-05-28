@@ -92,7 +92,7 @@ export default {
 <style lang="less" scoped>
 .tuia-doc-sidebar {
   position: fixed;
-  left: 0;
+  left: 122px;
   top: 60px;
   bottom: 0;
   z-index: 1;
@@ -102,9 +102,11 @@ export default {
   overflow-y: scroll;
   background-color: #fff;
   box-shadow: 0 8px 12px #ebedf0;
+
   &__group {
     margin-bottom: 16px;
   }
+
   &__title {
     padding: 8px 0 8px 30px;
     color: #455a64;
@@ -112,8 +114,10 @@ export default {
     font-size: 15px;
     line-height: 28px;
   }
+
   &__item {
     position: relative;
+
     & > a {
       display: block;
       margin: 0;
