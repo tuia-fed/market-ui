@@ -56,3 +56,9 @@ export default {
 ```bash
 npx husky install
 ```
+
+## 自动创建标准组件开发模板
+* 直接输入组件相关的信息，插件会自动为你生成一份标准化的组件开发模板代码，告别手动创建，一键创建模板，快乐coding！
+```bash
+yarn create:new
+```
