@@ -1,27 +1,6 @@
-<template>
-  <div class="doc-demo-block">
-    <h2 v-if="title" class="doc-demo-block__title">{{ title }}</h2>
-    <div v-if="card" class="doc-demo-block__card">
-      <slot />
-    </div>
-    <slot v-else />
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'DemoBlock',
-
-  props: {
-    card: Boolean,
-    title: String,
-  },
-};
-</script>
-
-<style lang="less" scoped>
 .doc-demo-block {
   position: relative;
+
   &__title {
     margin: 0;
     padding: 32px 16px 16px;
@@ -47,4 +26,3 @@ export default {
     }
   }
 }
-</style>
