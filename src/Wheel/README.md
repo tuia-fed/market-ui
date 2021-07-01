@@ -19,7 +19,7 @@ Vue.use(Wheel)
 
 ## 代码演示
 
-<<< @/src/wheel/demo/index.vue#html
+<<< @/src/Wheel/demo/index.vue#html
 
 <br />
 
@@ -27,7 +27,7 @@ Vue.use(Wheel)
 
 <summary>点击展开完整代码</summary>
 
-<<< @/src/wheel/demo/index.vue#js
+<<< @/src/Wheel/demo/index.vue#js
 
 </details>
 
@@ -49,8 +49,8 @@ Vue.use(Wheel)
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| title | 奖项名称| _string_ | `` |
-| image | 奖项图片 | _string_ | `` |
+| title | 奖项名称| _string_ | 无 |
+| image | 奖项图片 | _string_ | 无 |
 
 ## WheelOption Slots
 | 名称 | 说明 |
