@@ -9356,6 +9356,14 @@ postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2, postcss-selector
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
 
+postcss-sorting@^5.0.1:
+  version "5.0.1"
+  resolved "http://npm.dui88.com:80/postcss-sorting/-/postcss-sorting-5.0.1.tgz#10d5d0059eea8334dacc820c0121864035bc3f11"
+  integrity sha1-ENXQBZ7qgzTazIIMASGGQDW8PxE=
+  dependencies:
+    lodash "^4.17.14"
+    postcss "^7.0.17"
+
 postcss-svgo@^4.0.3:
   version "4.0.3"
   resolved "http://npm.dui88.com:80/postcss-svgo/-/postcss-svgo-4.0.3.tgz#343a2cdbac9505d416243d496f724f38894c941e"
@@ -9393,6 +9401,15 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.21
   version "7.0.35"
   resolved "http://npm.dui88.com:80/postcss/-/postcss-7.0.35.tgz#d2be00b998f7f211d8a276974079f2e92b970e24"
   integrity sha1-0r4AuZj38hHYonaXQHny6SuXDiQ=
+  dependencies:
+    chalk "^2.4.2"
+    source-map "^0.6.1"
+    supports-color "^6.1.0"
+
+postcss@^7.0.17, postcss@^7.0.31:
+  version "7.0.36"
+  resolved "http://npm.dui88.com:80/postcss/-/postcss-7.0.36.tgz#056f8cffa939662a8f5905950c07d5285644dfcb"
+  integrity sha1-BW+M/6k5ZiqPWQWVDAfVKFZE38s=
   dependencies:
     chalk "^2.4.2"
     source-map "^0.6.1"
@@ -10950,6 +10967,13 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+stylelint-config-recess-order@^2.4.0:
+  version "2.4.0"
+  resolved "http://npm.dui88.com:80/stylelint-config-recess-order/-/stylelint-config-recess-order-2.4.0.tgz#7336da98d9e11cfd17388f4c15fada615b49c301"
+  integrity sha1-czbamNnhHP0XOI9MFfraYVtJwwE=
+  dependencies:
+    stylelint-order "4.1.x"
+
 stylelint-config-recommended@^5.0.0:
   version "5.0.0"
   resolved "http://npm.dui88.com:80/stylelint-config-recommended/-/stylelint-config-recommended-5.0.0.tgz#fb5653f495a60b4938f2ad3e77712d9e1039ae78"
@@ -10961,6 +10985,15 @@ stylelint-config-standard@^22.0.0:
   integrity sha1-yGC+mhPrvBsIRFb6EFJ78TpErd8=
   dependencies:
     stylelint-config-recommended "^5.0.0"
+
+stylelint-order@4.1.x, stylelint-order@^4.1.0:
+  version "4.1.0"
+  resolved "http://npm.dui88.com:80/stylelint-order/-/stylelint-order-4.1.0.tgz#692d05b7d0c235ac66fcf5ea1d9e5f08a76747f6"
+  integrity sha1-aS0Ft9DCNaxm/PXqHZ5fCKdnR/Y=
+  dependencies:
+    lodash "^4.17.15"
+    postcss "^7.0.31"
+    postcss-sorting "^5.0.1"
 
 stylelint@^13.13.0:
   version "13.13.0"
