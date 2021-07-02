@@ -4,12 +4,10 @@ export default Vue.extend({
   name: "mk-sudoku",
 
   data: () => ({
-    component: "mk-sudoku"
+    component: "mk-sudoku",
   }),
 
   render() {
-    return (
-      <div>{this.component}</div>
-    )
-  }
-})
+    return <div>{this.component}</div>;
+  },
+});
