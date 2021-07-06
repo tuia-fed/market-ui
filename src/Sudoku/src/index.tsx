@@ -73,6 +73,7 @@ export default Vue.extend({
       return {
         width: `${this.radius}px`,
         height: `${this.radius}px`,
+        margin: '0 auto',
         ...this.containerStyle,
       };
     },

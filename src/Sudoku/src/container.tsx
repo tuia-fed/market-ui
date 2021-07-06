@@ -1,6 +1,5 @@
 import Vue, { PropType, VNode } from "vue";
 import { StyleObject } from "./options";
-// import * as tsx from "vue-tsx-support";
 
 export default Vue.extend({
   name: "mk-sudoku-container",

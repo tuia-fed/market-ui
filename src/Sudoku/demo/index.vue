@@ -5,7 +5,6 @@
       <mk-sudoku
         :activeIndex="activeIndex"
         :options="prizeOptions"
-        :containerStyle="styleObj"
         :rowsAmount="rowsAmount"
         @itemClick="handleClick"
       >
@@ -36,9 +35,6 @@ export default {
     return {
       activeIndex: 99,
       size: 88,
-      styleObj: {
-        margin: "0 auto",
-      },
       rowsAmount: 3,
       messages: [],
       isShowHand: true,
