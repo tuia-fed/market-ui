@@ -28,7 +28,6 @@ import { useChange, Sudoku } from "@tuia/market-ui";
 export default {
   components: {
     [Sudoku.name]: Sudoku,
-    [Sudoku.Option.name]: Sudoku.Option,
   },
 
   data() {
@@ -145,6 +144,7 @@ export default {
 .start {
   width: 80px;
   height: 80px;
+  cursor: pointer;
   background-image: url("https://yun.dui88.com/h5-mani/turnrect_direct104f3df2-a15e-4758-aa07-35abf539d748.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
