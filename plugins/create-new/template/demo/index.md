@@ -18,11 +18,3 @@ export default {
 };
 // #endregion js
 </script>
-<style lang="less" scoped>
-.primary {
-  color: #fff;
-  background-color: #409eff;
-  border-color: #409eff;
-  margin-top: 12px;
-}
-</style>

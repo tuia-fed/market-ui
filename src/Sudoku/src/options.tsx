@@ -1,7 +1,5 @@
 /**
  * 单个奖品选项组件，包含两种渲染方式，1是展示默认的图片，2是用户自定义渲染，同时确保为正常的九宫格UI，统一渲染成正方形元素
- * props——originalIndex: 奖品当前的原始索引; itemRender: 自定义渲染函数，返回的是DOM;
- * size: 奖品的尺寸; image: 默认渲染方式传入的图片地址;
  */
 import Vue, { VNode } from "vue";
 

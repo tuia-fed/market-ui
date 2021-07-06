@@ -33,7 +33,7 @@ export default Vue.extend({
 
   data() {
     return {
-      actionHeight: {},
+      containerHeight: 0
     };
   },
 
@@ -69,16 +69,22 @@ export default Vue.extend({
   },
 
   computed: {
+    // 宫格容器的宽高优先取父容器的尺寸，确保rem等尺寸计算兼容问题
+    containerRealSize(): number {
+      return this.containerHeight || this.radius
+    },
     fullContainerStyle(): StyleObject {
       return {
-        width: `${this.radius}px`,
-        height: `${this.radius}px`,
-        margin: "0 auto",
+        width: `${this.containerRealSize}px`,
+        height: `${this.containerRealSize}px`,
         ...this.containerStyle,
       };
     },
+    actionStyle(): number {
+      return (this.rowsAmount - 2) * this.singleCubeSize
+    },
     singleCubeSize(): number {
-      return Math.floor(this.radius / this.rowsAmount);
+      return Math.floor(this.containerRealSize / this.rowsAmount);
     },
     cubeNum(): number {
       return Math.pow(this.rowsAmount, 2) - Math.pow(this.rowsAmount - 2, 2);
@@ -89,14 +95,17 @@ export default Vue.extend({
     handleItemClick(index: number) {
       this.$emit("itemClick", index);
     },
+    getParentRect(id: string, defaultHeight: number) {
+      const container = document.getElementById(id)
+      const parentRect = container?.parentElement?.getBoundingClientRect()
+      return parentRect?.height || defaultHeight
+    }
   },
 
   mounted() {
     this.$nextTick(() => {
-      // 获取action操作区容器的高度
-      const constainerEle = this.$refs.action;
-      const rect = constainerEle.parentNode.getBoundingClientRect();
-      this.actionHeight = { height: rect.height + "px" };
+      // 宫格父容器的高度
+      this.containerHeight = this.getParentRect('sudoku_container', this.radius)
     });
   },
 
@@ -121,7 +130,6 @@ export default Vue.extend({
 
     return (
       <SudokuContainer
-        ref="container"
         containerStyle={this.fullContainerStyle}
         rowsAmount={this.rowsAmount}
         cubeSize={this.singleCubeSize}
@@ -141,8 +149,7 @@ export default Vue.extend({
         <div
           slot="action"
           class="mk-sudoku-wrap__action"
-          ref="action"
-          style={this.actionHeight}
+          style={{ height: `${this.actionStyle}px` }}
         >
           {this.$slots.default}
         </div>

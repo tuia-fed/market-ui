@@ -2,14 +2,16 @@
   <demo-section>
     <demo-block>
       <!-- #region html -->
-      <mk-sudoku
-        :activeIndex="activeIndex"
-        :options="prizeOptions"
-        :rowsAmount="rowsAmount"
-        @itemClick="handleClick"
-      >
-        <div class="start" @click="onStart"></div>
-      </mk-sudoku>
+      <div class="sudoku_demo_wrap">
+        <mk-sudoku
+          :activeIndex="activeIndex"
+          :options="prizeOptions"
+          :rowsAmount="rowsAmount"
+          @itemClick="handleClick"
+        >
+          <div class="start" @click="onStart"></div>
+        </mk-sudoku>
+      </div>
       <!-- #endregion html -->
       <!-- hand -->
       <div class="hand" v-show="isShowHand"></div>
@@ -134,11 +136,10 @@ export default {
 // #endregion js
 </script>
 <style lang="less" scoped>
-.primary {
-  margin-top: 12px;
-  color: #fff;
-  background-color: #409eff;
-  border-color: #409eff;
+.sudoku_demo_wrap {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 .start {

@@ -1,6 +1,6 @@
 ---
 group: 互动组件
-level: 1
+level: 2
 ---
 
 # 九宫格
