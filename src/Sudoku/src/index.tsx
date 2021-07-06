@@ -33,7 +33,7 @@ export default Vue.extend({
 
   data() {
     return {
-      containerHeight: 0
+      containerHeight: 0,
     };
   },
 
@@ -71,7 +71,7 @@ export default Vue.extend({
   computed: {
     // 宫格容器的宽高优先取父容器的尺寸，确保rem等尺寸计算兼容问题
     containerRealSize(): number {
-      return this.containerHeight || this.radius
+      return this.containerHeight || this.radius;
     },
     fullContainerStyle(): StyleObject {
       return {
@@ -81,7 +81,7 @@ export default Vue.extend({
       };
     },
     actionStyle(): number {
-      return (this.rowsAmount - 2) * this.singleCubeSize
+      return (this.rowsAmount - 2) * this.singleCubeSize;
     },
     singleCubeSize(): number {
       return Math.floor(this.containerRealSize / this.rowsAmount);
@@ -96,16 +96,19 @@ export default Vue.extend({
       this.$emit("itemClick", index);
     },
     getParentRect(id: string, defaultHeight: number) {
-      const container = document.getElementById(id)
-      const parentRect = container?.parentElement?.getBoundingClientRect()
-      return parentRect?.height || defaultHeight
-    }
+      const container = document.getElementById(id);
+      const parentRect = container?.parentElement?.getBoundingClientRect();
+      return parentRect?.height || defaultHeight;
+    },
   },
 
   mounted() {
     this.$nextTick(() => {
       // 宫格父容器的高度
-      this.containerHeight = this.getParentRect('sudoku_container', this.radius)
+      this.containerHeight = this.getParentRect(
+        "sudoku_container",
+        this.radius
+      );
     });
   },
 

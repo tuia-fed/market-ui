@@ -41,7 +41,11 @@ export default Vue.extend({
     };
 
     return (
-      <div class="mk-sudoku-container" id="sudoku_container" style={this.containerStyle}>
+      <div
+        class="mk-sudoku-container"
+        id="sudoku_container"
+        style={this.containerStyle}
+      >
         {/* 奖品的分布，上右下左 */}
         <div class="mk-sudoku-container__top" style={topStyle}>
           {this.$slots.top}
