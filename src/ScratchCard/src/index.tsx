@@ -2,7 +2,7 @@ import Vue from "vue";
 
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
-let events: string[]; 
+let events: string[];
 let startMoveHandler: any;
 let endMoveHandler: any;
 let moveHandler: any;
@@ -20,7 +20,7 @@ export default Vue.extend({
     startMoveHandler, //touchstart or mousedown 事件
     endMoveHandler, //touchend or mouseend 事件
     moveHandler, //touchmove or mousemove 事件
-    isSuspend: false
+    isSuspend: false,
   }),
 
   props: {
@@ -52,13 +52,13 @@ export default Vue.extend({
     coverImg: {
       //刮刮卡遮罩图片
       type: String,
-    }
+    },
   },
 
   computed: {
-    cardId () {
-      return `card_${new Date().getTime()}`
-    }
+    cardId() {
+      return `card_${new Date().getTime()}`;
+    },
   },
 
   render() {
@@ -74,8 +74,12 @@ export default Vue.extend({
 
   methods: {
     init() {
-      const canvasWrap = document.getElementById(this.cardId) as HTMLCanvasElement;
-      this.canvas = canvasWrap.querySelector(".mk-scratch_canvas") as HTMLCanvasElement;
+      const canvasWrap = document.getElementById(
+        this.cardId
+      ) as HTMLCanvasElement;
+      this.canvas = canvasWrap.querySelector(
+        ".mk-scratch_canvas"
+      ) as HTMLCanvasElement;
       this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
       this.canvas.width = canvasWrap.clientWidth;
       this.canvas.height = canvasWrap.clientHeight;
@@ -89,7 +93,13 @@ export default Vue.extend({
         var coverImg = new Image();
         coverImg.src = this.coverImg;
         coverImg.onload = () => {
-          this.ctx.drawImage(coverImg, 0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.drawImage(
+            coverImg,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+          );
         };
       } else {
         this.ctx.fillStyle = this.coverColor;
@@ -112,12 +122,16 @@ export default Vue.extend({
 
     addEvent() {
       this.startMoveHandler = this.startEventHandler.bind(this);
-      this.canvas.addEventListener(this.events[0], this.startMoveHandler, false);
+      this.canvas.addEventListener(
+        this.events[0],
+        this.startMoveHandler,
+        false
+      );
     },
 
     startEventHandler: function (e: { preventDefault: () => void }) {
       e.preventDefault();
-      if (this.isSuspend) return
+      if (this.isSuspend) return;
       if (this.firstTouch) {
         this.startCallback && this.startCallback();
         this.firstTouch = false;
@@ -143,11 +157,11 @@ export default Vue.extend({
           document.documentElement.scrollLeft || document.body.scrollLeft,
         mouseX = e.pageX - canvasPos.left - scrollL,
         mouseY = e.pageY - canvasPos.top - scrollT;
-        this.ctx.beginPath();
-        this.ctx.fillStyle = "#FFFFFF";
-        this.ctx.globalCompositeOperation = "destination-out";
-        this.ctx.arc(mouseX, mouseY, this.moveRadius, 0, 2 * Math.PI);
-        this.ctx.fill();
+      this.ctx.beginPath();
+      this.ctx.fillStyle = "#FFFFFF";
+      this.ctx.globalCompositeOperation = "destination-out";
+      this.ctx.arc(mouseX, mouseY, this.moveRadius, 0, 2 * Math.PI);
+      this.ctx.fill();
     },
 
     endEventHandler: function (e: { preventDefault: () => void }) {
@@ -160,7 +174,12 @@ export default Vue.extend({
     },
 
     caleArea: function () {
-      let pixels = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height),
+      let pixels = this.ctx.getImageData(
+          0,
+          0,
+          this.canvas.width,
+          this.canvas.height
+        ),
         transPixels = [];
 
       pixels.data.map((item, i) => {
@@ -173,22 +192,30 @@ export default Vue.extend({
       if (transPixels.length / pixels.data.length > this.ratio) {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.canvas.removeEventListener(this.events[0], this.startMoveHandler);
-        this.canvas.removeEventListener(this.events[1], this.moveHandler, false);
-        document.removeEventListener(this.events[2], this.endMoveHandler, false);
+        this.canvas.removeEventListener(
+          this.events[1],
+          this.moveHandler,
+          false
+        );
+        document.removeEventListener(
+          this.events[2],
+          this.endMoveHandler,
+          false
+        );
         this.showLucky = true;
         this.clearCallback && this.clearCallback();
       }
     },
 
-    changeStatus (suspend = true) {
-      this.isSuspend = suspend
+    changeStatus(suspend = true) {
+      this.isSuspend = suspend;
     },
 
     reset() {
       this.canvas.removeEventListener(this.events[0], this.startMoveHandler);
       this.canvas.removeEventListener(this.events[1], this.moveHandler, false);
       document.removeEventListener(this.events[2], this.endMoveHandler, false);
-      this.isSuspend = false
+      this.isSuspend = false;
       this.firstTouch = true;
       this.showLucky = false;
       this.$nextTick(() => {
