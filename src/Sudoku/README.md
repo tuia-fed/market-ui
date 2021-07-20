@@ -37,7 +37,7 @@ Vue.use(Sudoku)
 type OptionType = {
   // 奖项图片资源的地址
   image: string
-  // 奖项的索引(右上角奖项索引=0, 顺时针++)
+  // 奖项的索引(左上角奖项索引=0, 顺时针++)
   index: number
 }
 ```
