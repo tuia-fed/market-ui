@@ -32,7 +32,7 @@ Vue.use(FramesPlayer)
 
 # API
 
-## FramesPlayer Props
+## Props
 | 参数 | 说明 | 类型 | 默认值 | 是否是必须参数 |
 | --- | --- | --- | --- | --- |
 | url | 序列帧图片的cdn链接 | _string_ | 无 | 是 |
@@ -43,7 +43,7 @@ Vue.use(FramesPlayer)
 | direction | 帧动画播放顺序('normal', 'reverse') | _string_ | 'normal' | 否
 | times | 帧动画播放次数 | _number_ | `1` | 否 |
 
-## FramesPlayer Events
+## Events
 | 名称 | 说明 |
 | --- | --- |
 | playEnd | 帧动画播放结束的回调事件 |

@@ -2,7 +2,12 @@
   <div class="page_wrap">
     <!-- #region html -->
     <div class="gift_rain_wrap">
-      <mk-gift-rain :imgSource="sourceImgs" ref="giftRain"></mk-gift-rain>
+      <mk-gift-rain
+        :imgSource="sourceImgs"
+        :giftOpenFrame="giftFrame"
+        @openGift="handleOpenGift"
+        ref="giftRain"
+      ></mk-gift-rain>
     </div>
     <button class="common-button primary positionfix" @click="handleStartRain">
       <span>开始红包雨</span>
@@ -22,8 +27,12 @@ export default {
         "//yun.tuisnake.com/h5-mami/dist/normal1.cca5bdfdc574870aaea6510b3b271323.png",
         "//yun.tuisnake.com/h5-mami/dist/update-first-1.6fbfca78758ec31dc6d906e7c10aec0c.png",
         "//yun.tuisnake.com/h5-mami/dist/update-second-1.e5fbfc30fa509bad85dfb496f22beb4f.png",
-        "//yun.tuisnake.com/h5-mani/turncard_mix/yuanbao.png",
       ],
+      giftFrame: {
+        url:
+          "//yun.tuisnake.com/h5-mami/dist/redpacket-split-light.d2d071e706c7616dc659cebaaf2ce796.png",
+        amount: 6,
+      },
       isStopState: true, // 是否先关闭
     };
   },
@@ -40,6 +49,10 @@ export default {
     handleStopRain() {
       this.isStopState = true;
       this.$refs["giftRain"].stop();
+    },
+
+    handleOpenGift(amount) {
+      this.$mkToast.show(`恭喜您已经拆开${amount}个红包`);
     },
   },
 };

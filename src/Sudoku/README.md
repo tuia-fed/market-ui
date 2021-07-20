@@ -35,12 +35,14 @@ Vue.use(Sudoku)
 ```typescript
 // 单个奖项的类型
 type OptionType = {
+  // 奖项图片资源的地址
   image: string
+  // 奖项的索引(右上角奖项索引=0, 顺时针++)
   index: number
 }
 ```
 
-## Sudoku Props
+## Props
 
 | 参数 | 说明 | 类型 | 是否是必须参数 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -50,7 +52,7 @@ type OptionType = {
 | radius | 容器边长 | _number_ | 否 | 300 |
 | containerStyle | 容器的样式 | _object_ | 否 | 无 |
 
-## Sudoku Events
+## Events
 | 名称 | 说明 |
 | --- | --- |
 | itemClick | 奖品点击事件, (index) => void, 返回参数是当前奖品的索引 |
