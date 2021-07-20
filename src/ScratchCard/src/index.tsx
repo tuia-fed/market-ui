@@ -11,7 +11,7 @@ export default Vue.extend({
   name: "mk-scratch-card",
 
   data: () => ({
-    firstTouch: false, //是否第一次touchstart or mousedown
+    firstTouch: true, //是否第一次touchstart or mousedown
     showLucky: false, //显示隐藏抽奖结果
     supportTouch: false, //是否支持touch事件
     canvas,

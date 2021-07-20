@@ -44,10 +44,10 @@ export default {
 
   methods: {
     startCallback() {
-      console.log("抽奖成功！");
+      this.$mkToast.show("开始刮刮卡～");
     },
     clearCallback() {
-      console.log("清除完毕！");
+      this.$mkToast.show("抽到大奖啦～");
     },
     reset() {
       this.$refs.card.reset();
