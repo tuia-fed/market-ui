@@ -24,8 +24,8 @@ export default Vue.extend({
     },
     // 红包点击打开之后的帧动画资源
     giftOpenFrame: {
-      type: Object as PropType<FrameProps>
-    }
+      type: Object as PropType<FrameProps>,
+    },
   },
 
   data: () => ({
@@ -52,7 +52,7 @@ export default Vue.extend({
       return {
         width: parentRect?.width || this.canvasWidth,
         height: parentRect?.height || this.canvasHeight,
-        top: parentRect?.top || 0
+        top: parentRect?.top || 0,
       };
     },
     // 初始化canvas状态
@@ -82,7 +82,7 @@ export default Vue.extend({
           context: this.canvasCtx,
           width: this.canvasWidth,
           height: this.canvasHeight,
-          top: this.canvasToBodyTop
+          top: this.canvasToBodyTop,
         },
         this.imageEleArr,
         this.frameImageEle,
@@ -112,13 +112,13 @@ export default Vue.extend({
               image,
               imageWidth: width,
               imageHeight: height,
-            }
+            };
             // 排除帧动画图片元素
             if (arr[i] !== this.giftOpenFrame.url) {
               this.imageEleArr.push(imageObj);
             } else {
               // 获取帧动画图片元素
-              this.frameImageEle = { ...imageObj }
+              this.frameImageEle = { ...imageObj };
             }
             if (count === len) {
               // 加载完成
@@ -134,7 +134,7 @@ export default Vue.extend({
     // 初始化对应个数的红包实例位置信息
     initRedInstanceState(len: number): ImageState[] {
       const randomStateList = [];
-      const multiple = Math.floor(200 / len)
+      const multiple = Math.floor(200 / len);
       for (let j = 0; j < len; j++) {
         const newState = {
           x: multiple * j + 15,
@@ -147,12 +147,13 @@ export default Vue.extend({
     },
     // 在canvas上绑定click事件、获取点击位置信息、根据鼠标信息和红包所在位置判断红包是否被点击
     handleTouchCanvas(e: MouseEvent) {
-      this.giftInstance.getTouchLocation(e.clientX, e.clientY)
-        .then(amount => {
+      this.giftInstance
+        .getTouchLocation(e.clientX, e.clientY)
+        .then((amount) => {
           // 向上分发红包拆开事件,参数为红包拆开的总个数
-          this.$emit('openGift', amount)
+          this.$emit("openGift", amount);
         });
-    }
+    },
   },
 
   created() {
@@ -163,11 +164,10 @@ export default Vue.extend({
 
   mounted() {
     // 预加载并缓存图片资源
-    this.loadImgs([...this.imgSource, this.giftOpenFrame.url])
-      .then(() => {
-        // 异步实例化canvas
-        this.initCanvas();
-      })
+    this.loadImgs([...this.imgSource, this.giftOpenFrame.url]).then(() => {
+      // 异步实例化canvas
+      this.initCanvas();
+    });
   },
 
   render() {
