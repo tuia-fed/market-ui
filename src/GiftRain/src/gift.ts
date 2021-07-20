@@ -161,6 +161,7 @@ export default class Gift {
     const frame = () => {
       // 绘制红包的时候已经清除画布，重复清除会造成画布闪烁
       // this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      // 裁剪帧动画图片资源的每一帧来实现帧动画的绘制
       this.ctx.drawImage(
         img.image,
         index * oneFrameWidth,
