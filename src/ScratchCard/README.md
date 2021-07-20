@@ -51,4 +51,4 @@ Vue.use(ScratchCard)
 | 名称 | 说明 | 入参 |
 | --- | --- | --- |
 | changeStatus | 改变刮卡状态,true暂停刮卡,false恢复,默认true | _boolean_ |
-| reset | 重置刮刮卡 | --- |
+| reset | 重置刮刮卡 | 无 |
