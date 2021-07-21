@@ -31,33 +31,35 @@ Vue.use(Wheel)
 
 </details>
 
-# API
+# Wheel API
 
-## Wheel Props
+## Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | angle | 角度，转盘转动的角度 | _number_ | `0` |
 | size | 尺寸， 圆形转盘的尺寸 | _number_ | `300` |
 
-## Wheel Slots
+## Slots
 | 名称 | 说明 |
 | --- | --- |
 | default | 转盘内的奖品分布 |
 
-## WheelOption Props
+# WheelOption API
+
+## Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | title | 奖项名称| _string_ | 无 |
 | image | 奖项图片 | _string_ | 无 |
 
-## WheelOption Slots
+## Slots
 | 名称 | 说明 |
 | --- | --- |
 | default | 奖项内容 |
 
-## WheelOption Events
+## Events
 | 名称 | 说明 |
 | --- | --- |
-| onClick | 奖项被点击 (index: number) => void |
+| onClick | 奖项被点击 `(index: number) => void` |

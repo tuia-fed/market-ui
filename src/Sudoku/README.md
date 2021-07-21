@@ -47,12 +47,12 @@ type OptionType = {
 | 参数 | 说明 | 类型 | 是否是必须参数 | 默认值 |
 | --- | --- | --- | --- | --- |
 | activeIndex | 当前高亮的选项索引 | _number_ | 是 | 无 |
-| options | 奖品选项列表, Array<`OptionType`> | _array_ | 是 | 无 |
-| rowsAmount | 容器单行的奖品个数 | _number_ | 否 | 3 |
-| radius | 容器边长 | _number_ | 否 | 300 |
+| options | 奖品选项列表, `Array<OptionType>` | _array_ | 是 | 无 |
+| rowsAmount | 容器单行的奖品个数 | _number_ | 否 | `3` |
+| radius | 容器边长 | _number_ | 否 | `300` |
 | containerStyle | 容器的样式 | _object_ | 否 | 无 |
 
 ## Events
 | 名称 | 说明 |
 | --- | --- |
-| itemClick | 奖品点击事件, (index) => void, 返回参数是当前奖品的索引 |
+| itemClick | 奖品点击事件, `(index) => void`, 返回参数是当前奖品的索引 |

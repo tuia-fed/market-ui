@@ -5,7 +5,7 @@ level: 3
 
 # 红包雨
 
-从容器上方随机降落不同偏移角度的红包，用户点击红包，触发红包拆开回调事件。
+从容器上方随机降落不同种类的红包，用户点击红包，触发红包拆开回调事件。
 
 ## 引入
 
@@ -46,10 +46,18 @@ type GiftOpenFrameType = {
 ## Props
 | 参数 | 说明 | 类型 | 是否是必须参数 | 默认值 |
 | --- | --- | --- | --- | --- |
-| imgSource | 用于渲染成红包雨图片的资源列表, ImageSourceType | _array_ | 是 | 无 |
-| giftOpenFrame | 用于渲染成红包打开之后爆炸的帧动画图片资源信息, GiftOpenFrameType | _object_ | 是 | 无 |
+| imgSource | 用于渲染成红包雨图片的资源列表, `ImageSourceType` | _array_ | 是 | 无 |
+| giftOpenFrame | 用于渲染成红包打开之后爆炸的帧动画图片资源信息, `GiftOpenFrameType` | _object_ | 是 | 无 |
 
 ## Events
 | 名称 | 说明 |
 | --- | --- |
-| openGift | 红包拆开事件, (amount) => void, 返回参数是总共拆开的红包个数 |
+| openGift | 红包拆开事件, `(amount) => void`, 返回参数是总共拆开的红包个数 |
+
+## 方法
+* 通过`ref`可以获取到`GiftRain`实例并调用实例方法
+
+| 方法名 | 说明 |
+| --- | --- |
+| start | 用于开启红包雨 |
+| stop | 用于停止红包雨 |
