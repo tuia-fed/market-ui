@@ -1,6 +1,6 @@
 ---
 group: 互动组件
-level: 3
+level: 5
 ---
 
 # 红包雨
