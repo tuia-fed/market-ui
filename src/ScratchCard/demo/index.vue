@@ -15,13 +15,10 @@
           />
         </mk-scratch-card>
       </div>
-
       <button class="common-button primary marginR" @click="reset">重置</button>
-
       <button class="common-button primary marginR" @click="stopTouch">
         停止
       </button>
-
       <button class="common-button primary marginR" @click="recoverTouch">
         恢复
       </button>
