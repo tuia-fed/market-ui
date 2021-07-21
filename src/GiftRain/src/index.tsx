@@ -21,12 +21,12 @@ export default Vue.extend({
     imgSource: {
       type: Array as PropType<Array<string>>,
       default: () => [],
-      required: true
+      required: true,
     },
     // 红包点击打开之后的帧动画资源
     giftOpenFrame: {
       type: Object as PropType<FrameProps>,
-      required: true
+      required: true,
     },
   },
 
