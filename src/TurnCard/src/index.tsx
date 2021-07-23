@@ -63,14 +63,16 @@ export default Vue.extend({
 
   mounted() {
     this.$nextTick(() => {
-      getParentRect({ id: 'mkTurncard' }).then(res => {
-        const { width, height } = res
-        this.container.width = width;
-        this.container.height = height;
-        this.calcardsize(this.container);
-      }).catch(err => {
-        console.error('请给组件添加一个父容器!')
-      })
+      getParentRect({ id: "mkTurncard" })
+        .then((res) => {
+          const { width, height } = res;
+          this.container.width = width;
+          this.container.height = height;
+          this.calcardsize(this.container);
+        })
+        .catch((err) => {
+          console.error("请给组件添加一个父容器!");
+        });
     });
   },
 
@@ -93,7 +95,10 @@ export default Vue.extend({
                     },
                   ]}
                   style={{
-                    backgroundImage: this.configbackground(this.cardstate[index], card),
+                    backgroundImage: this.configbackground(
+                      this.cardstate[index],
+                      card
+                    ),
                   }}
                   onClick={() => this.cardNativeClick(index)}
                 ></div>

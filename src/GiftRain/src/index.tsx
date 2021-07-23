@@ -52,16 +52,18 @@ export default Vue.extend({
       this.canvas = document.getElementById("gift") as HTMLCanvasElement;
       this.canvasCtx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
       // 获取canvas父容器rect信息
-      getParentRect({ dom: this.canvas }).then(res => {
-        const { width, height, top } = res
-        this.canvasHeight = height;
-        this.canvasWidth = width;
-        this.canvasToBodyTop = top;
+      getParentRect({ dom: this.canvas })
+        .then((res) => {
+          const { width, height, top } = res;
+          this.canvasHeight = height;
+          this.canvasWidth = width;
+          this.canvasToBodyTop = top;
 
-        this.createGiftInstance();
-      }).catch(err => {
-        console.error('请给canavs组件添加一个父容器!')
-      })
+          this.createGiftInstance();
+        })
+        .catch((err) => {
+          console.error("请给canavs组件添加一个父容器!");
+        });
     },
     // 创建红包实例
     createGiftInstance() {
