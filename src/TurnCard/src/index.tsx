@@ -1,5 +1,6 @@
 import Vue, { PropType } from "vue";
 import { CardImg, CardSize } from "./types";
+import { getParentRect } from "../../utils";
 
 export default Vue.extend({
   name: "mk-turn-card",
@@ -40,19 +41,10 @@ export default Vue.extend({
     configbackground(state: number, card: CardImg): string {
       return state > 2 ? `url(${card.back})` : `url(${card.front})`;
     },
+    /** 卡牌点击事件 */
     cardNativeClick(index: number) {
       if (this.cardstate[index] > 1) return false;
       this.$emit("card-start", index);
-    },
-    /** 获取父元素的尺寸 */
-    getParentRect() {
-      const Turncard = document.getElementById("mkTurncard") as HTMLDivElement;
-      const cardParent = Turncard.parentElement;
-      const parentRect = cardParent?.getBoundingClientRect();
-      return {
-        width: parentRect?.width || 320,
-        height: parentRect?.height || 320,
-      };
     },
     /** 计算卡牌的尺寸 */
     calcardsize(size: CardSize) {
@@ -71,11 +63,14 @@ export default Vue.extend({
 
   mounted() {
     this.$nextTick(() => {
-      const { width, height } = this.getParentRect();
-
-      this.container.width = width;
-      this.container.height = height;
-      this.calcardsize(this.container);
+      getParentRect({ id: 'mkTurncard' }).then(res => {
+        const { width, height } = res
+        this.container.width = width;
+        this.container.height = height;
+        this.calcardsize(this.container);
+      }).catch(err => {
+        console.error('请给组件添加一个父容器!')
+      })
     });
   },
 
@@ -98,10 +93,7 @@ export default Vue.extend({
                     },
                   ]}
                   style={{
-                    backgroundImage: this.configbackground(
-                      this.cardstate[index],
-                      card
-                    ),
+                    backgroundImage: this.configbackground(this.cardstate[index], card),
                   }}
                   onClick={() => this.cardNativeClick(index)}
                 ></div>

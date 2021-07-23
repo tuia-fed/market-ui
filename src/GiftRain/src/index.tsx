@@ -1,7 +1,7 @@
 import Vue, { PropType } from "vue";
 import Gift from "./gift";
 import { ImageProps, GiftProps, ImageState, FrameProps } from "./types";
-import { randomRound } from "../../utils";
+import { randomRound, getParentRect } from "../../utils";
 
 let canvas: HTMLCanvasElement;
 let canvasCtx: CanvasRenderingContext2D;
@@ -47,24 +47,24 @@ export default Vue.extend({
   }),
 
   methods: {
-    // 获取canvas父容器的宽高
-    getCanvasParentRect() {
-      const canvasParent = this.canvas?.parentElement;
-      const parentRect = canvasParent?.getBoundingClientRect();
-      return {
-        width: parentRect?.width || this.canvasWidth,
-        height: parentRect?.height || this.canvasHeight,
-        top: parentRect?.top || 0,
-      };
-    },
     // 初始化canvas状态
     initCanvas() {
       this.canvas = document.getElementById("gift") as HTMLCanvasElement;
       this.canvasCtx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-      const { width, height, top } = this.getCanvasParentRect();
-      this.canvasHeight = height;
-      this.canvasWidth = width;
-      this.canvasToBodyTop = top;
+      // 获取canvas父容器rect信息
+      getParentRect({ dom: this.canvas }).then(res => {
+        const { width, height, top } = res
+        this.canvasHeight = height;
+        this.canvasWidth = width;
+        this.canvasToBodyTop = top;
+
+        this.createGiftInstance();
+      }).catch(err => {
+        console.error('请给canavs组件添加一个父容器!')
+      })
+    },
+    // 创建红包实例
+    createGiftInstance() {
       // 红包图片资源信息
       this.totalGiftArr = this.imageEleArr.map((item, index) => {
         const newItem = Object.assign(
@@ -77,7 +77,7 @@ export default Vue.extend({
         );
         return newItem;
       });
-      // 创建红包实例
+
       this.giftInstance = new Gift(
         this.totalGiftArr,
         {
