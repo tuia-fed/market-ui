@@ -5,8 +5,9 @@
       <mk-turn-card
         :cards="cards"
         :cardstate="cardState"
-        @card-start="handleCardStart"
-      ></mk-turn-card>
+        @cardStart="handleCardStart"
+      >
+      </mk-turn-card>
     </div>
     <!-- #endregion html -->
   </demo-section>
@@ -35,7 +36,11 @@ export default {
   methods: {
     handleCardStart(index) {
       // 校验抽奖次数
-      if (index === 8) return false;
+      if (index === 8) {
+        this.$mkToast.show("抽奖次数已用完");
+        return;
+      }
+      this.$mkToast.show(`您抽中的卡牌是第${index + 1}张`);
       // 翻转对应索引卡牌
       this.$set(this.cardState, index, 2);
       this.sleep(300).then(() => {
