@@ -11,7 +11,9 @@ export default Vue.extend({
     return (
       <div>
         <DemoNav />
-        <router-view />
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </div>
     )
   }

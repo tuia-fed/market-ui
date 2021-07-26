@@ -2,40 +2,10 @@ import Vue, { PropType } from "vue";
 import { RingAnimateState, CatchRingAnimateState } from "./types";
 import { delay } from "../../utils";
 
-let ringInitAnimateList: Array<RingAnimateState> = [
-  {
-    isShow: true, // 是否要显示
-    isInitMove: true, // 是否是初始动效
-    isStop: false, // 是否要停止动画
-    id: "cat0",
-  },
-  {
-    isShow: true,
-    isInitMove: true,
-    isStop: false,
-    id: "cat1",
-  },
-  {
-    isShow: true,
-    isInitMove: true,
-    isStop: false,
-    id: "cat2",
-  },
-];
-let ringCatchAnimateList: Array<CatchRingAnimateState> = [
-  {
-    catchActive: false,
-    escapeActive: false,
-  },
-  {
-    catchActive: false,
-    escapeActive: false,
-  },
-  {
-    catchActive: false,
-    escapeActive: false,
-  },
-];
+let ringInitAnimateList: Array<RingAnimateState> = [];
+let ringCopyInitAnimateList: Array<RingAnimateState> = [];
+let ringCatchAnimateList: Array<CatchRingAnimateState> = [];
+let ringCopyCatchAnimateList: Array<CatchRingAnimateState> = [];
 
 export default Vue.extend({
   name: "mk-ring-toss",
@@ -64,41 +34,61 @@ export default Vue.extend({
   data: () => ({
     hasCatchIndex: 0, // 哪只猫被抓、对应的索引
     ringInitAnimateList, // 猫的初始化动画
+    ringCopyInitAnimateList,
     ringCatchAnimateList, // 猫被抓的动画
+    ringCopyCatchAnimateList
   }),
 
-  computed: {
-    // 猫的初始化样式
-    initRingStyleList(): string[] {
-      const ringStyle = [];
-      const { ringSource } = this;
-      for (let j = 0; j < ringSource.length; j++) {
-        const style = `backgroundImage: url(${ringSource[j]})`;
-        ringStyle.push(style);
-      }
-      return ringStyle;
-    },
-    catchRingStyleList(): string[] {
-      const ringStyle = [];
-      const { catchRingSource } = this;
-      for (let j = 0; j < catchRingSource.length; j++) {
-        const style = `backgroundImage: url(${catchRingSource[j]})`;
-        ringStyle.push(style);
-      }
-      return ringStyle;
-    },
-    escapeRingStyleList(): string[] {
-      const ringStyle = [];
-      const { escapeRingSource } = this;
-      for (let j = 0; j < escapeRingSource.length; j++) {
-        const style = `backgroundImage: url(${escapeRingSource[j]})`;
-        ringStyle.push(style);
-      }
-      return ringStyle;
-    },
+  created() {
+    const ringList = this.calculateInitRingAnimate()
+    this.ringInitAnimateList = [...ringList]
+    this.ringCopyInitAnimateList = JSON.parse(JSON.stringify(ringList))
+
+    const ringCatchList = this.calculateCatchRingAnimate()
+    this.ringCatchAnimateList = [...ringCatchList]
+    this.ringCopyCatchAnimateList = JSON.parse(JSON.stringify(ringCatchList))
   },
 
   methods: {
+    /**
+     * 计算猫的初始化动画状态
+     */
+    calculateInitRingAnimate() {
+      const basicAnimateState: Omit<RingAnimateState, 'id'> = {
+        isShow: true, // 是否要显示
+        isInitMove: true, // 是否是初始动效
+        isStop: false, // 是否要停止动画
+      }
+      const animateList: Array<RingAnimateState> = []
+      for (let i = 0; i < this.ringSource.length; i++) {
+        const mergeProps = {
+          ...basicAnimateState,
+          id: `cat${i}`
+        }
+        animateList.push(mergeProps)
+      }
+      return animateList
+    },
+    /**
+     * 计算抓猫的动画状态
+     */
+    calculateCatchRingAnimate() {
+      const animateState: CatchRingAnimateState = {
+        catchActive: false,
+        escapeActive: false
+      }
+      const animateArr = new Array(this.catchRingSource.length).fill(animateState)
+      return animateArr
+    },
+    // 猫的初始化样式
+    initRingStyleList(ringSources: string[]): string[] {
+      const ringStyle = [];
+      for (let j = 0; j < ringSources.length; j++) {
+        const style = `backgroundImage: url(${ringSources[j]})`;
+        ringStyle.push(style);
+      }
+      return ringStyle;
+    },
     /**
      * 计算抓哪只猫
      */
@@ -140,45 +130,19 @@ export default Vue.extend({
      * 重置猫的状态
      */
     resetRing() {
-      this.ringInitAnimateList = [
-        {
-          isShow: true, // 是否要显示
-          isInitMove: false, // 是否是初始动效
-          isStop: false, // 是否要停止动画
-          id: "cat0",
-        },
-        {
-          isShow: true,
-          isInitMove: false,
-          isStop: false,
-          id: "cat1",
-        },
-        {
-          isShow: true,
-          isInitMove: false,
-          isStop: false,
-          id: "cat2",
-        },
-      ];
+      const basicList = JSON.parse(JSON.stringify(this.ringCopyInitAnimateList))
+      this.ringInitAnimateList = basicList.map((item: RingAnimateState) => {
+        const newItem = Object.assign(item, { isInitMove: false })
+        return newItem
+      })
       delay(100).then(() => {
         this.ringInitAnimateList.forEach((item) => {
           item.isInitMove = true;
         });
       });
-      this.ringCatchAnimateList = [
-        {
-          catchActive: false,
-          escapeActive: false,
-        },
-        {
-          catchActive: false,
-          escapeActive: false,
-        },
-        {
-          catchActive: false,
-          escapeActive: false,
-        },
-      ];
+
+      const basicCatchList = JSON.parse(JSON.stringify(this.ringCopyCatchAnimateList))
+      this.ringCatchAnimateList = [...basicCatchList];
     },
     /**
      * 藏猫
@@ -199,7 +163,7 @@ export default Vue.extend({
             return (
               <div
                 key={key}
-                style={this.initRingStyleList[key]}
+                style={this.initRingStyleList(this.ringSource)[key]}
                 id={item.id}
                 class={[
                   `cat${key}`,
@@ -218,13 +182,13 @@ export default Vue.extend({
             this.ringCatchAnimateList.map((item, key) => {
               return (
                 <div
-                  key={`${key}0`}
+                  key={`${key}_0`}
                   class={[
                     "initCatchCat",
                     `catchCat${key}`,
                     { active: item.catchActive },
                   ]}
-                  style={this.catchRingStyleList[key]}
+                  style={this.initRingStyleList(this.catchRingSource)[key]}
                 ></div>
               );
             })}
@@ -233,13 +197,13 @@ export default Vue.extend({
             this.ringCatchAnimateList.map((item, key) => {
               return (
                 <div
-                  key={`${key}1`}
+                  key={`${key}_1`}
                   class={[
                     "initEscapeCat",
                     `escapeCat${key}`,
                     { active: item.escapeActive },
                   ]}
-                  style={this.escapeRingStyleList[key]}
+                  style={this.initRingStyleList(this.escapeRingSource)[key]}
                 ></div>
               );
             })}
