@@ -38,8 +38,8 @@ export default Vue.extend({
     // 是否需要初始化的洗牌动画，默认开启
     isShuffle: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   methods: {
@@ -71,24 +71,26 @@ export default Vue.extend({
       const cardDomArr: Array<HTMLDivElement> = [];
       for (let i = 0; i < cardArr.length; i++) {
         const cardDom = document.getElementById(`card${i}`) as HTMLDivElement;
-        cardDomArr.push(cardDom)
+        cardDomArr.push(cardDom);
       }
-      const middle = middleIndex || (cardArr.length / 2) | 0
+      const middle = middleIndex || (cardArr.length / 2) | 0;
       const middleRect = cardDomArr[middle].getBoundingClientRect();
       // 遍历传入的dom
       for (let j = 0; j < cardDomArr.length; j++) {
-        const item = cardDomArr[j].getBoundingClientRect()
-        cardDomArr[j].style.transitionDuration = "0ms"
-        cardDomArr[j].style.transform = `translate(${middleRect.x - item.x}px, ${middleRect.y - item.y}px)`
+        const item = cardDomArr[j].getBoundingClientRect();
+        cardDomArr[j].style.transitionDuration = "0ms";
+        cardDomArr[j].style.transform = `translate(${
+          middleRect.x - item.x
+        }px, ${middleRect.y - item.y}px)`;
       }
       // 下一帧再回到卡牌的初始位置
       setTimeout(() => {
         for (let j = 0; j < cardDomArr.length; j++) {
-          cardDomArr[j].style.transitionDuration = `${duration}ms`
-          cardDomArr[j].style.transform = "translate(0, 0)"
+          cardDomArr[j].style.transitionDuration = `${duration}ms`;
+          cardDomArr[j].style.transform = "translate(0, 0)";
         }
-      })
-    }
+      });
+    },
   },
 
   mounted() {
@@ -100,7 +102,7 @@ export default Vue.extend({
           this.container.height = height;
           this.calcardsize(this.container);
           // 开启洗牌动画
-          if (this.isShuffle) this.shuffleCard(500)
+          if (this.isShuffle) this.shuffleCard(500);
         })
         .catch((err) => {
           console.error("请给组件添加一个父容器!");
@@ -127,11 +129,14 @@ export default Vue.extend({
                     },
                   ]}
                   style={{
-                    backgroundImage: this.configbackground(this.cardstate[index], card),
+                    backgroundImage: this.configbackground(
+                      this.cardstate[index],
+                      card
+                    ),
                   }}
                   onClick={() => this.cardNativeClick(index)}
                 ></div>
-                { this.$slots.default }
+                {this.$slots.default}
               </div>
             );
           })}
