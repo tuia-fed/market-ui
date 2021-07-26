@@ -36,17 +36,17 @@ export default Vue.extend({
     ringInitAnimateList, // 猫的初始化动画
     ringCopyInitAnimateList,
     ringCatchAnimateList, // 猫被抓的动画
-    ringCopyCatchAnimateList
+    ringCopyCatchAnimateList,
   }),
 
   created() {
-    const ringList = this.calculateInitRingAnimate()
-    this.ringInitAnimateList = [...ringList]
-    this.ringCopyInitAnimateList = JSON.parse(JSON.stringify(ringList))
+    const ringList = this.calculateInitRingAnimate();
+    this.ringInitAnimateList = [...ringList];
+    this.ringCopyInitAnimateList = JSON.parse(JSON.stringify(ringList));
 
-    const ringCatchList = this.calculateCatchRingAnimate()
-    this.ringCatchAnimateList = [...ringCatchList]
-    this.ringCopyCatchAnimateList = JSON.parse(JSON.stringify(ringCatchList))
+    const ringCatchList = this.calculateCatchRingAnimate();
+    this.ringCatchAnimateList = [...ringCatchList];
+    this.ringCopyCatchAnimateList = JSON.parse(JSON.stringify(ringCatchList));
   },
 
   methods: {
@@ -54,20 +54,20 @@ export default Vue.extend({
      * 计算猫的初始化动画状态
      */
     calculateInitRingAnimate() {
-      const basicAnimateState: Omit<RingAnimateState, 'id'> = {
+      const basicAnimateState: Omit<RingAnimateState, "id"> = {
         isShow: true, // 是否要显示
         isInitMove: true, // 是否是初始动效
         isStop: false, // 是否要停止动画
-      }
-      const animateList: Array<RingAnimateState> = []
+      };
+      const animateList: Array<RingAnimateState> = [];
       for (let i = 0; i < this.ringSource.length; i++) {
         const mergeProps = {
           ...basicAnimateState,
-          id: `cat${i}`
-        }
-        animateList.push(mergeProps)
+          id: `cat${i}`,
+        };
+        animateList.push(mergeProps);
       }
-      return animateList
+      return animateList;
     },
     /**
      * 计算抓猫的动画状态
@@ -75,10 +75,12 @@ export default Vue.extend({
     calculateCatchRingAnimate() {
       const animateState: CatchRingAnimateState = {
         catchActive: false,
-        escapeActive: false
-      }
-      const animateArr = new Array(this.catchRingSource.length).fill(animateState)
-      return animateArr
+        escapeActive: false,
+      };
+      const animateArr = new Array(this.catchRingSource.length).fill(
+        animateState
+      );
+      return animateArr;
     },
     // 猫的初始化样式
     initRingStyleList(ringSources: string[]): string[] {
@@ -130,18 +132,22 @@ export default Vue.extend({
      * 重置猫的状态
      */
     resetRing() {
-      const basicList = JSON.parse(JSON.stringify(this.ringCopyInitAnimateList))
+      const basicList = JSON.parse(
+        JSON.stringify(this.ringCopyInitAnimateList)
+      );
       this.ringInitAnimateList = basicList.map((item: RingAnimateState) => {
-        const newItem = Object.assign(item, { isInitMove: false })
-        return newItem
-      })
+        const newItem = Object.assign(item, { isInitMove: false });
+        return newItem;
+      });
       delay(100).then(() => {
         this.ringInitAnimateList.forEach((item) => {
           item.isInitMove = true;
         });
       });
 
-      const basicCatchList = JSON.parse(JSON.stringify(this.ringCopyCatchAnimateList))
+      const basicCatchList = JSON.parse(
+        JSON.stringify(this.ringCopyCatchAnimateList)
+      );
       this.ringCatchAnimateList = [...basicCatchList];
     },
     /**
