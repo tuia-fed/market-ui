@@ -7,7 +7,7 @@ module.exports = {
   base: '/market-ui/', // 部署到https://foo.github.io/market-ui/
   title: pkg.name.toUpperCase(),
   description: pkg.description,
-  dest: 'docs/dist',
+  dest: 'dist',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
