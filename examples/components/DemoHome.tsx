@@ -51,7 +51,7 @@ export default Vue.extend({
           <span>MarketUI</span>
         </h1>
         <h2 class="demo-home__desc">
-          丰富、可靠的移动端组件库
+          丰富、可靠的移动端营销互动组件库
         </h2>
         {
           this.group.length && this.group.map((item: groupItemType) => {
