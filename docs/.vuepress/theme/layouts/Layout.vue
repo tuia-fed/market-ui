@@ -27,8 +27,6 @@ import Simulator from '../components/Simulator'
 import Footer from '../components/Footer'
 import { throttle, DOC_PUBLICPATH, DOC_DEVPORT } from '../utils'
 
-let iframeConfigPath = null
-
 export default {
   name: 'Layout',
   data() {
@@ -37,7 +35,8 @@ export default {
       iframeListener: null,
       currentScrollTop: 0,
       simulatorDisabled: false,
-      simulatorHash: ''
+      simulatorHash: '',
+      basicPath: ''
     }
   },
   components: {
@@ -49,15 +48,11 @@ export default {
   },
   computed: {
     simulatorPath() {
-      let basicPath = ''
-      if (iframeConfigPath) {
-        basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}`
-      }
       let iframePath = ''
       if (this.simulatorHash) {
-        iframePath = `${basicPath}/#${this.simulatorHash}`
+        iframePath = `${this.basicPath}/#${this.simulatorHash}`
       } else {
-        iframePath = basicPath + '/#/'
+        iframePath = this.basicPath + '/#/'
       }
       return iframePath
     }
@@ -94,7 +89,8 @@ export default {
     window.addEventListener('message', this.iframeListener, false)
     // 动态引入库，避免build的时候报错，window is not defined
     import('../utils').then(module => {
-      iframeConfigPath = module.iframeConfigPath
+      const { iframeConfigPath } = module
+      this.basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}`
     })
   },
   beforeDestroy() {
