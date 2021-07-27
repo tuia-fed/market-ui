@@ -3,7 +3,7 @@
     <div class="tuia-doc-row">
       <div class="tuia-doc-header__top">
         <!-- logo -->
-        <a class="tuia-doc-header__logo" href="/">
+        <a class="tuia-doc-header__logo" href="/market-ui">
           <img src="../assets/logo.png" alt="">
           <span>MarketUI</span>
         </a>
