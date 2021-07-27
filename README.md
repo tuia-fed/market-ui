@@ -40,7 +40,7 @@ export default {
 /* #region——#endregion内部包裹的是可以引入的代码区块, js是区块的标识, 用于分段展示 */
 
 // 2. README.md 引入区块代码
-<<< @/src/wheel/demo/index.vue#js
+<<< @/src/Wheel/demo/index.vue#js
 // '<<< @'指向的是机器根地址, @——process.cwd(), 后面跟被引入文件的绝对路径
 ```
 ## 开发规范
@@ -61,7 +61,7 @@ npx husky install
 ```
 
 ## 自动创建标准组件开发模板
-* 直接输入组件相关的信息，插件会自动为你生成一份标准化的组件开发模板代码，告别手动创建，一键创建模板，快乐coding！
+* 直接输入组件相关的信息，插件会自动为你生成一份标准化的组件开发模板代码，告别手动创建，一键创建模板，happy coding！
 ```bash
 yarn create:new
 ```

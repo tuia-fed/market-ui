@@ -5,8 +5,8 @@ level: 2
 
 # 开发指南
 
-* 感谢你使用MarketUI，以下是关于向 MarketUI 提交反馈或代码的指南。
-* 在向 MarketUI 提交 issue 或者 PR 之前，请先花几分钟时间阅读以下文字。
+感谢你使用MarketUI，以下是关于向 MarketUI 提交反馈或代码的指南。
+在向 MarketUI 提交 [issue](https://github.com/tuia-fed/market-ui/issues) 或者 [PR](https://github.com/tuia-fed/market-ui/pulls) 之前，请先花几分钟时间阅读以下文字。
 
 # 参与开发
 

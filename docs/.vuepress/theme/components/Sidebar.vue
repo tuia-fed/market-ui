@@ -92,9 +92,9 @@ export default {
 <style lang="less" scoped>
 .tuia-doc-sidebar {
   position: fixed;
-  left: 122px;
   top: 60px;
   bottom: 0;
+  left: 122px;
   z-index: 1;
   min-width: 220px;
   max-width: 220px;
@@ -109,10 +109,10 @@ export default {
 
   &__title {
     padding: 8px 0 8px 30px;
-    color: #455a64;
-    font-weight: 600;
     font-size: 15px;
+    font-weight: 600;
     line-height: 28px;
+    color: #455a64;
   }
 
   &__item {
@@ -120,11 +120,11 @@ export default {
 
     & > a {
       display: block;
-      margin: 0;
       padding: 8px 0 8px 30px;
-      color: #455a64;
+      margin: 0;
       font-size: 14px;
       line-height: 28px;
+      color: #455a64;
       transition: color 0.2s;
     }
   }

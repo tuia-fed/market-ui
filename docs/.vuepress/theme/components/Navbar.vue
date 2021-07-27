@@ -13,7 +13,7 @@
         </div>
         <ul class="tuia-doc-header__top-nav">
           <li class="tui-doc-header__top-nav-item">
-            <a href="http://gitlab.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui" target="_blank">
+            <a href="https://github.com/tuia-fed/market-ui" target="_blank">
               <img src="../assets/github.svg" alt="">
               <p>Github</p>
             </a>

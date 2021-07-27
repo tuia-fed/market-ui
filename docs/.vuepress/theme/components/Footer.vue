@@ -18,7 +18,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
 .footer {
   padding-right: 24px;
 }
