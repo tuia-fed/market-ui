@@ -21,22 +21,27 @@ const FOOTER_HEIGHT = 32
 
 export default {
   name: 'Container',
+  data: () => ({
+    windowHeight: 0
+  }),
   computed: {
     containerStyle() {
-      const innerHeight = window.innerHeight
       return {
-        minHeight: `${innerHeight - NAV_HEIGHT - FOOTER_HEIGHT - 43}px`
+        minHeight: `${this.windowHeight - NAV_HEIGHT - FOOTER_HEIGHT - 43}px`
       }
     }
+  },
+  mounted() {
+    this.windowHeight = window.innerHeight
   }
 }
 </script>
 <style lang="less" scoped>
 .tuia-doc-container {
-  width: 100%;
   box-sizing: border-box;
-  overflow: hidden;
+  width: 100%;
   padding: 0 122px 0 342px;
+  overflow: hidden;
 }
 
 .tuia-doc-content {
@@ -53,13 +58,13 @@ export default {
 
   .tuia-doc-preview {
     position: absolute;
-    right: 0;
     top: 58px;
+    right: 0;
     box-sizing: border-box;
-    overflow: hidden;
     width: 360px;
     min-width: 360px;
     height: 640px;
+    overflow: hidden;
     background-color: #fafafa;
     border-radius: 12px;
     box-shadow: #ebedf0 0 4px 12px;
@@ -69,9 +74,9 @@ export default {
 .tuia-doc-footer {
   height: 32px;
   margin-top: -32px;
+  font-size: 14px;
+  line-height: 32px;
   color: #4e6e8e;
   text-align: right;
-  line-height: 32px;
-  font-size: 14px;
 }
 </style>

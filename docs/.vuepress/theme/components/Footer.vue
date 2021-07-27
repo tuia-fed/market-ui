@@ -18,15 +18,18 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+
 .footer {
   padding-right: 24px;
 }
+
 .prefix {
   font-weight: 500;
   color: #4e6e8e;
 }
+
 .time {
-  color: #767676;
   font-weight: 400;
+  color: #767676;
 }
 </style>

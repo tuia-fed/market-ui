@@ -25,7 +25,9 @@ import Sidebar from '../components/Sidebar'
 import Container from '../components/Container'
 import Simulator from '../components/Simulator'
 import Footer from '../components/Footer'
-import { throttle, iframeConfigPath, DOC_PUBLICPATH, DOC_DEVPORT } from '../utils'
+import { throttle, DOC_PUBLICPATH, DOC_DEVPORT } from '../utils'
+
+let iframeConfigPath = null
 
 export default {
   name: 'Layout',
@@ -47,7 +49,10 @@ export default {
   },
   computed: {
     simulatorPath() {
-      const basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}`
+      let basicPath = ''
+      if (iframeConfigPath) {
+        basicPath = iframeConfigPath(DOC_DEVPORT) + `${DOC_PUBLICPATH}`
+      }
       let iframePath = ''
       if (this.simulatorHash) {
         iframePath = `${basicPath}/#${this.simulatorHash}`
@@ -87,6 +92,10 @@ export default {
       }
     }
     window.addEventListener('message', this.iframeListener, false)
+    // 动态引入库，避免build的时候报错，window is not defined
+    import('../utils').then(module => {
+      iframeConfigPath = module.iframeConfigPath
+    })
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.scrollListener)
