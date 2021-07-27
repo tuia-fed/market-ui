@@ -28,10 +28,19 @@ export default Vue.extend({
   }),
 
   created() {
-    window.addEventListener('message', e => {
-      if (!e.data || e.data.type === 'webpackOk' || !e.data.filter) return
-      this.group = e.data.filter(item => !(/引导$/).test(item.group))
-    })
+    const routerGroups = window.sessionStorage.getItem('routerGroups')
+    if (routerGroups) {
+      this.group = JSON.parse(routerGroups)
+    } else {
+      window.addEventListener('message', e => {
+        if (!e.data || e.data.type === 'webpackOk' || !e.data.filter) return
+        this.group = e.data.filter(item => !(/引导$/).test(item.group))
+        // 存储到sessionStorage中,用于解决keep-alive组件去掉之后，demo路由返回之后group数据被重置
+        if (window.sessionStorage && this.group.length) {
+          window.sessionStorage.setItem('routerGroups', JSON.stringify(this.group))
+        }
+      })
+    }
   },
 
   render() {
