@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@master
+        with:
+          persist-credentials: false
+      - name: Install and Build
+        run: |
+          yarn install
+          yarn dev-copy
+          yarn build-doc
+          yarn build-demo
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist

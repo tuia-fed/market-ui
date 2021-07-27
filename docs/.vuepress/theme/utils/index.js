@@ -51,9 +51,9 @@ export function iframeReady (iframe, callback) {
 
 /* 配置iframe的开发生产基础路径 */
 export function iframeConfigPath (iframePort = '8080') {
-  const { protocol, hostname, port } = window.location
+  const { protocol, hostname, port, origin } = window.location
   const localPathExp = /^127\.0\.0\.1$/
-  let basicPath = ''
+  let basicPath = `${origin}/market-ui` // 生产环境的路径
   if (localPathExp.test(hostname) || port === '8080') { // 本地开发
     basicPath = `${protocol}//${hostname}:${iframePort}`
   }
