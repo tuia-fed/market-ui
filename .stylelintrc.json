@@ -1,0 +1,18 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "selector-pseudo-class-no-unknown": null,
+    "unit-case":null,
+    "no-descending-specificity":null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "property-no-unknown":[
+      true,
+      {
+        "ignoreProperties":[
+          "text-stroke"
+        ]
+      }
+    ]
+  }
+}

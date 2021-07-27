@@ -1,0 +1,42 @@
+@import '../styles/index.less';
+
+.mk {
+  &-wheel {
+    .wh();
+    .bg();
+
+    overflow: hidden;
+    user-select: none;
+    border-radius: 50%;
+
+    &-option {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: right bottom;
+
+      &__revert {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        height: 50%;
+        transform: translate(-25%, -25%) skew(-15deg, -15deg) rotate(-45deg);
+      }
+
+      &__title {
+        overflow: hidden;
+        font-size: 16px;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &__image {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,326 @@
+.content__default{
+  /* 全局属性 */
+  ::selection {
+    background:#b981d1;
+    color:white
+  }
+  ::-moz-selection {
+    background:#b981d1;
+    color:white
+  }
+  ::-webkit-selection {
+    background:#b981d1;
+    color:white
+  }
+
+  html {
+    background-color: #f6f6f6;
+    max-width: 914px;
+    font-size: 16px;
+    text-align: left;
+    letter-spacing: 0px;
+    font-family: "Fira Code", "微软雅黑","PingFang SC", "Microsoft YaHei", sans-serif;
+
+    li {
+      line-height: 25px !important;
+    }
+  }
+
+  /*段落*/
+  p {
+    font-size: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+    line-height: 26px;
+    color: #333;
+  }
+
+  /*  todo item 对齐 */
+  input[type="checkbox"] {
+    margin-top: calc(1em - 2px);
+    margin-right: 5px;
+    left: -3px;
+  }
+
+  /*标题*/
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: .72em 0;
+    padding: 0px;
+    font-weight: bold;
+    color: #333;
+  }
+  h1 {
+    margin: 1.2em 0;
+    font-size: 1.5rem;
+    /* text-align: center; */
+  }
+  // h2::before{
+  //   content: "✔";
+  //   font-weight: bold;
+  //   color: #1f6fb5;
+  //   margin-right: 4px
+  // }
+  h2 {
+    font-size: 1.2rem;
+    margin: 1em 0;
+  }
+  h2 span {
+  font-weight: bold;
+  color: #333;
+  padding: 3px 10px 1px;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+  h4 {
+    font-size: 1.75rem;
+  }
+  h5 {
+    font-size: 0.5rem;
+  }
+  h6 {
+    font-size: 0.5rem;
+  }
+
+  /* 列表 */
+  ul,
+  ol {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 25px;
+    color: #333;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ul ul {
+    list-style-type: square;
+  }
+  ol {
+    list-style-type: decimal;
+  }
+  li {
+    line-height: 28px;
+  }
+  /* 列表内容 */
+  li section {
+    font-size:14px;
+    line-height: 25px;
+  }
+
+  /* 字体加粗 */
+  strong::before {
+    content: '「';
+  }
+
+  strong {
+    color: #1f6fb5;
+    font-weight: bold;
+  }
+
+  strong::after {
+    content: '」';
+  }
+
+  /*引用*/
+  blockquote {
+    margin-bottom: 16px;
+    margin-top: 16px;
+    padding: 10px 10px 10px 20px;
+    font-size: 0.9em;
+    background: #f7f7f7;
+    border-left: 3px solid #1f6fb5;
+    color: #6a737d;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    line-height: 26px;
+  }
+  blockquote p {
+    line-height: 26px;
+  }
+
+  /* 超链接 */
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #1f6fb5;
+    border-bottom: 1px solid #1f6fb5;
+    display: none;
+  }
+
+  /* 分割线 */
+  hr {
+    height: 1px;
+    padding: 0;
+    border: none;
+    text-align: center;
+    background-image: linear-gradient(to right, rgba(231,93,109,0.3), #0974e2, rgba(255,216,181,0.3))
+  }
+
+  /* 行内代码 */
+  p code,
+  span code,
+  li code {
+    font-size: 15px;
+    line-height: 25px;
+    word-wrap: break-word;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin: 0 2px;
+    // color:  rgb(235, 76, 55);;
+    // background-color: rgba(27,31,35,.05);
+    background-color: #fff5f5;
+    color: #ff502c;
+    word-break: break-all;
+  }
+
+  /* 文章插图 */
+  img {
+    display: block;
+    margin: 10px auto;
+    width: 85%;
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow:0px 4px 12px #84A1A8;
+    border: 0px;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 12px;
+    color: #34495e;
+    font-size: 14px;
+    line-height: 1.5;
+    border-collapse: collapse;
+  }
+
+  table tr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    background-color: white;
+  }
+  table tr:nth-child(2n) {
+    background-color: #F8F8F8;
+  }
+  table tr th,
+  table tr td {
+    font-size: 14px;
+    border: 1px solid #f1f4f8;
+    padding: 8px;
+    text-align: left;
+  }
+  table tr th {
+    padding: 8px 10px;
+    font-weight: 600;
+    text-align: left;
+    background-color: #f0f0f0;
+  }
+  table td:first-child code {
+    margin: 0;
+    padding: 2px 6px;
+    color: #1989fa;
+    font-weight: 600;
+    font-size: 11px;
+    background-color: rgba(25, 137, 250, 0.1);
+    border-radius: 20px;
+  }
+  table em {
+    color: #4fc08d;
+    font-size: 14px;
+    font-family: 'Source Code Pro', 'Monaco', 'Inconsolata', monospace;
+    font-style: normal;
+    -webkit-font-smoothing: auto;
+  }
+
+  /* 上角标 */
+  .md-footnote {
+  font-weight: bold;
+  color: #1f6fb5;
+  }
+  .md-footnote > .md-text:before {
+  content: '['
+  }
+  .md-footnote > .md-text:after {
+  content: ']'
+  }
+
+
+  /* 下角标 */
+  .md-def-name {
+    padding-right: 1.8ch;
+  }
+  .md-def-name:before {
+    content: '[';
+    color: #000;
+  }
+  .md-def-name:after {
+    color: #000;
+  }
+
+
+  code, pre {
+    border-radius: 3px;
+    background-color:#f7f7f7;
+    color: inherit;
+}
+
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    margin: 0 2px;
+}
+
+.language-js, .language-vue, .language-bash, h1, h2, p {
+  padding-right: 380px;
+}
+
+pre {
+    line-height: 1.7em;
+    overflow: auto;
+    padding: 18px 15px 12px;
+    border-left: 5px solid #f7f7f7;
+}
+
+pre > code {
+    border: 0;
+    display: inline;
+    max-width: initial;
+    padding: 0;
+    margin: 0;
+    overflow: initial;
+    line-height: inherit;
+    font-size: .85em;
+    white-space: pre;
+    background: 0 0;
+
+}
+
+code {
+    color: #666555;
+}
+}
+
+summary {
+  text-align: center;
+  padding-top: 12px;
+  padding-right: 380px;
+  height: 44px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-top: -1px;
+  color: #d3dce6;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    color: #4fc08d;
+  }
+}

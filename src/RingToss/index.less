@@ -1,0 +1,203 @@
+@import '../styles/index.less';
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.mk {
+  &-ring-toss {
+    .wh();
+    .bg();
+
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+
+    .initCat {
+      position: absolute;
+      top: 10px;
+      right: -180px;
+      width: 138px;
+      height: 164px;
+      touch-action: none;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transform-origin: bottom center;
+    }
+
+    .activeCatInit {
+      animation: catInit steps(1) 1s 0s infinite, cat 2.8s linear infinite;
+    }
+
+    .stopCatMove {
+      animation-play-state: paused;
+    }
+
+    .cat0 {
+      animation-delay: -1.8s;
+    }
+
+    .cat1 {
+      animation-delay: -0.9s;
+    }
+
+    .cat2 {
+      animation-delay: 0s;
+    }
+
+    @keyframes catInit {
+      0% {
+        background-position-x: 0;
+      }
+
+      50% {
+        background-position-x: 100%;
+      }
+    }
+
+    @keyframes cat {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      10% {
+        transform: translate(-50px, 0);
+      }
+
+      20% {
+        transform: translate(-100px, 0);
+      }
+
+      30% {
+        transform: translate(-150px, 0);
+      }
+
+      40% {
+        transform: translate(-200px, -10px);
+      }
+
+      50% {
+        transform: translate(-250px, 0) scale(1, 1);
+      }
+
+      60% {
+        transform: translate(-300px, 0) scale(1, 1.1);
+      }
+
+      70% {
+        transform: translate(-350px, 0);
+      }
+
+      80% {
+        transform: translate(-400px, -10px);
+      }
+
+      90% {
+        transform: translate(-450px, 0);
+      }
+
+      100% {
+        transform: translate(-500px, -10px) scale(1, 1);
+      }
+    }
+  }
+
+  &-ring-catch__area {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    pointer-events: none;
+
+    .initCatchCat {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      left: 30px;
+      width: 138px;
+      height: 368px;
+      margin: 0 auto;
+      pointer-events: none;
+      touch-action: none;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0;
+
+      &.active {
+        opacity: 1;
+        animation: stepMove steps(1) 0.2s forwards, catchCat 1.8s linear forwards;
+
+        @keyframes stepMove {
+          0% {
+            background-position-x: 0;
+          }
+
+          100% {
+            background-position-x: 100%;
+          }
+        }
+
+        @keyframes catchCat {
+          from {
+            transform: translate(0, 0);
+          }
+
+          33% {
+            transform: translate(-20px, 30px);
+          }
+
+          40% {
+            transform: translate(-15px, 30px);
+          }
+
+          66% {
+            transform: translate(20px, 40px);
+          }
+
+          73% {
+            transform: translate(15px, 40px);
+          }
+
+          to {
+            transform: translate(0, 70px);
+          }
+        }
+      }
+    }
+
+    .initEscapeCat {
+      position: absolute;
+      top: 210px;
+      right: 0;
+      left: 30px;
+      width: 138px;
+      height: 164px;
+      margin: 0 auto;
+      pointer-events: none;
+      touch-action: none;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0;
+
+      &.active {
+        opacity: 1;
+        animation: escapeCatMove 1s linear forwards;
+
+        @keyframes escapeCatMove {
+          0% {
+            transform: translate(0, 0);
+          }
+
+          100% {
+            transform: translate(0, -60px);
+          }
+        }
+      }
+    }
+  }
+}

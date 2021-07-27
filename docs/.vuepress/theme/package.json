@@ -1,0 +1,20 @@
+{
+  "name": "@tuia/vuepress-theme",
+  "version": "0.0.1",
+  "description": "A Custome theme for VuePress Document",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "theme",
+    "vue",
+    "vuepress"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/plugin-nprogress": "^1.8.2",
+    "@vuepress/plugin-search": "^1.8.2"
+  }
+}

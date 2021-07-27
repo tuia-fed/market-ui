@@ -1,0 +1,27 @@
+@import '../styles/index.less';
+
+.mk {
+  &-scratch {
+    .wh();
+    .bg();
+
+    overflow: hidden;
+
+    &_card {
+      .wh();
+
+      position: relative;
+    }
+
+    &_result {
+      .wh();
+
+      overflow: hidden;
+    }
+
+    &_canvas {
+      position: absolute;
+      top: 0;
+    }
+  }
+}

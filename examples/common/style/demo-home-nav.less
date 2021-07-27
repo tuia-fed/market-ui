@@ -1,0 +1,42 @@
+.demo-home-nav {
+  position: relative;
+
+  &__title {
+    margin: 24px 0 8px 16px;
+    font-size: 14px;
+    color: rgba(69, 90, 100, 0.6);
+  }
+
+  &__block {
+    position: relative;
+    display: flex;
+    height: 40px;
+    padding-left: 20px;
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    color: #323233;
+    text-decoration: none;
+    background: #f7f8fa;
+    border-radius: 99px;
+    transition: background 0.3s;
+
+    &:hover {
+      background: darken(#f7f8fa, 3%);
+    }
+
+    &:active {
+      background: darken(#f7f8fa, 6%);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+  }
+}
