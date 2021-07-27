@@ -40,14 +40,28 @@ export default {
 /* #region——#endregion内部包裹的是可以引入的代码区块, js是区块的标识, 用于分段展示 */
 
 // 2. README.md 引入区块代码
-<<< @/../market-ui/src/wheel/demo/index.vue#js
-// '<<< @/../'指向的是机器根地址, @——process.cwd(), 后面跟被引入文件的绝对路径
+<<< @/src/wheel/demo/index.vue#js
+// '<<< @'指向的是机器根地址, @——process.cwd(), 后面跟被引入文件的绝对路径
 ```
 ## 开发规范
 * 组件核心代码、demo和README统一放在`src/*`目录下，方便开发和维护
+
+## 代码规范
+* `eslint`控制在代码编写阶段，代码格式不符合规范的问题；commit之前会有`prettier`做代码风格校验和自动化校正，同时这种风格一般不支持修改，属于统一的团队代码风格[标准](https://github.com/prettier/prettier/issues/40)，以及`stylelint`对样式文件风格的校验，确保整体编码风格的统一性
 
 ## 构建
 * 基于`mkui`构建工具打包，`es`目录下构建出来的是基于`esm`——ES模块文件，`lib`目录构建出的是`umd`规范，以`amd`、`cjs`、`iife`为一体的通用模块文件
 
 ## 关于hooks
 * 在React的生态内，`hooks`被用于抽象通用逻辑的最好方式，因此可以借鉴其思想，将组件的通用逻辑抽象出来，同组件完全独立，只输出一个响应式的对象变量和一些操作该变量的方法。在本项目中，所有抽离出的逻辑全部放在`./src/hooks`目录下，`mkui-cli`会单独打包并对外独立暴露出来，方便组件调用。
+
+## 安装husky.sh
+```bash
+npx husky install
+```
+
+## 自动创建标准组件开发模板
+* 直接输入组件相关的信息，插件会自动为你生成一份标准化的组件开发模板代码，告别手动创建，一键创建模板，快乐coding！
+```bash
+yarn create:new
+```

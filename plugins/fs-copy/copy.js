@@ -26,5 +26,9 @@ module.exports = {
         }
       })
     )
+  },
+  // 清除docs/components目录下的内容
+  async cleanDocs () {
+    await fs.remove(resolvePath('../../docs/components'))
   }
 }

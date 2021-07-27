@@ -142,8 +142,8 @@ export default {
 }
 
 .wheel-option-1 {
-  background-color: #fff;
   color: #f47920;
+  background-color: #fff;
 }
 
 .wheel-option-2 {
@@ -153,21 +153,21 @@ export default {
 
 .btn {
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  left: 50%;
   width: 90px;
   height: 105px;
-  background-repeat: no-repeat;
   background-image: url("http://yun.tuisnake.com/h5-mami/dist/5ee82ba891e04abd3eb7.png");
+  background-repeat: no-repeat;
   background-size: 100%;
+  transform: translate(-50%, -50%);
 
   &-inner {
-    margin: 12px auto;
     width: 80px;
     height: 80px;
-    background-size: 100%;
+    margin: 12px auto;
     background-image: url("//yun.tuisnake.com/h5-mani/marketui16b96b04-0664-4df0-ac02-4d29cf0b5ab2.png");
+    background-size: 100%;
     animation: wheelBtnhuxi 1s linear infinite;
   }
 
@@ -176,6 +176,7 @@ export default {
     100% {
       transform: scale(1);
     }
+
     50% {
       transform: scale(0.85);
     }
@@ -183,8 +184,8 @@ export default {
 }
 
 .messages {
-  margin: 0;
   padding: 20px;
+  margin: 0;
 
   li {
     margin-bottom: 15px;

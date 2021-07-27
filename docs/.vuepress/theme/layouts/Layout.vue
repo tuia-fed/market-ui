@@ -8,14 +8,15 @@
     <!-- Content组件是vuepress内部用于渲染Markdown文件的内容 -->
     <Container>
       <Content />
+      <!-- 模拟器 -->
+      <div slot="simulator">
+        <Simulator :src="simulatorPath"></Simulator>
+      </div>
       <!-- 页脚 -->
       <div slot="footer">
         <Footer />
       </div>
     </Container>
-    <!-- <Content slot-key="demo" /> -->
-    <!-- 模拟器 -->
-    <Simulator :isTopFixed="isFixed" :src="simulatorPath" ref="simulator"></Simulator>
   </div>
 </template>
 <script>
@@ -30,7 +31,6 @@ export default {
   name: 'Layout',
   data() {
     return {
-      isFixed: false,
       scrollListener: null,
       iframeListener: null,
       currentScrollTop: 0,
@@ -68,16 +68,10 @@ export default {
     }
   },
   mounted() {
-    const that = this
     /* 监听页面滚动 */
-    this.scrollListener = throttle(function(e) {
+    this.scrollListener = throttle(e => {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      that.currentScrollTop = scrollTop
-      if (scrollTop >= 60) {
-        that.isFixed = true
-      } else {
-        that.isFixed = false
-      }
+      this.currentScrollTop = scrollTop
     }, 20)
     window.addEventListener('scroll', this.scrollListener)
     /* 监听iframe子页面发送的消息 */

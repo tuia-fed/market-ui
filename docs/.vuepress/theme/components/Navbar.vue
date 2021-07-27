@@ -15,6 +15,7 @@
           <li class="tui-doc-header__top-nav-item">
             <a href="http://gitlab.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui" target="_blank">
               <img src="../assets/github.svg" alt="">
+              <p>Github</p>
             </a>
           </li>
         </ul>
@@ -46,48 +47,74 @@ export default {
     -webkit-user-select: none;
     user-select: none;
   }
+
   &-row {
     width: 100%;
   }
+
   &-header__top {
     display: flex;
     display: -webkit-flex;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 122px;
     height: 60px;
     line-height: 60px;
+
     &-nav {
       flex: 1;
       -webkit-box-flex: 1;
       font-size: 0;
       text-align: right;
+
       & > li {
         position: relative;
         font-size: 18px;
         color: #fff;
         margin-left: 20px;
         .inlineVertical();
+
+        a {
+          display: flex;
+          display: -webkit-flex;
+          height: 26px;
+          align-items: center;
+        }
+
         img {
           display: block;
           width: 26px;
           height: 26px;
         }
+
+        p {
+          height: 18px;
+          font-size: 14px;
+          line-height: 18px;
+          text-align: center;
+          color: #fff;
+          margin-left: 8px;
+        }
       }
     }
   }
+
   &-header__logo {
     display: block;
+
     & > img {
       width: 24px;
       .inlineVertical();
+
       margin-right: 10px;
     }
+
     & > span {
       font-size: 22px;
       color: #fff;
       .inlineVertical();
     }
   }
+
   &-header__search {
     margin-left: 200px;
   }

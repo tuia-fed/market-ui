@@ -5,8 +5,7 @@ level: 1
 
 # Toast 轻提示
 
-## 介绍
-* 用于做简单消息提示的组件，支持全局插件调用
+用于做简单消息提示的组件，支持全局插件调用
 
 ## 引入
 ```js
@@ -16,14 +15,12 @@ import { Toast } from '@tuia/market-ui'
 Vue.use(Toast)
 ```
 
-# 代码演示
-
-## 基础用法
-<<< @/src/toast/demo/index.vue#html1
+## 代码演示
+<<< @/src/Toast/demo/index.vue#html1
 
 <br />
 
-<<< @/src/toast/demo/index.vue#html2
+<<< @/src/Toast/demo/index.vue#html2
 
 <br />
 
@@ -31,7 +28,7 @@ Vue.use(Toast)
 
 <summary>点击展开完整代码</summary>
 
-<<< @/src/toast/demo/index.vue#js
+<<< @/src/Toast/demo/index.vue#js
 
 </details>
 

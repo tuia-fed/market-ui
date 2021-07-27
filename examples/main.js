@@ -9,8 +9,8 @@ import DemoSection from './components/DemoSection'
 /* 全局注册组件库 */
 Vue.use(MarketUI)
 
-Vue.component(DemoBlock.name, DemoBlock)
-Vue.component(DemoSection.name, DemoSection)
+Vue.component('DemoBlock', DemoBlock)
+Vue.component('DemoSection', DemoSection)
 
 if (process.env.NODE_ENV !== 'production') {
   Vue.config.productionTip = false
