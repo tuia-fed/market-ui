@@ -16,6 +16,7 @@ jobs:
           yarn install
           yarn build-copy
           yarn build-doc
+          yarn build
           yarn build-demo
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
