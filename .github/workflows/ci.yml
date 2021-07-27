@@ -14,7 +14,7 @@ jobs:
       - name: Install and Build
         run: |
           yarn install
-          yarn dev-copy
+          yarn build-copy
           yarn build-doc
           yarn build-demo
       - name: Deploy 🚀

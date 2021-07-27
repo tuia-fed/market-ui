@@ -21,7 +21,9 @@ function start() {
   // 先拷贝一次
   copyFn()
   /* 监听文件变化自动拷贝 */
-  chokidar.watch(SRCDIR).on('change', copyFn)
+  if (process.env.NODE_ENV === 'development') {
+    chokidar.watch(SRCDIR).on('change', copyFn)
+  }
 }
 
 start()
