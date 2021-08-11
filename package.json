@@ -4,6 +4,10 @@
   "private": true,
   "main": "lib/index.js",
   "module": "es/index.js",
+  "files": [
+    "es",
+    "lib"
+  ],
   "scripts": {
     "serve": "concurrently --kill-others-on-fail \"npm:dev-*\"",
     "dev-demo": "vue-cli-service serve",
