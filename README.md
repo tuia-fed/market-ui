@@ -14,7 +14,7 @@ yarn add @tuia/market-ui
 ```js
 import Vue from 'vue'
 import MarketUI from '@tuia/market-ui'
-import '@tuia/market-ui/index.less'
+import '@tuia/market-ui/es/index.less'
 
 Vue.use(MarketUI)
 ```
