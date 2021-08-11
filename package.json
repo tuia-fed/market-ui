@@ -1,5 +1,5 @@
 {
-  "name": "tuia-market-ui",
+  "name": "@tuia/market-ui",
   "version": "0.1.0",
   "description": "丰富、可靠的移动端营销互动组件库",
   "keywords": [
@@ -29,7 +29,6 @@
     "build-copy": "NODE_ENV=production node plugins/fs-copy",
     "create:new": "node plugins/create-new",
     "precommit": "npm run prettier && npm run stylelint",
-    "postinstall": "npx husky install",
     "commitlint": "npx commitlint -e $HUSKY_GIT_PARAMS",
     "prettier": "npx prettier --write \"src/**/*.tsx\"",
     "stylelint": "npx stylelint src/**/*.{css,less}",
