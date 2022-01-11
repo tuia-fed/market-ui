@@ -1,15 +1,27 @@
 <template>
   <div class="page">
+    <div class="presets">
+      <button
+        v-for="item in presetList"
+        :key="item.key"
+        class="common-button primary"
+        :disabled="item.key === preset"
+        @click="change(item.key)"
+      >
+        {{ item.name }}
+      </button>
+    </div>
     <!-- #region html -->
     <div class="container">
       <div class="wheel" :style="wheelSize">
-        <mk-wheel
+        <component
+          :is="preset"
           ref="wheel"
           :prizeList="prizeList"
           @stateChange="stateChange"
           @clickStart="clickStart"
           @prizeClick="prizeClick"
-        ></mk-wheel>
+        />
         <div class="info">
           <p>当前状态：{{ state }}</p>
           <p>当前点击：{{ clickPrize }}</p>
@@ -41,15 +53,46 @@
 </template>
 <script>
 // #region js
-import { Wheel, StateConstant } from '@tuia/market-ui';
+import { WheelFoundation, StateConstant } from '@tuia/market-ui';
+
+const { Red, Yellow, Blue, Green } = WheelFoundation.Presets;
+const AllList = [
+  {
+    key: WheelFoundation.name,
+    name: '默认',
+    comp: WheelFoundation,
+  },
+  {
+    key: 'red',
+    name: '红色',
+    comp: Red,
+  },
+  {
+    key: 'yellow',
+    name: '黄色',
+    comp: Yellow,
+  },
+  {
+    key: 'blue',
+    name: '蓝色',
+    comp: Blue,
+  },
+  {
+    key: 'green',
+    name: '绿色',
+    comp: Green,
+  },
+];
+const components = {};
+AllList.forEach((it) => (components[it.key] = it.comp));
 
 export default {
-  components: {
-    [Wheel.name]: Wheel,
-  },
+  components,
 
   data() {
     return {
+      angle: 0,
+      messages: [],
       state: 0,
       clickPrize: '',
       prizeList: [
@@ -79,6 +122,8 @@ export default {
         },
       ],
       wheelSize: {},
+      presetList: AllList.map((it) => ({ key: it.key, name: it.name })),
+      preset: AllList[0].key,
     };
   },
 
@@ -124,6 +169,11 @@ export default {
     disable() {
       this.$refs.wheel.disable();
     },
+
+    change(preset) {
+      this.disable();
+      this.preset = preset;
+    },
   },
 };
 // #endregion js
@@ -137,8 +187,12 @@ export default {
   position: relative;
 }
 
+.presets {
+  margin-bottom: 10px;
+}
+
 .wheel {
-  height: 400px;
+  height: 500px;
 
   .info {
     position: absolute;

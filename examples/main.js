@@ -6,6 +6,8 @@ import MarketUI from '@tuia/market-ui'
 import '@tuia/market-ui/index.less'
 import DemoBlock from './components/DemoBlock'
 import DemoSection from './components/DemoSection'
+import { delay } from './utils'
+Vue.prototype.$delay = delay
 /* 全局注册组件库 */
 Vue.use(MarketUI)
 
