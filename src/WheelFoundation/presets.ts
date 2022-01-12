@@ -7,7 +7,7 @@ export default {
       remark: '容器图片',
       default: '//yun.tuisnake.com/market-ui/75062570-fa97-4155-9416-20b838415227.png',
     },
-    rotatedomImg: {
+    rotateImg: {
       type: String,
       remark: '转盘图片（可转动部分）',
       default: '//yun.tuisnake.com/market-ui/2d44fefb-a255-4475-90fe-2ff3b96eea04.png',
@@ -39,7 +39,7 @@ export default {
       remark: '容器图片',
       default: '//yun.tuisnake.com/market-ui/f13b471e-1618-4a38-8fcd-c090e13a8f0e.png',
     },
-    rotatedomImg: {
+    rotateImg: {
       type: String,
       remark: '转盘图片（可转动部分）',
       default: '//yun.tuisnake.com/market-ui/ba4ccea9-31ad-46c8-ab2b-63795495f513.png',
@@ -61,7 +61,7 @@ export default {
       remark: '容器图片',
       default: '//yun.tuisnake.com/market-ui/b21463d3-fe79-47ac-8d0d-8a3ef64c28bf.png',
     },
-    rotatedomImg: {
+    rotateImg: {
       type: String,
       remark: '转盘图片（可转动部分）',
       default: '//yun.tuisnake.com/market-ui/8bc57a0f-0090-4fbc-9505-75172cb7eae3.png',
@@ -83,7 +83,7 @@ export default {
       remark: '容器图片',
       default: '//yun.tuisnake.com/market-ui/1907e6d0-792e-432d-991b-94ac89599d71.png',
     },
-    rotatedomImg: {
+    rotateImg: {
       type: String,
       remark: '转盘图片（可转动部分）',
       default: '//yun.tuisnake.com/market-ui/48227aa5-1def-4711-ba9d-365ae1eec9bc.png',

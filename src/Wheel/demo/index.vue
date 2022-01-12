@@ -1,22 +1,52 @@
 <template>
   <div class="page">
-    <!-- #region html -->
     <div class="container">
+      <div class="samples">
+        <button :disabled="sample === 0" @click="change(0)">普通形式</button>
+        <button :disabled="sample === 1" @click="change(1)">
+          高级定制(不均分转盘)
+        </button>
+      </div>
       <div class="wheel" :style="wheelSize">
+        <!-- #region html1 -->
         <mk-wheel
+          v-if="sample === 0"
           ref="wheel"
+          :key="sample"
           :prizeList="prizeList"
           @stateChange="stateChange"
           @clickStart="clickStart"
           @prizeClick="prizeClick"
-        ></mk-wheel>
+        >
+        </mk-wheel>
+        <!-- #endregion html1 -->
+        <!-- #region html2 -->
+        <mk-wheel
+          v-else
+          ref="wheel"
+          :key="sample"
+          :prizeList="prizeList"
+          :prizePercent="[70, 70, 50, 70, 30, 70]"
+          containerImg="//yun.tuisnake.com/market-ui/872894c9-c2e9-4206-b821-59dde2eac08d.png"
+          rotateImg="//yun.tuisnake.com/market-ui/f1395e69-e3a9-4f0f-a8a7-5b89b21d86a7.png"
+          @stateChange="stateChange"
+          @clickStart="clickStart"
+          @prizeClick="prizeClick"
+        >
+          <template #light>
+            <div></div>
+          </template>
+          <template #prize="{ index, item }">
+            <div v-if="index === 3" class="word">{{ item.title }}</div>
+          </template>
+        </mk-wheel>
+        <!-- #endregion html2 -->
         <div class="info">
           <p>当前状态：{{ state }}</p>
           <p>当前点击：{{ clickPrize }}</p>
         </div>
       </div>
     </div>
-    <!-- #endregion html -->
     <demo-block card title="基础操作">
       <button
         class="common-button primary"
@@ -79,6 +109,7 @@ export default {
         },
       ],
       wheelSize: {},
+      sample: 0,
     };
   },
 
@@ -124,21 +155,31 @@ export default {
     disable() {
       this.$refs.wheel.disable();
     },
+
+    change(v) {
+      this.disable();
+      this.sample = v;
+      this.reset();
+    },
   },
 };
 // #endregion js
 </script>
 <style lang="less" scoped>
 .page {
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .container {
   position: relative;
 }
 
+.samples {
+  margin-bottom: 10px;
+}
+
 .wheel {
-  height: 400px;
+  position: relative;
 
   .info {
     position: absolute;
@@ -146,6 +187,15 @@ export default {
     font-size: 12px;
     background-color: #ccc5;
     border-radius: 5px;
+  }
+
+  .word {
+    position: absolute;
+    top: -36vw;
+    font-size: 5vw;
+    font-weight: bold;
+    color: red;
+    transform: translate(-50%);
   }
 }
 </style>

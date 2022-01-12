@@ -7,7 +7,7 @@ type addUnitFuncType = (v: StyleValueType) => string;
 
 const defaultAddUnitFunc: addUnitFuncType = (v: StyleValueType): string => {
   if (typeof v === 'number') {
-    return `${(v * document.documentElement.clientWidth) / 750}px`;
+    return `${v / 7.5}vw`;
   }
   return v;
 };

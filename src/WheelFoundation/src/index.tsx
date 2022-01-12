@@ -19,7 +19,7 @@ export default BasicBase.extend({
       remark: '灯图片',
       default: '//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png',
     },
-    rotatedomImg: {
+    rotateImg: {
       type: String,
       remark: '转盘图片（可转动部分）',
       default: '//yun.tuisnake.com/market-ui/c31f472a-5be9-4296-9b0f-353b6583bbd9.png'
@@ -93,6 +93,10 @@ export default BasicBase.extend({
         ]
       }
     },
+    prizePercent: {
+      type: Array as PropType<number[]>,
+      remark: '奖品转盘划分比例，默认均分',
+    },
     extraRotate: {
       type: Number,
       remark: '初始转盘上奖品相对于转盘需要额外转动的度数',
@@ -161,6 +165,7 @@ export default BasicBase.extend({
         <mk-wheel
           ref="wheel"
           props={this.$props}
+          scopedSlots={this.$scopedSlots}
           onStateChange={this.emitStateChange.bind(this)}
           onClickStart={this.emitClickStart.bind(this)}
           onPrizeClick={this.prizeClick.bind(this)}

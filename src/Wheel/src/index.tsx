@@ -45,7 +45,7 @@ export default WheelBase.extend({
       remark: '灯图片',
       default: '//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png',
     },
-    rotatedomStyle: {
+    rotateStyle: {
       type: Object as PropType<StyleType>,
       remark: '转盘样式对象（设计尺寸）',
       default () {
@@ -56,7 +56,7 @@ export default WheelBase.extend({
         }
       }
     },
-    rotatedomImg: {
+    rotateImg: {
       type: String,
       remark: '转盘图片（可转动部分）',
       default: '//yun.tuisnake.com/market-ui/c31f472a-5be9-4296-9b0f-353b6583bbd9.png'
@@ -158,10 +158,10 @@ export default WheelBase.extend({
     },
     rotatedomStyleData (): StyleType {
       return {
-        'background-image': `url(${this.rotatedomImg})`,
+        'background-image': `url(${this.rotateImg})`,
         'transform-origin': 'center center',
-        left: this.addUnitFunc((+this.containerStyle.width - +this.rotatedomStyle.width) / 2),
-        ...this.addUnitForAll(this.rotatedomStyle)
+        left: this.addUnitFunc((+this.containerStyle.width - +this.rotateStyle.width) / 2),
+        ...this.addUnitForAll(this.rotateStyle)
       }
     },
     pointStyleData (): StyleType {
@@ -196,7 +196,7 @@ export default WheelBase.extend({
     },
     textStyleData (): StyleType {
       return {
-        top: this.addUnitFunc(-this.rotatedomStyle.width * 0.44),
+        top: this.addUnitFunc(-this.rotateStyle.width * 0.44),
         ...this.addUnitForAll(this.prizeTextStyle),
       }
     }
@@ -209,10 +209,9 @@ export default WheelBase.extend({
       this.$emit('prizeClick', { item, index })
     },
     getPrizeStyleData (pos: number) {
-      const dis = 360 / this.prizeList.length
-      const { width, height } = this.rotatedomStyle
+      const { width, height } = this.rotateStyle
       return {
-        transform: `rotate(${-this.extraRotate - pos * dis}deg)`,
+        transform: `rotate(${this.getPrizeAngle(pos)}deg)`,
         ...this.addUnitForAll({
           left: +width / 2,
           top: +height / 2
@@ -220,8 +219,14 @@ export default WheelBase.extend({
       }
     },
     getPrizeImgStyleData (pos: number) {
+      const imgSize = this.wheelParts[pos] > 45 ? {
+        top: this.addUnitFunc(-this.rotateStyle.width * 0.38),
+      } : {
+        top: this.addUnitFunc(-this.rotateStyle.width * 0.48),
+        transform: 'translate(-50%) scale(0.7)',
+      };
       return {
-        top: this.addUnitFunc(-this.rotatedomStyle.width * 0.38),
+        ...imgSize,
         'background-image': `url(${this.prizeList[pos].image})`,
         ...this.addUnitForAll(this.prizeImgStyle),
       }
@@ -232,12 +237,21 @@ export default WheelBase.extend({
         rotate.style.transform = `rotate3d(0, 0, 1, ${v}deg)`
       }
     },
+    getScopedSlot(name: string, data: any = {}) {
+      const slot = this.$scopedSlots[name];
+      return slot && slot(data);
+    },
+    renderOnePrize(item: PrizeType, index: number) {
+      return this.getScopedSlot('prize', { item, index }) || [
+        <div class="mk-wheel__item-img" style={this.getPrizeImgStyleData(index)} onClick={() => this.eventHandle(item, index)}></div>,
+        this.wheelParts[index] > 45 ? <div class="mk-wheel__item-text" style={this.textStyleData}>{item.title}</div> : null
+      ];
+    },
     renderPrizes () {
       return this.prizeList.map((item, index) => {
         return (
           <div class="mk-wheel__item" index={index} style={this.getPrizeStyleData(index)}>
-            <div class="mk-wheel__item-img" style={this.getPrizeImgStyleData(index)} onClick={() => this.eventHandle(item, index)}></div>
-            <div class="mk-wheel__item-text" style={this.textStyleData}>{item.title}</div>
+            {this.renderOnePrize(item, index)}
           </div>
         );
       });
@@ -246,15 +260,17 @@ export default WheelBase.extend({
   render () {
     return (
       <div class="mk-wheel" style={this.containerStyleData}>
-        <div class="mk-wheel__light" style={this.lightStyleData}>
-          <div class="mk-wheel__light-blink" style={this.lightBlinkStyleData}></div>
-        </div>
+        {this.getScopedSlot('light') || (
+          <div class="mk-wheel__light" style={this.lightStyleData}>
+            <div class="mk-wheel__light-blink" style={this.lightBlinkStyleData}></div>
+          </div>
+        )}
         <div ref="rotate" class="mk-wheel__rotate" style={this.rotatedomStyleData}>
           {this.renderPrizes()}
         </div>
         <div class="mk-wheel__point" style={this.pointStyleData}></div>
         <div class={['mk-wheel__btn', { 'mk-wheel__btn-active': this.isWaitStart }]} style={this.btnStyleData} onClick={this.emitClickStart}></div>
-        <div class="mk-wheel__hand" style={this.handStyleData}></div>
+        {this.getScopedSlot('hand') || <div class="mk-wheel__hand" style={this.handStyleData}></div>}
       </div>
     );
   },

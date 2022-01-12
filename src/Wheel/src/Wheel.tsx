@@ -50,6 +50,10 @@ export default BasicBase.extend({
         ];
       },
     },
+    prizePercent: {
+      type: Array as PropType<number[]>,
+      remark: '奖品转盘划分比例，默认均分',
+    },
     idleTurningSpeed: {
       type: Number,
       remark: '闲置每秒转动度数（闲置转速）',
@@ -79,6 +83,21 @@ export default BasicBase.extend({
       this.setDegree(val);
     },
   },
+  computed: {
+    wheelParts(): number[] {
+      const len = this.prizeList.length;
+      if (this.prizePercent && this.prizePercent.length) {
+        if (len !== this.prizePercent.length) {
+          console.error('[大转盘]转盘比例配置与奖品配置长度不一致');
+        }
+        const percents = this.prizePercent.concat(Array.from({ length: len}, () => this.prizePercent[0])).slice(0, len);
+        const total = percents.reduce((p, c) => p + c, 0);
+        return Array.from({length: len}, (v, k) => 360 * percents[k]/total);
+      }
+      // 默认均分
+      return Array.from({length: len}, () => 360/len);
+    },
+  },
   created() {
     this.waitStart();
   },
@@ -92,6 +111,9 @@ export default BasicBase.extend({
           this.wheelDegree = nowDegree % 360;
         }
       }
+    },
+    getPrizeAngle(index: number) {
+      return -this.extraRotate - this.wheelParts.slice(0, index + 1).reduce((p,c) => p + c, 0) + this.wheelParts[0] / 2 + this.wheelParts[index] / 2;
     },
     async start() {
       if (this.state !== StateConstant.WAIT_START) {
@@ -108,10 +130,8 @@ export default BasicBase.extend({
       this.state = StateConstant.END;
 
       const index = (opts.index || 0) % this.prizeList.length;
-      const part = 360 / this.prizeList.length;
-      const rangePart = part * 0.8;
-      const disDegree =
-        this.extraRotate + part * index + (Math.random() - 0.5) * rangePart;
+      const rangePart = this.wheelParts[index] * 0.8;
+      const disDegree = -this.getPrizeAngle(index) + (Math.random() - 0.5) * rangePart;
       const now = this.wheelDegree % 360;
       const dist = 360 * 3 - now + disDegree;
       const t = (2 * dist) / this.maxTurningSpeed;

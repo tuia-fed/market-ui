@@ -21,7 +21,8 @@
           @stateChange="stateChange"
           @clickStart="clickStart"
           @prizeClick="prizeClick"
-        />
+        >
+        </component>
         <div class="info">
           <p>当前状态：{{ state }}</p>
           <p>当前点击：{{ clickPrize }}</p>
@@ -180,7 +181,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .page {
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .container {

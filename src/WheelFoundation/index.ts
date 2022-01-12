@@ -8,7 +8,7 @@ WheelFoundation.install = function (Vue: VueConstructor) {
   Vue.component(WheelFoundation.name, WheelFoundation);
 };
 
-Object.keys(Presets).forEach(key => {
+Object.keys(Presets).forEach((key) => {
   if (!WheelFoundation.Presets) {
     WheelFoundation.Presets = {};
   }
