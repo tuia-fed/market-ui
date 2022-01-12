@@ -33,7 +33,8 @@
     "prettier": "npx prettier --write \"src/**/*.tsx\"",
     "stylelint": "npx stylelint src/**/*.{css,less}",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "release": "npx standard-version --no-verify -t release-"
+    "release": "npx standard-version --no-verify -t release-",
+    "github-doc": "git push -u github master"
   },
   "dependencies": {
     "core-js": "^3.6.5",
