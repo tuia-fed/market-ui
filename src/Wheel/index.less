@@ -1,42 +1,62 @@
 @import '../styles/index.less';
 
-.mk {
-  &-wheel {
-    .wh();
+.mk-wheel {
+  .bg();
+  .atl();
+
+  // 转盘旋转时会超出区域，ios上会撑开页面
+  overflow: hidden;
+
+  &__rotate,
+  &__point,
+  &__btn,
+  &__light {
     .bg();
+    .atl();
+  }
 
-    overflow: hidden;
-    user-select: none;
-    border-radius: 50%;
+  &__point {
+    pointer-events: none;
+  }
 
-    &-option {
-      position: absolute;
-      width: 50%;
-      height: 50%;
-      transform-origin: right bottom;
+  &__light-blink {
+    .bg();
+    .atl();
 
-      &__revert {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 50%;
-        height: 50%;
-        transform: translate(-25%, -25%) skew(-15deg, -15deg) rotate(-45deg);
-      }
+    width: inherit;
+    height: inherit;
+    content: '';
+    background-image: inherit;
+    transform: rotate(15deg);
+    animation: lightBlinkAni 1s linear infinite;
+  }
 
-      &__title {
-        overflow: hidden;
-        font-size: 16px;
-        text-align: center;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+  &__item {
+    .atl();
 
-      &__image {
-        display: block;
-        width: 80%;
-        margin: 0 auto;
-      }
+    &-img {
+      .bg();
+      .atm(0);
     }
+
+    &-text {
+      .atm(0);
+
+      color: #f45125;
+      text-align: center;
+    }
+  }
+
+  &__btn-active {
+    animation: btnScaleAni 0.7s ease-in infinite;
+  }
+
+  &__hand {
+    .bg();
+    .atl();
+
+    pointer-events: none;
+    transform-origin: right bottom;
+    animation: handShakeAni 0.8s linear 0s infinite alternate;
   }
 }

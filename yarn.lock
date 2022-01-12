@@ -1224,16 +1224,44 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tuia/mkui-cli@^0.0.8":
-  version "0.0.8"
-  resolved "http://npm.dui88.com:80/@tuia%2fmkui-cli/-/mkui-cli-0.0.8.tgz#3abc646f64f84cde5d7107445c2113aecbed921c"
-  integrity sha512-XP+qRrDLIbF1BgPIU4tEhCkpGDH+EpgETX7ngdoR1NK3z/N+GG+fCWqCsh4hEP6Dj8wivWx1lmQqVyr1g7dWvw==
+"@tuia/compiler@^1.0.7":
+  version "1.0.8"
+  resolved "http://npm.dui88.com:80/@tuia%2fcompiler/-/compiler-1.0.8.tgz#bfb3b93d9a183f512b68353f29e01a13bbace14a"
+  integrity sha512-TiLWh1vrRwAy9Z3z9Po62rI87LpNpWTxXkUOdwi7XjceUwQet5Vlp3IhCUGVS8+afCtm2BpRAb1B6AEz9Zspcw==
   dependencies:
     "@babel/core" "^7.13.15"
     "@babel/preset-env" "^7.13.15"
     "@babel/preset-typescript" "^7.13.0"
     "@rollup/plugin-commonjs" "^18.0.0"
     "@rollup/plugin-node-resolve" "^11.2.1"
+    "@tuia/compiler" "^1.0.7"
+    "@vue/babel-preset-jsx" "^1.2.4"
+    "@vue/component-compiler-utils" "^3.2.0"
+    autoprefixer "^10.2.5"
+    chokidar "^3.5.1"
+    clean-css "^5.1.2"
+    commander "^7.2.0"
+    fs-extra "^9.0.1"
+    less "^4.1.1"
+    ora "^5.4.0"
+    postcss "^8.2.9"
+    postcss-load-config "^3.0.1"
+    rollup "^2.45.1"
+    rollup-plugin-external-globals "^0.6.1"
+    rollup-plugin-terser "^7.0.2"
+    vue-template-compiler "^2.6.12"
+
+"@tuia/mkui-cli@^0.0.16":
+  version "0.0.16"
+  resolved "http://npm.dui88.com:80/@tuia%2fmkui-cli/-/mkui-cli-0.0.16.tgz#e5730f13fc3c7803c704fe7f3eeac35b5eace5b6"
+  integrity sha512-+drl3A/qGyjOTTTVtw8XkpoWBI++ChA0ezjP3luvZ/jCD8ZWNoHH6FoQTUKbNmhcxoaoqrOBLLG18rAekxATQA==
+  dependencies:
+    "@babel/core" "^7.13.15"
+    "@babel/preset-env" "^7.13.15"
+    "@babel/preset-typescript" "^7.13.0"
+    "@rollup/plugin-commonjs" "^18.0.0"
+    "@rollup/plugin-node-resolve" "^11.2.1"
+    "@tuia/compiler" "^1.0.7"
     "@vue/babel-preset-jsx" "^1.2.4"
     "@vue/component-compiler-utils" "^3.2.0"
     autoprefixer "^10.2.5"

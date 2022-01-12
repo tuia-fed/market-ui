@@ -1,6 +1,6 @@
 {
   "name": "@tuia/market-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "丰富、可靠的移动端营销互动组件库",
   "keywords": [
     "tuia",
@@ -24,7 +24,7 @@
     "commit": "git-cz",
     "dev-doc": "vuepress dev docs --open",
     "build-doc": "vuepress build docs",
-    "dev-builld": "npm run build:watch",
+    "dev-build": "npm run build:watch",
     "dev-copy": "NODE_ENV=development node plugins/fs-copy",
     "build-copy": "NODE_ENV=production node plugins/fs-copy",
     "create:new": "node plugins/create-new",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
-    "@tuia/mkui-cli": "^0.0.8",
+    "@tuia/mkui-cli": "^0.0.16",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/babel-preset-jsx": "^1.2.4",

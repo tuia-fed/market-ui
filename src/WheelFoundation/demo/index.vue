@@ -1,52 +1,35 @@
 <template>
   <div class="page">
+    <div class="presets">
+      <button
+        v-for="item in presetList"
+        :key="item.key"
+        class="common-button primary"
+        :disabled="item.key === preset"
+        @click="change(item.key)"
+      >
+        {{ item.name }}
+      </button>
+    </div>
+    <!-- #region html -->
     <div class="container">
-      <div class="samples">
-        <button :disabled="sample === 0" @click="change(0)">普通形式</button>
-        <button :disabled="sample === 1" @click="change(1)">
-          高级定制(不均分转盘)
-        </button>
-      </div>
       <div class="wheel" :style="wheelSize">
-        <!-- #region html1 -->
-        <mk-wheel
-          v-if="sample === 0"
+        <component
+          :is="preset"
           ref="wheel"
-          :key="sample"
           :prizeList="prizeList"
           @stateChange="stateChange"
           @clickStart="clickStart"
           @prizeClick="prizeClick"
         >
-        </mk-wheel>
-        <!-- #endregion html1 -->
-        <!-- #region html2 -->
-        <mk-wheel
-          v-else
-          ref="wheel"
-          :key="sample"
-          :prizeList="prizeList"
-          :prizePercent="[70, 70, 50, 70, 30, 70]"
-          containerImg="//yun.tuisnake.com/market-ui/872894c9-c2e9-4206-b821-59dde2eac08d.png"
-          rotateImg="//yun.tuisnake.com/market-ui/f1395e69-e3a9-4f0f-a8a7-5b89b21d86a7.png"
-          @stateChange="stateChange"
-          @clickStart="clickStart"
-          @prizeClick="prizeClick"
-        >
-          <template #light>
-            <div></div>
-          </template>
-          <template #prize="{ index, item }">
-            <div v-if="index === 3" class="word">{{ item.title }}</div>
-          </template>
-        </mk-wheel>
-        <!-- #endregion html2 -->
+        </component>
         <div class="info">
           <p>当前状态：{{ state }}</p>
           <p>当前点击：{{ clickPrize }}</p>
         </div>
       </div>
     </div>
+    <!-- #endregion html -->
     <demo-block card title="基础操作">
       <button
         class="common-button primary"
@@ -71,15 +54,46 @@
 </template>
 <script>
 // #region js
-import { Wheel, StateConstant } from '@tuia/market-ui';
+import { WheelFoundation, StateConstant } from '@tuia/market-ui';
+
+const { Red, Yellow, Blue, Green } = WheelFoundation.Presets;
+const AllList = [
+  {
+    key: WheelFoundation.name,
+    name: '默认',
+    comp: WheelFoundation,
+  },
+  {
+    key: 'red',
+    name: '红色',
+    comp: Red,
+  },
+  {
+    key: 'yellow',
+    name: '黄色',
+    comp: Yellow,
+  },
+  {
+    key: 'blue',
+    name: '蓝色',
+    comp: Blue,
+  },
+  {
+    key: 'green',
+    name: '绿色',
+    comp: Green,
+  },
+];
+const components = {};
+AllList.forEach((it) => (components[it.key] = it.comp));
 
 export default {
-  components: {
-    [Wheel.name]: Wheel,
-  },
+  components,
 
   data() {
     return {
+      angle: 0,
+      messages: [],
       state: 0,
       clickPrize: '',
       prizeList: [
@@ -109,7 +123,8 @@ export default {
         },
       ],
       wheelSize: {},
-      sample: 0,
+      presetList: AllList.map((it) => ({ key: it.key, name: it.name })),
+      preset: AllList[0].key,
     };
   },
 
@@ -156,10 +171,9 @@ export default {
       this.$refs.wheel.disable();
     },
 
-    change(v) {
+    change(preset) {
       this.disable();
-      this.sample = v;
-      this.reset();
+      this.preset = preset;
     },
   },
 };
@@ -174,12 +188,12 @@ export default {
   position: relative;
 }
 
-.samples {
+.presets {
   margin-bottom: 10px;
 }
 
 .wheel {
-  position: relative;
+  height: 500px;
 
   .info {
     position: absolute;
@@ -187,15 +201,6 @@ export default {
     font-size: 12px;
     background-color: #ccc5;
     border-radius: 5px;
-  }
-
-  .word {
-    position: absolute;
-    top: -36vw;
-    font-size: 5vw;
-    font-weight: bold;
-    color: red;
-    transform: translate(-50%);
   }
 }
 </style>

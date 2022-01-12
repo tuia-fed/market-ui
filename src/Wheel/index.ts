@@ -1,12 +1,10 @@
-import { VueConstructor } from "vue";
-import Wheel from "./src/index";
-import WheelOption from "./src/option";
+import { VueConstructor } from 'vue';
+import Wheel from './src/index';
 
-(Wheel as any).install = function (Vue: VueConstructor) {
+Wheel.install = function (Vue: VueConstructor) {
   Vue.component(Wheel.name, Wheel);
-  Vue.component(WheelOption.name, WheelOption);
 };
 
-(Wheel as any).Option = WheelOption;
+export type WheelRef = InstanceType<typeof Wheel>;
 
 export default Wheel;

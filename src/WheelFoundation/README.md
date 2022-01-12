@@ -1,34 +1,37 @@
 ---
-group: 基础组件
-level: 1
+group: 互动组件
+level: 2
 ---
 
-# Toast 轻提示
+# 基座大转盘
 
 用于做简单消息提示的组件，支持全局插件调用
 
 ## 引入
 ```js
 import Vue from 'vue'
-import { Toast } from '@tuia/market-ui'
+import { WheelFoundation } from '@tuia/market-ui'
 
-Vue.use(Toast)
+Vue.use(WheelFoundation)
 ```
 
 ## 代码演示
-<<< @/src/Toast/demo/index.vue#html1
 
-<br />
-
-<<< @/src/Toast/demo/index.vue#html2
-
-<br />
+```html
+<mk-wheel-foundation
+  ref="wheel"
+  :prizeList="prizeList"
+  @stateChange="stateChange"
+  @clickStart="clickStart"
+  @prizeClick="prizeClick"
+/>
+```
 
 <details>
 
 <summary>点击展开完整代码</summary>
 
-<<< @/src/Toast/demo/index.vue#js
+<<< @/src/WheelFoundation/demo/index.vue#js
 
 </details>
 
