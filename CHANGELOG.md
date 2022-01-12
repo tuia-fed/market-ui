@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/compare/release-0.1.0...release-0.1.1) (2022-01-12)
+
+
+### Features
+
+* 第一个版本 ([149354e](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/149354e38163fd95e5f86517129c03c95e4c86ca))
+
+
+### Docs
+
+* 更新readme.md文档 ([52a5782](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/52a5782f94afe95da9153ec37098ef1a61558c35))
+* 更新README文档 ([209e701](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/209e7011fbde1095ba9c3f2a53cb16471c972be4))
+
 ## 0.1.0 (2021-08-11)
 
 
