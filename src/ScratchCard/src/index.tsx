@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue';
 
 let canvas: HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D;
@@ -8,7 +8,7 @@ let endMoveHandler: any;
 let moveHandler: any;
 
 export default Vue.extend({
-  name: "mk-scratch-card",
+  name: 'mk-scratch-card',
 
   data: () => ({
     firstTouch: true, //是否第一次touchstart or mousedown
@@ -47,7 +47,7 @@ export default Vue.extend({
     coverColor: {
       //刮刮卡遮罩颜色
       type: String,
-      default: "#C5C5C5",
+      default: '#C5C5C5',
     },
     coverImg: {
       //刮刮卡遮罩图片
@@ -78,9 +78,9 @@ export default Vue.extend({
         this.cardId
       ) as HTMLCanvasElement;
       this.canvas = canvasWrap.querySelector(
-        ".mk-scratch_canvas"
+        '.mk-scratch_canvas'
       ) as HTMLCanvasElement;
-      this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+      this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
       this.canvas.width = canvasWrap.clientWidth;
       this.canvas.height = canvasWrap.clientHeight;
       this.createCanvasStyle();
@@ -108,15 +108,15 @@ export default Vue.extend({
     },
 
     isSupportCanvas() {
-      var elem = document.createElement("canvas");
-      return !!(elem.getContext && elem.getContext("2d"));
+      var elem = document.createElement('canvas');
+      return !!(elem.getContext && elem.getContext('2d'));
     },
 
     bindEvent() {
-      if ("ontouchstart" in window) this.supportTouch = true;
+      if ('ontouchstart' in window) this.supportTouch = true;
       this.events = this.supportTouch
-        ? ["touchstart", "touchmove", "touchend"]
-        : ["mousedown", "mousemove", "mouseup"];
+        ? ['touchstart', 'touchmove', 'touchend']
+        : ['mousedown', 'mousemove', 'mouseup'];
       this.addEvent();
     },
 
@@ -158,8 +158,8 @@ export default Vue.extend({
         mouseX = e.pageX - canvasPos.left - scrollL,
         mouseY = e.pageY - canvasPos.top - scrollT;
       this.ctx.beginPath();
-      this.ctx.fillStyle = "#FFFFFF";
-      this.ctx.globalCompositeOperation = "destination-out";
+      this.ctx.fillStyle = '#FFFFFF';
+      this.ctx.globalCompositeOperation = 'destination-out';
       this.ctx.arc(mouseX, mouseY, this.moveRadius, 0, 2 * Math.PI);
       this.ctx.fill();
     },

@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue';
 
 type KeyframsType = {
   width: number;
@@ -8,14 +8,14 @@ type KeyframsType = {
 };
 
 export default Vue.extend({
-  name: "mk-frames-player",
+  name: 'mk-frames-player',
 
   props: {
     // 序列帧的cdn链接
     url: {
       type: String,
       validator(val) {
-        return ["https://", "http://", "//"].some((prefix) =>
+        return ['https://', 'http://', '//'].some((prefix) =>
           val.startsWith(prefix)
         );
       },
@@ -44,15 +44,15 @@ export default Vue.extend({
     // 帧动画播放顺序，正序/倒序
     direction: {
       type: String,
-      default: "normal",
+      default: 'normal',
       validator(val) {
-        return ["normal", "reverse"].indexOf(val) !== -1;
+        return ['normal', 'reverse'].indexOf(val) !== -1;
       },
     },
     // 动画播放次数
     times: {
       type: String,
-      default: "1",
+      default: '1',
     },
   },
 
@@ -75,25 +75,25 @@ export default Vue.extend({
       const height = totalHeight / this.rows;
       const animationStyle = `${this.animationName} ${
         this.duration / 1000
-      }s steps(1) ${this.pause ? "paused" : "running"} ${this.times} ${
+      }s steps(1) ${this.pause ? 'paused' : 'running'} ${this.times} ${
         this.direction
       }`;
       return {
-        width: width + "px",
-        height: height + "px",
+        width: width + 'px',
+        height: height + 'px',
         backgroundImage: `url(${this.url})`,
         backgroundSize: `${totalWidth}px ${totalHeight}px`,
-        animation: this.animationControl ? animationStyle : "",
+        animation: this.animationControl ? animationStyle : '',
       };
     },
   },
 
   watch: {
     framsVisible(newVal) {
-      const framesPlayer = document.getElementById("framesPlayer");
+      const framesPlayer = document.getElementById('framesPlayer');
       newVal
-        ? framesPlayer?.classList.add("frames-block")
-        : framesPlayer?.classList.remove("frames-block");
+        ? framesPlayer?.classList.add('frames-block')
+        : framesPlayer?.classList.remove('frames-block');
     },
   },
 
@@ -108,7 +108,7 @@ export default Vue.extend({
       setTimeout(() => {
         this.animationControl = false;
         this.framsVisible = false;
-        this.$emit("playEnd");
+        this.$emit('playEnd');
       }, this.duration);
     },
     pauses() {
@@ -123,14 +123,14 @@ export default Vue.extend({
         const image = new Image();
         image.src = url;
         image.onload = (e) => {
-          this.$emit("imageOnLoad", { element: image, url, e });
+          this.$emit('imageOnLoad', { element: image, url, e });
           const { width, height } = image;
           resolve({ width, height });
           // 销毁image元素
           image.parentNode?.removeChild(image);
         };
         image.onerror = (e) => {
-          this.$emit("imageOnError", { element: image, url, e });
+          this.$emit('imageOnError', { element: image, url, e });
           reject(url);
         };
       });
@@ -148,13 +148,13 @@ export default Vue.extend({
         amount: this.amount,
         column: this.columns,
       });
-      const styleEl = document.createElement("style");
+      const styleEl = document.createElement('style');
       styleEl.textContent = keyframeCss;
       document.head.appendChild(styleEl);
     },
     // 计算对应的帧动画样式
     keyframeGenerator({ width, height, amount, column }: KeyframsType) {
-      let outputHtml: string = "";
+      let outputHtml: string = '';
       outputHtml += `@keyframes ${this.animationName} {`;
       // 遍历生成每一帧的动画样式
       for (let i = 0; i < amount; i++) {
@@ -168,7 +168,7 @@ export default Vue.extend({
               background-position: -${width * whichColumn}px -${
             height * whichRow
           }px
-              ${i === amount - 2 ? "opacity: 1" : "opacity: 0"}
+              ${i === amount - 2 ? 'opacity: 1' : 'opacity: 0'}
             }
           `;
         } else {
@@ -181,7 +181,7 @@ export default Vue.extend({
           `;
         }
       }
-      outputHtml += "}";
+      outputHtml += '}';
       return outputHtml;
     },
   },

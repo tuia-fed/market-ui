@@ -1,21 +1,21 @@
-import { PropType } from "vue";
-import WheelBase, { PrizeType } from "./Wheel";
-import StateConstant from "../../constants/StateConstant";
-import { StyleType } from "../../../types/Core";
+import { PropType } from 'vue';
+import WheelBase, { PrizeType } from './Wheel';
+import StateConstant from '../../constants/StateConstant';
+import { StyleType } from '../../../types/Core';
 
 const LIGHT_TIME: Record<string, string> = {
-  [StateConstant.DISABLE]: "0s",
-  [StateConstant.PRIZE]: "0.5s",
-  [StateConstant.WAIT_START]: "1s",
+  [StateConstant.DISABLE]: '0s',
+  [StateConstant.PRIZE]: '0.5s',
+  [StateConstant.WAIT_START]: '1s',
 };
 
 export default WheelBase.extend({
   extends: WheelBase,
-  name: "mk-wheel",
+  name: 'mk-wheel',
   props: {
     containerStyle: {
       type: Object as PropType<StyleType>,
-      remark: "底盘样式（包含整体位置）",
+      remark: '底盘样式（包含整体位置）',
       default() {
         return {
           width: 750,
@@ -27,13 +27,13 @@ export default WheelBase.extend({
     },
     containerImg: {
       type: String,
-      remark: "底盘图片",
+      remark: '底盘图片',
       default:
-        "//yun.tuisnake.com/market-ui/e7185b56-1757-40f7-a921-f8c818d4c1a7.png",
+        '//yun.tuisnake.com/market-ui/e7185b56-1757-40f7-a921-f8c818d4c1a7.png',
     },
     lightStyle: {
       type: Object as PropType<StyleType>,
-      remark: "底盘灯样式",
+      remark: '底盘灯样式',
       default() {
         return {
           width: 750,
@@ -43,13 +43,13 @@ export default WheelBase.extend({
     },
     lightImg: {
       type: String,
-      remark: "底盘灯图片",
+      remark: '底盘灯图片',
       default:
-        "//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png",
+        '//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png',
     },
     rotateStyle: {
       type: Object as PropType<StyleType>,
-      remark: "转盘样式",
+      remark: '转盘样式',
       default() {
         return {
           width: 635,
@@ -60,13 +60,13 @@ export default WheelBase.extend({
     },
     rotateImg: {
       type: String,
-      remark: "转盘图片",
+      remark: '转盘图片',
       default:
-        "//yun.tuisnake.com/market-ui/c31f472a-5be9-4296-9b0f-353b6583bbd9.png",
+        '//yun.tuisnake.com/market-ui/c31f472a-5be9-4296-9b0f-353b6583bbd9.png',
     },
     pointStyle: {
       type: Object as PropType<StyleType>,
-      remark: "指针样式",
+      remark: '指针样式',
       default() {
         return {
           width: 270,
@@ -77,13 +77,13 @@ export default WheelBase.extend({
     },
     pointImg: {
       type: String,
-      remark: "指针图片",
+      remark: '指针图片',
       default:
-        "//yun.tuisnake.com/market-ui/0b7f2b9d-c63f-46fc-a851-edc2d47df9ab.png",
+        '//yun.tuisnake.com/market-ui/0b7f2b9d-c63f-46fc-a851-edc2d47df9ab.png',
     },
     btnStyle: {
       type: Object as PropType<StyleType>,
-      remark: "开始按钮样式",
+      remark: '开始按钮样式',
       default() {
         return {
           width: 175,
@@ -94,19 +94,19 @@ export default WheelBase.extend({
     },
     btnImg: {
       type: String,
-      remark: "开始按钮图片",
+      remark: '开始按钮图片',
       default:
-        "//yun.tuisnake.com/market-ui/db4540bd-8c5a-439d-bbb6-ea3f114c4902.png",
+        '//yun.tuisnake.com/market-ui/db4540bd-8c5a-439d-bbb6-ea3f114c4902.png',
     },
     btnDisableImg: {
       type: String,
-      remark: "开始按钮禁用图片",
+      remark: '开始按钮禁用图片',
       default:
-        "//yun.tuisnake.com/market-ui/11c22d77-2e83-405b-85e8-c8832dc78529.png",
+        '//yun.tuisnake.com/market-ui/11c22d77-2e83-405b-85e8-c8832dc78529.png',
     },
     handStyle: {
       type: Object as PropType<StyleType>,
-      remark: "手势样式",
+      remark: '手势样式',
       default() {
         return {
           width: 160,
@@ -118,13 +118,13 @@ export default WheelBase.extend({
     },
     handImg: {
       type: String,
-      remark: "手势图片",
+      remark: '手势图片',
       default:
-        "//yun.tuisnake.com/tact/turnCircle/bcb4fc7e-18c1-46d7-bdae-2e91147196c1.png",
+        '//yun.tuisnake.com/tact/turnCircle/bcb4fc7e-18c1-46d7-bdae-2e91147196c1.png',
     },
     prizeImgStyle: {
       type: Object as PropType<StyleType>,
-      remark: "奖品图片样式",
+      remark: '奖品图片样式',
       default() {
         return {
           width: 140,
@@ -134,12 +134,12 @@ export default WheelBase.extend({
     },
     prizeTextStyle: {
       type: Object as PropType<StyleType>,
-      remark: "奖品标题样式",
+      remark: '奖品标题样式',
       default() {
         return {
           width: 280,
           height: 50,
-          "font-size": 24,
+          'font-size': 24,
         };
       },
     },
@@ -147,13 +147,13 @@ export default WheelBase.extend({
   computed: {
     containerStyleData(): StyleType {
       return {
-        "background-image": `url(${this.containerImg})`,
+        'background-image': `url(${this.containerImg})`,
         ...this.addUnitForAll(this.containerStyle),
       };
     },
     lightStyleData(): StyleType {
       return {
-        "background-image": `url(${this.lightImg})`,
+        'background-image': `url(${this.lightImg})`,
         left: this.addUnitFunc(
           (+this.containerStyle.width - +this.lightStyle.width) / 2
         ),
@@ -162,13 +162,13 @@ export default WheelBase.extend({
     },
     lightBlinkStyleData(): StyleType {
       return {
-        "animation-duration": LIGHT_TIME[this.state] || "0.7s",
+        'animation-duration': LIGHT_TIME[this.state] || '0.7s',
       };
     },
     rotatedomStyleData(): StyleType {
       return {
-        "background-image": `url(${this.rotateImg})`,
-        "transform-origin": "center center",
+        'background-image': `url(${this.rotateImg})`,
+        'transform-origin': 'center center',
         left: this.addUnitFunc(
           (+this.containerStyle.width - +this.rotateStyle.width) / 2
         ),
@@ -177,7 +177,7 @@ export default WheelBase.extend({
     },
     pointStyleData(): StyleType {
       return {
-        "background-image": `url(${this.pointImg})`,
+        'background-image': `url(${this.pointImg})`,
         left: this.addUnitFunc(
           (+this.containerStyle.width - +this.pointStyle.width) / 2
         ),
@@ -190,7 +190,7 @@ export default WheelBase.extend({
         btnImg = this.btnDisableImg;
       }
       return {
-        "background-image": `url(${btnImg})`,
+        'background-image': `url(${btnImg})`,
         left: this.addUnitFunc(
           (+this.containerStyle.width - +this.btnStyle.width) / 2
         ),
@@ -199,10 +199,10 @@ export default WheelBase.extend({
     },
     handStyleData(): StyleType {
       if (!this.isWaitStart) {
-        return { display: "none" };
+        return { display: 'none' };
       }
       return {
-        "background-image": `url(${this.handImg})`,
+        'background-image': `url(${this.handImg})`,
         ...this.addUnitForAll(this.handStyle),
       };
     },
@@ -221,7 +221,7 @@ export default WheelBase.extend({
       if (!this.isWaitStart && this.state !== StateConstant.DISABLE) {
         return;
       }
-      this.$emit("prizeClick", { item, index });
+      this.$emit('prizeClick', { item, index });
     },
     getPrizeStyleData(pos: number) {
       const { width, height } = this.rotateStyle;
@@ -241,11 +241,11 @@ export default WheelBase.extend({
             }
           : {
               top: this.addUnitFunc(-this.rotateStyle.width * 0.48),
-              transform: "translate(-50%) scale(0.7)",
+              transform: 'translate(-50%) scale(0.7)',
             };
       return {
         ...imgSize,
-        "background-image": `url(${this.prizeList[pos].image})`,
+        'background-image': `url(${this.prizeList[pos].image})`,
         ...this.addUnitForAll(this.prizeImgStyle),
       };
     },
@@ -261,7 +261,7 @@ export default WheelBase.extend({
     },
     renderOnePrize(item: PrizeType, index: number) {
       return (
-        this.getScopedSlot("prize", { item, index }) || [
+        this.getScopedSlot('prize', { item, index }) || [
           <div
             class="mk-wheel__item-img"
             style={this.getPrizeImgStyleData(index)}
@@ -292,7 +292,7 @@ export default WheelBase.extend({
   render() {
     return (
       <div class="mk-wheel" style={this.containerStyleData}>
-        {this.getScopedSlot("light") || (
+        {this.getScopedSlot('light') || (
           <div class="mk-wheel__light" style={this.lightStyleData}>
             <div
               class="mk-wheel__light-blink"
@@ -310,13 +310,13 @@ export default WheelBase.extend({
         <div class="mk-wheel__point" style={this.pointStyleData}></div>
         <div
           class={[
-            "mk-wheel__btn",
-            { "mk-wheel__btn-active": this.isWaitStart },
+            'mk-wheel__btn',
+            { 'mk-wheel__btn-active': this.isWaitStart },
           ]}
           style={this.btnStyleData}
           onClick={this.emitClickStart}
         ></div>
-        {this.getScopedSlot("hand") || (
+        {this.getScopedSlot('hand') || (
           <div class="mk-wheel__hand" style={this.handStyleData}></div>
         )}
       </div>
