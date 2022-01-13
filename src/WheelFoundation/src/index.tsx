@@ -17,33 +17,55 @@ export default BasicBase.extend({
     },
     lightImg: {
       type: String,
-      remark: "灯图片",
+      remark: "底盘灯图片",
       default:
         "//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png",
     },
     rotateImg: {
       type: String,
-      remark: "转盘图片（可转动部分）",
+      remark: "转盘图片",
       default:
         "//yun.tuisnake.com/market-ui/c31f472a-5be9-4296-9b0f-353b6583bbd9.png",
     },
+    pointStyle: {
+      type: Object as PropType<StyleType>,
+      remark: "指针样式",
+      default() {
+        return {
+          width: 270,
+          height: 270,
+          top: 240,
+        };
+      },
+    },
     pointImg: {
       type: String,
-      remark: "箭头图片",
+      remark: "指针图片",
       default:
         "//yun.tuisnake.com/market-ui/0b7f2b9d-c63f-46fc-a851-edc2d47df9ab.png",
     },
     btnImg: {
       type: String,
-      remark: "按钮图片",
+      remark: "开始按钮图片",
       default:
         "//yun.tuisnake.com/market-ui/db4540bd-8c5a-439d-bbb6-ea3f114c4902.png",
     },
     btnDisableImg: {
       type: String,
-      remark: "按钮不可用图片",
+      remark: "开始按钮禁用图片",
       default:
         "//yun.tuisnake.com/market-ui/11c22d77-2e83-405b-85e8-c8832dc78529.png",
+    },
+    foundationStyle: {
+      type: Object as PropType<StyleType>,
+      remark: "底座样式",
+      default() {
+        return {
+          width: 750,
+          height: 300,
+          top: 610,
+        };
+      },
     },
     foundationImg: {
       type: String,
@@ -53,7 +75,7 @@ export default BasicBase.extend({
     },
     handStyle: {
       type: Object as PropType<StyleType>,
-      remark: "手势样式（设计尺寸）",
+      remark: "手势样式",
       default() {
         return {
           width: 160,
@@ -69,9 +91,30 @@ export default BasicBase.extend({
       default:
         "//yun.tuisnake.com/tact/turnCircle/bcb4fc7e-18c1-46d7-bdae-2e91147196c1.png",
     },
+    prizeImgStyle: {
+      type: Object as PropType<StyleType>,
+      remark: "奖品图片样式",
+      default() {
+        return {
+          width: 140,
+          height: 140,
+        };
+      },
+    },
+    prizeTextStyle: {
+      type: Object as PropType<StyleType>,
+      remark: "奖品标题样式",
+      default() {
+        return {
+          width: 280,
+          height: 50,
+          "font-size": 24,
+        };
+      },
+    },
     prizeList: {
       type: Array as PropType<PrizeType[]>,
-      remark: "奖品项",
+      remark: "奖品列表",
       default() {
         return [
           {
@@ -140,12 +183,7 @@ export default BasicBase.extend({
     foundationStyleData(): StyleType {
       return {
         "background-image": `url(${this.foundationImg})`,
-        ...this.addUnitForAll({
-          width: 750,
-          height: 300,
-          top: 610,
-          left: 0,
-        }),
+        ...this.addUnitForAll(this.foundationStyle),
       };
     },
   },

@@ -4,31 +4,31 @@ export default {
   Red: {
     containerImg: {
       type: String,
-      remark: '容器图片',
+      remark: '底盘图片',
       default:
         '//yun.tuisnake.com/market-ui/75062570-fa97-4155-9416-20b838415227.png',
     },
     rotateImg: {
       type: String,
-      remark: '转盘图片（可转动部分）',
+      remark: '转盘图片',
       default:
         '//yun.tuisnake.com/market-ui/2d44fefb-a255-4475-90fe-2ff3b96eea04.png',
     },
     pointImg: {
       type: String,
-      remark: '箭头图片',
+      remark: '指针图片',
       default:
         '//yun.tuisnake.com/market-ui/7b9547b1-5696-4b2d-a609-046e9ed8956c.png',
     },
     btnImg: {
       type: String,
-      remark: '按钮图片',
+      remark: '开始按钮图片',
       default:
         '//yun.tuisnake.com/market-ui/af7401b9-239c-42ca-9860-18ad35095220.png',
     },
     btnDisableImg: {
       type: String,
-      remark: '按钮不可用图片',
+      remark: '开始按钮禁用图片',
       default:
         '//yun.tuisnake.com/market-ui/56f54152-fefd-480e-b524-e1751ddf589f.png',
     },
@@ -42,13 +42,13 @@ export default {
   Yellow: {
     containerImg: {
       type: String,
-      remark: '容器图片',
+      remark: '底盘图片',
       default:
         '//yun.tuisnake.com/market-ui/f13b471e-1618-4a38-8fcd-c090e13a8f0e.png',
     },
     rotateImg: {
       type: String,
-      remark: '转盘图片（可转动部分）',
+      remark: '转盘图片',
       default:
         '//yun.tuisnake.com/market-ui/ba4ccea9-31ad-46c8-ab2b-63795495f513.png',
     },
@@ -67,13 +67,13 @@ export default {
   Blue: {
     containerImg: {
       type: String,
-      remark: '容器图片',
+      remark: '底盘图片',
       default:
         '//yun.tuisnake.com/market-ui/b21463d3-fe79-47ac-8d0d-8a3ef64c28bf.png',
     },
     rotateImg: {
       type: String,
-      remark: '转盘图片（可转动部分）',
+      remark: '转盘图片',
       default:
         '//yun.tuisnake.com/market-ui/8bc57a0f-0090-4fbc-9505-75172cb7eae3.png',
     },
@@ -92,31 +92,31 @@ export default {
   Green: {
     containerImg: {
       type: String,
-      remark: '容器图片',
+      remark: '底盘图片',
       default:
         '//yun.tuisnake.com/market-ui/1907e6d0-792e-432d-991b-94ac89599d71.png',
     },
     rotateImg: {
       type: String,
-      remark: '转盘图片（可转动部分）',
+      remark: '转盘图片',
       default:
         '//yun.tuisnake.com/market-ui/48227aa5-1def-4711-ba9d-365ae1eec9bc.png',
     },
     pointImg: {
       type: String,
-      remark: '箭头图片',
+      remark: '指针图片',
       default:
         '//yun.tuisnake.com/market-ui/6cf7b8a6-ba54-432e-9ef6-961b7aad0de1.png',
     },
     btnImg: {
       type: String,
-      remark: '按钮图片',
+      remark: '开始按钮图片',
       default:
         '//yun.tuisnake.com/market-ui/4b39c513-624c-4174-a3ac-4733574042d9.png',
     },
     btnDisableImg: {
       type: String,
-      remark: '按钮不可用图片',
+      remark: '开始按钮禁用图片',
       default:
         '//yun.tuisnake.com/market-ui/821c5285-4546-4448-a70f-c94de4385348.png',
     },
