@@ -1,9 +1,9 @@
-import Vue, { PropType } from "vue";
-import { CardImg, CardSize } from "./types";
-import { getParentRect } from "../../utils";
+import Vue, { PropType } from 'vue';
+import { CardImg, CardSize } from './types';
+import { getParentRect } from '../../utils';
 
 export default Vue.extend({
-  name: "mk-turn-card",
+  name: 'mk-turn-card',
 
   data: () => ({
     // 组件父容器的尺寸
@@ -50,7 +50,7 @@ export default Vue.extend({
     /** 卡牌点击事件 */
     cardNativeClick(index: number) {
       if (this.cardstate[index] > 1) return false;
-      this.$emit("cardStart", index);
+      this.$emit('cardStart', index);
     },
     /** 计算卡牌的尺寸 */
     calcardsize(size: CardSize) {
@@ -78,7 +78,7 @@ export default Vue.extend({
       // 遍历传入的dom
       for (let j = 0; j < cardDomArr.length; j++) {
         const item = cardDomArr[j].getBoundingClientRect();
-        cardDomArr[j].style.transitionDuration = "0ms";
+        cardDomArr[j].style.transitionDuration = '0ms';
         cardDomArr[j].style.transform = `translate(${
           middleRect.x - item.x
         }px, ${middleRect.y - item.y}px)`;
@@ -87,7 +87,7 @@ export default Vue.extend({
       setTimeout(() => {
         for (let j = 0; j < cardDomArr.length; j++) {
           cardDomArr[j].style.transitionDuration = `${duration}ms`;
-          cardDomArr[j].style.transform = "translate(0, 0)";
+          cardDomArr[j].style.transform = 'translate(0, 0)';
         }
       });
     },
@@ -95,7 +95,7 @@ export default Vue.extend({
 
   mounted() {
     this.$nextTick(() => {
-      getParentRect({ id: "mkTurncard" })
+      getParentRect({ id: 'mkTurncard' })
         .then((res) => {
           const { width, height } = res;
           this.container.width = width;
@@ -105,7 +105,7 @@ export default Vue.extend({
           if (this.isShuffle) this.shuffleCard(500);
         })
         .catch((err) => {
-          console.error("请给组件添加一个父容器!");
+          console.error('请给组件添加一个父容器!');
         });
     });
   },
@@ -120,12 +120,12 @@ export default Vue.extend({
                 <div
                   id={`card${index}`}
                   class={[
-                    "mk-turncard-card__item",
+                    'mk-turncard-card__item',
                     {
-                      "mk-turncard-card__item-turn": this.cardstate[index] > 1,
+                      'mk-turncard-card__item-turn': this.cardstate[index] > 1,
                     },
                     {
-                      "mk-turncard-card__item-turn2": this.cardstate[index] > 2,
+                      'mk-turncard-card__item-turn2': this.cardstate[index] > 2,
                     },
                   ]}
                   style={{

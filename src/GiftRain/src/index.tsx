@@ -1,7 +1,7 @@
-import Vue, { PropType } from "vue";
-import Gift from "./gift";
-import { ImageProps, GiftProps, ImageState, FrameProps } from "./types";
-import { randomRound, getParentRect } from "../../utils";
+import Vue, { PropType } from 'vue';
+import Gift from './gift';
+import { ImageProps, GiftProps, ImageState, FrameProps } from './types';
+import { randomRound, getParentRect } from '../../utils';
 
 let canvas: HTMLCanvasElement;
 let canvasCtx: CanvasRenderingContext2D;
@@ -14,7 +14,7 @@ let imageStyle: ImageState[] = [];
 let frameImageEle: ImageProps; // 帧动画图片实例
 
 export default Vue.extend({
-  name: "mk-gift-rain",
+  name: 'mk-gift-rain',
 
   props: {
     // 红包的图片资源src列表
@@ -31,7 +31,7 @@ export default Vue.extend({
   },
 
   data: () => ({
-    component: "mk-gift-rain",
+    component: 'mk-gift-rain',
     // canvas尺寸
     canvasWidth: 552,
     canvasHeight: 338,
@@ -49,8 +49,8 @@ export default Vue.extend({
   methods: {
     // 初始化canvas状态
     initCanvas() {
-      this.canvas = document.getElementById("gift") as HTMLCanvasElement;
-      this.canvasCtx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+      this.canvas = document.getElementById('gift') as HTMLCanvasElement;
+      this.canvasCtx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
       // 获取canvas父容器rect信息
       getParentRect({ dom: this.canvas })
         .then((res) => {
@@ -62,7 +62,7 @@ export default Vue.extend({
           this.createGiftInstance();
         })
         .catch((err) => {
-          console.error("请给canavs组件添加一个父容器!");
+          console.error('请给canavs组件添加一个父容器!');
         });
     },
     // 创建红包实例
@@ -155,7 +155,7 @@ export default Vue.extend({
         .getTouchLocation(e.clientX, e.clientY)
         .then((amount) => {
           // 向上分发红包拆开事件,参数为红包拆开的总个数
-          this.$emit("openGift", amount);
+          this.$emit('openGift', amount);
         });
     },
   },

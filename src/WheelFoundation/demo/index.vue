@@ -192,13 +192,17 @@ export default {
   margin-bottom: 10px;
 }
 
+button {
+  font-size: 4vw;
+}
+
 .wheel {
-  height: 500px;
+  position: relative;
 
   .info {
     position: absolute;
     padding: 5px;
-    font-size: 12px;
+    font-size: 1.6vw;
     background-color: #ccc5;
     border-radius: 5px;
   }

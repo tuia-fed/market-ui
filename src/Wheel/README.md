@@ -83,8 +83,8 @@ export interface WheelStopOptionType {
 | btnDisableImg | 开始按钮禁用图片 | _string_ | `//yun.tuisnake.com/market-ui/11c22d77-2e83-405b-85e8-c8832dc78529.png` |
 | handStyle | 手势样式 | _StyleType_ | `{ width: 160, height: 170, top: 390, left: 400 }` |
 | handImg | 手势图片 | _string_ | `//yun.tuisnake.com/tact/turnCircle/bcb4fc7e-18c1-46d7-bdae-2e91147196c1.png` |
-| prizeImgStyle | 手势样式 | _StyleType_ | `{ width: 140, height: 140 }` |
-| prizeTextStyle | 手势样式 | _StyleType_ | `{ width: 280, height: 50, 'font-size': 24 }` |
+| prizeImgStyle | 奖品图片样式 | _StyleType_ | `{ width: 140, height: 140 }` |
+| prizeTextStyle | 奖品标题样式 | _StyleType_ | `{ width: 280, height: 50, 'font-size': 24 }` |
 | prizeList | 奖品列表 | _PrizeType[]_ | `[...]` |
 | prizePercent | 奖品转盘划分比例，默认（不传）均分 | _number[]_ | `undefined` |
 | idleTurningSpeed | 转盘闲置每秒转动度数（闲置转速） | _number_ | `24` |

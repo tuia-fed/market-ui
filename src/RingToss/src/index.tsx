@@ -1,6 +1,6 @@
-import Vue, { PropType } from "vue";
-import { RingAnimateState, CatchRingAnimateState } from "./types";
-import { delay } from "../../utils";
+import Vue, { PropType } from 'vue';
+import { RingAnimateState, CatchRingAnimateState } from './types';
+import { delay } from '../../utils';
 
 let ringInitAnimateList: Array<RingAnimateState> = [];
 let ringCopyInitAnimateList: Array<RingAnimateState> = [];
@@ -8,7 +8,7 @@ let ringCatchAnimateList: Array<CatchRingAnimateState> = [];
 let ringCopyCatchAnimateList: Array<CatchRingAnimateState> = [];
 
 export default Vue.extend({
-  name: "mk-ring-toss",
+  name: 'mk-ring-toss',
 
   props: {
     // 绘制成猫的初始化状态图片资源
@@ -54,7 +54,7 @@ export default Vue.extend({
      * 计算猫的初始化动画状态
      */
     calculateInitRingAnimate() {
-      const basicAnimateState: Omit<RingAnimateState, "id"> = {
+      const basicAnimateState: Omit<RingAnimateState, 'id'> = {
         isShow: true, // 是否要显示
         isInitMove: true, // 是否是初始动效
         isStop: false, // 是否要停止动画
@@ -95,8 +95,8 @@ export default Vue.extend({
      * 计算抓哪只猫
      */
     calculateRing() {
-      const cat0 = document.getElementById("cat0");
-      const cat1 = document.getElementById("cat1");
+      const cat0 = document.getElementById('cat0');
+      const cat1 = document.getElementById('cat1');
       const windowWidth =
         document.body.clientWidth || document.documentElement.clientWidth;
       const ratio0 = (cat0?.getBoundingClientRect().left || 0) / windowWidth;
@@ -173,8 +173,8 @@ export default Vue.extend({
                 id={item.id}
                 class={[
                   `cat${key}`,
-                  "initCat",
-                  "hide",
+                  'initCat',
+                  'hide',
                   { activeCatInit: item.isInitMove },
                   { stopCatMove: item.isStop },
                   { show: item.isShow },
@@ -190,7 +190,7 @@ export default Vue.extend({
                 <div
                   key={`${key}_0`}
                   class={[
-                    "initCatchCat",
+                    'initCatchCat',
                     `catchCat${key}`,
                     { active: item.catchActive },
                   ]}
@@ -205,7 +205,7 @@ export default Vue.extend({
                 <div
                   key={`${key}_1`}
                   class={[
-                    "initEscapeCat",
+                    'initEscapeCat',
                     `escapeCat${key}`,
                     { active: item.escapeActive },
                   ]}
