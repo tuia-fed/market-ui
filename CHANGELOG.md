@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/compare/release-0.1.1...release-0.1.2) (2022-01-13)
+
+
+### Features
+
+* add github ([3fafa9c](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/3fafa9ceb9015ca56d949418ff3986b2e97c11d1))
+
+
+### Bug Fixes
+
+* github ci ([598f3a6](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/598f3a64fd9d693c99236530da0e122743dcdd77))
+
+
+### Docs
+
+* add wheel docs ([1bc69f4](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/1bc69f49a0679c3cf506addcb4b431232884be4d))
+* add wheelfoundation docs ([7b2ce9b](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/7b2ce9b168445c4a9c35b2e06e96d97642114477))
+
 ### [0.1.1](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/compare/release-0.1.0...release-0.1.1) (2022-01-12)
 
 
