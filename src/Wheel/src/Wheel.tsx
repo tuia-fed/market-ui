@@ -1,9 +1,9 @@
-import BasicBase from '../../core/BasicBase';
-import UpdateMixin from '../../mixins/update';
-import StateConstant from '../../constants/StateConstant';
-import { animate } from 'popmotion';
-import { PopmotionType } from '../../../types/Core';
-import { PropType } from 'vue';
+import BasicBase from "../../core/BasicBase";
+import UpdateMixin from "../../mixins/update";
+import StateConstant from "../../constants/StateConstant";
+import { animate } from "popmotion";
+import { PopmotionType } from "../../../types/Core";
+import { PropType } from "vue";
 
 export interface WheelStopOptionType {
   index?: number;
@@ -20,53 +20,53 @@ export default BasicBase.extend({
   props: {
     prizeList: {
       type: Array as PropType<PrizeType[]>,
-      remark: '奖品项',
+      remark: "奖品列表",
       default() {
         return [
           {
-            title: '谢谢参与1',
-            image: '//yun.tuia.cn/tuia/jimo-web-pro/smile.png',
+            title: "谢谢参与1",
+            image: "//yun.tuia.cn/tuia/jimo-web-pro/smile.png",
           },
           {
-            title: '谢谢参与2',
-            image: '//yun.tuia.cn/tuia/jimo-web-pro/smile.png',
+            title: "谢谢参与2",
+            image: "//yun.tuia.cn/tuia/jimo-web-pro/smile.png",
           },
           {
-            title: '谢谢参与3',
-            image: '//yun.tuia.cn/tuia/jimo-web-pro/smile.png',
+            title: "谢谢参与3",
+            image: "//yun.tuia.cn/tuia/jimo-web-pro/smile.png",
           },
           {
-            title: '谢谢参与4',
-            image: '//yun.tuia.cn/tuia/jimo-web-pro/smile.png',
+            title: "谢谢参与4",
+            image: "//yun.tuia.cn/tuia/jimo-web-pro/smile.png",
           },
           {
-            title: '谢谢参与5',
-            image: '//yun.tuia.cn/tuia/jimo-web-pro/smile.png',
+            title: "谢谢参与5",
+            image: "//yun.tuia.cn/tuia/jimo-web-pro/smile.png",
           },
           {
-            title: '谢谢参与6',
-            image: '//yun.tuia.cn/tuia/jimo-web-pro/smile.png',
+            title: "谢谢参与6",
+            image: "//yun.tuia.cn/tuia/jimo-web-pro/smile.png",
           },
         ];
       },
     },
     prizePercent: {
       type: Array as PropType<number[]>,
-      remark: '奖品转盘划分比例，默认均分',
+      remark: "奖品转盘划分比例，默认均分",
     },
     idleTurningSpeed: {
       type: Number,
-      remark: '闲置每秒转动度数（闲置转速）',
+      remark: "闲置每秒转动度数（闲置转速）",
       default: 24,
     },
     maxTurningSpeed: {
       type: Number,
-      remark: '运行每秒转动度数（最大转速）',
+      remark: "运行每秒转动度数（最大转速）",
       default: 900,
     },
     extraRotate: {
       type: Number,
-      remark: '初始转盘上奖品相对于转盘需要额外转动的度数',
+      remark: "初始转盘上奖品相对于转盘需要额外转动的度数",
       default: 0,
     },
   },
@@ -88,14 +88,19 @@ export default BasicBase.extend({
       const len = this.prizeList.length;
       if (this.prizePercent && this.prizePercent.length) {
         if (len !== this.prizePercent.length) {
-          console.error('[大转盘]转盘比例配置与奖品配置长度不一致');
+          console.error("[大转盘]转盘比例配置与奖品配置长度不一致");
         }
-        const percents = this.prizePercent.concat(Array.from({ length: len}, () => this.prizePercent[0])).slice(0, len);
+        const percents = this.prizePercent
+          .concat(Array.from({ length: len }, () => this.prizePercent[0]))
+          .slice(0, len);
         const total = percents.reduce((p, c) => p + c, 0);
-        return Array.from({length: len}, (v, k) => 360 * percents[k]/total);
+        return Array.from(
+          { length: len },
+          (v, k) => (360 * percents[k]) / total
+        );
       }
       // 默认均分
-      return Array.from({length: len}, () => 360/len);
+      return Array.from({ length: len }, () => 360 / len);
     },
   },
   created() {
@@ -113,11 +118,16 @@ export default BasicBase.extend({
       }
     },
     getPrizeAngle(index: number) {
-      return -this.extraRotate - this.wheelParts.slice(0, index + 1).reduce((p,c) => p + c, 0) + this.wheelParts[0] / 2 + this.wheelParts[index] / 2;
+      return (
+        -this.extraRotate -
+        this.wheelParts.slice(0, index + 1).reduce((p, c) => p + c, 0) +
+        this.wheelParts[0] / 2 +
+        this.wheelParts[index] / 2
+      );
     },
     async start() {
       if (this.state !== StateConstant.WAIT_START) {
-        throw new Error('当前状态无法开始');
+        throw new Error("当前状态无法开始");
       }
       this.state = StateConstant.START;
       await this.startWheelAni(this.idleTurningSpeed, this.maxTurningSpeed);
@@ -125,13 +135,14 @@ export default BasicBase.extend({
     },
     async stop(opts: WheelStopOptionType = {}) {
       if (this.state !== StateConstant.WAIT_END) {
-        throw new Error('当前状态无法开始');
+        throw new Error("当前状态无法开始");
       }
       this.state = StateConstant.END;
 
       const index = (opts.index || 0) % this.prizeList.length;
       const rangePart = this.wheelParts[index] * 0.8;
-      const disDegree = -this.getPrizeAngle(index) + (Math.random() - 0.5) * rangePart;
+      const disDegree =
+        -this.getPrizeAngle(index) + (Math.random() - 0.5) * rangePart;
       const now = this.wheelDegree % 360;
       const dist = 360 * 3 - now + disDegree;
       const t = (2 * dist) / this.maxTurningSpeed;
@@ -169,7 +180,7 @@ export default BasicBase.extend({
           from,
           to,
           duration,
-          onStop: () => reject('被停止'),
+          onStop: () => reject("被停止"),
           onUpdate: (v) => {
             this.wheelSpeed = v;
           },
@@ -190,6 +201,6 @@ export default BasicBase.extend({
       this.state = StateConstant.WAIT_START;
     },
     // eslint-disable-next-line
-    setDegree(v: number) { },
+    setDegree(v: number) {},
   },
 });

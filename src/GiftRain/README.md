@@ -1,6 +1,6 @@
 ---
-group: 互动组件
-level: 5
+group: 特殊玩法组件
+level: 1
 ---
 
 # 红包雨

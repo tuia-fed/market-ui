@@ -41,14 +41,15 @@ export default {
   },
   methods: {
     groupSidebarRouter(pages) {
-      const frontmatterGroupList = []
+      // 暂时只展示这些
+      const frontmatterGroupList = ['引导', '基础玩法组件', '特殊玩法组件']
       // 分组
-      pages.forEach(item => {
-        const { frontmatter } = item // 页面自定义配置
-        if (!frontmatterGroupList.includes(frontmatter.group)) {
-          frontmatterGroupList.push(frontmatter.group)
-        }
-      })
+      // pages.forEach(item => {
+      //   const { frontmatter } = item // 页面自定义配置
+      //   if (!frontmatterGroupList.includes(frontmatter.group)) {
+      //     frontmatterGroupList.push(frontmatter.group)
+      //   }
+      // })
       // 排序
       const sidebarGroups = frontmatterGroupList.map(item => {
         const groupChild = pages.filter(page => page.frontmatter.group === item)

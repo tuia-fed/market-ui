@@ -1,5 +1,5 @@
-import Resolution from './Resolution';
-import StateConstant from '../constants/StateConstant';
+import Resolution from "./Resolution";
+import StateConstant from "../constants/StateConstant";
 
 export interface StateChangeDataType {
   now: StateConstant;
@@ -31,11 +31,11 @@ export default Resolution.extend({
     // eslint-disable-next-line
     async disable(opts?: any) {},
     emitStateChange(opt: StateChangeDataType) {
-      this.$emit('stateChange', opt);
+      this.$emit("stateChange", opt);
     },
     // eslint-disable-next-line
     emitClickStart(opt: any) {
-      this.$emit('clickStart', opt);
+      this.$emit("clickStart", opt);
     },
   },
 });

@@ -71,13 +71,9 @@
 </template>
 <script>
 // #region js
-import { Wheel, StateConstant } from '@tuia/market-ui';
+import { StateConstant } from '@tuia/market-ui';
 
 export default {
-  components: {
-    [Wheel.name]: Wheel,
-  },
-
   data() {
     return {
       state: 0,
@@ -178,13 +174,17 @@ export default {
   margin-bottom: 10px;
 }
 
+button {
+  font-size: 4vw;
+}
+
 .wheel {
   position: relative;
 
   .info {
     position: absolute;
     padding: 5px;
-    font-size: 12px;
+    font-size: 1.6vw;
     background-color: #ccc5;
     border-radius: 5px;
   }
