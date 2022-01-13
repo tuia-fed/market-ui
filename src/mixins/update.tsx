@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 
 const getNowTime = () => {
   // if (performance && performance.now) {

@@ -65,3 +65,18 @@ npx husky install
 ```bash
 yarn create:new
 ```
+
+## 更新文档到GitHub
+
+- 先增加GitHub源，如果已经加过则忽略
+
+```bash
+git remote add github https://github.com/tuia-fed/market-ui.git
+```
+
+- 推送master分支代码到GitHub
+
+```bash
+git checkout master
+yarn github-doc
+```
