@@ -105,7 +105,7 @@ export interface WheelStopOptionType {
 | prizeTextStyle | 奖品标题样式 | _StyleType_ | `{ width: 280, height: 50, 'font-size': 24 }` |
 | prizeList | 奖品列表 | _PrizeType[]_ | `[...]` |
 | prizePercent | 奖品转盘划分比例，默认（不传）均分 | _number[]_ | `undefined` |
-| idleTurningSpeed | 转盘闲置每秒转动度数（闲置转速） | _number_ | `24` |
+| idleTurningSpeed | 转盘闲置每秒转动度数（闲置转速） | _number_ | `6` |
 | maxTurningSpeed | 转盘运行每秒转动度数（最大转速） | _number_ | `900` |
 | extraRotate | 初始转盘上奖品相对于转盘需要额外转动的度数 | _number_ | `0` |
 | rangePercent | 指针命中区域范围：0-1 | _number[]_ | `[0.1, 0.9]` |
