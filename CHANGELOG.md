@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/compare/release-0.1.2...release-0.1.3) (2022-01-14)
+
+
+### Features
+
+* **squarewheel:** add SquareWheel ([62c4a11](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/62c4a11b55e12952d9902910aed1e3d234815bad))
+* 补充基座大转盘参数 ([6781e71](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/commit/6781e71d62842c435a6926de22c94e2e3b8be451))
+
 ### [0.1.2](https://gitlab2.dui88.com/tuia-frontend/tuia-activity-frontend/market-ui/compare/release-0.1.1...release-0.1.2) (2022-01-13)
 
 
