@@ -9,17 +9,50 @@ export default BasicBase.extend({
   extends: BasicBase,
   name: 'mk-wheel-foundation',
   props: {
+    containerStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '底盘样式',
+      default() {
+        return {
+          width: 750,
+          height: 750,
+          top: 0,
+          left: 0,
+        };
+      },
+    },
     containerImg: {
       type: String,
       remark: '底盘图片',
       default:
         '//yun.tuisnake.com/market-ui/e7185b56-1757-40f7-a921-f8c818d4c1a7.png',
     },
+    lightStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '底盘灯样式',
+      default() {
+        return {
+          width: 750,
+          height: 750,
+        };
+      },
+    },
     lightImg: {
       type: String,
       remark: '底盘灯图片',
       default:
         '//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png',
+    },
+    rotateStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '转盘样式',
+      default() {
+        return {
+          width: 635,
+          height: 635,
+          top: 57.5,
+        };
+      },
     },
     rotateImg: {
       type: String,
@@ -43,6 +76,17 @@ export default BasicBase.extend({
       remark: '指针图片',
       default:
         '//yun.tuisnake.com/market-ui/0b7f2b9d-c63f-46fc-a851-edc2d47df9ab.png',
+    },
+    btnStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '开始按钮样式',
+      default() {
+        return {
+          width: 175,
+          height: 175,
+          top: 287.5,
+        };
+      },
     },
     btnImg: {
       type: String,

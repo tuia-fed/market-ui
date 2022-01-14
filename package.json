@@ -37,9 +37,7 @@
     "github-doc": "git push github master"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "popmotion": "9.1.0",
-    "vue": "^2.6.11"
+    "popmotion": "9.1.0"
   },
   "peerDependencies": {
     "vue": ">= 2.5.22"
@@ -78,6 +76,7 @@
     "stylelint-order": "^4.1.0",
     "ts-loader": "^8.1.0",
     "typescript": "~4.1.5",
+    "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.8.2"
   },

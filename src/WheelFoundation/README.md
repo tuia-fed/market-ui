@@ -86,11 +86,15 @@ export interface WheelStopOptionType {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| containerStyle | 底盘样式 | _StyleType_ | `{ width: 750, height: 750, top: 0, left: 0 }` |
 | containerImg | 底盘图片 | _string_ | `//yun.tuisnake.com/market-ui/e7185b56-1757-40f7-a921-f8c818d4c1a7.png` |
+| lightStyle | 底盘灯样式 | _StyleType_ | `{ width: 750, height: 750 }` |
 | lightImg | 底盘灯图片 | _string_ | `//yun.tuisnake.com/market-ui/d9d80c69-fe30-42a9-9794-e61f00193593.png` |
+| rotateStyle | 转盘样式 | _StyleType_ | `{ width: 635, height: 635, top: 57.5 }` |
 | rotateImg | 转盘图片 | _string_ | `//yun.tuisnake.com/market-ui/c31f472a-5be9-4296-9b0f-353b6583bbd9.png` |
 | pointStyle | 指针样式 | _StyleType_ | `{ width: 270, height: 270, top: 240 }` |
 | pointImg | 指针图片 | _string_ | `//yun.tuisnake.com/market-ui/0b7f2b9d-c63f-46fc-a851-edc2d47df9ab.png` |
+| btnStyle | 开始按钮样式 | _StyleType_ | `{ width: 175, height: 175, top: 287.5 }` |
 | btnImg | 开始按钮图片 | _string_ | `//yun.tuisnake.com/market-ui/db4540bd-8c5a-439d-bbb6-ea3f114c4902.png` |
 | btnDisableImg | 开始按钮禁用图片 | _string_ | `//yun.tuisnake.com/market-ui/11c22d77-2e83-405b-85e8-c8832dc78529.png` |
 | foundationStyle | 底座样式 | _StyleType_ | `{ width: 750, height: 300, top: 610 }` |
