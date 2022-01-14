@@ -35,7 +35,6 @@ export default {
       iframeListener: null,
       currentScrollTop: 0,
       simulatorDisabled: false,
-      simulatorHash: '',
       basicPath: ''
     }
   },
@@ -48,23 +47,11 @@ export default {
   },
   computed: {
     simulatorPath() {
-      let iframePath = ''
-      if (this.simulatorHash) {
-        iframePath = `${this.basicPath}/#${this.simulatorHash}`
-      } else {
-        iframePath = this.basicPath + '/#/'
+      let hash = '/'
+      if (this.$route.path.startsWith('/components')) {
+        hash = this.$route.path.split('/components')[1]
       }
-      return iframePath
-    }
-  },
-  watch: {
-    '$route'(to, from) {
-      const currentPath = to.path // 当前页面路由
-      if (/^\/components/.test(currentPath)) { // 匹配到组件路由
-        this.simulatorHash = currentPath.split('/components')[1]
-      } else {
-        this.simulatorHash = ''
-      }
+      return `${this.basicPath}/#${hash}`
     }
   },
   mounted() {
