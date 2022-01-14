@@ -165,7 +165,7 @@ export default WheelBase.extend({
         'animation-duration': LIGHT_TIME[this.state] || '0.7s',
       };
     },
-    rotatedomStyleData(): StyleType {
+    rotateStyleData(): StyleType {
       return {
         'background-image': `url(${this.rotateImg})`,
         'transform-origin': 'center center',
@@ -303,7 +303,7 @@ export default WheelBase.extend({
         <div
           ref="rotate"
           class="mk-wheel__rotate"
-          style={this.rotatedomStyleData}
+          style={this.rotateStyleData}
         >
           {this.renderPrizes()}
         </div>
