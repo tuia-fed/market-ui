@@ -212,12 +212,19 @@ export default BasicBase.extend({
       remark: '运行每秒转动度数（最大转速）',
       default: 900,
     },
+    rangePercent: {
+      type: Array as PropType<number[]>,
+      remark: '指针命中区域范围：0-1',
+      default() {
+        return [0.1, 0.9];
+      },
+    },
   },
   computed: {
     wheel(): WheelRef {
       return this.$refs.wheel as WheelRef;
     },
-    containerStyle(): StyleType {
+    foundationContainerStyle(): StyleType {
       return this.addUnitForAll({
         top: this.top,
         width: 750,
@@ -261,7 +268,7 @@ export default BasicBase.extend({
 
   render() {
     return (
-      <div class="mk-wheel-foundation" style={this.containerStyle}>
+      <div class="mk-wheel-foundation" style={this.foundationContainerStyle}>
         <mk-wheel
           ref="wheel"
           props={this.$props}

@@ -69,6 +69,13 @@ export default BasicBase.extend({
       remark: '初始转盘上奖品相对于转盘需要额外转动的度数',
       default: 0,
     },
+    rangePercent: {
+      type: Array as PropType<number[]>,
+      remark: '指针命中区域范围：0-1',
+      default() {
+        return [0.1, 0.9];
+      },
+    },
   },
   data() {
     return {
@@ -101,6 +108,24 @@ export default BasicBase.extend({
       }
       // 默认均分
       return Array.from({ length: len }, () => 360 / len);
+    },
+    wheelActiveIndex(): number {
+      const now =
+        (360 +
+          ((this.wheelDegree + this.wheelParts[0] / 2 - this.extraRotate) %
+            360)) %
+        360;
+      let index = 0;
+      let pre = 0;
+      this.wheelParts.some((it, ind) => {
+        if (now < pre + it) {
+          index = ind;
+          return true;
+        } else {
+          pre += it;
+        }
+      });
+      return index;
     },
   },
   created() {
@@ -140,9 +165,12 @@ export default BasicBase.extend({
       this.state = StateConstant.END;
 
       const index = (opts.index || 0) % this.prizeList.length;
-      const rangePart = this.wheelParts[index] * 0.8;
+      const rangePart =
+        Math.random() * (this.rangePercent[1] - this.rangePercent[0]) +
+        this.rangePercent[0] -
+        0.5;
       const disDegree =
-        -this.getPrizeAngle(index) + (Math.random() - 0.5) * rangePart;
+        -this.getPrizeAngle(index) + this.wheelParts[index] * rangePart;
       const now = this.wheelDegree % 360;
       const dist = 360 * 3 - now + disDegree;
       const t = (2 * dist) / this.maxTurningSpeed;
