@@ -5,7 +5,7 @@ const resolve = dir => path.join(__dirname, dir)
 
 module.exports = {
   base: '/market-ui/', // 部署到https://foo.github.io/market-ui/
-  title: pkg.name.toUpperCase(),
+  title: 'MarketUI',
   description: pkg.description,
   dest: 'dist',
   head: [
