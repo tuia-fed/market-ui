@@ -206,7 +206,7 @@ export default WheelBase.extend({
         ...this.addUnitForAll(this.handStyle),
       };
     },
-    isWaitStart() {
+    isWaitStart(): boolean {
       return this.state === StateConstant.WAIT_START;
     },
     textStyleData(): StyleType {
@@ -300,11 +300,7 @@ export default WheelBase.extend({
             ></div>
           </div>
         )}
-        <div
-          ref="rotate"
-          class="mk-wheel__rotate"
-          style={this.rotateStyleData}
-        >
+        <div ref="rotate" class="mk-wheel__rotate" style={this.rotateStyleData}>
           {this.renderPrizes()}
         </div>
         <div class="mk-wheel__point" style={this.pointStyleData}></div>

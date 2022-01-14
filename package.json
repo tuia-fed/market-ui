@@ -34,9 +34,11 @@
     "stylelint": "npx stylelint src/**/*.{css,less}",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "release": "npx standard-version --no-verify -t release-",
-    "github-doc": "git push github master"
+    "github-doc": "git push github master",
+    "beta": "npm publish --tag=beta"
   },
   "dependencies": {
+    "core-js": "^3.6.5",
     "popmotion": "9.1.0"
   },
   "peerDependencies": {

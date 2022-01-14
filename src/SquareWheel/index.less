@@ -1,0 +1,56 @@
+@import '../styles/index.less';
+
+.mk-square-wheel {
+  .bg();
+  .atl();
+
+  &__point,
+  &__btn,
+  &__light {
+    .bg();
+    .atl();
+  }
+
+  &__point {
+    pointer-events: none;
+  }
+
+  &__item {
+    .atl();
+    .bg();
+
+    &-img {
+      .bg();
+      .atm(0);
+    }
+
+    &-text {
+      .atm(0);
+
+      overflow: hidden;
+      font-weight: bold;
+      color: #626262;
+      text-align: center;
+    }
+
+    &-mask {
+      .bg();
+      .atl();
+
+      pointer-events: none;
+    }
+  }
+
+  &__btn-active {
+    animation: btnScaleAni 0.7s ease-in infinite;
+  }
+
+  &__hand {
+    .bg();
+    .atl();
+
+    pointer-events: none;
+    transform-origin: right bottom;
+    animation: handShakeAni 0.8s linear 0s infinite alternate;
+  }
+}
