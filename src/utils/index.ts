@@ -48,3 +48,30 @@ export function getParentRect(current: Partial<DomProps>): Promise<ClientRect> {
     }
   });
 }
+
+/**
+ * 加载远程图片
+ * @param {String} url 图片cdn地址
+ * @returns {Promise<HTMLImageElement>}
+ */
+export function downloadDomImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+
+    function loadCallback() {
+      img.removeEventListener('load', loadCallback);
+      img.removeEventListener('error', errorCallback);
+      resolve(img);
+    }
+    function errorCallback() {
+      img.removeEventListener('load', loadCallback);
+      img.removeEventListener('error', errorCallback);
+      reject(new Error('图片下载失败'));
+    }
+
+    img.addEventListener('load', loadCallback);
+    img.addEventListener('error', errorCallback);
+    img.src = url;
+  });
+}
