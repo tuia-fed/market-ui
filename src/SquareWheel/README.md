@@ -82,7 +82,7 @@ export interface WheelStopOptionType {
 | prizeList | 奖品列表（当前仅支持8个） | _PrizeType[]_ | `[...]` |
 | idleTurningSpeed | 转盘闲置每秒转动度数（闲置转速） | _number_ | `24` |
 | maxTurningSpeed | 转盘运行每秒转动度数（最大转速） | _number_ | `900` |
-| rangePercent | 指针命中区域范围：0-1 | _number[]_ | `[0.1, 0.9]` |
+| rangePercent | 指针命中区域范围：0-1 | _number[]_ | `[0.01, 0.02]` |
 
 ## Slots
 | 名称 | 作用域 | 说明 |

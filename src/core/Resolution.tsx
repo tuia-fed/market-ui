@@ -1,7 +1,7 @@
 import Vue from 'vue';
 // 错开Vue引入
 import { PropType } from 'vue';
-import { StyleValueType, StyleType } from 'types/Core';
+import { StyleValueType, StyleType, SizeType } from 'types/Core';
 
 type addUnitFuncType = (v: StyleValueType) => string;
 

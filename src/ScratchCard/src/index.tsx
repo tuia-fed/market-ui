@@ -1,232 +1,282 @@
-import Vue from 'vue';
+import { PropType } from 'vue';
+import BasicBasePlus from '../../core/BasicBasePlus';
+import ScratchCanvas from './ScratchCanvas';
+import StateConstant from '../../constants/StateConstant';
+import { SizeType, StyleType } from '../../../types/Core';
 
-let canvas: HTMLCanvasElement;
-let ctx: CanvasRenderingContext2D;
-let events: string[];
-let startMoveHandler: any;
-let endMoveHandler: any;
-let moveHandler: any;
-
-export default Vue.extend({
+export default BasicBasePlus.extend({
+  extends: BasicBasePlus,
   name: 'mk-scratch-card',
 
-  data: () => ({
-    firstTouch: true, //是否第一次touchstart or mousedown
-    showLucky: false, //显示隐藏抽奖结果
-    supportTouch: false, //是否支持touch事件
-    canvas,
-    ctx,
-    events, //touch事件 or mouse事件合集
-    startMoveHandler, //touchstart or mousedown 事件
-    endMoveHandler, //touchend or mouseend 事件
-    moveHandler, //touchmove or mousemove 事件
-    isSuspend: false,
-  }),
+  data() {
+    return {
+      canvas: null as never as ScratchCanvas,
+    };
+  },
 
   props: {
-    moveRadius: {
-      //刮刮范围
-      type: Number,
-      default: 20,
+    containerStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '容器样式（包含整体位置）',
+      default() {
+        return {
+          width: 750,
+          height: 465,
+        };
+      },
     },
-    ratio: {
-      //要求刮掉的面积占比，达到这个占比后，将会自动把其余区域清除
-      type: Number,
-      default: 0.3,
-    },
-    startCallback: {
-      //第一次刮回调函数
-      type: Function,
-      default: () => {},
-    },
-    clearCallback: {
-      //达到ratio占比后的回调函数
-      type: Function,
-      default: () => {},
-    },
-    coverColor: {
-      //刮刮卡遮罩颜色
+    containerImg: {
       type: String,
-      default: '#C5C5C5',
+      remark: '容器背景图片',
+      default: '//yun.tuisnake.com/market-ui/c6c0a01c-59e1-4317-bfa2-b46c361e9a3a.png',
+    },
+    scratchStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '刮刮卡样式',
+      default() {
+        return {
+          left: 15,
+          top: 30,
+        };
+      },
+    },
+    scratchSize: {
+      type: Object as PropType<SizeType>,
+      remark: '可刮区域宽高',
+      default() {
+        return {
+          width: 720,
+          height: 405,
+        };
+      },
     },
     coverImg: {
-      //刮刮卡遮罩图片
       type: String,
+      remark: '刮刮卡封面图片',
+      default: '//yun.tuisnake.com/market-ui/71d1c715-17d2-426a-867f-da00c4647213.png',
+    },
+    coverDisableImg: {
+      type: String,
+      remark: '刮刮卡禁用时封面图片',
+      default: '//yun.tuisnake.com/market-ui/71d1c715-17d2-426a-867f-da00c4647213.png',
+    },
+    coverColor: {
+      type: String,
+      remark: '刮刮卡封面兜底颜色',
+      default: '#c5c5c5',
+    },
+    brushSize: {
+      type: Object as PropType<SizeType>,
+      remark: '刮刮卡刷子宽高',
+      default() {
+        return {
+          width: 160,
+          height: 100,
+        };
+      },
+    },
+    brushImg: {
+      type: String,
+      remark: '刮刮卡刷子图片',
+      default: '//yun.tuisnake.com/market-ui/7fde6794-f9b4-49a1-8f08-44673bacbb23.png',
+    },
+    brushRadius: {
+      type: Number,
+      remark: '刮的刷子兜底圆圈半径',
+      default: 40,
+    },
+    prizeImg: {
+      type: String,
+      remark: '奖品图片',
+      default: '//yun.tuisnake.com/market-ui/b16b8439-b6ee-4aa4-8c2a-c158c1ea613c.png',
+    },
+    coreRect: {
+      type: Array as PropType<number[]>,
+      remark: '奖品核心区域范围，用于判断刮的程度，数字数组（0-1）：[left, top, width, height]',
+      default() {
+        return [0.1, 0.1, 0.8, 0.8];
+      },
+    },
+    endRatio: {
+      type: Number,
+      remark: '当核心区域手动刮掉的面积达到这个值时，表示刮完了',
+      default: 0.5,
+    },
+    enableAutoScratch: {
+      type: Boolean,
+      remark: '当手动刮一次未达到结束标准时，是否触发自动刮开',
+      default: true,
+    },
+    autoScratchPath: {
+      type: Array as PropType<number[][]>,
+      remark: '自动刮开路径，二维坐标数组（0-1）最后一项表示该路径耗时：[[x1, y1], [x2, y2, t2]]',
+      default() {
+        return [[0.9, 0.1], [0.1, 0.27, 250], [0.96, 0.36, 250], [0.07, 0.62, 250], [0.96, 0.6, 250], [0.05, 0.85, 250]];
+      },
+    },
+    tipsStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '提示文字（跳动文字）整体样式',
+      default() {
+        return {
+          'font-size': 100,
+        };
+      },
+    },
+    tipsWords: {
+      type: String,
+      remark: '提示文字（跳动文字）',
+      default: '领福利啦～',
+    },
+    handStyle: {
+      type: Object as PropType<StyleType>,
+      remark: '手势样式',
+      default() {
+        return {
+          width: 160,
+          height: 170,
+        };
+      },
+    },
+    handImg: {
+      type: String,
+      remark: '手势图片',
+      default:
+        '//yun.tuisnake.com/tact/turnCircle/bcb4fc7e-18c1-46d7-bdae-2e91147196c1.png',
     },
   },
 
   computed: {
-    cardId() {
-      return `card_${new Date().getTime()}`;
+    containerStyleData(): StyleType {
+      return {
+        'background-image': this.containerImg ? `url(${this.containerImg})` : '',
+        ...this.addUnitForAll(this.containerStyle),
+      };
+    },
+    contentStyleData(): StyleType {
+      return {
+        ...this.addUnitForAll(this.scratchSize),
+        ...this.addUnitForAll(this.scratchStyle),
+      };
+    },
+    prizeStyleData(): StyleType {
+      return {
+        'background-image': this.prizeImg ? `url(${this.prizeImg})` : '',
+      };
+    },
+    disableCoverStyleData(): StyleType {
+      if (this.coverDisableImg) {
+        return {
+          'background-image': `url(${this.coverDisableImg})`,
+        };
+      }
+      return {
+        'background-cover': this.coverColor,
+      };
+    },
+    tipsStyleData(): StyleType {
+      return this.addUnitForAll(this.tipsStyle);
+    },
+    handStyleData(): StyleType {
+      return {
+        'background-image': this.handImg ? `url(${this.handImg})` : '',
+        ...this.addUnitForAll(this.handStyle),
+      };
+    },
+    isDisable(): boolean {
+      return this.state === StateConstant.DISABLE;
+    },
+    isShowPrize(): boolean {
+      return this.state >= StateConstant.START && this.state <= StateConstant.PRIZE;
+    },
+    isCanvasShow(): boolean {
+      return !this.isDisable && this.state !== StateConstant.PRIZE;
+    },
+    isWaitStart(): boolean {
+      return this.state === StateConstant.WAIT_START;
+    },
+  },
+
+  mounted() {
+    this.canvas = new ScratchCanvas({
+      canvas: this.$refs.canvas as HTMLCanvasElement,
+      coverColor: this.coverColor,
+      coverImg: this.coverImg,
+      brushSize: this.brushSize,
+      brushImg: this.brushImg,
+      brushRadius: this.brushRadius,
+      scratchStart: this.scratchStart.bind(this),
+      scratchEnd: this.scratchEnd.bind(this),
+    });
+    this.init();
+  },
+
+  methods: {
+    async init() {
+      await this.canvas.init();
+      this.state = StateConstant.WAIT_START;
+    },
+    scratchStart(e: Event) {
+      if (this.state === StateConstant.WAIT_START) {
+        this.state = StateConstant.START;
+        this.emitClickStart(e);
+      }
+    },
+    scratchEnd() {
+      const per = this.canvas.getEmptyPercent(this.coreRect);
+      if (per >= this.endRatio) {
+        this.state = StateConstant.END;
+        this.state = StateConstant.PRIZE;
+      } else if (this.enableAutoScratch) {
+        this.autoScratch();
+      }
+    },
+    async start() {
+      if (this.state !== StateConstant.WAIT_START) {
+        throw new Error('当前状态无法开始');
+      }
+      this.state = StateConstant.START;
+      await this.autoScratch();
+    },
+    async reset() {
+      this.state = StateConstant.RESET;
+      this.canvas.reset();
+      this.canvas.setUserScratchEnable(true);
+      this.state = StateConstant.WAIT_START;
+    },
+    async disable() {
+      this.canvas.reset();
+      this.canvas.setUserScratchEnable(false);
+      this.state = StateConstant.DISABLE;
+    },
+    async autoScratch() {
+      this.canvas.setUserScratchEnable(false);
+      this.state = StateConstant.END;
+      await this.canvas.scratchWithPath(this.autoScratchPath);
+      this.state = StateConstant.PRIZE;
+    },
+    renderTips() {
+      return this.getScopedSlot('tips') || (this.isWaitStart && this.tipsWords.length &&
+        <div class="mk-scratch-card__tips" style={this.tipsStyleData}>
+          {this.tipsWords.split('').map((it, ind) => (
+            <span style={{ animationDelay: 0.2 * ind + 's'}}>{it}</span>
+          ))}
+        </div>
+      );
     },
   },
 
   render() {
     return (
-      <div class="mk-scratch">
-        <div class="mk-scratch_card" id={this.cardId}>
-          <div class="mk-scratch_result">{this.$slots.default}</div>
-          <canvas class="mk-scratch_canvas"></canvas>
+      <div class="mk-scratch-card" style={this.containerStyleData}>
+        <div class="mk-scratch-card__content" style={this.contentStyleData}>
+          <div class="mk-scratch-card__result" v-show={this.isShowPrize}>{this.getScopedSlot('result') || <div class="mk-scratch-card__result-prize" style={this.prizeStyleData}></div>}</div>
+          <canvas ref="canvas" width={this.scratchSize.width} height={this.scratchSize.height} class="mk-scratch-card__canvas" v-show={this.isCanvasShow}></canvas>
+          <div class="mk-scratch-card__disable-cover" v-show={this.isDisable} style={this.disableCoverStyleData}></div>
+          {this.renderTips()}
+          {this.isWaitStart ? <div class="mk-scratch-card__hand" style={this.handStyleData}></div> : null}
         </div>
       </div>
     );
-  },
-
-  methods: {
-    init() {
-      const canvasWrap = document.getElementById(
-        this.cardId
-      ) as HTMLCanvasElement;
-      this.canvas = canvasWrap.querySelector(
-        '.mk-scratch_canvas'
-      ) as HTMLCanvasElement;
-      this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-      this.canvas.width = canvasWrap.clientWidth;
-      this.canvas.height = canvasWrap.clientHeight;
-      this.createCanvasStyle();
-      this.bindEvent();
-    },
-
-    createCanvasStyle() {
-      //当传入coverImg时，优先使用图片，否则使用颜色作为刮刮卡遮罩
-      if (this.coverImg) {
-        var coverImg = new Image();
-        coverImg.src = this.coverImg;
-        coverImg.onload = () => {
-          this.ctx.drawImage(
-            coverImg,
-            0,
-            0,
-            this.canvas.width,
-            this.canvas.height
-          );
-        };
-      } else {
-        this.ctx.fillStyle = this.coverColor;
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      }
-    },
-
-    isSupportCanvas() {
-      var elem = document.createElement('canvas');
-      return !!(elem.getContext && elem.getContext('2d'));
-    },
-
-    bindEvent() {
-      if ('ontouchstart' in window) this.supportTouch = true;
-      this.events = this.supportTouch
-        ? ['touchstart', 'touchmove', 'touchend']
-        : ['mousedown', 'mousemove', 'mouseup'];
-      this.addEvent();
-    },
-
-    addEvent() {
-      this.startMoveHandler = this.startEventHandler.bind(this);
-      this.canvas.addEventListener(
-        this.events[0],
-        this.startMoveHandler,
-        false
-      );
-    },
-
-    startEventHandler: function (e: { preventDefault: () => void }) {
-      e.preventDefault();
-      if (this.isSuspend) return;
-      if (this.firstTouch) {
-        this.startCallback && this.startCallback();
-        this.firstTouch = false;
-      }
-      this.moveHandler = this.moveEventHandler.bind(this);
-      this.endMoveHandler = this.endEventHandler.bind(this);
-      this.canvas.addEventListener(this.events[1], this.moveHandler, false);
-      document.addEventListener(this.events[2], this.endMoveHandler, false);
-    },
-
-    moveEventHandler: function (e: {
-      preventDefault: () => void;
-      touches: any[];
-      pageX: number;
-      pageY: number;
-    }) {
-      e.preventDefault();
-
-      e = this.supportTouch ? e.touches[0] : e;
-      const canvasPos = this.canvas.getBoundingClientRect(),
-        scrollT = document.documentElement.scrollTop || document.body.scrollTop,
-        scrollL =
-          document.documentElement.scrollLeft || document.body.scrollLeft,
-        mouseX = e.pageX - canvasPos.left - scrollL,
-        mouseY = e.pageY - canvasPos.top - scrollT;
-      this.ctx.beginPath();
-      this.ctx.fillStyle = '#FFFFFF';
-      this.ctx.globalCompositeOperation = 'destination-out';
-      this.ctx.arc(mouseX, mouseY, this.moveRadius, 0, 2 * Math.PI);
-      this.ctx.fill();
-    },
-
-    endEventHandler: function (e: { preventDefault: () => void }) {
-      e.preventDefault();
-
-      this.canvas.removeEventListener(this.events[1], this.moveHandler, false);
-      document.removeEventListener(this.events[2], this.endMoveHandler, false);
-      this.endMoveHandler = null;
-      this.caleArea();
-    },
-
-    caleArea: function () {
-      let pixels = this.ctx.getImageData(
-          0,
-          0,
-          this.canvas.width,
-          this.canvas.height
-        ),
-        transPixels = [];
-
-      pixels.data.map((item, i) => {
-        const pixel = pixels.data[i + 3];
-        if (pixel === 0) {
-          transPixels.push(pixel);
-        }
-        return item;
-      });
-      if (transPixels.length / pixels.data.length > this.ratio) {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.canvas.removeEventListener(this.events[0], this.startMoveHandler);
-        this.canvas.removeEventListener(
-          this.events[1],
-          this.moveHandler,
-          false
-        );
-        document.removeEventListener(
-          this.events[2],
-          this.endMoveHandler,
-          false
-        );
-        this.showLucky = true;
-        this.clearCallback && this.clearCallback();
-      }
-    },
-
-    changeStatus(suspend = true) {
-      this.isSuspend = suspend;
-    },
-
-    reset() {
-      this.canvas.removeEventListener(this.events[0], this.startMoveHandler);
-      this.canvas.removeEventListener(this.events[1], this.moveHandler, false);
-      document.removeEventListener(this.events[2], this.endMoveHandler, false);
-      this.isSuspend = false;
-      this.firstTouch = true;
-      this.showLucky = false;
-      this.$nextTick(() => {
-        this.init();
-      });
-    },
-  },
-
-  mounted() {
-    this.$nextTick(() => {
-      this.init();
-    });
   },
 });

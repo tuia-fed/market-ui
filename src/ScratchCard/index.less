@@ -1,27 +1,99 @@
 @import '../styles/index.less';
 
-.mk {
-  &-scratch {
+.mk-scratch-card {
+  .bg();
+  .atl();
+
+  // overflow: hidden;
+
+  &__content {
+    .atl();
+  }
+
+  &__canvas,
+  &__result,
+  &__disable-cover {
+    .atl();
+    .wh();
+  }
+
+  &__result-prize {
+    .atl();
     .wh();
     .bg();
+  }
 
-    overflow: hidden;
+  &__disable-cover {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
 
-    &_card {
-      .wh();
+  &__tips {
+    .wh();
+    .atl();
 
-      position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #888;
+    pointer-events: none;
+
+    span {
+      animation: scratchTipWordJumpAni 1.6s infinite;
     }
 
-    &_result {
-      .wh();
+    @keyframes scratchTipWordJumpAni {
+      0%,
+      20% {
+        transform: translateY(0%);
+      }
 
-      overflow: hidden;
+      10% {
+        transform: translateY(-20%);
+      }
     }
+  }
 
-    &_canvas {
-      position: absolute;
-      top: 0;
+  &__hand {
+    .bg();
+    .atl();
+
+    pointer-events: none;
+    animation: scratchHandAni 3s infinite linear;
+
+    @keyframes scratchHandAni {
+      0%,
+      100% {
+        top: 10%;
+        left: 90%;
+      }
+
+      14% {
+        top: 27%;
+        left: 10%;
+      }
+
+      28% {
+        top: 36%;
+        left: 96%;
+      }
+
+      42% {
+        top: 62%;
+        left: 7%;
+      }
+
+      56% {
+        top: 60%;
+        left: 96%;
+      }
+
+      68%,
+      90% {
+        top: 85%;
+        left: 5%;
+      }
     }
   }
 }

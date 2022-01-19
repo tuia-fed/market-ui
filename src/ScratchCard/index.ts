@@ -1,7 +1,7 @@
-import { VueConstructor } from "vue";
-import ScratchCard from "./src/index";
+import { VueConstructor } from 'vue';
+import ScratchCard from './src/index';
 
-(ScratchCard as any).install = function (Vue: VueConstructor) {
+ScratchCard.install = function (Vue: VueConstructor) {
   Vue.component(ScratchCard.name, ScratchCard);
 };
 
