@@ -8,12 +8,6 @@ export default BasicBasePlus.extend({
   extends: BasicBasePlus,
   name: 'mk-scratch-card',
 
-  data() {
-    return {
-      canvas: null as never as ScratchCanvas,
-    };
-  },
-
   props: {
     containerStyle: {
       type: Object as PropType<StyleType>,
@@ -146,6 +140,13 @@ export default BasicBasePlus.extend({
     },
   },
 
+  data() {
+    return {
+      canvas: null as never as ScratchCanvas,
+      startResolve: null as Function | null,
+    };
+  },
+
   computed: {
     containerStyleData(): StyleType {
       return {
@@ -216,10 +217,10 @@ export default BasicBasePlus.extend({
       await this.canvas.init();
       this.state = StateConstant.WAIT_START;
     },
-    scratchStart(e: Event) {
+    scratchStart() {
       if (this.state === StateConstant.WAIT_START) {
         this.state = StateConstant.START;
-        this.emitClickStart(e);
+        this.emitClickStart(new Promise(resolve => this.startResolve = resolve));
       }
     },
     scratchEnd() {
@@ -227,6 +228,7 @@ export default BasicBasePlus.extend({
       if (per >= this.endRatio) {
         this.state = StateConstant.END;
         this.state = StateConstant.PRIZE;
+        this.startResolve && this.startResolve();
       } else if (this.enableAutoScratch) {
         this.autoScratch();
       }
@@ -240,6 +242,7 @@ export default BasicBasePlus.extend({
     },
     async reset() {
       this.state = StateConstant.RESET;
+      this.startResolve = null;
       this.canvas.reset();
       this.canvas.setUserScratchEnable(true);
       this.state = StateConstant.WAIT_START;
@@ -254,6 +257,7 @@ export default BasicBasePlus.extend({
       this.state = StateConstant.END;
       await this.canvas.scratchWithPath(this.autoScratchPath);
       this.state = StateConstant.PRIZE;
+      this.startResolve && this.startResolve();
     },
     renderTips() {
       return this.getScopedSlot('tips') || (this.isWaitStart && this.tipsWords.length &&
