@@ -82,11 +82,11 @@ export interface SizeType extends StyleType {
 ## Events
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
-| clickStart | 无 | 第一次手动刮的时候触发 |
+| clickStart | _Promise_ | 第一次手动刮的时候触发，可以通过等待返回的Promise来监听刮卡结束 |
 
 ## Methods
 因为其为`不可控组件`，故不提供`stop`方法，当然支持其他[基础玩法组件](../../guide/basic-rule)的方法
 | 名称 | 入参 | 出参 | 说明 |
 | --- | --- | --- | --- |
 | stop | - | - | **不提供结束方法** |
-| start |  | _Promise_ | 开始方法，表示直接触发自动刮卡 |
+| start | 无 | _Promise_ | 开始方法，表示直接触发自动刮卡 |

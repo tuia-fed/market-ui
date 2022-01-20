@@ -43,6 +43,7 @@ export default {
     return {
       state: 0,
       sample: 0,
+      wait: null,
     };
   },
 
@@ -56,8 +57,9 @@ export default {
     stateChange(opt) {
       this.state = opt.now;
     },
-    clickStart() {
-      console.log('开始刮了');
+    clickStart(wait) {
+      this.wait = wait;
+      this.waitEnd();
     },
     autoScratch() {
       this.$refs.card.start();
@@ -72,6 +74,11 @@ export default {
       this.disable();
       this.sample = v;
       this.reset();
+    },
+    async waitEnd() {
+      console.log('开始刮了');
+      await this.wait;
+      console.log('挂完了');
     },
   },
 };

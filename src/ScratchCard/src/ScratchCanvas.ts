@@ -17,7 +17,7 @@ export interface ScratchCanvasPropsType {
   // 刮的刷子兜底圆圈半径
   brushRadius: number;
   // 开始刮回调
-  scratchStart?: (e: Event) => void;
+  scratchStart?: () => void;
   // 结束刮回调
   scratchEnd?: () => void;
 }
@@ -40,7 +40,7 @@ export default class ScratchCanvas {
   brushSize?: SizeType;
   brushImg?: string;
   brushRadius = 40;
-  scratchStart?: (e: Event) => void;
+  scratchStart?: () => void;
   scratchEnd?: () => void;
   // 缓存封面图片
   coverHtmlImg?: HTMLImageElement;
@@ -90,7 +90,7 @@ export default class ScratchCanvas {
     e.preventDefault();
     this.isDrawing = true;
     this.drawBrushWithEvent(e);
-    this.scratchStart && this.scratchStart(e);
+    this.scratchStart && this.scratchStart();
   }
 
   onTouchMove(e: TouchEvent | MouseEvent) {
