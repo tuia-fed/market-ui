@@ -1,7 +1,6 @@
 import { PropType } from 'vue';
 import BasicBase from '../../core/BasicBase';
 import { WheelRef } from '../../Wheel';
-import StateConstant from '../../constants/StateConstant';
 import { StyleType } from 'types/Core';
 import { PrizeType } from '@/Wheel/src/Wheel';
 

@@ -255,10 +255,6 @@ export default WheelBase.extend({
         rotate.style.transform = `rotate3d(0, 0, 1, ${v}deg)`;
       }
     },
-    getScopedSlot(name: string, data: any = {}) {
-      const slot = this.$scopedSlots[name];
-      return slot && slot(data);
-    },
     renderOnePrize(item: PrizeType, index: number) {
       return (
         this.getScopedSlot('prize', { item, index }) || [

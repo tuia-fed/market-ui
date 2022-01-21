@@ -224,10 +224,6 @@ export default WheelBase.extend({
       }
       this.$emit('prizeClick', { item, index });
     },
-    getScopedSlot(name: string, data: any = {}) {
-      const slot = this.$scopedSlots[name];
-      return slot && slot(data);
-    },
     renderPrizes() {
       const left =
         +this.containerStyle.width * 0.5 -
@@ -280,8 +276,6 @@ export default WheelBase.extend({
       });
     },
   },
-
-  mounted() {},
 
   render() {
     return (
