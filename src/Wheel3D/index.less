@@ -1,0 +1,39 @@
+@import '../styles/index.less';
+
+.mk-wheel-3d {
+  .atl();
+
+  &__wheel {
+    .wh();
+    .atl();
+  }
+
+  &__items {
+    .am();
+
+    transform-style: preserve-3d;
+  }
+
+  &__item {
+    .atl();
+    .bg();
+
+    filter: brightness(60%);
+    opacity: 0.8;
+    transition: all 0.2s;
+
+    &-img {
+      .bg();
+      .atm(0);
+    }
+
+    &-text {
+      .atm(0);
+
+      overflow: hidden;
+      font-weight: bold;
+      color: #ff7b4d;
+      text-align: center;
+    }
+  }
+}

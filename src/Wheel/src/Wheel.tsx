@@ -1,4 +1,4 @@
-import BasicBase from '../../core/BasicBase';
+import BasicBasePlus from '../../core/BasicBasePlus';
 import UpdateMixin from '../../mixins/update';
 import StateConstant from '../../constants/StateConstant';
 import { animate } from 'popmotion';
@@ -14,8 +14,8 @@ export interface PrizeType {
   image?: string;
 }
 
-export default BasicBase.extend({
-  extends: BasicBase,
+export default BasicBasePlus.extend({
+  extends: BasicBasePlus,
   mixins: [UpdateMixin],
   props: {
     prizeList: {
