@@ -1,8 +1,3 @@
----
-group: 引导
-level: 2
----
-
 # 开发指南
 
 感谢你使用MarketUI，以下是关于向 MarketUI 提交反馈或代码的指南。
