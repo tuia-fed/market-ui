@@ -1,7 +1,7 @@
 import Vue, { PropType } from 'vue'
 import ArrowRight from './ArrowRight'
 import '../common/style/demo-home-nav.less'
-import { groupItemType } from './DemoHome'
+import { NavItemType } from '../config';
 
 export default Vue.extend({
   components: {
@@ -9,27 +9,20 @@ export default Vue.extend({
   },
 
   props: {
-    group: {
-      type: Object as PropType<groupItemType>
+    nav: {
+      type: Object as PropType<NavItemType>
     }
   },
 
   methods: {
     handlePushRoute (path: string) {
       // 向主窗口发送路由消息
-      window.parent.postMessage({ path }, '*')
-    },
-    groupTitle(val: string) {
-      const titleExp = new RegExp(/\|/, 'g')
-      if (titleExp.test(val)) {
-        return val.split('|')[1].trim()
-      }
-      return val
+      window.parent.postMessage({ path: '/' + path }, '*')
     },
     filterPath(path: string) {
       let componentPath: string = path
-      if (/^\/components/.test(path)) {
-        componentPath = path.split('/components')[1]
+      if (/components/.test(path)) {
+        componentPath = path.split('components')[1]
       }
       return componentPath
     }
@@ -40,11 +33,11 @@ export default Vue.extend({
       <div class="demo-home-nav">
         <div>
           <div class="demo-home-nav__title">
-            { this.group.group }
+            { this.nav.title }
           </div>
           <div class="demo-home-nav__group">
             {
-              this.group.children.map((navItem: { path: string; title: string }) => {
+              this.nav.items.map((navItem: { path: string; title: string }) => {
                 return (
                   <div onClick={() => this.handlePushRoute(navItem.path)}>
                     <router-link class="demo-home-nav__block" key={navItem.path} to={this.filterPath(navItem.path)}>

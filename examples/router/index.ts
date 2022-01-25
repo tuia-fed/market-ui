@@ -1,53 +1,39 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { nav, NavItemType } from '../config';
 
-/* require.context——用于获取模块的上下文,导出的是一个require函数,导出的函数包含3个属性——resolve,keys,id */
-const demoFiles = require.context('../../src', true, /index\.vue$/)
-
-/* window对象下挂载自定义对象 */
-declare global {
-  interface Window {
-    sitebarRoutes: [];
+const routes = [];
+function makeRoute(config: NavItemType) {
+  if (config.path && config.path.startsWith('components')) {
+    const path = config.path.split('/')[1];
+    routes.push({
+      path: `/${path}`,
+      name: config.title,
+      component: () => import(`../../src/${path}/demo`),
+      meta: {
+        name: config.title
+      }
+    })
+  } else if (config.items) {
+    makeRoutes(config.items);
   }
 }
+function makeRoutes(configs: NavItemType[]) {
+  configs.forEach(it => makeRoute(it));
+}
+makeRoutes(nav);
 
-const ROUTE_NAME_REG = /\.\/(\w+)\/demo\/index.vue/
+routes.push({
+  path: '/',
+  name: 'Home',
+  component: () => import('../components/DemoHome')
+});
 
-const homeRoutes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('../components/DemoHome')
-  }
-]
-
-const routes = demoFiles.keys().map(name => {
-  const match = name.match(ROUTE_NAME_REG)
-
-  if (match) {
-    name = match[1]
-  }
-
-  return {
-    path: `/${name}`,
-    name,
-    component: () => import(`../../src/${name}/demo`),
-    meta: {
-      name
-    }
-  }
-
-})
-
-const combineRoutes = [
-  ...routes,
-  ...homeRoutes
-]
 // 全局调用VueRouter插件
 Vue.use(VueRouter)
 
 export const router = new VueRouter({
   mode: 'hash',
-  routes: combineRoutes,
+  routes: routes,
   scrollBehavior: (to, from, savedPosition) => savedPosition || { x: 0, y: 0 },
 })

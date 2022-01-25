@@ -18,19 +18,6 @@ if (process.env.NODE_ENV !== 'production') {
   Vue.config.productionTip = false
 }
 
-window.addEventListener('message', e => {
-  if (!e.data || e.data.type === 'webpackOk' || !e.data.filter) return
-  const group = e.data.filter(item => !(/引导$/).test(item.group))
-  if (window.sessionStorage && group.length) {
-    const before = window.sessionStorage.getItem('routerGroups') || '';
-    const after = JSON.stringify(group);
-    if (before !== after) {
-      window.sessionStorage.setItem('routerGroups', after);
-      window.location.reload();
-    }
-  }
-})
-
 new Vue({
   render: h => h(App),
   router

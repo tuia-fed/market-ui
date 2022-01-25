@@ -26,10 +26,6 @@ export default {
       this.windowHeight = window.innerHeight
     })
 
-    this.$refs.iframe.onload = () => {
-      this.$refs.iframe.contentWindow.postMessage(window.sitebarRoutes, '*')
-    }
-
     this.windowHeight = window.innerHeight
   }
 }

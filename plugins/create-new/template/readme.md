@@ -1,17 +1,13 @@
----
-group: {{sort}}
-level: 1
----
-
 # {{chinese}}
 
 {{description}}
 
-## 引入
+## 按需引入
 
 ```js
 import Vue from 'vue'
-import { {{component}} } from '@tuia/market-ui'
+import {{component}} from '@tuia/market-ui/lib/{{component}}'
+import '@tuia/market-ui/lib/{{component}}/style'
 
 Vue.use({{component}})
 ```
